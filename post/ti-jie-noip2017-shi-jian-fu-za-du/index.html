@@ -6,7 +6,7 @@
 
 <title>【题解】NOIP2017 时间复杂度 | WzhDnwzWzh的博客</title>
 
-<link rel="shortcut icon" href="https://wzhdnwzwzh.github.io/favicon.ico?v=1629546495606">
+<link rel="shortcut icon" href="https://wzhdnwzwzh.github.io/favicon.ico?v=1629552769067">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wzhdnwzwzh.github.io/styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1629546495606" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1629552769067" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -134,6 +134,110 @@ else
     }
     else
         top--;
+}
+</code></pre>
+<p>接着处理</p>
+<h1 id="代码演示">代码演示</h1>
+<pre><code class="language-cpp">// P3952 [NOIP2017 提高组] 时间复杂度
+// WzhDnwzWzh
+
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+
+using namespace std;
+
+int main()
+{
+    int t, l, o, nx, ny, unshown;
+    string tmp, stack[100], x, y;
+    int depth, top, maxn;
+    bool err, f[100];
+    memset(f, 0, sizeof(f));
+
+    cin &gt;&gt; t;
+    while (t &gt; 0)
+    {
+        top = depth = maxn = 0;
+        unshown = 100;
+        err = false;
+
+        cin &gt;&gt; l &gt;&gt; tmp;
+        if (tmp[2] == '1')
+            o = 0;
+        else
+        {
+            o = 0;
+            for (int each = 4; tmp[each] &gt;= '0' &amp;&amp; tmp[each] &lt;= '9'; each++)
+                o = o * 10 + tmp[each] - '0';
+        }
+        for (int each = 0; each &lt; l; each++)
+        {
+            cin &gt;&gt; tmp;
+            if (tmp == &quot;F&quot;)
+            {
+                cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
+
+                for (int j = 0; j &lt; top; j++)
+                    if(stack[j] == stack[top])
+                        err = true;
+                if (x == &quot;n&quot; &amp;&amp; y == &quot;n&quot;)
+                    f[top] = false;
+                if (x == &quot;n&quot; &amp;&amp; y != &quot;n&quot;)
+                {
+                    f[top] = false;
+                    if (top &lt; unshown)
+                        unshown = top;
+                }
+                if (x != &quot;n&quot; &amp;&amp; y == &quot;n&quot;)
+                {
+                    if (top &lt; unshown)
+                    {
+                        f[top] = true;
+                        depth++;
+                    }
+                    else
+                        f[top] = false;
+                }
+                if (x != &quot;n&quot; &amp;&amp; y != &quot;n&quot;)
+                {
+                    nx = ny = 0;
+                    for (int j = 0; j &lt; x.length(); j++)
+                        nx = nx * 10 + x[j] - '0';
+                    for (int j = 0; j &lt; y.length(); j++)
+                        ny = ny * 10 + y[j] - '0';
+                    if (nx &gt; ny &amp;&amp; top &lt; unshown)
+                        unshown = top;
+                    f[top] = false;
+                }
+                top++;
+                if (depth &gt; maxn)
+                    maxn = depth;
+            }
+            else
+            {
+                if (top == 0)
+                    err = true;
+                else
+                {
+                    if (top - 1 == unshown)
+                        unshown = 100;
+                    else if (f[top - 1])
+                        depth--;
+                    top--;
+                }
+            }
+        }
+
+        if (err || top != 0)
+            cout &lt;&lt; &quot;ERR&quot; &lt;&lt; endl;
+        else if (maxn == o)
+            cout &lt;&lt; &quot;Yes&quot; &lt;&lt; endl;
+        else
+            cout &lt;&lt; &quot;No&quot; &lt;&lt; endl;
+        t--;
+    }
+
+    return 0;
 }
 </code></pre>
 
