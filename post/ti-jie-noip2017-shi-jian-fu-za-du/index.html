@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Gridea | WzhDnwzWzh的博客</title>
+<title>【题解】NOIP2017 时间复杂度 | WzhDnwzWzh的博客</title>
 
 <link rel="shortcut icon" href="https://wzhdnwzwzh.github.io/favicon.ico?v=1629546495606">
 
@@ -25,11 +25,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,51 +85,76 @@
     </div>
 </nav>
 
-        <div class="current-tag-container">
-            <h2 class="title gt-c-content-color-first">
-                #Gridea
-            </h2>
-        </div>
-        <div class="post-list-container">
-    <div class="post-inner">
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://wzhdnwzwzh.github.io/post/hello-gridea/">
-                            <span class="post-title gt-c-content-color-first">Hello Gridea</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2018-12-12 ·
-                        </time>
-                        
-                            <a href="https://wzhdnwzwzh.github.io/tag/p0e_JPGOS/" class="post-tag">
-                                # Gridea
-                            </a>
-                        
-                    </div>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    【题解】NOIP2017 时间复杂度
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-08-21 ·
+                    </time>
+                    
                 </div>
-                
-                    <a href="https://wzhdnwzwzh.github.io/post/hello-gridea/" class="post-feature-image"
-                       style="background-image: url('https://wzhdnwzwzh.github.io/post-images/hello-gridea.png')">
-                    </a>
-                
+                <div class="post-content">
+                    <h1 id="题目描述">题目描述</h1>
+<p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
+<p>本题定义了一个新语言名为A++，语言的循环定义如下：</p>
+<pre><code>F i x y
+    循环体
+E
+</code></pre>
+<p>本循环相当于</p>
+<pre><code class="language-cpp">for (int i = x; i &lt;= y; i++)
+</code></pre>
+<p>输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。<br>
+其中满足 x, y 必为常数或 n，n 远大于x, y。</p>
+<p>具体信息可详见洛谷</p>
+<h1 id="解题思路">解题思路</h1>
+<p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。<br>
+又由于A++中变量不可重名，故有遍历栈的需求。<br>
+故可以写一个手工栈，栈中存有A++变量名。</p>
+<pre><code class="language-cpp">int top = 0;
+string stack[100];
+</code></pre>
+<p>此时输入F则入栈，输入E则出栈，注意当F与E没有一一对应时需要处理为ERR。</p>
+<pre><code class="language-cpp">cin &gt;&gt; op;
+if (op == &quot;F&quot;)
+{
+    cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
+    // 处理后续
+    top++;
+}
+else
+{
+    if (top == 0)
+    {
+        // A++语法错误，输出ERR及处理后续
+    }
+    else
+        top--;
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://wzhdnwzwzh.github.io/post/hello-gridea/" class="post-title gt-a-link">
+                    Hello Gridea
+                </a>
             </div>
         
-    </div>
-</div>
-        <div class="pagination-container">
-    
-    
-</div>
+
+        
+
+        
+
+        
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">Don't let your dream be dream.</div>
