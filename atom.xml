@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wzhdnwzwzh.github.io</id>
     <title>WzhDnwzWzh的博客</title>
-    <updated>2021-08-22T12:21:48.603Z</updated>
+    <updated>2021-08-22T12:49:41.856Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wzhdnwzwzh.github.io"/>
     <link rel="self" href="https://wzhdnwzwzh.github.io/atom.xml"/>
@@ -37,8 +37,7 @@ E
 <pre><code class="language-cpp">std::cin &gt;&gt; l &gt;&gt; tmp;
 if (tmp[2] == '1')
     o = 0;
-else
-{
+else {
     o = 0;
     for (int each = 4; tmp[each] &gt;= '0' &amp;&amp; tmp[each] &lt;= '9'; each++)
         o = o * 10 + tmp[each] - '0';
@@ -52,19 +51,14 @@ std::string stack[100];
 </code></pre>
 <p>此时输入 F 则入栈，输入 E 则出栈，注意当 F 与 E 没有一一对应时需要处理为 ERR。</p>
 <pre><code class="language-cpp">std::cin &gt;&gt; tmp;
-if (tmp == &quot;F&quot;)
-{
+if (tmp == &quot;F&quot;) {
     std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
     // 处理后续
     top++;
-}
-else
-{
-    if (top == 0)
-    {
+} else {
+    if (top == 0) {
         // A++语法错误，输出ERR及处理后续
-    }
-    else
+    } else
         top--;
 }
 </code></pre>
@@ -93,24 +87,19 @@ else
 </ol>
 <pre><code class="language-cpp">if (x == &quot;n&quot; &amp;&amp; y == &quot;n&quot;)
     f[top] = false;
-if (x == &quot;n&quot; &amp;&amp; y != &quot;n&quot;)
-{
+if (x == &quot;n&quot; &amp;&amp; y != &quot;n&quot;) {
     f[top] = false;
     if (top &lt; unshown)
         unshown = top;
 }
-if (x != &quot;n&quot; &amp;&amp; y == &quot;n&quot;)
-{
-    if (top &lt; unshown)
-    {
+if (x != &quot;n&quot; &amp;&amp; y == &quot;n&quot;) {
+    if (top &lt; unshown) {
         f[top] = true;
         depth++;
-    }
-    else
+    } else
         f[top] = false;
 }
-if (x != &quot;n&quot; &amp;&amp; y != &quot;n&quot;)
-{
+if (x != &quot;n&quot; &amp;&amp; y != &quot;n&quot;) {
     nx = ny = 0;
     for (int j = 0; j &lt; x.length(); j++)
         nx = nx * 10 + x[j] - '0';
@@ -130,8 +119,7 @@ if (depth &gt; maxn)
 同时需注意处理 unknown 变量。</p>
 <pre><code class="language-cpp">if (top == 0)
     err = true;
-else
-{
+else {
     if (top - 1 == unshown)
         unshown = 100;
     else if (f[top - 1])
@@ -146,8 +134,7 @@ else
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 
-int main()
-{
+int main() {
     int t, l, o, nx, ny, unshown;
     std::string tmp, stack[100], x, y;
     int depth, top, maxn;
@@ -155,8 +142,7 @@ int main()
     memset(f, 0, sizeof(f));
 
     std::cin &gt;&gt; t;
-    while (t &gt; 0)
-    {
+    while (t &gt; 0) {
         top = depth = maxn = 0;
         unshown = 100;
         err = false;
@@ -164,14 +150,12 @@ int main()
         std::cin &gt;&gt; l &gt;&gt; tmp;
         if (tmp[2] == '1')
             o = 0;
-        else
-        {
+        else {
             o = 0;
             for (int each = 4; tmp[each] &gt;= '0' &amp;&amp; tmp[each] &lt;= '9'; each++)
                 o = o * 10 + tmp[each] - '0';
         }
-        for (int each = 0; each &lt; l; each++)
-        {
+        for (int each = 0; each &lt; l; each++) {
             std::cin &gt;&gt; tmp;
             if (tmp == &quot;F&quot;) {
                 std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
@@ -181,24 +165,19 @@ int main()
                         err = true;
                 if (x == &quot;n&quot; &amp;&amp; y == &quot;n&quot;)
                     f[top] = false;
-                if (x == &quot;n&quot; &amp;&amp; y != &quot;n&quot;)
-                {
+                if (x == &quot;n&quot; &amp;&amp; y != &quot;n&quot;) {
                     f[top] = false;
                     if (top &lt; unshown)
                         unshown = top;
                 }
-                if (x != &quot;n&quot; &amp;&amp; y == &quot;n&quot;)
-                {
-                    if (top &lt; unshown)
-                    {
+                if (x != &quot;n&quot; &amp;&amp; y == &quot;n&quot;) {
+                    if (top &lt; unshown) {
                         f[top] = true;
                         depth++;
-                    }
-                    else
+                    } else
                         f[top] = false;
                 }
-                if (x != &quot;n&quot; &amp;&amp; y != &quot;n&quot;)
-                {
+                if (x != &quot;n&quot; &amp;&amp; y != &quot;n&quot;) {
                     nx = ny = 0;
                     for (int j = 0; j &lt; x.length(); j++)
                         nx = nx * 10 + x[j] - '0';
@@ -211,13 +190,10 @@ int main()
                 top++;
                 if (depth &gt; maxn)
                     maxn = depth;
-            }
-            else
-            {
+            } else {
                 if (top == 0)
                     err = true;
-                else
-                {
+                else {
                     if (top - 1 == unshown)
                         unshown = 100;
                     else if (f[top - 1])
