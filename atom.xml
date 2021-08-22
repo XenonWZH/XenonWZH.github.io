@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wzhdnwzwzh.github.io</id>
     <title>WzhDnwzWzh的博客</title>
-    <updated>2021-08-22T09:12:33.345Z</updated>
+    <updated>2021-08-22T10:53:30.918Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wzhdnwzwzh.github.io"/>
     <link rel="self" href="https://wzhdnwzwzh.github.io/atom.xml"/>
@@ -30,6 +30,18 @@ E
 其中满足 x, y 必为常数或 n，n 远大于x, y。</p>
 <p>具体信息可详见洛谷</p>
 <h1 id="解题思路">解题思路</h1>
+<p>本题为一道模拟题，阶梯思路为通过A++循环分析该代码的时间复杂度。<br>
+时间复杂度可通过存储 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msub><mi>n</mi><mi>k</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n_k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 的指数达到目的。</p>
+<pre><code class="language-cpp">std::cin &gt;&gt; l &gt;&gt; tmp;
+if (tmp[2] == '1')
+    o = 0;
+else
+{
+    o = 0;
+    for (int each = 4; tmp[each] &gt;= '0' &amp;&amp; tmp[each] &lt;= '9'; each++)
+        o = o * 10 + tmp[each] - '0';
+}
+</code></pre>
 <p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。<br>
 又由于A++中变量不可重名，故有遍历栈的需求。<br>
 故可以写一个手工栈，栈中存有A++变量名。</p>
@@ -37,8 +49,8 @@ E
 std::string stack[100];
 </code></pre>
 <p>此时输入F则入栈，输入E则出栈，注意当F与E没有一一对应时需要处理为ERR。</p>
-<pre><code class="language-cpp">cin &gt;&gt; op;
-if (op == &quot;F&quot;)
+<pre><code class="language-cpp">std::cin &gt;&gt; tmp;
+if (tmp == &quot;F&quot;)
 {
     std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
     // 处理后续
@@ -54,7 +66,8 @@ else
         top--;
 }
 </code></pre>
-<p>接着处理</p>
+<p>接着处理循环。<br>
+循环可分3种情况讨论</p>
 <h1 id="代码演示">代码演示</h1>
 <pre><code class="language-cpp">// P3952 [NOIP2017 提高组] 时间复杂度
 // WzhDnwzWzh
