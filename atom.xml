@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wzhdnwzwzh.github.io</id>
     <title>WzhDnwzWzh的博客</title>
-    <updated>2021-08-21T13:32:51.779Z</updated>
+    <updated>2021-08-22T09:12:33.345Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wzhdnwzwzh.github.io"/>
     <link rel="self" href="https://wzhdnwzwzh.github.io/atom.xml"/>
@@ -34,13 +34,13 @@ E
 又由于A++中变量不可重名，故有遍历栈的需求。<br>
 故可以写一个手工栈，栈中存有A++变量名。</p>
 <pre><code class="language-cpp">int top = 0;
-string stack[100];
+std::string stack[100];
 </code></pre>
 <p>此时输入F则入栈，输入E则出栈，注意当F与E没有一一对应时需要处理为ERR。</p>
 <pre><code class="language-cpp">cin &gt;&gt; op;
 if (op == &quot;F&quot;)
 {
-    cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
+    std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
     // 处理后续
     top++;
 }
@@ -62,24 +62,22 @@ else
 #include &lt;iostream&gt;
 #include &lt;cstring&gt;
 
-using namespace std;
-
 int main()
 {
     int t, l, o, nx, ny, unshown;
-    string tmp, stack[100], x, y;
+    std::string tmp, stack[100], x, y;
     int depth, top, maxn;
     bool err, f[100];
     memset(f, 0, sizeof(f));
 
-    cin &gt;&gt; t;
+    std::cin &gt;&gt; t;
     while (t &gt; 0)
     {
         top = depth = maxn = 0;
         unshown = 100;
         err = false;
 
-        cin &gt;&gt; l &gt;&gt; tmp;
+        std::cin &gt;&gt; l &gt;&gt; tmp;
         if (tmp[2] == '1')
             o = 0;
         else
@@ -90,10 +88,9 @@ int main()
         }
         for (int each = 0; each &lt; l; each++)
         {
-            cin &gt;&gt; tmp;
-            if (tmp == &quot;F&quot;)
-            {
-                cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
+            std::cin &gt;&gt; tmp;
+            if (tmp == &quot;F&quot;) {
+                std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;
 
                 for (int j = 0; j &lt; top; j++)
                     if(stack[j] == stack[top])
@@ -147,11 +144,11 @@ int main()
         }
 
         if (err || top != 0)
-            cout &lt;&lt; &quot;ERR&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;ERR&quot; &lt;&lt; std::endl;
         else if (maxn == o)
-            cout &lt;&lt; &quot;Yes&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;Yes&quot; &lt;&lt; std::endl;
         else
-            cout &lt;&lt; &quot;No&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;No&quot; &lt;&lt; std::endl;
         t--;
     }
 
