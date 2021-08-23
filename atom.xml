@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wzhdnwzwzh.github.io</id>
     <title>WzhDnwzWzh的博客</title>
-    <updated>2021-08-23T02:13:49.008Z</updated>
+    <updated>2021-08-23T02:16:45.402Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wzhdnwzwzh.github.io"/>
     <link rel="self" href="https://wzhdnwzwzh.github.io/atom.xml"/>
@@ -42,8 +42,9 @@ E
 其中满足 x，y 必为常数或 n，n 远大于 x，y。</p>
 <p>具体信息可详见洛谷，链接见上</p>
 <h1 id="解题思路">解题思路</h1>
+<p>显然本题为一道模拟题。</p>
 <h2 id="模型建立">模型建立</h2>
-<p>本题为一道模拟题，阶梯思路为通过 A++ 循环分析该代码的时间复杂度。<br>
+<p>解题思路为通过 A++ 循环分析该代码的时间复杂度。<br>
 时间复杂度可通过存储 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>k</mi></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 的指数达到目的。<br>
 通过新建 depth 变量存储有效增加代码时间复杂度的个数，使用 maxn 变量存储 depth 的最大值即可记录该 A++ 代码的时间复杂度。</p>
 <pre><code class="language-cpp">std::cin &gt;&gt; l &gt;&gt; tmp;
