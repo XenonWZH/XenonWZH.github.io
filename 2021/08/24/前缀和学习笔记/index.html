@@ -23,7 +23,7 @@
 <meta name="description" content="概念前缀和为一种预处理，可理解为数列前 $n$ 项的和。可降低查询某些信息的所需时间。 123456&#x2F;&#x2F; 前缀和示例int sum[MAXN];sum[0] &#x3D; a[0];for (int i &#x3D; 1; i &lt; n; i++) &amp;#123;    sum[i] &#x3D; sum[i - 1] + a[i];&amp;#125;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前缀和学习笔记">
-<meta property="og:url" content="http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="WzhDnwzWzh&#39;s Blog">
 <meta property="og:description" content="概念前缀和为一种预处理，可理解为数列前 $n$ 项的和。可降低查询某些信息的所需时间。 123456&#x2F;&#x2F; 前缀和示例int sum[MAXN];sum[0] &#x3D; a[0];for (int i &#x3D; 1; i &lt; n; i++) &amp;#123;    sum[i] &#x3D; sum[i - 1] + a[i];&amp;#125;">
 <meta property="og:locale" content="zh_CN">
@@ -36,11 +36,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/08/24/前缀和-差分学习笔记/","title":"前缀和学习笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/08/24/前缀和学习笔记/","title":"前缀和学习笔记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>前缀和学习笔记 | WzhDnwzWzh's Blog</title>
@@ -166,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -177,7 +177,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -205,9 +205,6 @@
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
           <a href="https://www.luogu.com.cn/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;" rel="noopener" target="_blank">洛谷</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://loj.ac/" title="https:&#x2F;&#x2F;loj.ac&#x2F;" rel="noopener" target="_blank">LibreOJ</a>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://oi-wiki.org/" title="https:&#x2F;&#x2F;oi-wiki.org&#x2F;" rel="noopener" target="_blank">OI Wiki</a>
@@ -250,7 +247,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -411,7 +408,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WzhDnwzWzh","repo":"WzhDnwzWzh.github.io","client_id":"a50e9fd26d482f52b54e","client_secret":"a4f21ff9193f06317c9cec26cf30d9beb4f52c79","admin_user":"WzhDnwzWzh","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"1926be320ca53797f624350ab2eeec48"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WzhDnwzWzh","repo":"WzhDnwzWzh.github.io","client_id":"a50e9fd26d482f52b54e","client_secret":"a4f21ff9193f06317c9cec26cf30d9beb4f52c79","admin_user":"WzhDnwzWzh","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"63f3baaef2f01666f88fdfdf5b0da223"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

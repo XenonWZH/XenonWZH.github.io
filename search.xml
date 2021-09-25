@@ -130,56 +130,6 @@
       </tags>
   </entry>
   <entry>
-    <title>梦开始的地方</title>
-    <url>/2021/08/24/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/</url>
-    <content><![CDATA[<p>我在以前就有想过搭建一个自己的博客，知识可惜自己的文笔和能力，一直没有勇气写下第一笔。<br>就在这时落下第一笔的时候，我终于意识到我终于有一个真正属于自己的博客了。<br>总之，初中生活已经结束，望着新高中的生活。<br>在初中，由于学业原因，OI 学得不深不精，到了高中，一切成为变数。<br>梦，开始了。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>杂项</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>前缀和学习笔记</title>
-    <url>/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>前缀和为一种预处理，可理解为数列前 $n$ 项的和。可降低查询某些信息的所需时间。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 前缀和示例</span></span><br><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line">sum[<span class="number">0</span>] = a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="STL-中的前缀和"><a href="#STL-中的前缀和" class="headerlink" title="STL 中的前缀和"></a>STL 中的前缀和</h2><p>C++ 标准库中提供了 <code>std::partial_sum</code> 前缀和函数，定义于头文件 <code>&lt;numeric&gt;</code> 中</p>
-<p>用法为 <code>partial_sum(InputIt first, InputIt last, OutputIt d_first)</code></p>
-<ul>
-<li><p><code>first</code> 和 <code>last</code> 表示要求和的元素范围；</p>
-</li>
-<li><p><code>d_first</code> 表示目标范围起始；可以等于 <code>first</code>。</p>
-</li>
-</ul>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.com.cn/problem/P3131">P3131 [USACO16JAN]Subsequences Summing to Sevens S</a></p>
-<p>本题直接处理前缀和存储余数，在前缀和中取头尾两余数相等的数坐标相减即可。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// P3131 [USACO16JAN]Subsequences Summing to Sevens S</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">50000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, maxn = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[MAXN + <span class="number">1</span>];</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> sum[MAXN + <span class="number">1</span>];</span><br><span class="line">    sum[<span class="number">1</span>] = a[<span class="number">1</span>] % <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        sum[i] = (sum[i - <span class="number">1</span>] + a[i]) % <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> first[<span class="number">7</span>], last[<span class="number">7</span>];</span><br><span class="line">    <span class="built_in">memset</span>(first, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(first));</span><br><span class="line">    <span class="built_in">memset</span>(last, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(last));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (sum[j] == i) &#123;</span><br><span class="line">                first[i] = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">            <span class="keyword">if</span> (sum[j] == i) &#123;</span><br><span class="line">                last[i] = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    maxn = last[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (last[i] - first[i] &gt; maxn) &#123;</span><br><span class="line">            maxn = last[i] - first[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; maxn &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="二维-多维前缀和"><a href="#二维-多维前缀和" class="headerlink" title="二维/多维前缀和"></a>二维/多维前缀和</h1><p>RT</p>
-<h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.com.cn/problem/P1387">P1387 最大正方形</a></p>
-<p>本题可通过前缀和处理矩形，利用 <code>sum</code> 数组存储可组成正方形的最大值。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// P1387 最大正方形</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> squ[MAXN + <span class="number">1</span>][MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            std::cin &gt;&gt; squ[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> sum[MAXN + <span class="number">1</span>][MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(sum));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (squ[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                sum[i][j] = std::<span class="built_in">min</span>(std::<span class="built_in">min</span>(sum[i - <span class="number">1</span>][j] , sum[i][j - <span class="number">1</span>]), sum[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (sum[i][j] &gt; ans) &#123;</span><br><span class="line">                    ans = sum[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>学习笔记</tag>
-        <tag>前缀和</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【NOIP2017】时间复杂度 - 模拟</title>
     <url>/2021/08/24/%E3%80%90NOIP2017%E3%80%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-%E6%A8%A1%E6%8B%9F/</url>
     <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
@@ -232,6 +182,114 @@
         <tag>栈</tag>
         <tag>NOIP</tag>
         <tag>2017</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>位运算学习笔记</title>
+    <url>/2021/09/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感</p>
+</blockquote>
+<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
+<p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p>
+<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code> 不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt; 0xFF。</p>
+<p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p>
+<span id="more"></span>
+
+<h1 id="位运算的妙用"><a href="#位运算的妙用" class="headerlink" title="位运算的妙用"></a>位运算的妙用</h1><h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>当计算 $a^b$ 时 $b$ 可以被分成 $b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times 2^2 + \cdots + x_n \times 2^n$，故可以用位运算剥离 $b$ 在二进制下的位数，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % p;</span><br><span class="line">    <span class="keyword">while</span> (b &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ((<span class="keyword">long</span> <span class="keyword">long</span>)ans * a) % p;</span><br><span class="line">        &#125;</span><br><span class="line">        a = ((<span class="keyword">long</span> <span class="keyword">long</span>)a * a) % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code> 表示不选择。</p>
+<p>故当拥有一个 $n$ 个元素的集合时，可使用一个位数为 $n$ 的二进制数来枚举全部的子集，即为 $2^n$ 的十进制数。</p>
+<p>此时可以用一个整型数代替布尔数组，也可以使用一个整型数枚举全排列。</p>
+<p>下面的列表列举了常用操作。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>运算（运算符为 C++）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取出整数 $n$ 在二进制表示下的第 $k$ 位</td>
+<td><code>（n &gt;&gt; k） &amp; 1</code></td>
+</tr>
+<tr>
+<td>取出整数 $n$ 在二进制表示下的第 $0 \sim k - 1$ 位（后 $k$ 位）</td>
+<td><code>n &amp; ((1 &lt;&lt; k) - 1)</code></td>
+</tr>
+<tr>
+<td>把整数 $n$ 在二进制表示下的第 $k$ 位取反</td>
+<td><code>n ^ (1 &lt;&lt; k)</code></td>
+</tr>
+<tr>
+<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $1$</td>
+<td><code>n | (1 &lt;&lt; k)</code></td>
+</tr>
+<tr>
+<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $0$</td>
+<td><code>n &amp; (~(1 &lt;&lt; k))</code></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>学习笔记</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前缀和学习笔记</title>
+    <url>/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>前缀和为一种预处理，可理解为数列前 $n$ 项的和。可降低查询某些信息的所需时间。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 前缀和示例</span></span><br><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line">sum[<span class="number">0</span>] = a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="STL-中的前缀和"><a href="#STL-中的前缀和" class="headerlink" title="STL 中的前缀和"></a>STL 中的前缀和</h2><p>C++ 标准库中提供了 <code>std::partial_sum</code> 前缀和函数，定义于头文件 <code>&lt;numeric&gt;</code> 中</p>
+<p>用法为 <code>partial_sum(InputIt first, InputIt last, OutputIt d_first)</code></p>
+<ul>
+<li><p><code>first</code> 和 <code>last</code> 表示要求和的元素范围；</p>
+</li>
+<li><p><code>d_first</code> 表示目标范围起始；可以等于 <code>first</code>。</p>
+</li>
+</ul>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.com.cn/problem/P3131">P3131 [USACO16JAN]Subsequences Summing to Sevens S</a></p>
+<p>本题直接处理前缀和存储余数，在前缀和中取头尾两余数相等的数坐标相减即可。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// P3131 [USACO16JAN]Subsequences Summing to Sevens S</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">50000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, maxn = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[MAXN + <span class="number">1</span>];</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> sum[MAXN + <span class="number">1</span>];</span><br><span class="line">    sum[<span class="number">1</span>] = a[<span class="number">1</span>] % <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        sum[i] = (sum[i - <span class="number">1</span>] + a[i]) % <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> first[<span class="number">7</span>], last[<span class="number">7</span>];</span><br><span class="line">    <span class="built_in">memset</span>(first, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(first));</span><br><span class="line">    <span class="built_in">memset</span>(last, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(last));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (sum[j] == i) &#123;</span><br><span class="line">                first[i] = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">            <span class="keyword">if</span> (sum[j] == i) &#123;</span><br><span class="line">                last[i] = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    maxn = last[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (last[i] - first[i] &gt; maxn) &#123;</span><br><span class="line">            maxn = last[i] - first[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; maxn &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二维-多维前缀和"><a href="#二维-多维前缀和" class="headerlink" title="二维/多维前缀和"></a>二维/多维前缀和</h1><p>RT</p>
+<h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.com.cn/problem/P1387">P1387 最大正方形</a></p>
+<p>本题可通过前缀和处理矩形，利用 <code>sum</code> 数组存储可组成正方形的最大值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// P1387 最大正方形</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> squ[MAXN + <span class="number">1</span>][MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            std::cin &gt;&gt; squ[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> sum[MAXN + <span class="number">1</span>][MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(sum));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (squ[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                sum[i][j] = std::<span class="built_in">min</span>(std::<span class="built_in">min</span>(sum[i - <span class="number">1</span>][j] , sum[i][j - <span class="number">1</span>]), sum[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (sum[i][j] &gt; ans) &#123;</span><br><span class="line">                    ans = sum[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>学习笔记</tag>
+        <tag>前缀和</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>梦开始的地方</title>
+    <url>/2021/08/24/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/</url>
+    <content><![CDATA[<p>我在以前就有想过搭建一个自己的博客，知识可惜自己的文笔和能力，一直没有勇气写下第一笔。<br>就在这时落下第一笔的时候，我终于意识到我终于有一个真正属于自己的博客了。<br>总之，初中生活已经结束，望着新高中的生活。<br>在初中，由于学业原因，OI 学得不深不精，到了高中，一切成为变数。<br>梦，开始了。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>杂项</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>杂项</tag>
       </tags>
   </entry>
 </search>
