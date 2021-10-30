@@ -1,49 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSP-S2021 第二轮 行记</title>
-    <url>/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
-    <content><![CDATA[<p><del>爆零了？</del></p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
-<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
-<span id="more"></span>
-
-<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
-<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
-<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
-<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
-<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
-<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
-<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
-<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
-<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
-<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
-<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
-<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
-<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
-<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
-<p>T1 只有 5 分？？？</p>
-<p>重新看了一下代码，</p>
-<p>真！的！爆！零！了！</p>
-<p>我是伞兵！</p>
-<p><img src="https://img11.360buyimg.com/ddimg/jfs/t1/214995/33/1989/22037/6177c676Ec9d7bfe9/1f99876824a5aecd.png"></p>
-<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
-<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
-<p><del>“iqx37f” 375pts 省队预定 %%%</del></p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSP-S2021 第一轮 行记</title>
     <url>/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
     <content><![CDATA[<p>总觉得应该写些什么……</p>
@@ -172,6 +129,49 @@
       <tags>
         <tag>OI</tag>
         <tag>知识整理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2021 第二轮 行记</title>
+    <url>/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
+    <content><![CDATA[<p><del>爆零了？</del></p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
+<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
+<span id="more"></span>
+
+<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
+<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
+<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
+<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
+<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
+<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
+<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
+<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
+<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
+<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
+<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
+<p>T1 只有 5 分？？？</p>
+<p>重新看了一下代码，</p>
+<p>真！的！爆！零！了！</p>
+<p>我是伞兵！</p>
+<p><img src="https://img11.360buyimg.com/ddimg/jfs/t1/214995/33/1989/22037/6177c676Ec9d7bfe9/1f99876824a5aecd.png"></p>
+<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
+<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
+<p><del>“iqx37f” 375pts 省队预定 %%%</del></p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
       </tags>
   </entry>
   <entry>
