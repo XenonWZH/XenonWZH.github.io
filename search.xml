@@ -1,137 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSP-S2021 第一轮 行记</title>
-    <url>/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
-    <content><![CDATA[<p>总觉得应该写些什么……</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
-<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
-<span id="more"></span>
-
-<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
-<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
-<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
-<p>选择题？简单，30分钟写完。</p>
-<p>阅读程序第一个懒得看，直接手动模拟。</p>
-<p>？？？</p>
-<p>这怎么考了立体几何了啊喂？</p>
-<p>高一还没学啊！！！</p>
-<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
-<p>第三题？手算 base64，不想说了……</p>
-<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
-<p>第二题……</p>
-<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
-<p>算了算了直接蒙。</p>
-<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数线 50 分，52 分滚粗。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OI 知识树</title>
-    <url>/2021/08/24/OI-%E7%9F%A5%E8%AF%86%E6%A0%91/</url>
-    <content><![CDATA[<ul>
-<li>C++<ul>
-<li>C++ 基础</li>
-<li>C++ 标准库<ul>
-<li>STL 容器</li>
-<li>STL 算法</li>
-<li>string</li>
-</ul>
-</li>
-<li>C++ 进阶<ul>
-<li>重载运算符</li>
-<li>引用</li>
-<li>常值<span id="more"></span></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>算法基础<ul>
-<li>复杂度</li>
-<li>枚举</li>
-<li>模拟</li>
-<li>递归 &amp; 分治</li>
-<li>贪心</li>
-<li>排序<ul>
-<li>选择排序</li>
-<li>冒泡排序</li>
-<li>插入排序</li>
-<li>计数排序</li>
-<li>快速排序</li>
-<li>归并排序</li>
-<li>桶排序</li>
-<li>排序相关 STL</li>
-</ul>
-</li>
-<li>前缀和 &amp; 差分</li>
-<li>二分</li>
-</ul>
-</li>
-<li>搜索<ul>
-<li>DFS（搜索）</li>
-<li>BFS（搜索）</li>
-</ul>
-</li>
-<li>动态规划<ul>
-<li>动态规划基础</li>
-<li>记忆化搜索</li>
-<li>背包 DP</li>
-</ul>
-</li>
-<li>字符串<ul>
-<li>字符串基础</li>
-<li>标准库</li>
-</ul>
-</li>
-<li>数学<ul>
-<li>位运算</li>
-<li>快速幂</li>
-<li>高精度计算</li>
-</ul>
-</li>
-<li>数据结构<ul>
-<li>栈</li>
-<li>队列</li>
-<li>链表</li>
-<li>哈希表</li>
-</ul>
-</li>
-<li>图论<ul>
-<li>图论相关概念</li>
-<li>图的存储</li>
-<li>DFS（图论）</li>
-<li>BFS（图论）</li>
-<li>树上问题<ul>
-<li>树基础</li>
-</ul>
-</li>
-<li>有向无环图</li>
-<li>拓扑排序</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>知识整理</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>知识整理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSP-S2021 第二轮 行记</title>
     <url>/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
     <content><![CDATA[<p><del>爆零了？</del></p>
@@ -172,6 +41,176 @@
         <tag>行记</tag>
         <tag>CSP</tag>
         <tag>2021</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2021 第一轮 行记</title>
+    <url>/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
+    <content><![CDATA[<p>总觉得应该写些什么……</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
+<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
+<span id="more"></span>
+
+<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
+<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
+<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
+<p>选择题？简单，30分钟写完。</p>
+<p>阅读程序第一个懒得看，直接手动模拟。</p>
+<p>？？？</p>
+<p>这怎么考了立体几何了啊喂？</p>
+<p>高一还没学啊！！！</p>
+<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
+<p>第三题？手算 base64，不想说了……</p>
+<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
+<p>第二题……</p>
+<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
+<p>算了算了直接蒙。</p>
+<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数线 50 分，52 分滚粗。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OI 知识树</title>
+    <url>/2021/08/24/OI-%E7%9F%A5%E8%AF%86%E6%A0%91/</url>
+    <content><![CDATA[<ul>
+<li><p>C++</p>
+<ul>
+<li><p>C++ 基础</p>
+</li>
+<li><p>C++ 标准库</p>
+<ul>
+<li>STL 容器</li>
+<li>STL 算法</li>
+<li>string</li>
+<li>pair</li>
+</ul>
+</li>
+<li><p>C++ 进阶</p>
+  <span id="more"></span>
+
+<ul>
+<li>类</li>
+<li>命名空间</li>
+<li>重载运算符</li>
+<li>引用</li>
+<li>常值</li>
+</ul>
+</li>
+<li><p>C 与 C++ 区别</p>
+</li>
+<li><p>Python 速成</p>
+</li>
+</ul>
+</li>
+<li><p>算法基础</p>
+<ul>
+<li>复杂度</li>
+<li>枚举</li>
+<li>模拟</li>
+<li>递归 &amp; 分治</li>
+<li>贪心</li>
+<li>排序<ul>
+<li>选择排序</li>
+<li>冒泡排序</li>
+<li>插入排序</li>
+<li>计数排序</li>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>桶排序</li>
+<li>排序相关 STL</li>
+<li>排序应用</li>
+</ul>
+</li>
+<li>前缀和 &amp; 差分</li>
+<li>二分</li>
+</ul>
+</li>
+<li><p>搜索</p>
+<ul>
+<li>DFS（搜索）</li>
+<li>BFS（搜索）</li>
+<li>启发式搜索</li>
+<li>优化</li>
+</ul>
+</li>
+<li><p>动态规划</p>
+<ul>
+<li>动态规划基础</li>
+<li>记忆化搜索</li>
+<li>背包 DP</li>
+<li>DAG 上的 DP</li>
+</ul>
+</li>
+<li><p>字符串</p>
+<ul>
+<li>字符串基础</li>
+<li>标准库</li>
+<li>字符串匹配</li>
+<li>前缀函数与 KMP 算法</li>
+</ul>
+</li>
+<li><p>数学</p>
+<ul>
+<li>位运算</li>
+<li>快速幂</li>
+<li>进位制</li>
+<li>高精度计算</li>
+<li>数论<ul>
+<li>数论基础</li>
+<li>素数</li>
+<li>最大公约数</li>
+<li>筛法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据结构</p>
+<ul>
+<li>栈</li>
+<li>队列</li>
+<li>链表</li>
+<li>哈希表</li>
+<li>并查集</li>
+<li>堆<ul>
+<li>二叉堆</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>图论</p>
+<ul>
+<li>图论相关概念</li>
+<li>图的存储</li>
+<li>DFS（图论）</li>
+<li>BFS（图论）</li>
+<li>树上问题<ul>
+<li>树基础</li>
+</ul>
+</li>
+<li>有向无环图</li>
+<li>拓扑排序</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>知识整理</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>知识整理</tag>
       </tags>
   </entry>
   <entry>
@@ -321,6 +360,25 @@
         <tag>OI</tag>
         <tag>学习笔记</tag>
         <tag>前缀和</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【SDOI2010】猪国杀 - 模拟</title>
+    <url>/2021/10/30/%E3%80%90SDOI2010%E3%80%91%E7%8C%AA%E5%9B%BD%E6%9D%80-%E6%A8%A1%E6%8B%9F/</url>
+    <content><![CDATA[<p><del>感觉最近有点颓，就做一道大模拟练习一下，顺带理解一下面向对象编程。不过这道题真的毒瘤</del></p>
+<p>待完成。。。</p>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>模拟</tag>
+        <tag>类</tag>
+        <tag>SDOI</tag>
+        <tag>2010</tag>
       </tags>
   </entry>
 </search>
