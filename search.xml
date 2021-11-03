@@ -1,91 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSP-S2021 第一轮 行记</title>
-    <url>/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
-    <content><![CDATA[<p>总觉得应该写些什么……</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
-<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
-<span id="more"></span>
-
-<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
-<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
-<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
-<p>选择题？简单，30分钟写完。</p>
-<p>阅读程序第一个懒得看，直接手动模拟。</p>
-<p>？？？</p>
-<p>这怎么考了立体几何了啊喂？</p>
-<p>高一还没学啊！！！</p>
-<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
-<p>第三题？手算 base64，不想说了……</p>
-<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
-<p>第二题……</p>
-<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
-<p>算了算了直接蒙。</p>
-<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数线 50 分，52 分滚粗。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSP-S2021 第二轮 行记</title>
-    <url>/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
-    <content><![CDATA[<p><del>爆零了？</del></p>
-<p>没爆零！</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
-<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
-<span id="more"></span>
-
-<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
-<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
-<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
-<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
-<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
-<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
-<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
-<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
-<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
-<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
-<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
-<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
-<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
-<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
-<p>T1 只有 5 分？？？</p>
-<p>重新看了一下代码，</p>
-<p>真！的！爆！零！了！</p>
-<p>我是伞兵！</p>
-<p><img src="https://img11.360buyimg.com/ddimg/jfs/t1/214995/33/1989/22037/6177c676Ec9d7bfe9/1f99876824a5aecd.png"></p>
-<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
-<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
-<p><del>“iqx37f” 375pts 省队预定 %%%</del></p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数出来了。</p>
-<p>感谢 CCF 的数据，给了我第一题很多分！（不过如果没写错可以有 95 QWQ）</p>
-<p>最终成绩：60 + 0 + 12 + 0 = 72</p>
-<p>可能省二，可能省三。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OI 知识树（置顶）</title>
     <url>/2021/08/24/OI-%E7%9F%A5%E8%AF%86%E6%A0%91%EF%BC%88%E7%BD%AE%E9%A1%B6%EF%BC%89/</url>
     <content><![CDATA[<ul>
@@ -220,7 +135,7 @@
   </entry>
   <entry>
     <title>【CSP-S2021】廊桥分配 - 技巧</title>
-    <url>/2021/11/03/%E3%80%90CSP-S2021%E3%80%91%E5%BB%8A%E6%A1%A5%E5%88%86%E9%85%8D-%E5%8D%A1%E5%B8%B8/</url>
+    <url>/2021/11/03/%E3%80%90CSP-S2021%E3%80%91%E5%BB%8A%E6%A1%A5%E5%88%86%E9%85%8D-%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p><del>论正解 $O(n \log n)$ 我用 $O(n^2)$ 的算法怎么卡过的。。。</del></p>
 <p>这道题我不打算写正解。。。</p>
 <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P7913">洛谷链接</a></p>
@@ -274,58 +189,51 @@
       </tags>
   </entry>
   <entry>
-    <title>【NOIP2017】时间复杂度 - 模拟</title>
-    <url>/2021/08/24/%E3%80%90NOIP2017%E3%80%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-%E6%A8%A1%E6%8B%9F/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
-<p>本题定义了一个新语言名为 A++，语言的循环定义如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">F i x y</span><br><span class="line">    循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
-<p>本循环相当于</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++)</span><br></pre></td></tr></table></figure>
-<p>输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。<br>其中满足 x，y 必为常数或 n，n 远大于 x，y。</p>
-<p>具体信息可详见洛谷，链接见上</p>
+    <title>CSP-S2021 第二轮 行记</title>
+    <url>/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
+    <content><![CDATA[<p><del>爆零了？</del></p>
+<p>没爆零！</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
+<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
 <span id="more"></span>
 
-
-
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>显然本题为一道模拟题。</p>
-<h2 id="模型建立"><a href="#模型建立" class="headerlink" title="模型建立"></a>模型建立</h2><p>解题思路为通过 A++ 循环分析该代码的时间复杂度。<br>时间复杂度可通过存储 $O(n^k)$ 的指数达到目的。<br>通过新建 <code>depth</code> 变量存储有效增加代码时间复杂度的个数，使用 <code>maxn</code> 变量存储 <code>depth</code> 的最大值即可记录该 A++ 代码的时间复杂度。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    o = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    o = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++)</span><br><span class="line">        o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。<br>又由于 A++ 中变量不可重名，故有遍历栈的需求。<br>故可以写一个手工栈，栈中存有 A++ 变量名。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">std::string stack[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
-
-<p>此时输入 F 则入栈，输入 E 则出栈，注意当 F 与 E 没有一一对应时需要处理为 ERR。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">    std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line">    <span class="comment">// 处理后续</span></span><br><span class="line">    top++;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// A++语法错误，输出ERR及处理后续</span></span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="循环处理"><a href="#循环处理" class="headerlink" title="循环处理"></a>循环处理</h2><p>首先处理 A++ 循环中申明的变量，若变量重复，则处理为 ERR。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">    <span class="keyword">if</span>(stack[j] == stack[top])</span><br><span class="line">        err = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-<p>循环可分4种情况讨论：</p>
-<ol>
-<li>x，y 均为 n；</li>
-<li>x 为 n，y 为常数；</li>
-<li>x 为常数，y 为 n；</li>
-<li>x，y 均为常数。</li>
-</ol>
-<p>第一种情况显然时间复杂度为 $O(1)$。<br>第二种情况由于 n 远大于 x，故这个循环和循环内部的任何语句都不会被执行，此时需要新建变量  <code>unknown</code> 来记录该层层数，在这个层数之上则不记录时间复杂度。<br>第三种情况由于 n 远大于 y，时间复杂度为 $O(n)$，所以需要 <code>depth++</code>。<br>第四种情况则需要分两种情况讨论。</p>
-<ol>
-<li>$x \leq y$</li>
-<li>$x &gt; y$<br> 其中第一种情况显然时间复杂度为 $O(1)$。<br> 第二种情况得循环及其内部也不会被执行，等同 x 为 n，y 为常数的情况。<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>)</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown)</span><br><span class="line">        unshown = top;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">        f[top] = <span class="literal">true</span>;</span><br><span class="line">        depth++;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    nx = ny = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++)</span><br><span class="line">        nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++)</span><br><span class="line">        ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown)</span><br><span class="line">        unshown = top;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">top++;</span><br><span class="line"><span class="keyword">if</span> (depth &gt; maxn)</span><br><span class="line">    maxn = depth;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>最后在收到 E 的时候结束循环，弹出栈。<br>若栈已空，则说明 F 与 E 不匹配，处理为 ERR。<br>此时则需检测这层循环中 <code>depth</code> 有无变化，若有变化则 <code>depth--</code> 表明这层循环已退出时间复杂度的统计，以便处理其他循环。<br>同时需注意处理 <code>unknown</code> 变量。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (top == <span class="number">0</span>)</span><br><span class="line">    err = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown)</span><br><span class="line">        unshown = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>])</span><br><span class="line">        depth--;</span><br><span class="line">    top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// P3952 [NOIP2017 提高组] 时间复杂度</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, l, o, nx, ny, unshown;</span><br><span class="line">    std::string tmp, stack[<span class="number">100</span>], x, y;</span><br><span class="line">    <span class="keyword">int</span> depth, top, maxn;</span><br><span class="line">    <span class="keyword">bool</span> err, f[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        top = depth = maxn = <span class="number">0</span>;</span><br><span class="line">        unshown = <span class="number">100</span>;</span><br><span class="line">        err = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">            o = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            o = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++)</span><br><span class="line">                o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">0</span>; each &lt; l; each++) &#123;</span><br><span class="line">            std::cin &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">                std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">                    <span class="keyword">if</span> (stack[j] == stack[top])</span><br><span class="line">                        err = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>)</span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown)</span><br><span class="line">                        unshown = top;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">                        f[top] = <span class="literal">true</span>;</span><br><span class="line">                        depth++;</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    nx = ny = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++)</span><br><span class="line">                        nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++)</span><br><span class="line">                        ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown)</span><br><span class="line">                        unshown = top;</span><br><span class="line"></span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                top++;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (depth &gt; maxn)</span><br><span class="line">                    maxn = depth;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (top == <span class="number">0</span>)</span><br><span class="line">                    err = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown)</span><br><span class="line">                        unshown = <span class="number">100</span>;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>])</span><br><span class="line">                        depth--;</span><br><span class="line"></span><br><span class="line">                    top--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (err || top != <span class="number">0</span>)</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;ERR&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (maxn == o)</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;Yes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        t--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
+<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
+<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
+<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
+<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
+<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
+<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
+<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
+<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
+<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
+<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
+<p>T1 只有 5 分？？？</p>
+<p>重新看了一下代码，</p>
+<p>真！的！爆！零！了！</p>
+<p>我是伞兵！</p>
+<p><img src="https://img11.360buyimg.com/ddimg/jfs/t1/214995/33/1989/22037/6177c676Ec9d7bfe9/1f99876824a5aecd.png"></p>
+<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
+<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
+<p><del>“iqx37f” 375pts 省队预定 %%%</del></p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数出来了。</p>
+<p>感谢 CCF 的数据，给了我第一题很多分！（不过如果没写错可以有 95 QWQ）</p>
+<p>最终成绩：60 + 0 + 12 + 0 = 72</p>
+<p>可能省二，可能省三。</p>
+]]></content>
       <categories>
-        <category>OI</category>
-        <category>题解</category>
+        <category>日常</category>
+        <category>行记</category>
       </categories>
       <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>模拟</tag>
-        <tag>栈</tag>
-        <tag>NOIP</tag>
-        <tag>2017</tag>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
       </tags>
   </entry>
   <entry>
@@ -387,6 +295,43 @@
       </tags>
   </entry>
   <entry>
+    <title>CSP-S2021 第一轮 行记</title>
+    <url>/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
+    <content><![CDATA[<p>总觉得应该写些什么……</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
+<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
+<span id="more"></span>
+
+<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
+<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
+<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
+<p>选择题？简单，30分钟写完。</p>
+<p>阅读程序第一个懒得看，直接手动模拟。</p>
+<p>？？？</p>
+<p>这怎么考了立体几何了啊喂？</p>
+<p>高一还没学啊！！！</p>
+<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
+<p>第三题？手算 base64，不想说了……</p>
+<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
+<p>第二题……</p>
+<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
+<p>算了算了直接蒙。</p>
+<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数线 50 分，52 分滚粗。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前缀和学习笔记</title>
     <url>/2021/08/24/%E5%89%8D%E7%BC%80%E5%92%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>前缀和为一种预处理，可理解为数列前 $n$ 项的和。可降低查询某些信息的所需时间。</p>
@@ -420,6 +365,61 @@
         <tag>OI</tag>
         <tag>前缀和</tag>
         <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【NOIP2017】时间复杂度 - 模拟</title>
+    <url>/2021/08/24/%E3%80%90NOIP2017%E3%80%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-%E6%A8%A1%E6%8B%9F/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
+<p>本题定义了一个新语言名为 A++，语言的循环定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">F i x y</span><br><span class="line">    循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
+<p>本循环相当于</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++)</span><br></pre></td></tr></table></figure>
+<p>输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。<br>其中满足 x，y 必为常数或 n，n 远大于 x，y。</p>
+<p>具体信息可详见洛谷，链接见上</p>
+<span id="more"></span>
+
+
+
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>显然本题为一道模拟题。</p>
+<h2 id="模型建立"><a href="#模型建立" class="headerlink" title="模型建立"></a>模型建立</h2><p>解题思路为通过 A++ 循环分析该代码的时间复杂度。<br>时间复杂度可通过存储 $O(n^k)$ 的指数达到目的。<br>通过新建 <code>depth</code> 变量存储有效增加代码时间复杂度的个数，使用 <code>maxn</code> 变量存储 <code>depth</code> 的最大值即可记录该 A++ 代码的时间复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    o = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    o = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++)</span><br><span class="line">        o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。<br>又由于 A++ 中变量不可重名，故有遍历栈的需求。<br>故可以写一个手工栈，栈中存有 A++ 变量名。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">std::string stack[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
+
+<p>此时输入 F 则入栈，输入 E 则出栈，注意当 F 与 E 没有一一对应时需要处理为 ERR。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">    std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line">    <span class="comment">// 处理后续</span></span><br><span class="line">    top++;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// A++语法错误，输出ERR及处理后续</span></span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环处理"><a href="#循环处理" class="headerlink" title="循环处理"></a>循环处理</h2><p>首先处理 A++ 循环中申明的变量，若变量重复，则处理为 ERR。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">    <span class="keyword">if</span>(stack[j] == stack[top])</span><br><span class="line">        err = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>循环可分4种情况讨论：</p>
+<ol>
+<li>x，y 均为 n；</li>
+<li>x 为 n，y 为常数；</li>
+<li>x 为常数，y 为 n；</li>
+<li>x，y 均为常数。</li>
+</ol>
+<p>第一种情况显然时间复杂度为 $O(1)$。<br>第二种情况由于 n 远大于 x，故这个循环和循环内部的任何语句都不会被执行，此时需要新建变量  <code>unknown</code> 来记录该层层数，在这个层数之上则不记录时间复杂度。<br>第三种情况由于 n 远大于 y，时间复杂度为 $O(n)$，所以需要 <code>depth++</code>。<br>第四种情况则需要分两种情况讨论。</p>
+<ol>
+<li>$x \leq y$</li>
+<li>$x &gt; y$<br> 其中第一种情况显然时间复杂度为 $O(1)$。<br> 第二种情况得循环及其内部也不会被执行，等同 x 为 n，y 为常数的情况。<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>)</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown)</span><br><span class="line">        unshown = top;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">        f[top] = <span class="literal">true</span>;</span><br><span class="line">        depth++;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    nx = ny = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++)</span><br><span class="line">        nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++)</span><br><span class="line">        ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown)</span><br><span class="line">        unshown = top;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">top++;</span><br><span class="line"><span class="keyword">if</span> (depth &gt; maxn)</span><br><span class="line">    maxn = depth;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>最后在收到 E 的时候结束循环，弹出栈。<br>若栈已空，则说明 F 与 E 不匹配，处理为 ERR。<br>此时则需检测这层循环中 <code>depth</code> 有无变化，若有变化则 <code>depth--</code> 表明这层循环已退出时间复杂度的统计，以便处理其他循环。<br>同时需注意处理 <code>unknown</code> 变量。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (top == <span class="number">0</span>)</span><br><span class="line">    err = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown)</span><br><span class="line">        unshown = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>])</span><br><span class="line">        depth--;</span><br><span class="line">    top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// P3952 [NOIP2017 提高组] 时间复杂度</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, l, o, nx, ny, unshown;</span><br><span class="line">    std::string tmp, stack[<span class="number">100</span>], x, y;</span><br><span class="line">    <span class="keyword">int</span> depth, top, maxn;</span><br><span class="line">    <span class="keyword">bool</span> err, f[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        top = depth = maxn = <span class="number">0</span>;</span><br><span class="line">        unshown = <span class="number">100</span>;</span><br><span class="line">        err = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">            o = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            o = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++)</span><br><span class="line">                o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">0</span>; each &lt; l; each++) &#123;</span><br><span class="line">            std::cin &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">                std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">                    <span class="keyword">if</span> (stack[j] == stack[top])</span><br><span class="line">                        err = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>)</span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown)</span><br><span class="line">                        unshown = top;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">                        f[top] = <span class="literal">true</span>;</span><br><span class="line">                        depth++;</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    nx = ny = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++)</span><br><span class="line">                        nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++)</span><br><span class="line">                        ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown)</span><br><span class="line">                        unshown = top;</span><br><span class="line"></span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                top++;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (depth &gt; maxn)</span><br><span class="line">                    maxn = depth;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (top == <span class="number">0</span>)</span><br><span class="line">                    err = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown)</span><br><span class="line">                        unshown = <span class="number">100</span>;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>])</span><br><span class="line">                        depth--;</span><br><span class="line"></span><br><span class="line">                    top--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (err || top != <span class="number">0</span>)</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;ERR&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (maxn == o)</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;Yes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        t--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>模拟</tag>
+        <tag>栈</tag>
+        <tag>NOIP</tag>
+        <tag>2017</tag>
       </tags>
   </entry>
 </search>
