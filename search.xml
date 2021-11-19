@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>NOIP2021 行记</title>
-    <url>/2021/11/17/NOIP2021-%E8%A1%8C%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Day"><a href="#Day" class="headerlink" title="Day -???"></a>Day -???</h1><p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
-<p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>成功申请停课。。。</p>
-<span id="more"></span>
-
-<p>顺带在昨天过了 <a href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了 2 天的 bug，我太蒻了 QWQ。</del></p>
-<p>看了一下图论基础，准备刷一下 DP 题。</p>
-<p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>NOIP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSP-S2021 第一轮 行记</title>
     <url>/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
     <content><![CDATA[<p>总觉得应该写些什么……</p>
@@ -56,8 +33,8 @@
       <tags>
         <tag>日常</tag>
         <tag>行记</tag>
-        <tag>2021</tag>
         <tag>CSP</tag>
+        <tag>2021</tag>
       </tags>
   </entry>
   <entry>
@@ -103,8 +80,43 @@
       <tags>
         <tag>日常</tag>
         <tag>行记</tag>
-        <tag>2021</tag>
         <tag>CSP</tag>
+        <tag>2021</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NOIP2021 行记</title>
+    <url>/2021/11/17/NOIP2021-%E8%A1%8C%E8%AE%B0/</url>
+    <content><![CDATA[<p><del>又滚来记流水账了。。。</del></p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day -???"></a>Day -???</h1><p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
+<p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day -2"></a>Day -2</h1><p>成功申请停课。。。</p>
+<span id="more"></span>
+
+<p>顺带在昨天过了 <a href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了 2 天的 bug，我太蒻了 QWQ。</del></p>
+<p>看了一下图论基础，准备刷一下 DP 题。</p>
+<p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>刷了一下题，摸了一会儿鱼。</p>
+<p>看了一下正睿 OI 的题 <del>真难</del>。</p>
+<p>打算刷一下 <a href="https://loj.ac/p?tagIds=186">LibreOJ NOIP Round #1 的题</a>。</p>
+<p>顺带复习了一下 KMP 算法和字符串哈希（lyd 的书真好用）。</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>上午刷题的时候发现 “INORI FOR U” 买的键盘到了，粉色红轴，就观摩了一会儿。</p>
+<p>中午爸爸把身份证送到学校了，顺带还送来了手机，终于可以在电脑上登炉石了！</p>
+<p>然而发现现在炉石也要防沉迷，只能晚上玩。。。</p>
+<p>下午和 “filament” 一起去打乒乓，被爆切。</p>
+<blockquote>
+<p>To be continued…</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>2021</tag>
+        <tag>NOIP</tag>
       </tags>
   </entry>
   <entry>
@@ -154,8 +166,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>2021</tag>
         <tag>CSP</tag>
+        <tag>2021</tag>
         <tag>OI</tag>
         <tag>题解</tag>
         <tag>模拟</tag>
