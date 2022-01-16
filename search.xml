@@ -38,54 +38,6 @@
       </tags>
   </entry>
   <entry>
-    <title>NOIP2021 行记</title>
-    <url>/2021/11/17/NOIP2021-%E8%A1%8C%E8%AE%B0/</url>
-    <content><![CDATA[<p><del>又滚来记流水账了。。。</del></p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day -???"></a>Day -???</h1><p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
-<p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
-<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day -2"></a>Day -2</h1><p>成功申请停课。。。</p>
-<span id="more"></span>
-
-<p>顺带在昨天过了 <a href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了 2 天的 bug，我太蒻了 QWQ。</del></p>
-<p>看了一下图论基础，准备刷一下 DP 题。</p>
-<p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>刷了一下题，摸了一会儿鱼。</p>
-<p>看了一下正睿 OI 的题 <del>真难</del>。</p>
-<p>打算刷一下 <a href="https://loj.ac/p?tagIds=186">LibreOJ NOIP Round #1 的题</a>。</p>
-<p>顺带复习了一下 KMP 算法和字符串哈希（lyd 的书真好用）。</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>上午刷题的时候发现 “INORI FOR U” 买的键盘到了，粉色红轴，就观摩了一会儿。</p>
-<p>中午爸爸把身份证送到学校了，顺带还送来了手机，终于可以在电脑上登炉石了！</p>
-<p>然而发现现在炉石也要防沉迷，只能晚上玩。。。</p>
-<p>晚上简简单单的刷了一下题，玩了一下炉石，就去睡觉了。</p>
-<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早上起晚了，跑着去吃早饭，赶紧吃完早饭就上车。</p>
-<p>到了天府七中之后，看了一下，环境比电子科大的好，电脑配置四代 i5 加上 8G 内存，勉强能用。</p>
-<p>考试前开了 Linux 开始打板子，结果老师说考试前不能动电脑，然后把 Linux 关了。。。</p>
-<p>考试开始后读了一下题，一眼看出来了 T4 是大模拟。</p>
-<p>首先看了一下 T1，看着数据范围应该用 $O(n)$ 的算法，于是想到了先在输入数据中取到询问最大值，类似于埃氏筛法的算法，最后挨个查询的做法。感觉极限数据的答案会超过 $1 \times 10^7$，于是数组和筛法的次数都开了两倍，写 + 调用力一个小时就把大样例过了，于是就开始做下一道题。</p>
-<p>T2 花了半个小时才读懂，开始想怎么把数拆成二进制后用 k 枚举，然后发现这种方法不可行。最终还是想不出正解，就花了一点时间写了一个 $O(n^m)$ 的复杂度的暴力，大样例花了三秒钟才跑出来，有点慌。</p>
-<p>T3 看了一下，很明显是 DP，并且不是背包或线性 DP。知道这道题我写不出来正解后果断打暴力，由于不会将 $n^2$ 乘在方差里，最终的结果只能用 double 存（精度爆炸）。到了最后也只能过第一个样例。</p>
-<p>T4 很明显大模拟，花了 80min 写了一个邻接表 + 爆搜（没有处理 opt = 3 的情况），跑路。</p>
-<p>这次至少把题做完了。。。</p>
-<p>估分：100 + 20 + 12 + 0 = 132</p>
-<p>回家看了一下洛谷群，发现第一题可能会被卡。</p>
-<p>分数 -= 20。。。</p>
-<h1 id="Day-2-1"><a href="#Day-2-1" class="headerlink" title="Day 2"></a>Day 2</h1><p>补文化课ing</p>
-<p>顺带看了一下有道小图灵，省一无望了，<del>可能省二都没了</del>（意料之中）。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数 70 + 0 + 0 + 0 = 70pts，省三。。。</p>
-<p>打算在期末调考之前 AFO 了。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>2021</tag>
-        <tag>NOIP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSP-S2021 第二轮 行记</title>
     <url>/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/</url>
     <content><![CDATA[<p><del>爆零了？</del></p>
@@ -113,7 +65,7 @@
 <p>重新看了一下代码，</p>
 <p>真！的！爆！零！了！</p>
 <p>我是伞兵！</p>
-<p><img src="https://img11.360buyimg.com/ddimg/jfs/t1/214995/33/1989/22037/6177c676Ec9d7bfe9/1f99876824a5aecd.png"></p>
+<p><img src="/images/sb.png" alt="我是傻逼"></p>
 <p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
 <p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
 <p><del>“iqx37f” 360pts 省队预定 %%%</del></p>
@@ -188,6 +140,54 @@
       </tags>
   </entry>
   <entry>
+    <title>NOIP2021 行记</title>
+    <url>/2021/11/17/NOIP2021-%E8%A1%8C%E8%AE%B0/</url>
+    <content><![CDATA[<p><del>又滚来记流水账了。。。</del></p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day -???"></a>Day -???</h1><p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
+<p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day -2"></a>Day -2</h1><p>成功申请停课。。。</p>
+<span id="more"></span>
+
+<p>顺带在昨天过了 <a href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了 2 天的 bug，我太蒻了 QWQ。</del></p>
+<p>看了一下图论基础，准备刷一下 DP 题。</p>
+<p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>刷了一下题，摸了一会儿鱼。</p>
+<p>看了一下正睿 OI 的题 <del>真难</del>。</p>
+<p>打算刷一下 <a href="https://loj.ac/p?tagIds=186">LibreOJ NOIP Round #1 的题</a>。</p>
+<p>顺带复习了一下 KMP 算法和字符串哈希（lyd 的书真好用）。</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>上午刷题的时候发现 “INORI FOR U” 买的键盘到了，粉色红轴，就观摩了一会儿。</p>
+<p>中午爸爸把身份证送到学校了，顺带还送来了手机，终于可以在电脑上登炉石了！</p>
+<p>然而发现现在炉石也要防沉迷，只能晚上玩。。。</p>
+<p>晚上简简单单的刷了一下题，玩了一下炉石，就去睡觉了。</p>
+<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早上起晚了，跑着去吃早饭，赶紧吃完早饭就上车。</p>
+<p>到了天府七中之后，看了一下，环境比电子科大的好，电脑配置四代 i5 加上 8G 内存，勉强能用。</p>
+<p>考试前开了 Linux 开始打板子，结果老师说考试前不能动电脑，然后把 Linux 关了。。。</p>
+<p>考试开始后读了一下题，一眼看出来了 T4 是大模拟。</p>
+<p>首先看了一下 T1，看着数据范围应该用 $O(n)$ 的算法，于是想到了先在输入数据中取到询问最大值，类似于埃氏筛法的算法，最后挨个查询的做法。感觉极限数据的答案会超过 $1 \times 10^7$，于是数组和筛法的次数都开了两倍，写 + 调用力一个小时就把大样例过了，于是就开始做下一道题。</p>
+<p>T2 花了半个小时才读懂，开始想怎么把数拆成二进制后用 k 枚举，然后发现这种方法不可行。最终还是想不出正解，就花了一点时间写了一个 $O(n^m)$ 的复杂度的暴力，大样例花了三秒钟才跑出来，有点慌。</p>
+<p>T3 看了一下，很明显是 DP，并且不是背包或线性 DP。知道这道题我写不出来正解后果断打暴力，由于不会将 $n^2$ 乘在方差里，最终的结果只能用 double 存（精度爆炸）。到了最后也只能过第一个样例。</p>
+<p>T4 很明显大模拟，花了 80min 写了一个邻接表 + 爆搜（没有处理 opt = 3 的情况），跑路。</p>
+<p>这次至少把题做完了。。。</p>
+<p>估分：100 + 20 + 12 + 0 = 132</p>
+<p>回家看了一下洛谷群，发现第一题可能会被卡。</p>
+<p>分数 -= 20。。。</p>
+<h1 id="Day-2-1"><a href="#Day-2-1" class="headerlink" title="Day 2"></a>Day 2</h1><p>补文化课ing</p>
+<p>顺带看了一下有道小图灵，省一无望了，<del>可能省二都没了</del>（意料之中）。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数 70 + 0 + 0 + 0 = 70pts，省三。。。</p>
+<p>打算在期末调考之前 AFO 了。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>2021</tag>
+        <tag>NOIP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【NOIP2017】时间复杂度 - 模拟</title>
     <url>/2021/08/24/%E3%80%90NOIP2017%E3%80%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-%E6%A8%A1%E6%8B%9F/</url>
     <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
@@ -234,10 +234,10 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>NOIP</tag>
         <tag>OI</tag>
         <tag>题解</tag>
         <tag>模拟</tag>
+        <tag>NOIP</tag>
         <tag>栈</tag>
         <tag>2017</tag>
       </tags>
