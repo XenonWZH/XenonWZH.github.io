@@ -19,30 +19,33 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感  补码计算机中的整数均使用补码存储，位运算时也不例外。 故十六进制中大于 0x7FFFFFFF 时就为负数。 在 memset(src, val, len) 中是将 val 不停循环地填入 src，且 0x00 &lt; val &lt; 0xFF。 故可以将 0x3F 定义为一个很大的数，即为 INF。">
+<meta name="description" content="爆零了？ 没爆零！ Day 0简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。 Day 1CCF迷惑操作，把考点设置在了绵阳 开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="位运算学习笔记">
-<meta property="og:url" content="http://example.com/2021/09/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="CSP-S2021 第二轮 行记">
+<meta property="og:url" content="http://example.com/2021/10/25/csp-s2021-1/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感  补码计算机中的整数均使用补码存储，位运算时也不例外。 故十六进制中大于 0x7FFFFFFF 时就为负数。 在 memset(src, val, len) 中是将 val 不停循环地填入 src，且 0x00 &lt; val &lt; 0xFF。 故可以将 0x3F 定义为一个很大的数，即为 INF。">
+<meta property="og:description" content="爆零了？ 没爆零！ Day 0简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。 Day 1CCF迷惑操作，把考点设置在了绵阳 开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-25T06:36:34.000Z">
-<meta property="article:modified_time" content="2022-01-24T04:57:41.973Z">
+<meta property="og:image" content="http://example.com/images/sb.png">
+<meta property="article:published_time" content="2021-10-25T12:08:39.000Z">
+<meta property="article:modified_time" content="2022-01-24T05:42:35.360Z">
 <meta property="article:author" content="XenonWZH">
-<meta property="article:tag" content="OI">
-<meta property="article:tag" content="学习笔记">
-<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="日常">
+<meta property="article:tag" content="行记">
+<meta property="article:tag" content="CSP">
+<meta property="article:tag" content="2021">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/sb.png">
 
 
-<link rel="canonical" href="http://example.com/2021/09/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2021/10/25/csp-s2021-1/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/09/25/位运算学习笔记/","title":"位运算学习笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/25/csp-s2021-1/","path":"2021/10/25/csp-s2021-1/","title":"CSP-S2021 第二轮 行记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>位运算学习笔记 | XenonWZH's Blog</title>
+<title>CSP-S2021 第二轮 行记 | XenonWZH's Blog</title>
   
 
 
@@ -149,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">补码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%A6%99%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">位运算的妙用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82"><span class="nav-number">2.1.</span> <span class="nav-text">快速幂</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9"><span class="nav-number">3.</span> <span class="nav-text">二进制状态压缩</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-0"><span class="nav-number">1.</span> <span class="nav-text">Day 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1"><span class="nav-number">2.</span> <span class="nav-text">Day 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#T1"><span class="nav-number">2.1.</span> <span class="nav-text">T1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">2.2.</span> <span class="nav-text">T2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">2.3.</span> <span class="nav-text">T3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4"><span class="nav-number">2.4.</span> <span class="nav-text">T4</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-2"><span class="nav-number">3.</span> <span class="nav-text">Day 2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-3"><span class="nav-number">4.</span> <span class="nav-text">Day 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day"><span class="nav-number">5.</span> <span class="nav-text">Day ???</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -229,7 +232,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/25/csp-s2021-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -242,7 +245,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          位运算学习笔记
+          CSP-S2021 第二轮 行记
         </h1>
 
         <div class="post-meta-container">
@@ -253,14 +256,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-09-25 14:36:34" itemprop="dateCreated datePublished" datetime="2021-09-25T14:36:34+08:00">2021-09-25</time>
+      <time title="创建时间：2021-10-25 20:08:39" itemprop="dateCreated datePublished" datetime="2021-10-25T20:08:39+08:00">2021-10-25</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-01-24 12:57:41" itemprop="dateModified" datetime="2022-01-24T12:57:41+08:00">2022-01-24</time>
+        <time title="修改时间：2022-01-24 13:42:35" itemprop="dateModified" datetime="2022-01-24T13:42:35+08:00">2022-01-24</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,11 +271,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+          <a href="/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">行记</span></a>
         </span>
     </span>
 
@@ -286,50 +289,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <blockquote>
-<p>《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感</p>
-</blockquote>
-<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
-<p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p>
-<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code> 不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt; 0xFF。</p>
-<p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p>
+        <p><del>爆零了？</del></p>
+<p>没爆零！</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
+<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
 <span id="more"></span>
 
-<h1 id="位运算的妙用"><a href="#位运算的妙用" class="headerlink" title="位运算的妙用"></a>位运算的妙用</h1><h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>当计算 $a^b$ 时 $b$ 可以被分成 $b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times 2^2 + \cdots + x_n \times 2^n$，故可以用位运算剥离 $b$ 在二进制下的位数，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % p;</span><br><span class="line">    <span class="keyword">while</span> (b &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ((<span class="keyword">long</span> <span class="keyword">long</span>)ans * a) % p;</span><br><span class="line">        &#125;</span><br><span class="line">        a = ((<span class="keyword">long</span> <span class="keyword">long</span>)a * a) % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code> 表示不选择。</p>
-<p>故当拥有一个 $n$ 个元素的集合时，可使用一个位数为 $n$ 的二进制数来枚举全部的子集，即为 $2^n$ 的十进制数。</p>
-<p>此时可以用一个整型数代替布尔数组，也可以使用一个整型数枚举全排列。</p>
-<p>下面的列表列举了常用操作。</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>运算（运算符为 C++）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>取出整数 $n$ 在二进制表示下的第 $k$ 位</td>
-<td><code>（n &gt;&gt; k） &amp; 1</code></td>
-</tr>
-<tr>
-<td>取出整数 $n$ 在二进制表示下的第 $0 \sim k - 1$ 位（后 $k$ 位）</td>
-<td><code>n &amp; ((1 &lt;&lt; k) - 1)</code></td>
-</tr>
-<tr>
-<td>把整数 $n$ 在二进制表示下的第 $k$ 位取反</td>
-<td><code>n ^ (1 &lt;&lt; k)</code></td>
-</tr>
-<tr>
-<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $1$</td>
-<td><code>n | (1 &lt;&lt; k)</code></td>
-</tr>
-<tr>
-<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $0$</td>
-<td><code>n &amp; (~(1 &lt;&lt; k))</code></td>
-</tr>
-</tbody></table>
+<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
+<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
+<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
+<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
+<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
+<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
+<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
+<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
+<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
+<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
+<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
+<p>T1 只有 5 分？？？</p>
+<p>重新看了一下代码，</p>
+<p>真！的！爆！零！了！</p>
+<p>我是伞兵！</p>
+<p><img src="/images/sb.png" alt="我是傻逼"></p>
+<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
+<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
+<p><del>“iqx37f” 360pts 省队预定 %%%</del></p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数出来了。</p>
+<p>感谢 CCF 的数据，给了我第一题很多分！（不过如果没写错可以有 95 QWQ）</p>
+<p>最终成绩：60 + 0 + 12 + 0 = 72，省二滚粗。</p>
 
     </div>
 
@@ -339,22 +330,23 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/OI/" rel="tag"># OI</a>
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
-              <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
+              <a href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag"># 日常</a>
+              <a href="/tags/%E8%A1%8C%E8%AE%B0/" rel="tag"># 行记</a>
+              <a href="/tags/CSP/" rel="tag"># CSP</a>
+              <a href="/tags/2021/" rel="tag"># 2021</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/18/CSP-S2021-%E7%AC%AC%E4%B8%80%E8%BD%AE-%E8%A1%8C%E8%AE%B0/" rel="prev" title="CSP-S2021 第一轮 行记">
-                  <i class="fa fa-chevron-left"></i> CSP-S2021 第一轮 行记
+                <a href="/2021/09/25/bitwise-operator-notes/" rel="prev" title="位运算学习笔记">
+                  <i class="fa fa-chevron-left"></i> 位运算学习笔记
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/10/25/CSP-S2021-%E7%AC%AC%E4%BA%8C%E8%BD%AE-%E8%A1%8C%E8%AE%B0/" rel="next" title="CSP-S2021 第二轮 行记">
-                  CSP-S2021 第二轮 行记 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/11/03/csp-s2021-airport/" rel="next" title="「CSP-S2021」廊桥分配 - 技巧">
+                  「CSP-S2021」廊桥分配 - 技巧 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
