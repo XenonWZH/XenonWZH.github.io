@@ -1081,6 +1081,10 @@ pre code {
 .post-body .note.danger h6 {
   color: #d9534f;
 }
+.mermaid {
+  margin-bottom: 20px;
+  text-align: center;
+}
 .pagination .prev,
 .pagination .next,
 .pagination .page-number,

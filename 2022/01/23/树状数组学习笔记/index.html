@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前置知识详见之前《位运算学习笔记》博客 这里想补充一点，$lowbit$ 计算 $lowbit$ 计算的目的是求出一个数在二进制下最后一位 $1$ 和之后的所有 $0$ 所组成的数。 具体求法为 x &#x3D; x &amp; -x，接下我将会利用数字 $20$ 解释其原理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树状数组学习笔记">
+<meta property="og:url" content="http://example.com/2022/01/23/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="前置知识详见之前《位运算学习笔记》博客 这里想补充一点，$lowbit$ 计算 $lowbit$ 计算的目的是求出一个数在二进制下最后一位 $1$ 和之后的所有 $0$ 所组成的数。 具体求法为 x &#x3D; x &amp; -x，接下我将会利用数字 $20$ 解释其原理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oi-wiki.org/ds/images/fenwick.svg">
+<meta property="article:published_time" content="2022-01-23T10:33:42.000Z">
+<meta property="article:modified_time" content="2022-01-24T03:56:35.271Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="树状数组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oi-wiki.org/ds/images/fenwick.svg">
+
+
+<link rel="canonical" href="http://example.com/2022/01/23/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/01/23/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2022/01/23/树状数组学习笔记/","title":"树状数组学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树状数组学习笔记 | XenonWZH's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">XenonWZH's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">实现方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E4%BF%AE%E6%94%B9"><span class="nav-number">3.2.</span> <span class="nav-text">单点修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.3.</span> <span class="nav-text">前缀查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">例题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/dian-nao-wang-zhe-32" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;dian-nao-wang-zhe-32" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">huaruoji</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/23/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树状数组学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-23 18:33:42" itemprop="dateCreated datePublished" datetime="2022-01-23T18:33:42+08:00">2022-01-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-01-24 11:56:35" itemprop="dateModified" datetime="2022-01-24T11:56:35+08:00">2022-01-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><p><a target="_blank" rel="noopener" href="https://xenonwzh.github.io/2021/09/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">详见之前《位运算学习笔记》博客</a></p>
+<p>这里想补充一点，$lowbit$ 计算</p>
+<p>$lowbit$ 计算的目的是求出一个数在二进制下最后一位 $1$ 和之后的所有 $0$ 所组成的数。</p>
+<p>具体求法为 <code>x = x &amp; -x</code>，接下我将会利用数字 $20$ 解释其原理。</p>
+<span id="more"></span>
+
+<p>首先将 $20$ 的二进制表示出来，为 $010100$。</p>
+<p>然后将 $20$ 的复数表示出来，在补码的表示方法为先将 $20$ 按位取反，再 $+1$，即为 $101100$。</p>
+<p>再将两个数进行与运算，得到二进制数 $000100$，十进制数为 $4$。该数即为 $20$ 在二进制下的最后一个 $1$ 和之后的 $0$ 所组成的数。</p>
+<p>$lowbit$ 计算为树状数组的基础运算。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>树状数组是一种维护线性数组前缀和的特殊方法，使用了类似于快速幂等的二进制分组的优势，对数组进行分段，从而可以快速求出该数组的前缀和的树形数据结构。</p>
+<p>这一点与线段树类似。树状数组能干的事情线段树都能干，线段树能干的事情树状数组不一定能干。但树状数组相对线段树代码更短更好写，故在只涉及单点修改的时候树状数组更常用。</p>
+<p>树状数组的工作原理如下图（图片引用自 OI Wiki）：</p>
+<p><img src="https://oi-wiki.org/ds/images/fenwick.svg" alt="工作原理"></p>
+<p>将 $a$ 数组分为图示若干段，其中 $c$ 数组存的是区间和。</p>
+<h1 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h1><p>那么怎么实现对数组的分段？这里就需要使用之前介绍的 $lowbit$ 计算。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>树状数组支持两种操作：单点修改，前缀求和。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>首先在使用树状数组之间，我们需要将其初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c[MAXN + <span class="number">1</span>];    <span class="comment">//存储区间和</span></span><br><span class="line"><span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br></pre></td></tr></table></figure>
+
+<h2 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h2><p>树状数组可以将单点单独加一个值，例如修改 $a_5$ 工作原理如下（对应上图序号）（画图丑请见谅）：</p>
+<pre class="mermaid">graph LR
+a5 --> c6 --> c8</pre>
+<p>即为逐级上升，在经过的结点都加上这个值即可。</p>
+<p>关于如何求上升后的坐标，使用 $lowbit$ 即可。</p>
+<p>$$<br>\left{<br>    \begin{matrix}<br>    5 + lowbit(5) = 6 \<br>    6 + lowbit(6) = 8<br>    \end{matrix}<br>\right.<br>$$</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x &lt;= n) &#123;    <span class="comment">// 防止数组越界</span></span><br><span class="line">        c[x] = c[x] + k;</span><br><span class="line">        x = x + <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前缀查询"><a href="#前缀查询" class="headerlink" title="前缀查询"></a>前缀查询</h2><p>树状数组最主要的功能就是求前缀和，例如查询 $a_7$ 工作原理如下：</p>
+<pre class="mermaid">graph LR
+a7 --> c6 --> c4</pre>
+
+<p>即为不停地查询上一层的前一个，同时将值加入最终结果即可。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        ans = ans + c[x];</span><br><span class="line">        x = x - <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上为树状数组最基础的操作</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3374">P3374 【模板】树状数组 1</a></p>
+<p>简单的模板题，结合上面的知识即可 AC。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">500000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c[MAXN + <span class="number">1</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x &lt;= n) &#123;</span><br><span class="line">        c[x] = c[x] + k;</span><br><span class="line">        x = x + <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        ans = ans + c[x];</span><br><span class="line">        x = x - <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, x; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        <span class="built_in">add</span>(i, x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="keyword">int</span> m, x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;m, &amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">1</span>) <span class="built_in">add</span>(x, y);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">getsum</span>(y) - <span class="built_in">getsum</span>(x - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag"># 树状数组</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/16/%E3%80%90%E6%B4%9B%E8%B0%B7-P1182%E3%80%91%E6%95%B0%E5%88%97%E5%88%86%E6%AE%B5-Section-II-%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" rel="prev" title="【洛谷 P1182】数列分段 Section II - 二分答案">
+                  <i class="fa fa-chevron-left"></i> 【洛谷 P1182】数列分段 Section II - 二分答案
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"forest","js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.11.2/dist/mermaid.min.js","integrity":"sha256-lBK8/r0PCT3qtPtIvDcaT+20nHioFbzRGg36kOJ+wz4="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
