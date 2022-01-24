@@ -1,64 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>位运算学习笔记</title>
-    <url>/bitwise-operator-notes/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
-<p>《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感</p>
-</blockquote>
-<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
-<p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p>
-<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code> 不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt; 0xFF。</p>
-<p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p>
-<span id="more"></span>
-
-<h1 id="位运算的妙用"><a href="#位运算的妙用" class="headerlink" title="位运算的妙用"></a>位运算的妙用</h1><h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>当计算 $a^b$ 时 $b$ 可以被分成 $b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times 2^2 + \cdots + x_n \times 2^n$，故可以用位运算剥离 $b$ 在二进制下的位数，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % p;</span><br><span class="line">    <span class="keyword">while</span> (b &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ((<span class="keyword">long</span> <span class="keyword">long</span>)ans * a) % p;</span><br><span class="line">        &#125;</span><br><span class="line">        a = ((<span class="keyword">long</span> <span class="keyword">long</span>)a * a) % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code> 表示不选择。</p>
-<p>故当拥有一个 $n$ 个元素的集合时，可使用一个位数为 $n$ 的二进制数来枚举全部的子集，即为 $2^n$ 的十进制数。</p>
-<p>此时可以用一个整型数代替布尔数组，也可以使用一个整型数枚举全排列。</p>
-<p>下面的列表列举了常用操作。</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>运算（运算符为 C++）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>取出整数 $n$ 在二进制表示下的第 $k$ 位</td>
-<td><code>（n &gt;&gt; k） &amp; 1</code></td>
-</tr>
-<tr>
-<td>取出整数 $n$ 在二进制表示下的第 $0 \sim k - 1$ 位（后 $k$ 位）</td>
-<td><code>n &amp; ((1 &lt;&lt; k) - 1)</code></td>
-</tr>
-<tr>
-<td>把整数 $n$ 在二进制表示下的第 $k$ 位取反</td>
-<td><code>n ^ (1 &lt;&lt; k)</code></td>
-</tr>
-<tr>
-<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $1$</td>
-<td><code>n | (1 &lt;&lt; k)</code></td>
-</tr>
-<tr>
-<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $0$</td>
-<td><code>n &amp; (~(1 &lt;&lt; k))</code></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>学习笔记</tag>
-        <tag>位运算</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>树状数组学习笔记</title>
     <url>/binary-index-tree-notes/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><a href="/bitwise-operator-notes/" title="详见之前《位运算学习笔记》博客">详见之前《位运算学习笔记》博客</a>
@@ -154,53 +96,6 @@ a7 --> c6 --> c4</pre>
       </tags>
   </entry>
   <entry>
-    <title>CSP-S2021 第二轮 行记</title>
-    <url>/csp-s2021-2/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>爆零了？</del></p>
-<p>没爆零！</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
-<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
-<span id="more"></span>
-
-<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
-<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
-<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
-<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
-<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
-<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
-<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
-<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
-<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
-<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
-<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
-<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
-<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
-<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
-<p>T1 只有 5 分？？？</p>
-<p>重新看了一下代码，</p>
-<p>真！的！爆！零！了！</p>
-<p>我是伞兵！</p>
-<p><img src="/.com//sb.png" alt="我是傻逼"></p>
-<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
-<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
-<p><del>“iqx37f” 360pts 省队预定 %%%</del></p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数出来了。</p>
-<p>感谢 CCF 的数据，给了我第一题很多分！（不过如果没写错可以有 95 QWQ）</p>
-<p>最终成绩：60 + 0 + 12 + 0 = 72，省二滚粗。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>「CSP-S2021」廊桥分配 - 技巧</title>
     <url>/csp-s2021-airport/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>论正解 $O(n \log n)$ 我用 $O(n^2)$ 的算法怎么卡过的。。。</del></p>
@@ -256,45 +151,108 @@ a7 --> c6 --> c4</pre>
       </tags>
   </entry>
   <entry>
-    <title>「洛谷 P1182」数列分段 Section II - 二分答案</title>
-    <url>/luogu-1182/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>学完 wxk 的康复训练</del></p>
-<blockquote>
-<p>学 wxk 学久了感觉 wxk 有意思，学 OI 学久了感觉 OI 有意思。 ——huaruoji</p>
+    <title>位运算学习笔记</title>
+    <url>/bitwise-operator-notes/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+<p>《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感</p>
 </blockquote>
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P1182">洛谷链接</a></p>
-<p>给定一个长度为 $n$ 的整形数列 $A_{1 \sim n}$，先将其分为 $m$ 段，并要求每段连续，目前需要一种分法，使得分出的每段和的最大值最小。</p>
+<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
+<p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p>
+<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code> 不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt; 0xFF。</p>
+<p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p>
 <span id="more"></span>
 
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h2><p>求最大值最小，显然是一道二分答案题，可以尝试使用二分答案解决问题。</p>
-<p>这道题二分答案的方法是二分每段和的最大值，从答案的最大值 $10^9$ 开始二分。注意二分的最小值为整个数列的单个元素最大值，否则可能会出现最后答案小于数列中的某个数，导致无法分割数列的情况（例如洛谷数据中的第四个测试点）。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    std::cin &gt;&gt; a[i];</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 二分处理</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<h1 id="位运算的妙用"><a href="#位运算的妙用" class="headerlink" title="位运算的妙用"></a>位运算的妙用</h1><h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>当计算 $a^b$ 时 $b$ 可以被分成 $b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times 2^2 + \cdots + x_n \times 2^n$，故可以用位运算剥离 $b$ 在二进制下的位数，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % p;</span><br><span class="line">    <span class="keyword">while</span> (b &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ((<span class="keyword">long</span> <span class="keyword">long</span>)ans * a) % p;</span><br><span class="line">        &#125;</span><br><span class="line">        a = ((<span class="keyword">long</span> <span class="keyword">long</span>)a * a) % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><p>现在我们已经处理完了，现在的问题是二分出答案后如何检验。</p>
-<p>这块可以使用类似均分纸牌的思路，使用贪心解决。</p>
-<p>在数列的开头开始扫，不停的加数列中的数，若和大于答案，则把和清空为最后加入的一个数，段数 +1。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum += a[i];</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">        sum = a[i];</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后如果段数大于 $m$，则说明答案过小，答案在 $mid$ 之上。</p>
-<p>如果段数小于 $m$，则说明答案过大，答案在 $mid$ 之下。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line"><span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>, MAXA = <span class="number">10000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> a[MAXN];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += a[i];</span><br><span class="line">            <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">                sum = a[i];</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line">        <span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code> 表示不选择。</p>
+<p>故当拥有一个 $n$ 个元素的集合时，可使用一个位数为 $n$ 的二进制数来枚举全部的子集，即为 $2^n$ 的十进制数。</p>
+<p>此时可以用一个整型数代替布尔数组，也可以使用一个整型数枚举全排列。</p>
+<p>下面的列表列举了常用操作。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>运算（运算符为 C++）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取出整数 $n$ 在二进制表示下的第 $k$ 位</td>
+<td><code>（n &gt;&gt; k） &amp; 1</code></td>
+</tr>
+<tr>
+<td>取出整数 $n$ 在二进制表示下的第 $0 \sim k - 1$ 位（后 $k$ 位）</td>
+<td><code>n &amp; ((1 &lt;&lt; k) - 1)</code></td>
+</tr>
+<tr>
+<td>把整数 $n$ 在二进制表示下的第 $k$ 位取反</td>
+<td><code>n ^ (1 &lt;&lt; k)</code></td>
+</tr>
+<tr>
+<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $1$</td>
+<td><code>n | (1 &lt;&lt; k)</code></td>
+</tr>
+<tr>
+<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $0$</td>
+<td><code>n &amp; (~(1 &lt;&lt; k))</code></td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
         <category>OI</category>
-        <category>题解</category>
+        <category>学习笔记</category>
       </categories>
       <tags>
         <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>二分</tag>
-        <tag>二分答案</tag>
-        <tag>贪心</tag>
-        <tag>洛谷</tag>
+        <tag>学习笔记</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2021 第二轮 行记</title>
+    <url>/csp-s2021-2/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>爆零了？</del></p>
+<p>没爆零！</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
+<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
+<span id="more"></span>
+
+<h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>看了一眼题，感觉不难，就开始做了。</p>
+<p>这道题先把飞进来的飞机按照飞机的起飞顺序排序，然后再模拟有无限个廊道，维护一个数组，其中存储了每个廊道可容下的最大飞机数和最晚飞机起飞的时间。分别模拟国内场和国际场的廊道情况。最后把 n 拆成两个数，求最大值即可。时间复杂度为 $O(n^2)$。考场上以为可以 AC。</p>
+<p>最后和 “huaruoji” 交流了一下，发现 $O(n^2)$ 会被卡，正解的复杂度是 $O(n \log n)$。</p>
+<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p><del>看到这道题我吐血了，小 c 会做的题我完全不会做。</del></p>
+<p>以为这题可做，就花了一个半小时做了这一道题 <del>（然而并没有做出来）</del> 。</p>
+<p>先是想的数学方法，如果 ? 可以被替换成 ) 或 *，那就 <code>ans = 2 * ans + 1</code>，然后搜索 ? 替换成 ( 的情况。</p>
+<p>然后发现这个方法无法判重，就全部改成了深搜剪枝，但始终第二个样例要少两个数，心态很爆炸。</p>
+<p><del>然而并没有关系，毕竟洛谷上此时全部 TLE 了。</del></p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>最后做的，花了半个小时想思路。</p>
+<p>先是将相同的数在上面连线，如 a b c d a 这个数列中 a 包围了 b c d。若在包围的数中有几根线无论如何都会交叉就无解，否则就优先输出 L。可以先解决包围的数，如前面数列中的 a，最后解决被包围的数，直接输出 L 完事，最后回文简单处理即可。</p>
+<p>虽然证明出来了算法的正确性，但是没时间写，于是又爆零了。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>看不懂题，不会，输出 0，跳过。</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>没停课，赶作业ing。</p>
+<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h1><p>代码发出来了，测了一下。</p>
+<p>T1 只有 5 分？？？</p>
+<p>重新看了一下代码，</p>
+<p>真！的！爆！零！了！</p>
+<p>我是伞兵！</p>
+<p><img src="/images/sb.png" alt="我是傻逼"></p>
+<p>回头全部测了一下数据，分数 5+0+0+0=5pts，炸了。</p>
+<p><del>“huaruoji” 128pts 省一预定 %%%</del></p>
+<p><del>“iqx37f” 360pts 省队预定 %%%</del></p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数出来了。</p>
+<p>感谢 CCF 的数据，给了我第一题很多分！（不过如果没写错可以有 95 QWQ）</p>
+<p>最终成绩：60 + 0 + 12 + 0 = 72，省二滚粗。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
       </tags>
   </entry>
   <entry>
@@ -350,6 +308,48 @@ a7 --> c6 --> c4</pre>
         <tag>栈</tag>
         <tag>NOIP</tag>
         <tag>2017</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「洛谷 P1182」数列分段 Section II - 二分答案</title>
+    <url>/luogu-1182/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>学完 wxk 的康复训练</del></p>
+<blockquote>
+<p>学 wxk 学久了感觉 wxk 有意思，学 OI 学久了感觉 OI 有意思。 ——huaruoji</p>
+</blockquote>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P1182">洛谷链接</a></p>
+<p>给定一个长度为 $n$ 的整形数列 $A_{1 \sim n}$，先将其分为 $m$ 段，并要求每段连续，目前需要一种分法，使得分出的每段和的最大值最小。</p>
+<span id="more"></span>
+
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h2><p>求最大值最小，显然是一道二分答案题，可以尝试使用二分答案解决问题。</p>
+<p>这道题二分答案的方法是二分每段和的最大值，从答案的最大值 $10^9$ 开始二分。注意二分的最小值为整个数列的单个元素最大值，否则可能会出现最后答案小于数列中的某个数，导致无法分割数列的情况（例如洛谷数据中的第四个测试点）。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    std::cin &gt;&gt; a[i];</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 二分处理</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><p>现在我们已经处理完了，现在的问题是二分出答案后如何检验。</p>
+<p>这块可以使用类似均分纸牌的思路，使用贪心解决。</p>
+<p>在数列的开头开始扫，不停的加数列中的数，若和大于答案，则把和清空为最后加入的一个数，段数 +1。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum += a[i];</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">        sum = a[i];</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后如果段数大于 $m$，则说明答案过小，答案在 $mid$ 之上。</p>
+<p>如果段数小于 $m$，则说明答案过大，答案在 $mid$ 之下。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line"><span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>, MAXA = <span class="number">10000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> a[MAXN];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += a[i];</span><br><span class="line">            <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">                sum = a[i];</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line">        <span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>二分</tag>
+        <tag>二分答案</tag>
+        <tag>贪心</tag>
+        <tag>洛谷</tag>
       </tags>
   </entry>
   <entry>
