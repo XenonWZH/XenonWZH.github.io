@@ -6,7 +6,7 @@
   <link href="http://xenonwzh.github.io/atom.xml" rel="self"/>
   
   <link href="http://xenonwzh.github.io/"/>
-  <updated>2022-02-08T02:15:45.337Z</updated>
+  <updated>2022-02-08T02:46:51.373Z</updated>
   <id>http://xenonwzh.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://xenonwzh.github.io/lca-notes/"/>
     <id>http://xenonwzh.github.io/lca-notes/</id>
     <published>2022-02-08T01:21:00.000Z</published>
-    <updated>2022-02-08T02:15:45.337Z</updated>
+    <updated>2022-02-08T02:46:51.373Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>最近公共祖先（英文 Lowest Common Ancestor，简称 LCA）定义为树种两个点的公共祖先里面，离根最远的一个。</p><h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="朴素算法"><a href="#朴素算法" class="headerlink" title="朴素算法"></a>朴素算法</h2><p>先算出两点的深度，取深度最小值，不停寻找父结点直到该深度。之后两点同时找父结点，直到两者的父结点相同，该父结点即为最近公共祖先。易得时间复杂度为 $O(n)$。</p><h2 id="倍增算法"><a href="#倍增算法" class="headerlink" title="倍增算法"></a>倍增算法</h2><span id="more"></span><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>记录一个数组 <code>fa[u][i]</code>，记录的是结点 $u$ 向上寻找 $2^i$ 次父结点所达到的结点，如果不存在则为 $0$。</p><p>可通过二进制拆分 $u$ 的深度（拆分过程详见 [位运算学习笔记 - 快速幂](<a href="https://xenonwzh.github.io/bitwise-operator-notes/#%E5%BF%AB%E9%80%9F%E5%B9%82">位运算学习笔记 | XenonWZH’s Blog</a>) ），在 $O(\log n)$ 的时间复杂度下算出 <code>fa[u][i]</code>。利用该方法可以利用递归在 $O(n \log n)$ 的时间复杂度内预处理完 <code>fa</code> 数组。</p><p>下列为预处理 <code>fa</code> 的代码：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFa</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    fa[u][<span class="number">0</span>] = f;</span><br><span class="line">    dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; i++) fa[u][i] = fa[ fa[u][i - <span class="number">1</span>] ][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : e[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getFa</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="寻找-LCA"><a href="#寻找-LCA" class="headerlink" title="寻找 LCA"></a>寻找 LCA</h3><p>与朴素算法相同，不过通过询问从大到小的 $2$ 的幂次方的 <code>fa</code> 可以将复杂度从 $O(n)$ 优化到 $O(\log n)$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[ fa[u][i] ] &gt;= dep[u] ) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa[u][i] != fa[v][i]) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">            v = fa[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="算法复杂度统计"><a href="#算法复杂度统计" class="headerlink" title="算法复杂度统计"></a>算法复杂度统计</h2><table><thead><tr><th>算法</th><th>预处理</th><th>q 次查询</th></tr></thead><tbody><tr><td>朴素算法</td><td>$O(n)$</td><td>$O(qn)$</td></tr><tr><td>倍增算法</td><td>$O(n \log n)$</td><td>$O(q \log n)$</td></tr><tr><td>欧拉序转 RMQ</td><td>$O(n \log n)$</td><td>$O(q)$</td></tr><tr><td>Tarjan</td><td>$O(n)$</td><td>$O(n + q)$</td></tr><tr><td>树链剖分</td><td>$O(n)$</td><td>$O(q \log n)$</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>最近公共祖先（英文 Lowest Common Ancestor，简称 LCA）定义为树种两个点的公共祖先里面，离根最远的一个。</p><h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="朴素算法"><a href="#朴素算法" class="headerlink" title="朴素算法"></a>朴素算法</h2><p>先算出两点的深度，取深度最小值，不停寻找父结点直到该深度。之后两点同时找父结点，直到两者的父结点相同，该父结点即为最近公共祖先。易得时间复杂度为 $O(n)$。</p><h2 id="倍增算法"><a href="#倍增算法" class="headerlink" title="倍增算法"></a>倍增算法</h2><span id="more"></span><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>记录一个数组 <code>fa[u][i]</code>，记录的是结点 $u$ 向上寻找 $2^i$ 次父结点所达到的结点，如果不存在则为 $0$。</p><p>可通过二进制拆分 $u$ 的深度（<a href="/bitwise-operator-notes/" title="拆分过程详见之前《位运算学习笔记》博客中的“快速幂”章节">拆分过程详见之前《位运算学习笔记》博客中的“快速幂”章节</a> ），在 $O(\log n)$ 的时间复杂度下算出 <code>fa[u][i]</code>。利用该方法可以利用递归在 $O(n \log n)$ 的时间复杂度内预处理完 <code>fa</code> 数组。</p><p>下列为预处理 <code>fa</code> 的代码：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFa</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    fa[u][<span class="number">0</span>] = f;</span><br><span class="line">    dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; i++) fa[u][i] = fa[ fa[u][i - <span class="number">1</span>] ][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : e[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getFa</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="寻找-LCA"><a href="#寻找-LCA" class="headerlink" title="寻找 LCA"></a>寻找 LCA</h3><p>与朴素算法相同，不过通过询问从大到小的 $2$ 的幂次方的 <code>fa</code> 可以将复杂度从 $O(n)$ 优化到 $O(\log n)$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[ fa[u][i] ] &gt;= dep[] ) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa[u][i] != fa[v][i]) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">            v = fa[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="算法复杂度统计"><a href="#算法复杂度统计" class="headerlink" title="算法复杂度统计"></a>算法复杂度统计</h2><table><thead><tr><th>算法</th><th>预处理</th><th>q 次查询</th></tr></thead><tbody><tr><td>朴素算法</td><td>$O(n)$</td><td>$O(qn)$</td></tr><tr><td>倍增算法</td><td>$O(n \log n)$</td><td>$O(q \log n)$</td></tr><tr><td>欧拉序转 RMQ</td><td>$O(n \log n)$</td><td>$O(q)$</td></tr><tr><td>Tarjan</td><td>$O(n)$</td><td>$O(n + q)$</td></tr><tr><td>树链剖分</td><td>$O(n)$</td><td>$O(q \log n)$</td></tr></tbody></table>]]></content>
     
     
     <summary type="html">&lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;p&gt;最近公共祖先（英文 Lowest Common Ancestor，简称 LCA）定义为树种两个点的公共祖先里面，离根最远的一个。&lt;/p&gt;
@@ -48,40 +48,6 @@
     <category term="最近公共祖先" scheme="http://xenonwzh.github.io/tags/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
     
     <category term="倍增" scheme="http://xenonwzh.github.io/tags/%E5%80%8D%E5%A2%9E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「Codeforces 1632B」Roof Construction - 贪心</title>
-    <link href="http://xenonwzh.github.io/cf-1632b/"/>
-    <id>http://xenonwzh.github.io/cf-1632b/</id>
-    <published>2022-02-02T06:47:13.000Z</published>
-    <updated>2022-02-02T07:40:13.878Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="OI" scheme="http://xenonwzh.github.io/categories/OI/"/>
-    
-    <category term="题解" scheme="http://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
-    
-    
-    <category term="OI" scheme="http://xenonwzh.github.io/tags/OI/"/>
-    
-    <category term="位运算" scheme="http://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-    <category term="题解" scheme="http://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-    <category term="贪心" scheme="http://xenonwzh.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
-    
-    <category term="Codeforces" scheme="http://xenonwzh.github.io/tags/Codeforces/"/>
     
   </entry>
   
@@ -144,11 +110,11 @@
     
     <category term="题解" scheme="http://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="贪心" scheme="http://xenonwzh.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
-    
     <category term="二分" scheme="http://xenonwzh.github.io/tags/%E4%BA%8C%E5%88%86/"/>
     
     <category term="二分答案" scheme="http://xenonwzh.github.io/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
+    
+    <category term="贪心" scheme="http://xenonwzh.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
     
     <category term="洛谷" scheme="http://xenonwzh.github.io/tags/%E6%B4%9B%E8%B0%B7/"/>
     
@@ -213,11 +179,11 @@
     
     <category term="OI" scheme="http://xenonwzh.github.io/tags/OI/"/>
     
-    <category term="题解" scheme="http://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
-    
     <category term="CSP" scheme="http://xenonwzh.github.io/tags/CSP/"/>
     
     <category term="2021" scheme="http://xenonwzh.github.io/tags/2021/"/>
+    
+    <category term="题解" scheme="http://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
     <category term="模拟" scheme="http://xenonwzh.github.io/tags/%E6%A8%A1%E6%8B%9F/"/>
     
@@ -381,9 +347,9 @@
     
     <category term="模拟" scheme="http://xenonwzh.github.io/tags/%E6%A8%A1%E6%8B%9F/"/>
     
-    <category term="栈" scheme="http://xenonwzh.github.io/tags/%E6%A0%88/"/>
-    
     <category term="NOIP" scheme="http://xenonwzh.github.io/tags/NOIP/"/>
+    
+    <category term="栈" scheme="http://xenonwzh.github.io/tags/%E6%A0%88/"/>
     
     <category term="2017" scheme="http://xenonwzh.github.io/tags/2017/"/>
     
