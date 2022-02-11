@@ -1,40 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSP-S2021 第一轮 行记</title>
-    <url>/csp-s2021-1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>总觉得应该写些什么……</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
-<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
-<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
-<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
+    <title>树状数组学习笔记</title>
+    <url>/binary-index-trees-notes/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>树状数组是一种维护线性数组前缀和的特殊方法，使用了类似于快速幂等的二进制分组的优势，对数组进行分段，从而可以快速求出该数组的前缀和的树形数据结构。</p>
+<p>这一点与线段树类似。树状数组能干的事情线段树都能干，线段树能干的事情树状数组不一定能干。但树状数组相对线段树代码更短更好写，故在只涉及单点修改的时候树状数组更常用。</p>
 <span id="more"></span>
 
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
-<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
-<p>选择题？简单，30分钟写完。</p>
-<p>阅读程序第一个懒得看，直接手动模拟。</p>
-<p>？？？</p>
-<p>这怎么考了立体几何了啊喂？</p>
-<p>高一还没学啊！！！</p>
-<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
-<p>第三题？手算 base64，不想说了……</p>
-<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
-<p>第二题……</p>
-<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
-<p>算了算了直接蒙。</p>
-<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数线 50 分，52 分滚粗。</p>
-]]></content>
+<p>树状数组的工作原理如下图（图片引用自 OI Wiki）：</p>
+<p><img src="https://oi-wiki.org/ds/images/fenwick.svg" alt="工作原理"></p>
+<p>将 $a$ 数组分为图示若干段，其中 $c$ 数组存的是区间和。</p>
+<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><a href="/bitwise-operator-notes/" title="详见之前《位运算学习笔记》博客">详见之前《位运算学习笔记》博客</a>
+
+<p>这里想补充一点，就是 lowbit 计算。</p>
+<p>lowbit 计算的目的是求出一个数在二进制下最后一位 1 和之后的所有 0 所组成的数。</p>
+<p>具体求法为 <code>x = x &amp; -x</code>，接下我将会利用数字 20 解释其原理。</p>
+<p>首先将 20 的二进制表示出来，为 010100。</p>
+<p>然后将 20 的负数表示出来，在补码的表示方法为将 20 按位取反，再 +1，即为 101100。</p>
+<p>再将两个数进行与运算，得到二进制数 000100，十进制数为 4。该数即为 20 在二进制下的最后一个 1 和之后的 0 所组成的数。</p>
+<p>lowbit 计算为树状数组的基础运算。</p>
+<h1 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h1><p>那么怎么实现对数组的分段？这里就需要使用之前介绍的 $lowbit$ 计算。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>树状数组支持两种操作：单点修改，前缀求和。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>首先在使用树状数组之间，我们需要将其初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> c[MAXN + <span class="number">1</span>];    <span class="comment">//存储区间和</span></span><br><span class="line"><span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br></pre></td></tr></table></figure>
+
+<h2 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h2><p>树状数组可以将单点单独加一个值，例如修改 $a_5$ 工作原理如下（对应上图序号）（画图丑请见谅）：</p>
+<pre class="mermaid">graph LR
+a5 --> c6 --> c8</pre>
+
+<p>即为逐级上升，在经过的结点都加上这个值即可。</p>
+<p>关于如何求上升后的坐标，使用 $lowbit$ 即可。</p>
+<p>$$<br>\begin{cases}<br>5 + lowbit(5) = 6 \quad a_5 \rightarrow c_6 \\<br>6 + lowbit(6) = 8 \quad c_6 \rightarrow c_8<br>\end{cases}<br>$$</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x &lt;= n) &#123;    <span class="comment">// 防止数组越界</span></span><br><span class="line">        c[x] = c[x] + k;</span><br><span class="line">        x = x + <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前缀查询"><a href="#前缀查询" class="headerlink" title="前缀查询"></a>前缀查询</h2><p>树状数组最主要的功能就是求前缀和，例如查询 $a_7$ 工作原理如下：</p>
+<pre class="mermaid">graph LR
+a7 --> c6 --> c4</pre>
+
+<p>即为不停地查询上一层的前一个，同时将值加入最终结果即可。</p>
+<p>求前一层的前一个也可以使用前缀和：</p>
+<p>$$<br>\begin{cases}<br>7 - lowbit(7) = 6 \quad a_7 \rightarrow c_6 \\<br>6 - lowbit(6) = 4 \quad c_6 \rightarrow c_4<br>\end{cases}<br>$$</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        ans = ans + c[x];</span><br><span class="line">        x = x - <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上为树状数组最基础的操作</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.com.cn/problem/P3374">洛谷 P3374 【模板】树状数组 1</a></p>
+<p>简单的模板题，结合上面的知识即可 AC。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">500000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c[MAXN + <span class="number">1</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x &lt;= n) &#123;</span><br><span class="line">        c[x] = c[x] + k;</span><br><span class="line">        x = x + <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        ans = ans + c[x];</span><br><span class="line">        x = x - <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, x; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        <span class="built_in">add</span>(i, x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="keyword">int</span> m, x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;m, &amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">1</span>) <span class="built_in">add</span>(x, y);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">getsum</span>(y) - <span class="built_in">getsum</span>(x - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>日常</category>
-        <category>行记</category>
+        <category>OI</category>
+        <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
+        <tag>OI</tag>
+        <tag>学习笔记</tag>
+        <tag>树状数组</tag>
       </tags>
   </entry>
   <entry>
@@ -96,66 +119,6 @@
       </tags>
   </entry>
   <entry>
-    <title>树状数组学习笔记</title>
-    <url>/binary-index-trees-notes/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>树状数组是一种维护线性数组前缀和的特殊方法，使用了类似于快速幂等的二进制分组的优势，对数组进行分段，从而可以快速求出该数组的前缀和的树形数据结构。</p>
-<p>这一点与线段树类似。树状数组能干的事情线段树都能干，线段树能干的事情树状数组不一定能干。但树状数组相对线段树代码更短更好写，故在只涉及单点修改的时候树状数组更常用。</p>
-<span id="more"></span>
-
-<p>树状数组的工作原理如下图（图片引用自 OI Wiki）：</p>
-<p><img src="https://oi-wiki.org/ds/images/fenwick.svg" alt="工作原理"></p>
-<p>将 $a$ 数组分为图示若干段，其中 $c$ 数组存的是区间和。</p>
-<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><a href="/bitwise-operator-notes/" title="详见之前《位运算学习笔记》博客">详见之前《位运算学习笔记》博客</a>
-
-<p>这里想补充一点，就是 lowbit 计算。</p>
-<p>lowbit 计算的目的是求出一个数在二进制下最后一位 1 和之后的所有 0 所组成的数。</p>
-<p>具体求法为 <code>x = x &amp; -x</code>，接下我将会利用数字 20 解释其原理。</p>
-<p>首先将 20 的二进制表示出来，为 010100。</p>
-<p>然后将 20 的负数表示出来，在补码的表示方法为将 20 按位取反，再 +1，即为 101100。</p>
-<p>再将两个数进行与运算，得到二进制数 000100，十进制数为 4。该数即为 20 在二进制下的最后一个 1 和之后的 0 所组成的数。</p>
-<p>lowbit 计算为树状数组的基础运算。</p>
-<h1 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h1><p>那么怎么实现对数组的分段？这里就需要使用之前介绍的 $lowbit$ 计算。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>树状数组支持两种操作：单点修改，前缀求和。</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>首先在使用树状数组之间，我们需要将其初始化。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> c[MAXN + <span class="number">1</span>];    <span class="comment">//存储区间和</span></span><br><span class="line"><span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br></pre></td></tr></table></figure>
-
-<h2 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h2><p>树状数组可以将单点单独加一个值，例如修改 $a_5$ 工作原理如下（对应上图序号）（画图丑请见谅）：</p>
-<pre class="mermaid">graph LR
-a5 --> c6 --> c8</pre>
-
-<p>即为逐级上升，在经过的结点都加上这个值即可。</p>
-<p>关于如何求上升后的坐标，使用 $lowbit$ 即可。</p>
-<p>$$<br>\begin{cases}<br>5 + lowbit(5) = 6 \quad a_5 \rightarrow c_6 \\<br>6 + lowbit(6) = 8 \quad c_6 \rightarrow c_8<br>\end{cases}<br>$$</p>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x &lt;= n) &#123;    <span class="comment">// 防止数组越界</span></span><br><span class="line">        c[x] = c[x] + k;</span><br><span class="line">        x = x + <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="前缀查询"><a href="#前缀查询" class="headerlink" title="前缀查询"></a>前缀查询</h2><p>树状数组最主要的功能就是求前缀和，例如查询 $a_7$ 工作原理如下：</p>
-<pre class="mermaid">graph LR
-a7 --> c6 --> c4</pre>
-
-<p>即为不停地查询上一层的前一个，同时将值加入最终结果即可。</p>
-<p>求前一层的前一个也可以使用前缀和：</p>
-<p>$$<br>\begin{cases}<br>7 - lowbit(7) = 6 \quad a_7 \rightarrow c_6 \\<br>6 - lowbit(6) = 4 \quad c_6 \rightarrow c_4<br>\end{cases}<br>$$</p>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        ans = ans + c[x];</span><br><span class="line">        x = x - <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上为树状数组最基础的操作</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.com.cn/problem/P3374">洛谷 P3374 【模板】树状数组 1</a></p>
-<p>简单的模板题，结合上面的知识即可 AC。代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">500000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c[MAXN + <span class="number">1</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x &lt;= n) &#123;</span><br><span class="line">        c[x] = c[x] + k;</span><br><span class="line">        x = x + <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        ans = ans + c[x];</span><br><span class="line">        x = x - <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, x; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        <span class="built_in">add</span>(i, x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="keyword">int</span> m, x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;m, &amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">1</span>) <span class="built_in">add</span>(x, y);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">getsum</span>(y) - <span class="built_in">getsum</span>(x - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>OI</category>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>学习笔记</tag>
-        <tag>树状数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSP-S2021 第二轮 行记</title>
     <url>/csp-s2021-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>爆零了？</del></p>
@@ -190,6 +153,43 @@ a7 --> c6 --> c4</pre>
 <h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数出来了。</p>
 <p>感谢 CCF 的数据，给了我第一题很多分！（不过如果没写错可以有 95 QWQ）</p>
 <p>最终成绩：60 + 0 + 12 + 0 = 72，省二滚粗。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2021 第一轮 行记</title>
+    <url>/csp-s2021-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>总觉得应该写些什么……</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
+<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
+<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
+<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
+<span id="more"></span>
+
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
+<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
+<p>选择题？简单，30分钟写完。</p>
+<p>阅读程序第一个懒得看，直接手动模拟。</p>
+<p>？？？</p>
+<p>这怎么考了立体几何了啊喂？</p>
+<p>高一还没学啊！！！</p>
+<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
+<p>第三题？手算 base64，不想说了……</p>
+<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
+<p>第二题……</p>
+<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
+<p>算了算了直接蒙。</p>
+<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
+<h1 id="Day"><a href="#Day" class="headerlink" title="Day ???"></a>Day ???</h1><p>分数线 50 分，52 分滚粗。</p>
 ]]></content>
       <categories>
         <category>日常</category>
@@ -249,12 +249,82 @@ a7 --> c6 --> c4</pre>
         <category>题解</category>
       </categories>
       <tags>
+        <tag>OI</tag>
         <tag>CSP</tag>
         <tag>2021</tag>
-        <tag>OI</tag>
         <tag>题解</tag>
         <tag>模拟</tag>
         <tag>前缀和</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最近公共祖先学习笔记</title>
+    <url>/lca-notes/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>最近公共祖先（英文 Lowest Common Ancestor，简称 LCA）定义为树种两个点的公共祖先里面，离根最远的一个。</p>
+<span id="more"></span>
+
+<h1 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h1><h2 id="朴素算法"><a href="#朴素算法" class="headerlink" title="朴素算法"></a>朴素算法</h2><p>先算出两点的深度，取深度最小值，不停寻找父结点直到该深度。之后两点同时找父结点，直到两者的父结点相同，该父结点即为最近公共祖先。易得时间复杂度为 $O(n)$。</p>
+<h2 id="倍增算法"><a href="#倍增算法" class="headerlink" title="倍增算法"></a>倍增算法</h2><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>记录一个数组 <code>fa[u][i]</code>，记录的是结点 $u$ 向上寻找 $2^i$ 次父结点所达到的结点，如果不存在则为 $0$。</p>
+<p>可通过二进制拆分 $u$ 的深度（<a href="/bitwise-operator-notes/" title="拆分过程详见之前《位运算学习笔记》博客中的“快速幂”章节">拆分过程详见之前《位运算学习笔记》博客中的“快速幂”章节</a> ），在 $O(\log n)$ 的时间复杂度下算出 <code>fa[u][i]</code>。利用该方法可以利用递归在 $O(n \log n)$ 的时间复杂度内预处理完 <code>fa</code> 数组。</p>
+<p>下列为预处理 <code>fa</code> 的代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFa</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    fa[u][<span class="number">0</span>] = f;</span><br><span class="line">    dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; i++) fa[u][i] = fa[ fa[u][i - <span class="number">1</span>] ][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : e[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getFa</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="寻找-LCA"><a href="#寻找-LCA" class="headerlink" title="寻找 LCA"></a>寻找 LCA</h3><p>与朴素算法类似，不同之处是利用二进制和 <code>fa</code> 数组将复杂度从 $O(n)$ 优化到 $O(\log n)$。</p>
+<p>原理是从远及近遍历 <code>fa</code> 数组，直到两结点同深度的祖先不相同，此时 $LCA$ 必定在两祖先之上，然后在祖先之上再次使用 <code>fa</code> 数组遍历，直到 <code>fa[u][0] == fa[v][0]</code> 时，$LCA$ 为 $u$ 或 $v$ 的父结点。该过程相当于将 $LCA$ 与 $u$、$v$ 的深度差拆分成若干个 $2$ 的幂，减少了运算次数，加快运行效率。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[ fa[u][i] ] &gt;= dep[v] ) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa[u][i] != fa[v][i]) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">            v = fa[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="算法复杂度统计"><a href="#算法复杂度统计" class="headerlink" title="算法复杂度统计"></a>算法复杂度统计</h2><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>预处理</th>
+<th>q 次查询</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>朴素算法</td>
+<td>$O(n)$</td>
+<td>$O(qn)$</td>
+</tr>
+<tr>
+<td>倍增算法</td>
+<td>$O(n \log n)$</td>
+<td>$O(q \log n)$</td>
+</tr>
+<tr>
+<td>欧拉序转 RMQ</td>
+<td>$O(n \log n)$</td>
+<td>$O(q)$</td>
+</tr>
+<tr>
+<td>Tarjan</td>
+<td>$O(n)$</td>
+<td>$O(n + q)$</td>
+</tr>
+<tr>
+<td>树链剖分</td>
+<td>$O(n)$</td>
+<td>$O(q \log n)$</td>
+</tr>
+</tbody></table>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://loj.ac/p/10130">LOJ #10130. 「一本通 4.4 例 1」点的距离</a></p>
+<p>本题由于是树，可利用树的特性做题。</p>
+<p>这里可以使用 $LCA$。因 $x$、$y$ 的最短路径种必定会经过 $LCA$，故可以将该题转化为求 $LCA$ 分别与点 $x$ 和点 $y$ 的距离。</p>
+<p>先求出点 $x$ 与点 $y$ 的 $LCA$，再将 $LCA$ 与点 $x$、点 $y$ 的深度差相加即为答案。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">std::vector&lt;<span class="keyword">int</span>&gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> fa[MAXN + <span class="number">1</span>][<span class="number">25</span>], dep[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFa</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    fa[u][<span class="number">0</span>] = f;</span><br><span class="line">    dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; i++) fa[u][i] = fa[ fa[u][i - <span class="number">1</span>] ][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : e[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getFa</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[ fa[u][i] ] &gt;= dep[v] ) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa[u][i] != fa[v][i]) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">            v = fa[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, x, y; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">        e[x].<span class="built_in">push_back</span>(y);</span><br><span class="line">        e[y].<span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">getFa</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> q;</span><br><span class="line">    std::cin &gt;&gt; q;</span><br><span class="line">    <span class="keyword">while</span> (q--) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> root = <span class="built_in">lca</span>(x, y);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, dep[x] + dep[y] - <span class="number">2</span> * dep[root]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>学习笔记</tag>
+        <tag>图论</tag>
+        <tag>树</tag>
+        <tag>最近公共祖先</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -333,8 +403,8 @@ a7 --> c6 --> c4</pre>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;code-runner.executorMap&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;cpp&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>即可在 <code>&quot;cpp&quot;</code> 对应的字符串中修改 <code>g++</code> 参数。</p>
-<h3 id="C-C-官方扩展"><a href="#C-C-官方扩展" class="headerlink" title="C / C++ 官方扩展"></a>C / C++ 官方扩展</h3><p>在 Visual Studio Code 中打开编写程序的文件夹，打开一个 C++ 文件，在菜单栏中点击 终端、配置默认生成任务。之后再弹出的 json 文件中 修改 <code>&quot;args&quot;</code> 参数即可。</p>
-<h3 id="clangd"><a href="#clangd" class="headerlink" title="clangd"></a>clangd</h3><p>打开文件夹，再文件夹下新建 <code>compile_flags.txt</code> 文件，在该文件中添加 GCC 编译选项即可（同样不含 <code>-o test</code>）</p>
+<h3 id="C-C-官方扩展"><a href="#C-C-官方扩展" class="headerlink" title="C / C++ 官方扩展"></a>C / C++ 官方扩展</h3><p>在 Visual Studio Code 中打开编写程序的文件夹，打开一个 C++ 文件，在菜单栏中点击 终端、配置默认生成任务。之后在弹出的 json 文件中 修改 <code>&quot;args&quot;</code> 参数即可。</p>
+<h3 id="clangd"><a href="#clangd" class="headerlink" title="clangd"></a>clangd</h3><p>打开文件夹，在文件夹下新建 <code>compile_flags.txt</code> 文件，在该文件中添加 GCC 编译选项即可（同样不含 <code>-o test</code>）</p>
 <h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>下文将以 <code>g++</code> 举例，<code>gcc</code> 同理。</p>
 <p>GCC 可编译单文件，语法如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp</span><br></pre></td></tr></table></figure>
@@ -396,173 +466,6 @@ a7 --> c6 --> c4</pre>
       <tags>
         <tag>OI</tag>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>最近公共祖先学习笔记</title>
-    <url>/lca-notes/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>最近公共祖先（英文 Lowest Common Ancestor，简称 LCA）定义为树种两个点的公共祖先里面，离根最远的一个。</p>
-<span id="more"></span>
-
-<h1 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h1><h2 id="朴素算法"><a href="#朴素算法" class="headerlink" title="朴素算法"></a>朴素算法</h2><p>先算出两点的深度，取深度最小值，不停寻找父结点直到该深度。之后两点同时找父结点，直到两者的父结点相同，该父结点即为最近公共祖先。易得时间复杂度为 $O(n)$。</p>
-<h2 id="倍增算法"><a href="#倍增算法" class="headerlink" title="倍增算法"></a>倍增算法</h2><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>记录一个数组 <code>fa[u][i]</code>，记录的是结点 $u$ 向上寻找 $2^i$ 次父结点所达到的结点，如果不存在则为 $0$。</p>
-<p>可通过二进制拆分 $u$ 的深度（<a href="/bitwise-operator-notes/" title="拆分过程详见之前《位运算学习笔记》博客中的“快速幂”章节">拆分过程详见之前《位运算学习笔记》博客中的“快速幂”章节</a> ），在 $O(\log n)$ 的时间复杂度下算出 <code>fa[u][i]</code>。利用该方法可以利用递归在 $O(n \log n)$ 的时间复杂度内预处理完 <code>fa</code> 数组。</p>
-<p>下列为预处理 <code>fa</code> 的代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFa</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    fa[u][<span class="number">0</span>] = f;</span><br><span class="line">    dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; i++) fa[u][i] = fa[ fa[u][i - <span class="number">1</span>] ][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : e[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getFa</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="寻找-LCA"><a href="#寻找-LCA" class="headerlink" title="寻找 LCA"></a>寻找 LCA</h3><p>与朴素算法类似，不同之处是利用二进制和 <code>fa</code> 数组将复杂度从 $O(n)$ 优化到 $O(\log n)$。</p>
-<p>原理是从远及近遍历 <code>fa</code> 数组，直到两结点同深度的祖先不相同，此时 $LCA$ 必定在两祖先之上，然后在祖先之上再次使用 <code>fa</code> 数组遍历，直到 <code>fa[u][0] == fa[v][0]</code> 时，$LCA$ 为 $u$ 或 $v$ 的父结点。该过程相当于将 $LCA$ 与 $u$、$v$ 的深度差拆分成若干个 $2$ 的幂，减少了运算次数，加快运行效率。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[ fa[u][i] ] &gt;= dep[v] ) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa[u][i] != fa[v][i]) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">            v = fa[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="算法复杂度统计"><a href="#算法复杂度统计" class="headerlink" title="算法复杂度统计"></a>算法复杂度统计</h2><table>
-<thead>
-<tr>
-<th>算法</th>
-<th>预处理</th>
-<th>q 次查询</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>朴素算法</td>
-<td>$O(n)$</td>
-<td>$O(qn)$</td>
-</tr>
-<tr>
-<td>倍增算法</td>
-<td>$O(n \log n)$</td>
-<td>$O(q \log n)$</td>
-</tr>
-<tr>
-<td>欧拉序转 RMQ</td>
-<td>$O(n \log n)$</td>
-<td>$O(q)$</td>
-</tr>
-<tr>
-<td>Tarjan</td>
-<td>$O(n)$</td>
-<td>$O(n + q)$</td>
-</tr>
-<tr>
-<td>树链剖分</td>
-<td>$O(n)$</td>
-<td>$O(q \log n)$</td>
-</tr>
-</tbody></table>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://loj.ac/p/10130">LOJ #10130. 「一本通 4.4 例 1」点的距离</a></p>
-<p>本题由于是树，可利用树的特性做题。</p>
-<p>这里可以使用 $LCA$。因 $x$、$y$ 的最短路径种必定会经过 $LCA$，故可以将该题转化为求 $LCA$ 分别与点 $x$ 和点 $y$ 的距离。</p>
-<p>先求出点 $x$ 与点 $y$ 的 $LCA$，再将 $LCA$ 与点 $x$、点 $y$ 的深度差相加即为答案。</p>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">std::vector&lt;<span class="keyword">int</span>&gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> fa[MAXN + <span class="number">1</span>][<span class="number">25</span>], dep[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFa</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    fa[u][<span class="number">0</span>] = f;</span><br><span class="line">    dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; i++) fa[u][i] = fa[ fa[u][i - <span class="number">1</span>] ][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : e[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getFa</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[ fa[u][i] ] &gt;= dep[v] ) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">20</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa[u][i] != fa[v][i]) &#123;</span><br><span class="line">            u = fa[u][i];</span><br><span class="line">            v = fa[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fa[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, x, y; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">        e[x].<span class="built_in">push_back</span>(y);</span><br><span class="line">        e[y].<span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">getFa</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> q;</span><br><span class="line">    std::cin &gt;&gt; q;</span><br><span class="line">    <span class="keyword">while</span> (q--) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> root = <span class="built_in">lca</span>(x, y);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, dep[x] + dep[y] - <span class="number">2</span> * dep[root]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>学习笔记</tag>
-        <tag>图论</tag>
-        <tag>树</tag>
-        <tag>最近公共祖先</tag>
-        <tag>倍增</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「洛谷 P1182」数列分段 Section II - 二分答案</title>
-    <url>/luogu-1182/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>学完 wxk 的康复训练</del></p>
-<blockquote>
-<p>学 wxk 学久了感觉 wxk 有意思，学 OI 学久了感觉 OI 有意思。 ——huaruoji</p>
-</blockquote>
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P1182">洛谷链接</a></p>
-<p>给定一个长度为 $n$ 的整形数列 $A_{1 \sim n}$，先将其分为 $m$ 段，并要求每段连续，目前需要一种分法，使得分出的每段和的最大值最小。</p>
-<span id="more"></span>
-
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h2><p>求最大值最小，显然是一道二分答案题，可以尝试使用二分答案解决问题。</p>
-<p>这道题二分答案的方法是二分每段和的最大值，从答案的最大值 $10^9$ 开始二分。注意二分的最小值为整个数列的单个元素最大值，否则可能会出现最后答案小于数列中的某个数，导致无法分割数列的情况（例如洛谷数据中的第四个测试点）。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    std::cin &gt;&gt; a[i];</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 二分处理</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
-
-<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><p>现在我们已经处理完了，现在的问题是二分出答案后如何检验。</p>
-<p>这块可以使用类似均分纸牌的思路，使用贪心解决。</p>
-<p>在数列的开头开始扫，不停的加数列中的数，若和大于答案，则把和清空为最后加入的一个数，段数 +1。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum += a[i];</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">        sum = a[i];</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后如果段数大于 $m$，则说明答案过小，答案在 $mid$ 之上。</p>
-<p>如果段数小于 $m$，则说明答案过大，答案在 $mid$ 之下。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line"><span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>, MAXA = <span class="number">10000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> a[MAXN];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += a[i];</span><br><span class="line">            <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">                sum = a[i];</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line">        <span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>二分</tag>
-        <tag>二分答案</tag>
-        <tag>贪心</tag>
-        <tag>洛谷</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「NOIP2017」时间复杂度 - 模拟</title>
-    <url>/noip2017-complexity/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
-<p>本题定义了一个新语言名为 A++，语言的循环定义如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">F i x y</span><br><span class="line">    循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
-<p>本循环相当于</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++)</span><br></pre></td></tr></table></figure>
-<p>输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。<br>其中满足 x，y 必为常数或 n，n 远大于 x，y。</p>
-<p>具体信息可详见洛谷，链接见上</p>
-<span id="more"></span>
-
-
-
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>显然本题为一道模拟题。</p>
-<h2 id="模型建立"><a href="#模型建立" class="headerlink" title="模型建立"></a>模型建立</h2><p>解题思路为通过 A++ 循环分析该代码的时间复杂度。<br>时间复杂度可通过存储 $O(n^k)$ 的指数达到目的。<br>通过新建 <code>depth</code> 变量存储有效增加代码时间复杂度的个数，使用 <code>maxn</code> 变量存储 <code>depth</code> 的最大值即可记录该 A++ 代码的时间复杂度。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>) o = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    o = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++) &#123;</span><br><span class="line">        o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。<br>又由于 A++ 中变量不可重名，故有遍历栈的需求。<br>故可以写一个手工栈，栈中存有 A++ 变量名。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">std::string stack[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
-
-<p>此时输入 F 则入栈，输入 E 则出栈，注意当 F 与 E 没有一一对应时需要处理为 ERR。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">    std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line">    <span class="comment">// 处理后续</span></span><br><span class="line">    top++;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// A++语法错误，输出ERR及处理后续</span></span><br><span class="line">    &#125; <span class="keyword">else</span> top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="循环处理"><a href="#循环处理" class="headerlink" title="循环处理"></a>循环处理</h2><p>首先处理 A++ 循环中申明的变量，若变量重复，则处理为 ERR。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">    <span class="keyword">if</span>(stack[j] == stack[top])</span><br><span class="line">        err = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-<p>循环可分4种情况讨论：</p>
-<ol>
-<li>x，y 均为 n；</li>
-<li>x 为 n，y 为常数；</li>
-<li>x 为常数，y 为 n；</li>
-<li>x，y 均为常数。</li>
-</ol>
-<p>第一种情况显然时间复杂度为 $O(1)$。<br>第二种情况由于 n 远大于 x，故这个循环和循环内部的任何语句都不会被执行，此时需要新建变量  <code>unknown</code> 来记录该层层数，在这个层数之上则不记录时间复杂度。<br>第三种情况由于 n 远大于 y，时间复杂度为 $O(n)$，所以需要 <code>depth++</code>。<br>第四种情况则需要分两种情况讨论。</p>
-<ol>
-<li>$x \leq y$</li>
-<li>$x &gt; y$<br> 其中第一种情况显然时间复杂度为 $O(1)$。<br> 第二种情况得循环及其内部也不会被执行，等同 x 为 n，y 为常数的情况。<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) f[top] = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown)</span><br><span class="line">        unshown = top;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">        f[top] = <span class="literal">true</span>;</span><br><span class="line">        depth++;</span><br><span class="line">    &#125; <span class="keyword">else</span> f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    nx = ny = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++) nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++) ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown) unshown = top;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">top++;</span><br><span class="line"><span class="keyword">if</span> (depth &gt; maxn) maxn = depth;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>最后在收到 E 的时候结束循环，弹出栈。<br>若栈已空，则说明 F 与 E 不匹配，处理为 ERR。<br>此时则需检测这层循环中 <code>depth</code> 有无变化，若有变化则 <code>depth--</code> 表明这层循环已退出时间复杂度的统计，以便处理其他循环。<br>同时需注意处理 <code>unknown</code> 变量。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (top == <span class="number">0</span>) err = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown) unshown = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>]) depth--;</span><br><span class="line">    top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, l, o, nx, ny, unshown;</span><br><span class="line">    std::string tmp, stack[<span class="number">100</span>], x, y;</span><br><span class="line">    <span class="keyword">int</span> depth, top, maxn;</span><br><span class="line">    <span class="keyword">bool</span> err, f[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        top = depth = maxn = <span class="number">0</span>;</span><br><span class="line">        unshown = <span class="number">100</span>;</span><br><span class="line">        err = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>) o = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            o = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++) &#123;</span><br><span class="line">                o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">0</span>; each &lt; l; each++) &#123;</span><br><span class="line">            std::cin &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">                std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">                    <span class="keyword">if</span> (stack[j] == stack[top])</span><br><span class="line">                        err = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) f[top] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown) unshown = top;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">                        f[top] = <span class="literal">true</span>;</span><br><span class="line">                        depth++;</span><br><span class="line">                    &#125; <span class="keyword">else</span> f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    nx = ny = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++) nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++) ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown) unshown = top;</span><br><span class="line"></span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                top++;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (depth &gt; maxn) maxn = depth;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (top == <span class="number">0</span>) err = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown)</span><br><span class="line">                        unshown = <span class="number">100</span>;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>])</span><br><span class="line">                        depth--;</span><br><span class="line"></span><br><span class="line">                    top--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (err || top != <span class="number">0</span>) std::cout &lt;&lt; <span class="string">&quot;ERR&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (maxn == o) std::cout &lt;&lt; <span class="string">&quot;Yes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span> std::cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        t--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>模拟</tag>
-        <tag>栈</tag>
-        <tag>NOIP</tag>
-        <tag>2017</tag>
       </tags>
   </entry>
   <entry>
@@ -649,6 +552,48 @@ a7 --> c6 --> c4</pre>
       </tags>
   </entry>
   <entry>
+    <title>「洛谷 P1182」数列分段 Section II - 二分答案</title>
+    <url>/luogu-1182/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>学完 wxk 的康复训练</del></p>
+<blockquote>
+<p>学 wxk 学久了感觉 wxk 有意思，学 OI 学久了感觉 OI 有意思。 ——huaruoji</p>
+</blockquote>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P1182">洛谷链接</a></p>
+<p>给定一个长度为 $n$ 的整形数列 $A_{1 \sim n}$，先将其分为 $m$ 段，并要求每段连续，目前需要一种分法，使得分出的每段和的最大值最小。</p>
+<span id="more"></span>
+
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h2><p>求最大值最小，显然是一道二分答案题，可以尝试使用二分答案解决问题。</p>
+<p>这道题二分答案的方法是二分每段和的最大值，从答案的最大值 $10^9$ 开始二分。注意二分的最小值为整个数列的单个元素最大值，否则可能会出现最后答案小于数列中的某个数，导致无法分割数列的情况（例如洛谷数据中的第四个测试点）。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    std::cin &gt;&gt; a[i];</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 二分处理</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><p>现在我们已经处理完了，现在的问题是二分出答案后如何检验。</p>
+<p>这块可以使用类似均分纸牌的思路，使用贪心解决。</p>
+<p>在数列的开头开始扫，不停的加数列中的数，若和大于答案，则把和清空为最后加入的一个数，段数 +1。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum += a[i];</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">        sum = a[i];</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后如果段数大于 $m$，则说明答案过小，答案在 $mid$ 之上。</p>
+<p>如果段数小于 $m$，则说明答案过大，答案在 $mid$ 之下。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line"><span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>, MAXA = <span class="number">10000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> a[MAXN];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">1</span>, r = MAXN * MAXA;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; l) l = a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += a[i];</span><br><span class="line">            <span class="keyword">if</span> (sum &gt; mid) &#123;</span><br><span class="line">                sum = a[i];</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cnt &lt;= m) r = mid;</span><br><span class="line">        <span class="keyword">if</span> (cnt &gt; m) l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; l &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>二分</tag>
+        <tag>二分答案</tag>
+        <tag>贪心</tag>
+        <tag>洛谷</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「SCOI2011」糖果 - 差分约束</title>
     <url>/scoi2011-candy/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3275">洛谷链接</a><br><a href="https://loj.ac/p/2436">LOJ 链接</a></p>
@@ -690,6 +635,61 @@ a7 --> c6 --> c4</pre>
         <tag>省选</tag>
         <tag>SCOI</tag>
         <tag>2011</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「NOIP2017」时间复杂度 - 模拟</title>
+    <url>/noip2017-complexity/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
+<p>本题定义了一个新语言名为 A++，语言的循环定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">F i x y</span><br><span class="line">    循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
+<p>本循环相当于</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++)</span><br></pre></td></tr></table></figure>
+<p>输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。<br>其中满足 x，y 必为常数或 n，n 远大于 x，y。</p>
+<p>具体信息可详见洛谷，链接见上</p>
+<span id="more"></span>
+
+
+
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>显然本题为一道模拟题。</p>
+<h2 id="模型建立"><a href="#模型建立" class="headerlink" title="模型建立"></a>模型建立</h2><p>解题思路为通过 A++ 循环分析该代码的时间复杂度。<br>时间复杂度可通过存储 $O(n^k)$ 的指数达到目的。<br>通过新建 <code>depth</code> 变量存储有效增加代码时间复杂度的个数，使用 <code>maxn</code> 变量存储 <code>depth</code> 的最大值即可记录该 A++ 代码的时间复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>) o = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    o = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++) &#123;</span><br><span class="line">        o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。<br>又由于 A++ 中变量不可重名，故有遍历栈的需求。<br>故可以写一个手工栈，栈中存有 A++ 变量名。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">std::string stack[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
+
+<p>此时输入 F 则入栈，输入 E 则出栈，注意当 F 与 E 没有一一对应时需要处理为 ERR。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cin &gt;&gt; tmp;</span><br><span class="line"><span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">    std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line">    <span class="comment">// 处理后续</span></span><br><span class="line">    top++;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// A++语法错误，输出ERR及处理后续</span></span><br><span class="line">    &#125; <span class="keyword">else</span> top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环处理"><a href="#循环处理" class="headerlink" title="循环处理"></a>循环处理</h2><p>首先处理 A++ 循环中申明的变量，若变量重复，则处理为 ERR。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">    <span class="keyword">if</span>(stack[j] == stack[top])</span><br><span class="line">        err = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>循环可分4种情况讨论：</p>
+<ol>
+<li>x，y 均为 n；</li>
+<li>x 为 n，y 为常数；</li>
+<li>x 为常数，y 为 n；</li>
+<li>x，y 均为常数。</li>
+</ol>
+<p>第一种情况显然时间复杂度为 $O(1)$。<br>第二种情况由于 n 远大于 x，故这个循环和循环内部的任何语句都不会被执行，此时需要新建变量  <code>unknown</code> 来记录该层层数，在这个层数之上则不记录时间复杂度。<br>第三种情况由于 n 远大于 y，时间复杂度为 $O(n)$，所以需要 <code>depth++</code>。<br>第四种情况则需要分两种情况讨论。</p>
+<ol>
+<li>$x \leq y$</li>
+<li>$x &gt; y$<br> 其中第一种情况显然时间复杂度为 $O(1)$。<br> 第二种情况得循环及其内部也不会被执行，等同 x 为 n，y 为常数的情况。<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) f[top] = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown)</span><br><span class="line">        unshown = top;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">        f[top] = <span class="literal">true</span>;</span><br><span class="line">        depth++;</span><br><span class="line">    &#125; <span class="keyword">else</span> f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">    nx = ny = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++) nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++) ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown) unshown = top;</span><br><span class="line">    f[top] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">top++;</span><br><span class="line"><span class="keyword">if</span> (depth &gt; maxn) maxn = depth;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>最后在收到 E 的时候结束循环，弹出栈。<br>若栈已空，则说明 F 与 E 不匹配，处理为 ERR。<br>此时则需检测这层循环中 <code>depth</code> 有无变化，若有变化则 <code>depth--</code> 表明这层循环已退出时间复杂度的统计，以便处理其他循环。<br>同时需注意处理 <code>unknown</code> 变量。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (top == <span class="number">0</span>) err = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown) unshown = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>]) depth--;</span><br><span class="line">    top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, l, o, nx, ny, unshown;</span><br><span class="line">    std::string tmp, stack[<span class="number">100</span>], x, y;</span><br><span class="line">    <span class="keyword">int</span> depth, top, maxn;</span><br><span class="line">    <span class="keyword">bool</span> err, f[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        top = depth = maxn = <span class="number">0</span>;</span><br><span class="line">        unshown = <span class="number">100</span>;</span><br><span class="line">        err = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        std::cin &gt;&gt; l &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tmp[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>) o = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            o = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">4</span>; tmp[each] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="string">&#x27;9&#x27;</span>; each++) &#123;</span><br><span class="line">                o = o * <span class="number">10</span> + tmp[each] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">0</span>; each &lt; l; each++) &#123;</span><br><span class="line">            std::cin &gt;&gt; tmp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tmp == <span class="string">&quot;F&quot;</span>) &#123;</span><br><span class="line">                std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; top; j++)</span><br><span class="line">                    <span class="keyword">if</span> (stack[j] == stack[top])</span><br><span class="line">                        err = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) f[top] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x == <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown) unshown = top;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y == <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top &lt; unshown) &#123;</span><br><span class="line">                        f[top] = <span class="literal">true</span>;</span><br><span class="line">                        depth++;</span><br><span class="line">                    &#125; <span class="keyword">else</span> f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x != <span class="string">&quot;n&quot;</span> &amp;&amp; y != <span class="string">&quot;n&quot;</span>) &#123;</span><br><span class="line">                    nx = ny = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.<span class="built_in">length</span>(); j++) nx = nx * <span class="number">10</span> + x[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; y.<span class="built_in">length</span>(); j++) ny = ny * <span class="number">10</span> + y[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                    <span class="keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown) unshown = top;</span><br><span class="line"></span><br><span class="line">                    f[top] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                top++;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (depth &gt; maxn) maxn = depth;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (top == <span class="number">0</span>) err = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (top - <span class="number">1</span> == unshown)</span><br><span class="line">                        unshown = <span class="number">100</span>;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (f[top - <span class="number">1</span>])</span><br><span class="line">                        depth--;</span><br><span class="line"></span><br><span class="line">                    top--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (err || top != <span class="number">0</span>) std::cout &lt;&lt; <span class="string">&quot;ERR&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (maxn == o) std::cout &lt;&lt; <span class="string">&quot;Yes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">else</span> std::cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        t--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>模拟</tag>
+        <tag>NOIP</tag>
+        <tag>栈</tag>
+        <tag>2017</tag>
       </tags>
   </entry>
 </search>
