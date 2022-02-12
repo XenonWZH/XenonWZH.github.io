@@ -259,11 +259,11 @@
     <category term="题解" scheme="http://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
     
     
-    <category term="OI" scheme="http://xenonwzh.github.io/tags/OI/"/>
-    
     <category term="CSP" scheme="http://xenonwzh.github.io/tags/CSP/"/>
     
     <category term="2021" scheme="http://xenonwzh.github.io/tags/2021/"/>
+    
+    <category term="OI" scheme="http://xenonwzh.github.io/tags/OI/"/>
     
     <category term="题解" scheme="http://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
@@ -431,9 +431,9 @@
     
     <category term="模拟" scheme="http://xenonwzh.github.io/tags/%E6%A8%A1%E6%8B%9F/"/>
     
-    <category term="NOIP" scheme="http://xenonwzh.github.io/tags/NOIP/"/>
-    
     <category term="栈" scheme="http://xenonwzh.github.io/tags/%E6%A0%88/"/>
+    
+    <category term="NOIP" scheme="http://xenonwzh.github.io/tags/NOIP/"/>
     
     <category term="2017" scheme="http://xenonwzh.github.io/tags/2017/"/>
     
