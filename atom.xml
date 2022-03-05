@@ -6,7 +6,7 @@
   <link href="https://xenonwzh.github.io/atom.xml" rel="self"/>
   
   <link href="https://xenonwzh.github.io/"/>
-  <updated>2022-02-26T08:53:14.668Z</updated>
+  <updated>2022-03-05T01:04:58.586Z</updated>
   <id>https://xenonwzh.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「POJ 3070」Fibonacci - 矩阵乘法</title>
+    <link href="https://xenonwzh.github.io/poj-3070/"/>
+    <id>https://xenonwzh.github.io/poj-3070/</id>
+    <published>2022-03-05T00:47:20.000Z</published>
+    <updated>2022-03-05T01:04:58.586Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个数 $n$，求斐波那契数列第 $n$ 项的后四位。</p><p>数据范围：$1 \leq n \leq 10^9$</p><span id="more"></span><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>我们可以使用矩阵来加速地推。</p><p>我们知道斐波那契的通项公式为：</p><p>$$<br>a_i = a_{i - 1} + a_{i - 2}<br>$$</p><p>故我们可以设矩阵 $F(n)$：</p><p>$$<br>F(n) =<br>\begin{bmatrix}<br>a_n &amp; a_{n + 1}<br>\end{bmatrix}<br>$$</p><p>同时我们可以设：</p><p>$$<br>F(n) = F(n - 1) \times X<br>$$</p><p>即为：</p><p>$$<br>\begin{bmatrix}<br>a_n &amp; a_{n + 1}<br>\end{bmatrix} =<br>\begin{bmatrix}<br>a_{n - 1} &amp; a_n<br>\end{bmatrix} \times X<br>$$</p><p>我们可以推出：</p><p>$$<br>\begin{bmatrix}<br>a_n &amp; a_{n + 1}<br>\end{bmatrix} =<br>\begin{bmatrix}<br>a_{n - 1} &amp; a_n<br>\end{bmatrix} \times<br>\begin{bmatrix}<br>0 &amp; 1 \\<br>1 &amp; 1<br>\end{bmatrix}<br>$$</p><p>所以我们最终可以推出下列式子：</p><p>$$<br>F(n) = F(1) \times<br>\begin{bmatrix}<br>0 &amp; 1 \<br>1 &amp; 1<br>\end{bmatrix} ^ {n - 1} =<br>\begin{bmatrix}<br>1 &amp; 1<br>\end{bmatrix} \times<br>\begin{bmatrix}<br>0 &amp; 1 \\<br>1 &amp; 1<br>\end{bmatrix} ^ {n - 1}<br>$$</p><p>最终利用快速幂就可以在 $O(\log n)$ 的时间复杂度中求出答案。</p><h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;给定一个数 $n$，求斐波那契数列第 $n$ 项的后四位。&lt;/p&gt;
+&lt;p&gt;数据范围：$1 \leq n \leq 10^9$&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OI" scheme="https://xenonwzh.github.io/categories/OI/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="数学" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="矩阵乘法" scheme="https://xenonwzh.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/"/>
+    
+    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
+    
+  </entry>
   
   <entry>
     <title>「HAOI2007」反素数 - 数论 + DFS</title>
@@ -90,11 +122,11 @@
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
+    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
+    
     <category term="DP" scheme="https://xenonwzh.github.io/tags/DP/"/>
     
     <category term="线性 DP" scheme="https://xenonwzh.github.io/tags/%E7%BA%BF%E6%80%A7-DP/"/>
-    
-    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
     
     <category term="USACO" scheme="https://xenonwzh.github.io/tags/USACO/"/>
     
@@ -378,11 +410,11 @@
     <category term="题解" scheme="https://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
     
     
+    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
+    
     <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
     
     <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
-    
-    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
@@ -513,9 +545,9 @@
     
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     
-    <category term="前缀和" scheme="https://xenonwzh.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-    
     <category term="学习笔记" scheme="https://xenonwzh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="前缀和" scheme="https://xenonwzh.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   

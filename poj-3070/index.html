@@ -19,26 +19,32 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="XenonWZH&#39;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="XenonWZH&#39;s Blog">
-<meta property="og:url" content="https://xenonwzh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta name="description" content="题目描述给定一个数 $n$，求斐波那契数列第 $n$ 项的后四位。 数据范围：$1 \leq n \leq 10^9$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「POJ 3070」Fibonacci - 矩阵乘法">
+<meta property="og:url" content="https://xenonwzh.github.io/poj-3070/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="题目描述给定一个数 $n$，求斐波那契数列第 $n$ 项的后四位。 数据范围：$1 \leq n \leq 10^9$">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-05T00:47:20.000Z">
+<meta property="article:modified_time" content="2022-03-05T01:04:58.586Z">
 <meta property="article:author" content="XenonWZH">
-<meta property="article:tag" content="OI, XenonWZH, blog">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="矩阵乘法">
+<meta property="article:tag" content="POJ">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xenonwzh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="https://xenonwzh.github.io/poj-3070/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/学习笔记/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/poj-3070/","path":"poj-3070/","title":"「POJ 3070」Fibonacci - 矩阵乘法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: 学习笔记 | XenonWZH's Blog</title>
+<title>「POJ 3070」Fibonacci - 矩阵乘法 | XenonWZH's Blog</title>
   
 
 
@@ -133,7 +139,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -146,6 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">代码演示</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -228,134 +235,148 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">学习笔记
-          <small>标签</small>
-        </h2>
-      </div>
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/poj-3070/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「POJ 3070」Fibonacci - 矩阵乘法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+
+      <time title="创建时间：2022-03-05 08:47:20 / 修改时间：09:04:58" itemprop="dateCreated datePublished" datetime="2022-03-05T08:47:20+08:00">2022-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/poj-3070/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="poj-3070/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个数 $n$，求斐波那契数列第 $n$ 项的后四位。</p>
+<p>数据范围：$1 \leq n \leq 10^9$</p>
+<span id="more"></span>
+
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>我们可以使用矩阵来加速地推。</p>
+<p>我们知道斐波那契的通项公式为：</p>
+<p>$$<br>a_i = a_{i - 1} + a_{i - 2}<br>$$</p>
+<p>故我们可以设矩阵 $F(n)$：</p>
+<p>$$<br>F(n) =<br>\begin{bmatrix}<br>a_n &amp; a_{n + 1}<br>\end{bmatrix}<br>$$</p>
+<p>同时我们可以设：</p>
+<p>$$<br>F(n) = F(n - 1) \times X<br>$$</p>
+<p>即为：</p>
+<p>$$<br>\begin{bmatrix}<br>a_n &amp; a_{n + 1}<br>\end{bmatrix} =<br>\begin{bmatrix}<br>a_{n - 1} &amp; a_n<br>\end{bmatrix} \times X<br>$$</p>
+<p>我们可以推出：</p>
+<p>$$<br>\begin{bmatrix}<br>a_n &amp; a_{n + 1}<br>\end{bmatrix} =<br>\begin{bmatrix}<br>a_{n - 1} &amp; a_n<br>\end{bmatrix} \times<br>\begin{bmatrix}<br>0 &amp; 1 \\<br>1 &amp; 1<br>\end{bmatrix}<br>$$</p>
+<p>所以我们最终可以推出下列式子：</p>
+<p>$$<br>F(n) = F(1) \times<br>\begin{bmatrix}<br>0 &amp; 1 \<br>1 &amp; 1<br>\end{bmatrix} ^ {n - 1} =<br>\begin{bmatrix}<br>1 &amp; 1<br>\end{bmatrix} \times<br>\begin{bmatrix}<br>0 &amp; 1 \\<br>1 &amp; 1<br>\end{bmatrix} ^ {n - 1}<br>$$</p>
+<p>最终利用快速幂就可以在 $O(\log n)$ 的时间复杂度中求出答案。</p>
+<h1 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-09T09:37:49+08:00"
-              content="2022-02-09">
-          02-09
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/differential-constraints-notes/" itemprop="url">
-            <span itemprop="name">差分约束学习笔记</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="tag"># 矩阵乘法</a>
+              <a href="/tags/POJ/" rel="tag"># POJ</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/haoi2007-ant/" rel="prev" title="「HAOI2007」反素数 - 数论 + DFS">
+                  <i class="fa fa-chevron-left"></i> 「HAOI2007」反素数 - 数论 + DFS
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-08T09:21:00+08:00"
-              content="2022-02-08">
-          02-08
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/lca-notes/" itemprop="url">
-            <span itemprop="name">最近公共祖先学习笔记</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-01-23T18:33:42+08:00"
-              content="2022-01-23">
-          01-23
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/binary-index-trees-notes/" itemprop="url">
-            <span itemprop="name">树状数组学习笔记</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-25T14:36:34+08:00"
-              content="2021-09-25">
-          09-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/bitwise-operator-notes/" itemprop="url">
-            <span itemprop="name">位运算学习笔记</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-08-24T18:51:40+08:00"
-              content="2021-08-24">
-          08-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/prefix-sum-notes/" itemprop="url">
-            <span itemprop="name">前缀和学习笔记</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
-  
-  
-
 </div>
   </main>
 
