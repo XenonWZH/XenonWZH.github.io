@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -230,6 +230,113 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/binary-index-trees-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/binary-index-trees-notes/" class="post-title-link" itemprop="url">树状数组学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-23 18:33:42" itemprop="dateCreated datePublished" datetime="2022-01-23T18:33:42+08:00">2022-01-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-03-11 17:22:14" itemprop="dateModified" datetime="2022-03-11T17:22:14+08:00">2022-03-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/binary-index-trees-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="binary-index-trees-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="概念">概念</h1>
+<p>树状数组是一种维护线性数组前缀和的特殊方法，使用了类似于快速幂等的二进制分组的优势，对数组进行分段，从而可以快速求出该数组的前缀和的树形数据结构。</p>
+<p>这一点与线段树类似。树状数组能干的事情线段树都能干，线段树能干的事情树状数组不一定能干。但树状数组相对线段树代码更短更好写，故在只涉及单点修改的时候树状数组更常用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/binary-index-trees-notes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -312,10 +419,15 @@
     <div class="post-body" itemprop="articleBody">
           <p><del>学完 wxk 的康复训练</del></p>
 <blockquote>
-<p>学 wxk 学久了感觉 wxk 有意思，学 OI 学久了感觉 OI 有意思。 ——huaruoji</p>
+<p>学 wxk 学久了感觉 wxk 有意思，学 OI 学久了感觉 OI 有意思。
+——huaruoji</p>
 </blockquote>
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1182">洛谷链接</a></p>
-<p>给定一个长度为 $n$ 的整形数列 $A_{1 \sim n}$，先将其分为 $m$ 段，并要求每段连续，目前需要一种分法，使得分出的每段和的最大值最小。</p>
+<h1 id="题目描述">题目描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1182">洛谷链接</a></p>
+<p>给定一个长度为 <span class="math inline">\(n\)</span> 的整形数列
+<span class="math inline">\(A_{1 \sim n}\)</span>，先将其分为 <span
+class="math inline">\(m\)</span>
+段，并要求每段连续，目前需要一种分法，使得分出的每段和的最大值最小。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/luogu-1182/#more" rel="contents">
@@ -421,10 +533,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p><del>又滚来记流水账了。。。</del></p>
-<h1 id="Day"><a href="#Day" class="headerlink" title="Day -???"></a>Day -???</h1><p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
+<h1 id="day--">Day -???</h1>
+<p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
 <p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
-<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day -2"></a>Day -2</h1><p>成功申请停课。。。</p>
-<p>顺带在昨天过了 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了 2 天的 bug，我太蒻了 QWQ。</del></p>
+<h1 id="day--2">Day -2</h1>
+<p>成功申请停课。。。</p>
+<p>顺带在昨天过了 <a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了
+2 天的 bug，我太蒻了 QWQ。</del></p>
 <p>看了一下图论基础，准备刷一下 DP 题。</p>
 <p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
           <!--noindex-->
@@ -531,9 +647,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><del>论正解 $O(n \log n)$ 我用 $O(n^2)$ 的算法怎么卡过的。。。</del></p>
+          <p><del>论正解 <span class="math inline">\(O(n \log n)\)</span> 我用
+<span class="math inline">\(O(n^2)\)</span>
+的算法怎么卡过的。。。</del></p>
 <p>这道题我不打算写正解。。。</p>
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7913">洛谷链接</a></p>
+<h1 id="题目描述">题目描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7913">洛谷链接</a></p>
 <p>一个机场有国内场和国际场两种航班，每种航班中有多个廊桥，飞机可停在廊桥边，一个廊桥对应一个飞机。若在该场的廊桥已全部停完，则飞机则无法停靠。给定廊桥数量，所有国内航班和国际航班的降落时间和起飞时间，飞机到达时从前到后依次停靠，问国内廊桥和国际廊桥分别分配几个才可使可停靠飞机数最大。</p>
           <!--noindex-->
             <div class="post-button">
@@ -641,9 +760,13 @@
     <div class="post-body" itemprop="articleBody">
           <p><del>爆零了？</del></p>
 <p>没爆零！</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和 “Isoheptane” “huaruoji” 聊一下天。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
-<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压 i7 加上 8G 内存完全够用。</p>
+<h1 id="day-0">Day 0</h1>
+<p>简单的准备了一下，下午在机房摸了一小会儿鱼，看了一下考试技巧，在洛谷上写了一下单源最短路找一下手感，顺便再和
+"Isoheptane" "huaruoji" 聊一下天。</p>
+<h1 id="day-1">Day 1</h1>
+<p><del>CCF迷惑操作，把考点设置在了绵阳</del></p>
+<p>开了一个上午的车，终于到了绵阳东辰国际学校。来到考场后，发现考场环境比想象中的要好，九代标压
+i7 加上 8G 内存完全够用。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/csp-s2021-2/#more" rel="contents">
@@ -749,11 +872,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p>《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感</p>
+<p>《<算法竞赛进阶指南> 0x01 位运算》读后感</p>
 </blockquote>
-<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
+<h1 id="补码">补码</h1>
+<p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
 <p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p>
-<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code> 不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt; 0xFF。</p>
+<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code>
+不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt;
+0xFF。</p>
 <p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p>
           <!--noindex-->
             <div class="post-button">
@@ -860,7 +986,8 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>总觉得应该写些什么……</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
+<h1 id="day-0">Day 0</h1>
+<p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
 <p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
 <p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
 <p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
@@ -968,7 +1095,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>前缀和为一种预处理，可理解为数列前 $n$ 项的和。可降低查询某些信息的所需时间。</p>
+          <h1 id="概念">概念</h1>
+<p>前缀和为一种预处理，可理解为数列前 <span
+class="math inline">\(n\)</span>
+项的和。可降低查询某些信息的所需时间。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前缀和示例</span></span><br><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line">sum[<span class="number">0</span>] = a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
@@ -1074,12 +1204,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
-<p>本题定义了一个新语言名为 A++，语言的循环定义如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F i x y</span><br><span class="line">    循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
-<p>本循环相当于</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++)</span><br></pre></td></tr></table></figure>
-<p>输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。<br>其中满足 x，y 必为常数或 n，n 远大于 x，y。</p>
+          <h1 id="题目描述">题目描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
+<p>本题定义了一个新语言名为 A++，语言的循环定义如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F i x y</span><br><span class="line">    循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
+本循环相当于 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++)</span><br></pre></td></tr></table></figure>
+输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。 其中满足 x，y
+必为常数或 n，n 远大于 x，y。</p>
 <p>具体信息可详见洛谷，链接见上</p>
           <!--noindex-->
             <div class="post-button">

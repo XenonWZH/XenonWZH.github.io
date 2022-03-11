@@ -20,12 +20,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感  补码计算机中的整数均使用补码存储，位运算时也不例外。 故十六进制中大于 0x7FFFFFFF 时就为负数。 在 memset(src, val, len) 中是将 val 不停循环地填入 src，且 0x00 &lt; val &lt; 0xFF。 故可以将 0x3F 定义为一个很大的数，即为 INF。">
+<meta name="description" content="《 0x01 位运算》读后感  补码 计算机中的整数均使用补码存储，位运算时也不例外。 故十六进制中大于 0x7FFFFFFF 时就为负数。 在 memset(src, val, len) 中是将 val 不停循环地填入 src，且 0x00 &lt; val &lt; 0xFF。 故可以将 0x3F 定义为一个很大的数，即为 INF。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="位运算学习笔记">
 <meta property="og:url" content="https://xenonwzh.github.io/bitwise-operator-notes/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感  补码计算机中的整数均使用补码存储，位运算时也不例外。 故十六进制中大于 0x7FFFFFFF 时就为负数。 在 memset(src, val, len) 中是将 val 不停循环地填入 src，且 0x00 &lt; val &lt; 0xFF。 故可以将 0x3F 定义为一个很大的数，即为 INF。">
+<meta property="og:description" content="《 0x01 位运算》读后感  补码 计算机中的整数均使用补码存储，位运算时也不例外。 故十六进制中大于 0x7FFFFFFF 时就为负数。 在 memset(src, val, len) 中是将 val 不停循环地填入 src，且 0x00 &lt; val &lt; 0xFF。 故可以将 0x3F 定义为一个很大的数，即为 INF。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-25T06:36:34.000Z">
 <meta property="article:modified_time" content="2022-02-11T03:01:23.595Z">
@@ -167,7 +167,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -324,49 +324,75 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感</p>
+<p>《<算法竞赛进阶指南> 0x01 位运算》读后感</p>
 </blockquote>
-<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
+<h1 id="补码">补码</h1>
+<p>计算机中的整数均使用补码存储，位运算时也不例外。</p>
 <p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p>
-<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code> 不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt; 0xFF。</p>
+<p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code>
+不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt;
+0xFF。</p>
 <p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p>
 <span id="more"></span>
-
-<h1 id="位运算的妙用"><a href="#位运算的妙用" class="headerlink" title="位运算的妙用"></a>位运算的妙用</h1><h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>当计算 $a^b$ 时 $b$ 可以被分成 $b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times 2^2 + \cdots + x_n \times 2^n$，故可以用位运算剥离 $b$ 在二进制下的位数，代码如下：</p>
+<h1 id="位运算的妙用">位运算的妙用</h1>
+<h2 id="快速幂">快速幂</h2>
+<p>当计算 <span class="math inline">\(a^b\)</span> 时 <span
+class="math inline">\(b\)</span> 可以被分成 <span
+class="math inline">\(b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times
+2^2 + \cdots + x_n \times 2^n\)</span>，故可以用位运算剥离 <span
+class="math inline">\(b\)</span> 在二进制下的位数，代码如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % p;</span><br><span class="line">    <span class="keyword">while</span> (b &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ((<span class="keyword">long</span> <span class="keyword">long</span>)ans * a) % p;</span><br><span class="line">        &#125;</span><br><span class="line">        a = ((<span class="keyword">long</span> <span class="keyword">long</span>)a * a) % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code> 表示不选择。</p>
-<p>故当拥有一个 $n$ 个元素的集合时，可使用一个位数为 $n$ 的二进制数来枚举全部的子集，即为 $2^n$ 的十进制数。</p>
+<h1 id="二进制状态压缩">二进制状态压缩</h1>
+<p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code>
+表示不选择。</p>
+<p>故当拥有一个 <span class="math inline">\(n\)</span>
+个元素的集合时，可使用一个位数为 <span class="math inline">\(n\)</span>
+的二进制数来枚举全部的子集，即为 <span
+class="math inline">\(2^n\)</span> 的十进制数。</p>
 <p>此时可以用一个整型数代替布尔数组，也可以使用一个整型数枚举全排列。</p>
 <p>下面的列表列举了常用操作。</p>
 <table>
+<colgroup>
+<col style="width: 75%" />
+<col style="width: 25%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>操作</th>
 <th>运算（运算符为 C++）</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>取出整数 $n$ 在二进制表示下的第 $k$ 位</td>
+<tbody>
+<tr class="odd">
+<td>取出整数 <span class="math inline">\(n\)</span> 在二进制表示下的第
+<span class="math inline">\(k\)</span> 位</td>
 <td><code>（n &gt;&gt; k） &amp; 1</code></td>
 </tr>
-<tr>
-<td>取出整数 $n$ 在二进制表示下的第 $0 \sim k - 1$ 位（后 $k$ 位）</td>
+<tr class="even">
+<td>取出整数 <span class="math inline">\(n\)</span> 在二进制表示下的第
+<span class="math inline">\(0 \sim k - 1\)</span> 位（后 <span
+class="math inline">\(k\)</span> 位）</td>
 <td><code>n &amp; ((1 &lt;&lt; k) - 1)</code></td>
 </tr>
-<tr>
-<td>把整数 $n$ 在二进制表示下的第 $k$ 位取反</td>
+<tr class="odd">
+<td>把整数 <span class="math inline">\(n\)</span> 在二进制表示下的第
+<span class="math inline">\(k\)</span> 位取反</td>
 <td><code>n ^ (1 &lt;&lt; k)</code></td>
 </tr>
-<tr>
-<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $1$</td>
-<td><code>n | (1 &lt;&lt; k)</code></td>
+<tr class="even">
+<td>对整数 <span class="math inline">\(n\)</span> 在二进制表示下的第
+<span class="math inline">\(k\)</span> 位赋值 <span
+class="math inline">\(1\)</span></td>
+<td><code>n \| (1 &lt;&lt; k)</code></td>
 </tr>
-<tr>
-<td>对整数 $n$ 在二进制表示下的第 $k$ 位赋值 $0$</td>
+<tr class="odd">
+<td>对整数 <span class="math inline">\(n\)</span> 在二进制表示下的第
+<span class="math inline">\(k\)</span> 位赋值 <span
+class="math inline">\(0\)</span></td>
 <td><code>n &amp; (~(1 &lt;&lt; k))</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
     </div>
 
