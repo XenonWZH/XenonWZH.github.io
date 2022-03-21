@@ -6,7 +6,7 @@
   <link href="https://xenonwzh.github.io/atom.xml" rel="self"/>
   
   <link href="https://xenonwzh.github.io/"/>
-  <updated>2022-03-19T08:36:52.231Z</updated>
+  <updated>2022-03-21T13:40:57.706Z</updated>
   <id>https://xenonwzh.github.io/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「NOIP2012」同余方程 - 拓展欧几里得定理</title>
+    <link href="https://xenonwzh.github.io/noip2012-mod/"/>
+    <id>https://xenonwzh.github.io/noip2012-mod/</id>
+    <published>2022-03-21T13:31:48.000Z</published>
+    <updated>2022-03-21T13:40:57.706Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1><p><a href="https://www.luogu.com.cn/problem/P1082">洛谷链接</a></p><p><a href="https://loj.ac/p/2605">LOJ 链接</a></p><p>求关于 <span class="math inline">\(x\)</span> 的同余方程 <spanclass="math inline">\(ax \equiv 1 \pmod {b}\)</span>的最小正整数解。</p><span id="more"></span><h1 id="解题思路">解题思路</h1><p>很简单的拓展欧几里得板子题，我们可以由同余方程得出下列等式</p><p><span class="math display">\[ax + by = \gcd(a, b) \quad a, b \in \mathbb{Z}\]</span></p><p>利用拓展欧几里得求出 <span class="math inline">\(x\)</span>即可。对于本题 <span class="math inline">\(\gcd(a, b) \neq 1\)</span>的情况，只需在等式左右除以一个 <span class="math inline">\(\gcd(a,b)\)</span>，最后结果乘上 <span class="math inline">\(gcd(a, b)\)</span>即可。</p><h1 id="代码演示">代码演示</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = <span class="built_in">exgcd</span>(b, a % b, x, y);</span><br><span class="line">    <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t - (a / b) * y;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gcd</span>(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    std::cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="built_in">exgcd</span>(a / <span class="built_in">gcd</span>(a, b), b / <span class="built_in">gcd</span>(a, b), x, y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; (x % b + b) % <span class="function">b * <span class="title">gcd</span><span class="params">(a, b)</span> &lt;&lt; std::endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题意描述&quot;&gt;题意描述&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/problem/P1082&quot;&gt;洛谷链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://loj.ac/p/2605&quot;&gt;LOJ 链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;求关于 &lt;span class=&quot;math inline&quot;&gt;\(x\)&lt;/span&gt; 的同余方程 &lt;span
+class=&quot;math inline&quot;&gt;\(ax \equiv 1 \pmod {b}\)&lt;/span&gt;
+的最小正整数解。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OI" scheme="https://xenonwzh.github.io/categories/OI/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="数论" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+    <category term="NOIP" scheme="https://xenonwzh.github.io/tags/NOIP/"/>
+    
+    <category term="2012" scheme="https://xenonwzh.github.io/tags/2012/"/>
+    
+  </entry>
   
   <entry>
     <title>「洛谷 P2371」墨墨的等式 - 最短路</title>
@@ -213,11 +249,11 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
+    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
+    
     <category term="数学" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
     <category term="矩阵乘法" scheme="https://xenonwzh.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/"/>
-    
-    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
     
   </entry>
   
@@ -425,9 +461,9 @@ gcc、g++、gdb等软件。&lt;/p&gt;</summary>
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
+    
+    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     
     <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
     
@@ -643,13 +679,13 @@ href=&quot;https://www.luogu.com.cn/problem/P3371&quot;&gt;单源最短路径（
     
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     
-    <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
-    
-    <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
-    
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
     <category term="前缀和" scheme="https://xenonwzh.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
+    <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
+    
+    <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
     
     <category term="模拟" scheme="https://xenonwzh.github.io/tags/%E6%A8%A1%E6%8B%9F/"/>
     
@@ -759,37 +795,6 @@ i7 加上 8G 内存完全够用。&lt;/p&gt;</summary>
     <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
     
     <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前缀和学习笔记</title>
-    <link href="https://xenonwzh.github.io/prefix-sum-notes/"/>
-    <id>https://xenonwzh.github.io/prefix-sum-notes/</id>
-    <published>2021-08-24T10:51:40.000Z</published>
-    <updated>2022-02-08T03:30:51.951Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念">概念</h1><p>前缀和为一种预处理，可理解为数列前 <spanclass="math inline">\(n\)</span>项的和。可降低查询某些信息的所需时间。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前缀和示例</span></span><br><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line">sum[<span class="number">0</span>] = a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">    sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><span id="more"></span><h2 id="stl-中的前缀和">STL 中的前缀和</h2><p>C++ 标准库中提供了 <code>std::partial_sum</code>前缀和函数，定义于头文件 <code>&lt;numeric&gt;</code> 中</p><p>用法为<code>partial_sum(InputIt first, InputIt last, OutputIt d_first)</code></p><ul><li><p><code>first</code> 和 <code>last</code>表示要求和的元素范围；</p></li><li><p><code>d_first</code> 表示目标范围起始；可以等于<code>first</code>。</p></li></ul><h1 id="例题">例题</h1><p><a href="https://www.luogu.com.cn/problem/P3131">洛谷 P3131[USACO16JAN]Subsequences Summing to Sevens S</a></p><p>本题直接处理前缀和存储余数，在前缀和中取头尾两余数相等的数坐标相减即可。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">50000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, maxn = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[MAXN + <span class="number">1</span>];</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> sum[MAXN + <span class="number">1</span>];</span><br><span class="line">    sum[<span class="number">1</span>] = a[<span class="number">1</span>] % <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        sum[i] = (sum[i - <span class="number">1</span>] + a[i]) % <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> first[<span class="number">7</span>], last[<span class="number">7</span>];</span><br><span class="line">    <span class="built_in">memset</span>(first, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(first));</span><br><span class="line">    <span class="built_in">memset</span>(last, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(last));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (sum[j] == i) &#123;</span><br><span class="line">                first[i] = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">            <span class="keyword">if</span> (sum[j] == i) &#123;</span><br><span class="line">                last[i] = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    maxn = last[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (last[i] - first[i] &gt; maxn) &#123;</span><br><span class="line">            maxn = last[i] - first[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; maxn &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="二维多维前缀和">二维/多维前缀和</h1><p>RT</p><h2 id="例题-1">例题</h2><p><a href="https://www.luogu.com.cn/problem/P1387">洛谷 P1387最大正方形</a></p><p>本题可通过前缀和处理矩形，利用 <code>sum</code>数组存储可组成正方形的最大值。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> squ[MAXN + <span class="number">1</span>][MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            std::cin &gt;&gt; squ[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> sum[MAXN + <span class="number">1</span>][MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(sum));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (squ[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                sum[i][j] = std::<span class="built_in">min</span>(std::<span class="built_in">min</span>(sum[i - <span class="number">1</span>][j] , sum[i][j - <span class="number">1</span>]), sum[i - <span class="number">1</span>][j - <span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (sum[i][j] &gt; ans) &#123;</span><br><span class="line">                    ans = sum[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;概念&quot;&gt;概念&lt;/h1&gt;
-&lt;p&gt;前缀和为一种预处理，可理解为数列前 &lt;span
-class=&quot;math inline&quot;&gt;\(n\)&lt;/span&gt;
-项的和。可降低查询某些信息的所需时间。&lt;/p&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 前缀和示例&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; sum[MAXN];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sum[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = a[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt; n; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sum[i] = sum[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + a[i];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="OI" scheme="https://xenonwzh.github.io/categories/OI/"/>
-    
-    <category term="学习笔记" scheme="https://xenonwzh.github.io/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
-    
-    <category term="学习笔记" scheme="https://xenonwzh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    <category term="前缀和" scheme="https://xenonwzh.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
