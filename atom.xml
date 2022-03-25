@@ -6,7 +6,7 @@
   <link href="https://xenonwzh.github.io/atom.xml" rel="self"/>
   
   <link href="https://xenonwzh.github.io/"/>
-  <updated>2022-03-21T13:46:53.315Z</updated>
+  <updated>2022-03-25T08:36:25.779Z</updated>
   <id>https://xenonwzh.github.io/</id>
   
   <author>
@@ -15,6 +15,47 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「SCOI2005」互不侵犯 - 状压 DP</title>
+    <link href="https://xenonwzh.github.io/scoi2005-king/"/>
+    <id>https://xenonwzh.github.io/scoi2005-king/</id>
+    <published>2022-03-25T07:56:42.000Z</published>
+    <updated>2022-03-25T08:36:25.779Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1><p><a href="https://www.luogu.com.cn/problem/P1896">洛谷链接</a></p><p><a href="https://loj.ac/p/2153">LOJ 链接</a></p><p>在 <span class="math inline">\(N \times N\)</span> 的棋盘里面放 <spanclass="math inline">\(K\)</span>个国王，使他们互不攻击，共有多少种摆放方案。国王能攻击到它上下左右，以及左上左下右上右下八个方向上附近的各一个格子，共<span class="math inline">\(8\)</span> 个格子。</p><span id="more"></span><h1 id="解题思路">解题思路</h1><p>很明显这是一道状压 DP 的题目。我们可以定义数组 <spanclass="math inline">\(f_{i, j, l}\)</span>，状态表示中 <spanclass="math inline">\(i\)</span> 表示行数，<spanclass="math inline">\(j\)</span> 表示已经放下的国王数，<spanclass="math inline">\(l\)</span> 表示当前这行的国王放置状态。其中 <spanclass="math inline">\(l\)</span> 使用二进制表示子集存储，<spanclass="math inline">\(1\)</span> 表示放置国王。整个 <spanclass="math inline">\(f\)</span> 表示当前状态的可能数。</p><p>显然我们可以推出下列状态转移方程（<spanclass="math inline">\(\text{cnt}_x\)</span> 表示 <spanclass="math inline">\(x\)</span> 状态下当前行的国王数，<spanclass="math inline">\(\text{reach}\)</span> 代表添加一行可达到 <spanclass="math inline">\(l\)</span> 的情况的集合）：</p><p><span class="math display">\[f_{i, j + \text{cnt}_m, l} = \sum_{\text{reach}} f_{i - 1, j, m} \quad j\in [\text{cnt}_l, k - \text{cnt}_j]\]</span></p><p>对于 <span class="math inline">\(f\)</span>的初始化，我们仅需要做的是将 <span class="math inline">\(i = 1\)</span>的所有合法的序列赋值为 <span class="math inline">\(1\)</span> 即可。</p><h1 id="代码演示">代码演示</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[MAXN + <span class="number">1</span>][MAXN * MAXN + <span class="number">1</span>][<span class="number">1</span> &lt;&lt; MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">counts</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; (<span class="number">1</span> &lt;&lt; i) &lt;= x; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((x &gt;&gt; i) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        <span class="keyword">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (((i &gt;&gt; each) &amp; <span class="number">1</span>) &amp;&amp; (((i &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((i &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                con = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="built_in">counts</span>(i);</span><br><span class="line">        <span class="keyword">if</span> (con &amp;&amp; cnt &lt;= k) f[<span class="number">1</span>][cnt][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; n); j++) &#123;</span><br><span class="line">            <span class="keyword">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (((j &gt;&gt; each) &amp; <span class="number">1</span>) &amp; (((j &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((j &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                    con = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> cntJ = <span class="built_in">counts</span>(j);</span><br><span class="line">            <span class="keyword">if</span> (con &amp;&amp; cntJ &lt;= k) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; (<span class="number">1</span> &lt;&lt; n); l++) &#123;</span><br><span class="line">                    con = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">if</span> ((j &amp; <span class="number">1</span>) &amp;&amp; ((l &amp; <span class="number">1</span>) || ((l &gt;&gt; <span class="number">1</span>) &amp; <span class="number">1</span>))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">if</span> (((j &gt;&gt; (n - <span class="number">1</span>)) &amp; <span class="number">1</span>) &amp;&amp; (((l &gt;&gt; (n - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((l &gt;&gt; (n - <span class="number">2</span>)) &amp; <span class="number">1</span>))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (((j &gt;&gt; each) &amp; <span class="number">1</span>) &amp;&amp; (((l &gt;&gt; each) &amp; <span class="number">1</span>) || ((l &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((l &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                            con = <span class="literal">false</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">int</span> cntL = <span class="built_in">counts</span>(l);</span><br><span class="line">                    <span class="keyword">if</span> (con &amp;&amp; cntJ + cntL &lt;= k) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> m = cntL; m &lt;= k - cntJ; m++) &#123;</span><br><span class="line">                            f[i][m + cntJ][j] += f[i - <span class="number">1</span>][m][l];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">getAns</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        ans += f[n][k][i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getAns</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题意描述&quot;&gt;题意描述&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/problem/P1896&quot;&gt;洛谷链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://loj.ac/p/2153&quot;&gt;LOJ 链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;span class=&quot;math inline&quot;&gt;\(N \times N\)&lt;/span&gt; 的棋盘里面放 &lt;span
+class=&quot;math inline&quot;&gt;\(K\)&lt;/span&gt;
+个国王，使他们互不攻击，共有多少种摆放方案。国王能攻击到它上下左右，以及左上左下右上右下八个方向上附近的各一个格子，共
+&lt;span class=&quot;math inline&quot;&gt;\(8\)&lt;/span&gt; 个格子。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OI" scheme="https://xenonwzh.github.io/categories/OI/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
+    
+    <category term="DP" scheme="https://xenonwzh.github.io/tags/DP/"/>
+    
+    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
+    
+    <category term="状压 DP" scheme="https://xenonwzh.github.io/tags/%E7%8A%B6%E5%8E%8B-DP/"/>
+    
+    <category term="2005" scheme="https://xenonwzh.github.io/tags/2005/"/>
+    
+  </entry>
   
   <entry>
     <title>「NOIP2012」同余方程 - 拓展欧几里得定理</title>
@@ -214,9 +255,9 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
     
-    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
-    
     <category term="三分" scheme="https://xenonwzh.github.io/tags/%E4%B8%89%E5%88%86/"/>
+    
+    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
     
     <category term="2010" scheme="https://xenonwzh.github.io/tags/2010/"/>
     
@@ -249,11 +290,11 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
+    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
+    
     <category term="数学" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
     <category term="矩阵乘法" scheme="https://xenonwzh.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/"/>
-    
-    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
     
   </entry>
   
@@ -461,13 +502,13 @@ gcc、g++、gdb等软件。&lt;/p&gt;</summary>
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
     
-    <category term="差分约束" scheme="https://xenonwzh.github.io/tags/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F/"/>
+    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     
     <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
+    
+    <category term="差分约束" scheme="https://xenonwzh.github.io/tags/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F/"/>
     
     <category term="2011" scheme="https://xenonwzh.github.io/tags/2011/"/>
     
@@ -761,40 +802,6 @@ i7 加上 8G 内存完全够用。&lt;/p&gt;</summary>
     <category term="学习笔记" scheme="https://xenonwzh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     <category term="位运算" scheme="https://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSP-S2021 第一轮 行记</title>
-    <link href="https://xenonwzh.github.io/csp-s2021-1/"/>
-    <id>https://xenonwzh.github.io/csp-s2021-1/</id>
-    <published>2021-09-18T05:38:17.000Z</published>
-    <updated>2022-02-11T03:01:35.871Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>总觉得应该写些什么……</p><h1 id="day-0">Day 0</h1><p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p><p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p><p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p><p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p><span id="more"></span><h1 id="day-1">Day 1</h1><p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p><p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p><p>选择题？简单，30分钟写完。</p><p>阅读程序第一个懒得看，直接手动模拟。</p><p>？？？</p><p>这怎么考了立体几何了啊喂？</p><p>高一还没学啊！！！</p><p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p><p>第三题？手算 base64，不想说了……</p><p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p><p>第二题……</p><p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p><p>算了算了直接蒙。</p><p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p><h1 id="day">Day ???</h1><p>分数线 50 分，52 分滚粗。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;总觉得应该写些什么……&lt;/p&gt;
-&lt;h1 id=&quot;day-0&quot;&gt;Day 0&lt;/h1&gt;
-&lt;p&gt;今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。&lt;/p&gt;
-&lt;p&gt;考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ&lt;/p&gt;
-&lt;p&gt;早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。&lt;/p&gt;
-&lt;p&gt;晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="日常" scheme="https://xenonwzh.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
-    
-    <category term="行记" scheme="https://xenonwzh.github.io/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/"/>
-    
-    
-    <category term="日常" scheme="https://xenonwzh.github.io/tags/%E6%97%A5%E5%B8%B8/"/>
-    
-    <category term="行记" scheme="https://xenonwzh.github.io/tags/%E8%A1%8C%E8%AE%B0/"/>
-    
-    <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
-    
-    <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
     
   </entry>
   
