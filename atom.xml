@@ -6,7 +6,7 @@
   <link href="https://xenonwzh.github.io/atom.xml" rel="self"/>
   
   <link href="https://xenonwzh.github.io/"/>
-  <updated>2022-03-25T08:36:25.779Z</updated>
+  <updated>2022-03-28T07:57:34.391Z</updated>
   <id>https://xenonwzh.github.io/</id>
   
   <author>
@@ -15,6 +15,43 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NOI Online 2021 行记</title>
+    <link href="https://xenonwzh.github.io/noio2021/"/>
+    <id>https://xenonwzh.github.io/noio2021/</id>
+    <published>2022-03-26T03:34:25.000Z</published>
+    <updated>2022-03-28T07:57:34.391Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>纪念一下这个 <del>爆炸</del> 的考试</p><h1 id="day-0">Day 0</h1><p>晚上考完数学考试就到机房刷题。写了几道状压DP。没过多久就下课了。然后回寝睡觉。</p><h1 id="day-1">Day 1</h1><p>早上起来后看了一下 7FA4 上的 DP 题，感觉没啥做的，就看了会儿 B 站<del>然后发现鸽子 Alan Becker 居然更新了</del>。</p><p>没过多久就开始考试，提前开网页，题目加载出来后把题面扔在了我们学校的OI 群里。</p><span id="more"></span><p>首先看了一下 T1丹钓战，<del>谐音梗扣钱</del>。考场上想不出来正解，就胡乱写了暴力。然后再暴力的基础上优化了一下，预处理了可使<span class="math inline">\((a_i, b_i)\)</span>成为成功的二元组的最近的下标，复杂度优化到了 <spanclass="math inline">\(O(n^2)\)</span>。</p><p>然后看了一下 T3，感觉考得是多项式之类的题，没学过，就打了一个 <spanclass="math inline">\(O(n^3)\)</span>的暴力走人了。<del>考完后发现暴力写挂了</del></p><p>最后看了 T2，想着用图论搞，就建了一个无向图，写了一个用 bitset 优化的Floyd 传递闭包，最后用 bitset检测集合是否互相包含，不包含就输出答案。复杂度大概是 <spanclass="math inline">\(O(\frac{n^3}{w})\)</span>。</p><h1 id="day-1.5">Day 1.5</h1><p>下午考入门组，题目简单一点。考试前不想刷题，就看了会儿群。没过多久就开始考试了。</p><p>T1 是水题，很快就切掉了。</p><p>T2 想了一下，一道比较有意思的数论题，用 <spanclass="math inline">\(\gcd\)</span>乱搞一下就可以了。有点怕中间程序爆精度，就开了<code>__int128_t</code>。</p><p>T3 感觉是 Trie 或者是 AC自动机，没学过就没管了。<del>没想到是跟这些没啥关系的 DP 题</del></p><p>后来看了洛谷，真的没想到这次的入门组难度评级是红蓝蓝。。。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;纪念一下这个 &lt;del&gt;爆炸&lt;/del&gt; 的考试&lt;/p&gt;
+&lt;h1 id=&quot;day-0&quot;&gt;Day 0&lt;/h1&gt;
+&lt;p&gt;晚上考完数学考试就到机房刷题。写了几道状压
+DP。没过多久就下课了。然后回寝睡觉。&lt;/p&gt;
+&lt;h1 id=&quot;day-1&quot;&gt;Day 1&lt;/h1&gt;
+&lt;p&gt;早上起来后看了一下 7FA4 上的 DP 题，感觉没啥做的，就看了会儿 B 站
+&lt;del&gt;然后发现鸽子 Alan Becker 居然更新了&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;没过多久就开始考试，提前开网页，题目加载出来后把题面扔在了我们学校的
+OI 群里。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="日常" scheme="https://xenonwzh.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    <category term="行记" scheme="https://xenonwzh.github.io/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/"/>
+    
+    
+    <category term="日常" scheme="https://xenonwzh.github.io/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+    <category term="行记" scheme="https://xenonwzh.github.io/tags/%E8%A1%8C%E8%AE%B0/"/>
+    
+    <category term="NOI Online" scheme="https://xenonwzh.github.io/tags/NOI-Online/"/>
+    
+    <category term="2022" scheme="https://xenonwzh.github.io/tags/2022/"/>
+    
+  </entry>
   
   <entry>
     <title>「SCOI2005」互不侵犯 - 状压 DP</title>
@@ -49,9 +86,9 @@ class=&quot;math inline&quot;&gt;\(K\)&lt;/span&gt;
     
     <category term="DP" scheme="https://xenonwzh.github.io/tags/DP/"/>
     
-    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
-    
     <category term="状压 DP" scheme="https://xenonwzh.github.io/tags/%E7%8A%B6%E5%8E%8B-DP/"/>
+    
+    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
     
     <category term="2005" scheme="https://xenonwzh.github.io/tags/2005/"/>
     
@@ -255,9 +292,9 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
     
-    <category term="三分" scheme="https://xenonwzh.github.io/tags/%E4%B8%89%E5%88%86/"/>
-    
     <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
+    
+    <category term="三分" scheme="https://xenonwzh.github.io/tags/%E4%B8%89%E5%88%86/"/>
     
     <category term="2010" scheme="https://xenonwzh.github.io/tags/2010/"/>
     
@@ -290,11 +327,11 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
-    
     <category term="数学" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
     <category term="矩阵乘法" scheme="https://xenonwzh.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/"/>
+    
+    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
     
   </entry>
   
@@ -502,9 +539,9 @@ gcc、g++、gdb等软件。&lt;/p&gt;</summary>
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
-    
     <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+    <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
     
     <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
     
@@ -720,13 +757,13 @@ href=&quot;https://www.luogu.com.cn/problem/P3371&quot;&gt;单源最短路径（
     
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     
-    <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-    <category term="前缀和" scheme="https://xenonwzh.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-    
     <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
     
     <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
+    
+    <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="前缀和" scheme="https://xenonwzh.github.io/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
     <category term="模拟" scheme="https://xenonwzh.github.io/tags/%E6%A8%A1%E6%8B%9F/"/>
     
@@ -766,42 +803,6 @@ i7 加上 8G 内存完全够用。&lt;/p&gt;</summary>
     <category term="CSP" scheme="https://xenonwzh.github.io/tags/CSP/"/>
     
     <category term="2021" scheme="https://xenonwzh.github.io/tags/2021/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>位运算学习笔记</title>
-    <link href="https://xenonwzh.github.io/bitwise-operator-notes/"/>
-    <id>https://xenonwzh.github.io/bitwise-operator-notes/</id>
-    <published>2021-09-25T06:36:34.000Z</published>
-    <updated>2022-02-11T03:01:23.595Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>《<算法竞赛进阶指南> 0x01 位运算》读后感</p></blockquote><h1 id="补码">补码</h1><p>计算机中的整数均使用补码存储，位运算时也不例外。</p><p>故十六进制中大于 0x7FFFFFFF 时就为负数。</p><p>在 <code>memset(src, val, len)</code> 中是将 <code>val</code>不停循环地填入 <code>src</code>，且 0x00 &lt; <code>val</code> &lt;0xFF。</p><p>故可以将 0x3F 定义为一个很大的数，即为 <code>INF</code>。</p><span id="more"></span><h1 id="位运算的妙用">位运算的妙用</h1><h2 id="快速幂">快速幂</h2><p>当计算 <span class="math inline">\(a^b\)</span> 时 <spanclass="math inline">\(b\)</span> 可以被分成 <spanclass="math inline">\(b = x_0 \times 2^0 + x_1 \times 2^1 + x_2 \times2^2 + \cdots + x_n \times 2^n\)</span>，故可以用位运算剥离 <spanclass="math inline">\(b\)</span> 在二进制下的位数，代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % p;</span><br><span class="line">    <span class="keyword">while</span> (b &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ((<span class="keyword">long</span> <span class="keyword">long</span>)ans * a) % p;</span><br><span class="line">        &#125;</span><br><span class="line">        a = ((<span class="keyword">long</span> <span class="keyword">long</span>)a * a) % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="二进制状态压缩">二进制状态压缩</h1><p>一个集合中的元素可以使用 <code>1</code> 表示选择，用 <code>0</code>表示不选择。</p><p>故当拥有一个 <span class="math inline">\(n\)</span>个元素的集合时，可使用一个位数为 <span class="math inline">\(n\)</span>的二进制数来枚举全部的子集，即为 <spanclass="math inline">\(2^n\)</span> 的十进制数。</p><p>此时可以用一个整型数代替布尔数组，也可以使用一个整型数枚举全排列。</p><p>下面的列表列举了常用操作。</p><table><colgroup><col style="width: 75%" /><col style="width: 25%" /></colgroup><thead><tr class="header"><th>操作</th><th>运算（运算符为 C++）</th></tr></thead><tbody><tr class="odd"><td>取出整数 <span class="math inline">\(n\)</span> 在二进制表示下的第<span class="math inline">\(k\)</span> 位</td><td><code>（n &gt;&gt; k） &amp; 1</code></td></tr><tr class="even"><td>取出整数 <span class="math inline">\(n\)</span> 在二进制表示下的第<span class="math inline">\(0 \sim k - 1\)</span> 位（后 <spanclass="math inline">\(k\)</span> 位）</td><td><code>n &amp; ((1 &lt;&lt; k) - 1)</code></td></tr><tr class="odd"><td>把整数 <span class="math inline">\(n\)</span> 在二进制表示下的第<span class="math inline">\(k\)</span> 位取反</td><td><code>n ^ (1 &lt;&lt; k)</code></td></tr><tr class="even"><td>对整数 <span class="math inline">\(n\)</span> 在二进制表示下的第<span class="math inline">\(k\)</span> 位赋值 <spanclass="math inline">\(1\)</span></td><td><code>n \| (1 &lt;&lt; k)</code></td></tr><tr class="odd"><td>对整数 <span class="math inline">\(n\)</span> 在二进制表示下的第<span class="math inline">\(k\)</span> 位赋值 <spanclass="math inline">\(0\)</span></td><td><code>n &amp; (~(1 &lt;&lt; k))</code></td></tr></tbody></table>]]></content>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;《&lt;算法竞赛进阶指南&gt; 0x01 位运算》读后感&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;补码&quot;&gt;补码&lt;/h1&gt;
-&lt;p&gt;计算机中的整数均使用补码存储，位运算时也不例外。&lt;/p&gt;
-&lt;p&gt;故十六进制中大于 0x7FFFFFFF 时就为负数。&lt;/p&gt;
-&lt;p&gt;在 &lt;code&gt;memset(src, val, len)&lt;/code&gt; 中是将 &lt;code&gt;val&lt;/code&gt;
-不停循环地填入 &lt;code&gt;src&lt;/code&gt;，且 0x00 &amp;lt; &lt;code&gt;val&lt;/code&gt; &amp;lt;
-0xFF。&lt;/p&gt;
-&lt;p&gt;故可以将 0x3F 定义为一个很大的数，即为 &lt;code&gt;INF&lt;/code&gt;。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="OI" scheme="https://xenonwzh.github.io/categories/OI/"/>
-    
-    <category term="学习笔记" scheme="https://xenonwzh.github.io/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
-    
-    <category term="学习笔记" scheme="https://xenonwzh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    <category term="位运算" scheme="https://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
   </entry>
   
