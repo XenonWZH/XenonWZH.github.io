@@ -74,9 +74,9 @@ class=&quot;math inline&quot;&gt;\(-1\)&lt;/span&gt;。&lt;/p&gt;
     <link href="https://xenonwzh.github.io/noio2022/"/>
     <id>https://xenonwzh.github.io/noio2022/</id>
     <published>2022-03-26T03:34:25.000Z</published>
-    <updated>2022-03-28T08:08:15.521Z</updated>
+    <updated>2022-03-30T12:56:46.387Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>纪念一下这个 <del>爆炸</del> 的考试</p><h1 id="day-0">Day 0</h1><p>晚上考完数学考试就到机房刷题。写了几道状压DP。没过多久就下课了。然后回寝睡觉。</p><h1 id="day-1">Day 1</h1><p>早上起来后看了一下 7FA4 上的 DP 题，感觉没啥做的，就看了会儿 B 站<del>然后发现鸽子 Alan Becker 居然更新了</del>。</p><p>没过多久就开始考试，提前开网页，题目加载出来后把题面扔在了我们学校的OI 群里。</p><span id="more"></span><p>首先看了一下 T1丹钓战，<del>谐音梗扣钱</del>。考场上想不出来正解，就胡乱写了暴力。然后再暴力的基础上优化了一下，预处理了可使<span class="math inline">\((a_i, b_i)\)</span>成为成功的二元组的最近的下标，复杂度优化到了 <spanclass="math inline">\(O(n^2)\)</span>。</p><p>然后看了一下 T3，感觉考得是多项式之类的题，没学过，就打了一个 <spanclass="math inline">\(O(n^3)\)</span>的暴力走人了。<del>考完后发现暴力写挂了</del></p><p>最后看了 T2，想着用图论搞，就建了一个无向图，写了一个用 bitset 优化的Floyd 传递闭包，最后用 bitset检测集合是否互相包含，不包含就输出答案。复杂度大概是 <spanclass="math inline">\(O(\frac{n^3}{w})\)</span>。</p><h1 id="day-1.5">Day 1.5</h1><p>下午考入门组，题目简单一点。考试前不想刷题，就看了会儿群。没过多久就开始考试了。</p><p>T1 是水题，很快就切掉了。</p><p>T2 想了一下，一道比较有意思的数论题，用 <spanclass="math inline">\(\gcd\)</span>乱搞一下就可以了。有点怕中间程序爆精度，就开了<code>__int128_t</code>。</p><p>T3 感觉是 Trie 或者是 AC自动机，没学过就没管了。<del>没想到是跟这些没啥关系的 DP 题</del></p><p>后来看了洛谷，真的没想到这次的入门组难度评级是红蓝蓝。。。</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>纪念一下这个 <del>爆炸</del> 的考试</p><h1 id="day-0">Day 0</h1><p>晚上考完数学考试就到机房刷题。写了几道状压DP。没过多久就下课了。然后回寝睡觉。</p><h1 id="day-1">Day 1</h1><p>早上起来后看了一下 7FA4 上的 DP 题，感觉没啥做的，就看了会儿 B 站<del>然后发现鸽子 Alan Becker 居然更新了</del>。</p><p>没过多久就开始考试，提前开网页，题目加载出来后把题面扔在了我们学校的OI 群里。</p><span id="more"></span><p>首先看了一下 T1丹钓战，<del>谐音梗扣钱</del>。考场上想不出来正解，就胡乱写了暴力。然后再暴力的基础上优化了一下，预处理了可使<span class="math inline">\((a_i, b_i)\)</span>成为成功的二元组的最近的下标，复杂度优化到了 <spanclass="math inline">\(O(n^2)\)</span>。</p><p>然后看了一下 T3，感觉考得是多项式之类的题，没学过，就打了一个 <spanclass="math inline">\(O(n^3)\)</span>的暴力走人了。<del>考完后发现暴力写挂了</del></p><p>最后看了 T2，想着用图论搞，就建了一个无向图，写了一个用 bitset 优化的Floyd 传递闭包，最后用 bitset检测集合是否互相包含，不包含就输出答案。复杂度大概是 <spanclass="math inline">\(O(\frac{n^3}{w})\)</span>。</p><h1 id="day-1.5">Day 1.5</h1><p>下午考入门组，题目简单一点。考试前不想刷题，就看了会儿群。没过多久就开始考试了。</p><p>T1 是水题，很快就切掉了。</p><p>T2 想了一下，一道比较有意思的数论题，用 <spanclass="math inline">\(\gcd\)</span>乱搞一下就可以了。有点怕中间程序爆精度，就开了<code>__int128_t</code>。</p><p>T3 感觉是 Trie 或者是 AC自动机，没学过就没管了。<del>没想到是跟这些没啥关系的 DP 题</del></p><p>后来看了洛谷，真的没想到这次的入门组难度评级是红蓝蓝。。。</p><h1 id="day">Day ???</h1><p>分数线出来了。提高组 100 分，入门组 140 分。</p><p>我的成绩提高组未知，入门组 200。。。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;纪念一下这个 &lt;del&gt;爆炸&lt;/del&gt; 的考试&lt;/p&gt;
@@ -139,9 +139,9 @@ class=&quot;math inline&quot;&gt;\(K\)&lt;/span&gt;
     
     <category term="DP" scheme="https://xenonwzh.github.io/tags/DP/"/>
     
-    <category term="状压 DP" scheme="https://xenonwzh.github.io/tags/%E7%8A%B6%E5%8E%8B-DP/"/>
-    
     <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
+    
+    <category term="状压 DP" scheme="https://xenonwzh.github.io/tags/%E7%8A%B6%E5%8E%8B-DP/"/>
     
     <category term="2005" scheme="https://xenonwzh.github.io/tags/2005/"/>
     
@@ -296,9 +296,9 @@ class=&quot;math inline&quot;&gt;\(\&amp;amp;\)&lt;/span&gt; 是按位与操作�
     
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     
-    <category term="位运算" scheme="https://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="位运算" scheme="https://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
     <category term="DP" scheme="https://xenonwzh.github.io/tags/DP/"/>
     
@@ -345,9 +345,9 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
     
-    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
-    
     <category term="三分" scheme="https://xenonwzh.github.io/tags/%E4%B8%89%E5%88%86/"/>
+    
+    <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
     
     <category term="2010" scheme="https://xenonwzh.github.io/tags/2010/"/>
     
@@ -380,11 +380,11 @@ class=&quot;math inline&quot;&gt;\(\text D\)&lt;/span&gt;
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
+    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
+    
     <category term="数学" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
     <category term="矩阵乘法" scheme="https://xenonwzh.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/"/>
-    
-    <category term="POJ" scheme="https://xenonwzh.github.io/tags/POJ/"/>
     
   </entry>
   
