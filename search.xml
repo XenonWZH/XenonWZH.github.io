@@ -1,45 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSP-S2021 第一轮 行记</title>
-    <url>/csp-s2021-1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>总觉得应该写些什么……</p>
-<h1 id="day-0">Day 0</h1>
-<p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
-<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
-<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
-<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
-<span id="more"></span>
-<h1 id="day-1">Day 1</h1>
-<p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
-<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
-<p>选择题？简单，30分钟写完。</p>
-<p>阅读程序第一个懒得看，直接手动模拟。</p>
-<p>？？？</p>
-<p>这怎么考了立体几何了啊喂？</p>
-<p>高一还没学啊！！！</p>
-<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
-<p>第三题？手算 base64，不想说了……</p>
-<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
-<p>第二题……</p>
-<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
-<p>算了算了直接蒙。</p>
-<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
-<h1 id="day">Day ???</h1>
-<p>分数线 50 分，52 分滚粗。</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>行记</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>CSP</tag>
-        <tag>2021</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>位运算学习笔记</title>
     <url>/bitwise-operator-notes/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
@@ -124,6 +85,70 @@ class="math inline">\(0\)</span></td>
       </tags>
   </entry>
   <entry>
+    <title>「Codeforces 618F」Double Knapsack - 构造 + 鸽巢原理</title>
+    <url>/cf-618f/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a href="https://codeforces.com/problemset/problem/618/F">Codeforces
+链接</a></p>
+<p>给你两个可重集 <span class="math inline">\(A, B\)</span>，<span
+class="math inline">\(A, B\)</span> 的元素个数都为 <span
+class="math inline">\(n\)</span>，它们中每个元素的大小 <span
+class="math inline">\(x\in [1,n]\)</span>。请你分别找出 <span
+class="math inline">\(A, B\)</span>
+的子集，使得它们中的元素之和相等。</p>
+<p>数据范围：<span class="math inline">\(1 \leq n \leq 10^6\)</span></p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p><del>我甚至菜到这是我做的第一道紫题</del></p>
+<h2 id="构造方法">构造方法</h2>
+<p>本题显然需要构造。</p>
+<p>首先我们维护 <span class="math inline">\(A\)</span> 的前缀和 <span
+class="math inline">\(\text{sA}\)</span>，<span
+class="math inline">\(B\)</span> 的前缀和 <span
+class="math inline">\(\text{sB}\)</span>。然后维护双指针指向两前缀和的第一个元素。这时我们将指向
+<span class="math inline">\(\text{sA}\)</span> 的指针不停加 <span
+class="math inline">\(1\)</span>，同时指向 <span
+class="math inline">\(\text{sB}\)</span>
+的指针在满足下一个位置指的数小于等于 <span
+class="math inline">\(\text{sA}\)</span>
+的指针所指的数时不停向前移动，最后记录下 <span
+class="math inline">\(\text{sA}\)</span> 的指针指向的值和 <span
+class="math inline">\(\text{sB}\)</span>
+指针指向的值的差及下标。若差已经存在，将存在的差的下标的前面的数删去后后面的差即可变为
+<span class="math inline">\(0\)</span>，故两差坐标之间的数即为答案。</p>
+<h2 id="正确性证明">正确性证明</h2>
+<p>接下来我们需要证明本题绝对有解，且所有解中至少有一种解所取的子集在原集合中是相邻的。</p>
+<p>设指针下标为 <span class="math inline">\(p\)</span>，<span
+class="math inline">\(q\)</span>。该题始终满足 <span
+class="math inline">\(\text{sA}_p - \text{sB}_q &lt;
+n\)</span>，若两差大于 <span class="math inline">\(n\)</span>，则 <span
+class="math inline">\(q\)</span>
+必定可以后移，不为最优。因为集合中的所有数都小于等于 <span
+class="math inline">\(n\)</span>。</p>
+<p>所以我们目前有 <span class="math inline">\(sA_0 - sB_q, sA_1 - sB_q,
+sA_3 - sB_q, \cdots, sA_n - sB_q\)</span> 总共 <span
+class="math inline">\(n + 1\)</span> 个差。但所有差只有 <span
+class="math inline">\(0, 1, 2, \cdots, n - 1\)</span> 总共 <span
+class="math inline">\(n\)</span>
+种。根据鸽巢原理可知至少有一种差出现了不止一次。故用该方法本题保证有解。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[MAXN + <span class="number">1</span>], b[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> sa[MAXN + <span class="number">1</span>], sb[MAXN + <span class="number">1</span>];</span><br><span class="line">    sa[<span class="number">0</span>] = sb[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sa[i] = sa[i - <span class="number">1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line">        sb[i] = sb[i - <span class="number">1</span>] + b[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> vis[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">static</span> std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pos[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="literal">false</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis));</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1</span>, q = <span class="number">0</span>;</span><br><span class="line">    vis[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> find = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; p &lt;= n; p++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (q &lt; n &amp;&amp; sb[q + <span class="number">1</span>] &lt;= sa[p]) q++;</span><br><span class="line">        <span class="keyword">if</span> (vis[sa[p] - sb[q]]) &#123;</span><br><span class="line">            find = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            vis[sa[p] - sb[q]] = <span class="literal">true</span>;</span><br><span class="line">            pos[sa[p] - sb[q]] = std::<span class="built_in">make_pair</span>(p, q);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (find) &#123;</span><br><span class="line">        std::cout &lt;&lt; p - pos[sa[p] - sb[q]].first &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pos[sa[p] - sb[q]].first + <span class="number">1</span>; i &lt;= p; i++) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; q - pos[sa[p] - sb[q]].second &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pos[sa[p] - sb[q]].second + <span class="number">1</span>; i &lt;= q; i++) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> std::cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>构造</tag>
+        <tag>贪心</tag>
+        <tag>前缀和</tag>
+        <tag>鸽巢原理</tag>
+        <tag>Codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>树状数组学习笔记</title>
     <url>/binary-index-trees-notes/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念">概念</h1>
@@ -202,70 +227,6 @@ a7 --> c6 --> c4</pre>
         <tag>OI</tag>
         <tag>学习笔记</tag>
         <tag>树状数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「Codeforces 618F」Double Knapsack - 构造 + 鸽巢原理</title>
-    <url>/cf-618f/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
-<p><a href="https://codeforces.com/problemset/problem/618/F">Codeforces
-链接</a></p>
-<p>给你两个可重集 <span class="math inline">\(A, B\)</span>，<span
-class="math inline">\(A, B\)</span> 的元素个数都为 <span
-class="math inline">\(n\)</span>，它们中每个元素的大小 <span
-class="math inline">\(x\in [1,n]\)</span>。请你分别找出 <span
-class="math inline">\(A, B\)</span>
-的子集，使得它们中的元素之和相等。</p>
-<p>数据范围：<span class="math inline">\(1 \leq n \leq 10^6\)</span></p>
-<span id="more"></span>
-<h1 id="解题思路">解题思路</h1>
-<p><del>我甚至菜到这是我做的第一道紫题</del></p>
-<h2 id="构造方法">构造方法</h2>
-<p>本题显然需要构造。</p>
-<p>首先我们维护 <span class="math inline">\(A\)</span> 的前缀和 <span
-class="math inline">\(\text{sA}\)</span>，<span
-class="math inline">\(B\)</span> 的前缀和 <span
-class="math inline">\(\text{sB}\)</span>。然后维护双指针指向两前缀和的第一个元素。这时我们将指向
-<span class="math inline">\(\text{sA}\)</span> 的指针不停加 <span
-class="math inline">\(1\)</span>，同时指向 <span
-class="math inline">\(\text{sB}\)</span>
-的指针在满足下一个位置指的数小于等于 <span
-class="math inline">\(\text{sA}\)</span>
-的指针所指的数时不停向前移动，最后记录下 <span
-class="math inline">\(\text{sA}\)</span> 的指针指向的值和 <span
-class="math inline">\(\text{sB}\)</span>
-指针指向的值的差及下标。若差已经存在，将存在的差的下标的前面的数删去后后面的差即可变为
-<span class="math inline">\(0\)</span>，故两差坐标之间的数即为答案。</p>
-<h2 id="正确性证明">正确性证明</h2>
-<p>接下来我们需要证明本题绝对有解，且所有解中至少有一种解所取的子集在原集合中是相邻的。</p>
-<p>设指针下标为 <span class="math inline">\(p\)</span>，<span
-class="math inline">\(q\)</span>。该题始终满足 <span
-class="math inline">\(\text{sA}_p - \text{sB}_q &lt;
-n\)</span>，若两差大于 <span class="math inline">\(n\)</span>，则 <span
-class="math inline">\(q\)</span>
-必定可以后移，不为最优。因为集合中的所有数都小于等于 <span
-class="math inline">\(n\)</span>。</p>
-<p>所以我们目前有 <span class="math inline">\(sA_0 - sB_q, sA_1 - sB_q,
-sA_3 - sB_q, \cdots, sA_n - sB_q\)</span> 总共 <span
-class="math inline">\(n + 1\)</span> 个差。但所有差只有 <span
-class="math inline">\(0, 1, 2, \cdots, n - 1\)</span> 总共 <span
-class="math inline">\(n\)</span>
-种。根据鸽巢原理可知至少有一种差出现了不止一次。故用该方法本题保证有解。</p>
-<h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[MAXN + <span class="number">1</span>], b[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> sa[MAXN + <span class="number">1</span>], sb[MAXN + <span class="number">1</span>];</span><br><span class="line">    sa[<span class="number">0</span>] = sb[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sa[i] = sa[i - <span class="number">1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line">        sb[i] = sb[i - <span class="number">1</span>] + b[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> vis[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">static</span> std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pos[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="literal">false</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis));</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1</span>, q = <span class="number">0</span>;</span><br><span class="line">    vis[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> find = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; p &lt;= n; p++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (q &lt; n &amp;&amp; sb[q + <span class="number">1</span>] &lt;= sa[p]) q++;</span><br><span class="line">        <span class="keyword">if</span> (vis[sa[p] - sb[q]]) &#123;</span><br><span class="line">            find = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            vis[sa[p] - sb[q]] = <span class="literal">true</span>;</span><br><span class="line">            pos[sa[p] - sb[q]] = std::<span class="built_in">make_pair</span>(p, q);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (find) &#123;</span><br><span class="line">        std::cout &lt;&lt; p - pos[sa[p] - sb[q]].first &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pos[sa[p] - sb[q]].first + <span class="number">1</span>; i &lt;= p; i++) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; q - pos[sa[p] - sb[q]].second &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pos[sa[p] - sb[q]].second + <span class="number">1</span>; i &lt;= q; i++) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> std::cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>构造</tag>
-        <tag>贪心</tag>
-        <tag>前缀和</tag>
-        <tag>鸽巢原理</tag>
-        <tag>Codeforces</tag>
       </tags>
   </entry>
   <entry>
@@ -397,12 +358,51 @@ huaruoji 的博客）</h2>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>CSP</tag>
-        <tag>2021</tag>
         <tag>OI</tag>
         <tag>题解</tag>
         <tag>前缀和</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
         <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2021 第一轮 行记</title>
+    <url>/csp-s2021-1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>总觉得应该写些什么……</p>
+<h1 id="day-0">Day 0</h1>
+<p>今天周六，中午日常去机房，该复习的都复习过了，已经无心复习初赛，只是看了一下图论。</p>
+<p>考场设在石室文庙，又勾起了中考考砸的不美好的回忆 QWQ</p>
+<p>早上老师正常讲了一下课，中午竞赛来时强调了一些重要事项，下午又上了一些课。</p>
+<p>晚上回家已经很晚，最后上床前复习了一下图论和卡特兰数。</p>
+<span id="more"></span>
+<h1 id="day-1">Day 1</h1>
+<p>上午进考场，准备考试（话说洛谷签到签出来大凶是什么意思喂？！）。</p>
+<p>考试开始快速浏览了一下卷子，12页（今年怎么还不用机读卡啊）。</p>
+<p>选择题？简单，30分钟写完。</p>
+<p>阅读程序第一个懒得看，直接手动模拟。</p>
+<p>？？？</p>
+<p>这怎么考了立体几何了啊喂？</p>
+<p>高一还没学啊！！！</p>
+<p>阅读程序第二题稍微看了一下，两种方法二分求连续子序列的最大和，还算简单。</p>
+<p>第三题？手算 base64，不想说了……</p>
+<p>最后看了一下填程序，第一题看了一下看得懂，但又不完全懂……</p>
+<p>第二题……</p>
+<p>什么是卡特兰树？什么是 RMQ 算法？LCA 忘了……</p>
+<p>算了算了直接蒙。</p>
+<p>最后做完卷子还有 15 分钟，这张卷子实在不想检查了。</p>
+<h1 id="day">Day ???</h1>
+<p>分数线 50 分，52 分滚粗。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>CSP</tag>
+        <tag>2021</tag>
       </tags>
   </entry>
   <entry>
@@ -495,129 +495,6 @@ class="math inline">\(r\)</span> 在运算中会被抵消，故也为所求解�
         <tag>OI</tag>
         <tag>学习笔记</tag>
         <tag>图论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GCC 使用及技巧</title>
-    <url>/gcc-compiler/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
-<p>本文仅介绍 GCC 的使用以及在 OI 中使用的技巧，不涉及任何工程项目！</p>
-</blockquote>
-<h1 id="介绍">介绍</h1>
-<p>GCC 不用多说，是指的 GNU 编写的 C  C++ 编译器。包含
-gcc、g++、gdb等软件。</p>
-<span id="more"></span>
-<h1 id="安装">安装</h1>
-<p>大多数 C++ 的 IDE 都集成了 GCC（除了 Visual Studio 使用的 MSVC 和
-Xcode 默认使用的是 Clang）（Visual Studio Code 和 Vim
-等属于编辑器，不含有 GCC），若要安装 GCC 也很简单。</p>
-<p>Windows 上可选择 <a
-href="https://www.mingw-w64.org/">MinGW-w64</a>，macOS 可在安装 Homebrew
-的基础上在终端输入 <code>brew install gcc</code> 安装。</p>
-<p>Linux 上可使用 <code>sudo apt-get install build-essentia</code>
-命令（对于 Debian 及其衍生发行版），对于其他发行版则使用
-<code>sudo pacman -S gcc g++</code>（使用 Arch Linux 举例）。</p>
-<p>如果你是 Windows 10 或 Windows 11 用户，强烈推荐使用 <a
-href="https://docs.microsoft.com/zh-cn/windows/wsl/install">WSL2</a>
-安装 Ubuntu，在 Ubuntu 中使用
-GCC。这样可以避免本地与评测的环境差异。</p>
-<p>安装成功后可用 <code>gcc -v</code> 或 <code>g++ -v</code>
-检查安装。若安装成功应为下列输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xenonwzh@XenonWZH-Laptop:~$ gcc -v</span><br><span class="line">Using built-in specs.</span><br><span class="line">COLLECT_GCC=gcc</span><br><span class="line">COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper</span><br><span class="line">OFFLOAD_TARGET_NAMES=nvptx-none:hsa</span><br><span class="line">OFFLOAD_TARGET_DEFAULT=1</span><br><span class="line">Target: x86_64-linux-gnu</span><br><span class="line">Configured with: ../src/configure -v --with-pkgversion=&#x27;Ubuntu 9.3.0-17ubuntu1~20.04&#x27; --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-HskZEa/gcc-9-9.3.0/debian/tmp-nvptx/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu</span><br><span class="line">Thread model: posix</span><br><span class="line">gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</span><br></pre></td></tr></table></figure>
-<h1 id="部分-ide-与编辑器下-gcc-的设置">部分 IDE 与编辑器下 GCC
-的设置</h1>
-<h2 id="dev-c">Dev-C++</h2>
-<p>Dev-C++ 可在菜单栏中选择 工具，编译选项。之后会弹出下列窗口。</p>
-<p><img src="/images/gcc-devcpp.png" /></p>
-<p>在窗口中“编译时加入一下命令”打勾，可在里面输入 GCC 参数（不含
-<code>-o test</code>）。</p>
-<h2 id="visual-studio-code">Visual Studio Code</h2>
-<h3 id="code-runner">Code Runner</h3>
-<p>在 Visual Studio Code
-设置中点击“打开设置（json）”，在该json文件最外层大括号末尾添加下列语句：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;code-runner.executorMap&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;cpp&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>即可在 <code>"cpp"</code> 对应的字符串中修改 <code>g++</code>
-参数。</p>
-<h3 id="c-c-官方扩展">C / C++ 官方扩展</h3>
-<p>在 Visual Studio Code 中打开编写程序的文件夹，打开一个 C++
-文件，在菜单栏中点击 终端、配置默认生成任务。之后在弹出的 json 文件中
-修改 <code>"args"</code> 参数即可。</p>
-<h3 id="clangd">clangd</h3>
-<p>打开文件夹，在文件夹下新建 <code>compile_flags.txt</code>
-文件，在该文件中添加 GCC 编译选项即可（同样不含
-<code>-o test</code>）</p>
-<h1 id="编译">编译</h1>
-<p>下文将以 <code>g++</code> 举例，<code>gcc</code> 同理。</p>
-<p>GCC 可编译单文件，语法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp</span><br></pre></td></tr></table></figure>
-<p>此时可生成一个文件 <code>a.out</code>（Windows 下为
-<code>a.exe</code>）。</p>
-<p>若想让生成的程序变成指定文件名，可使用下列语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -o test</span><br></pre></td></tr></table></figure>
-<p>此时会生成名为 <code>test</code> 的文件（Windows 下为
-<code>test.exe</code>）</p>
-<p>若想使用新版本的特性，可使用下列指令（以 ISO C++ 14 为例）（目前的
-NOI 系列比赛使用的 GCC 已默认开启 ISO C++ 14）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -std=c++14</span><br></pre></td></tr></table></figure>
-<p>若想开启 O2 优化，可使用下列指令目前的 NOI 系列比赛使用的 GCC
-<strong>未</strong> 默认开启 O2）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -O2</span><br></pre></td></tr></table></figure>
-<p>若想使用 GDB 调试，则可以使用下列语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -g</span><br><span class="line">gdb a.out</span><br></pre></td></tr></table></figure>
-<p>以上如
-<code>-o</code>、<code>-std=c++14</code>、<code>-O2</code>、<code>-g</code>
-以及下列将介绍的参数均可叠加使用。</p>
-<h2 id="与-oi-无关的知识点">与 OI 无关的知识点</h2>
-<p>众所周知宏观的编译操作分为编译、链接两大操作，GCC
-也支持编译以及链接操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -c  # 编译，生成对象文件 test.o</span><br><span class="line">g++ test.o       # 链接，生成可执行文件 a.out</span><br></pre></td></tr></table></figure>
-<h1 id="警告">警告</h1>
-<p>GCC 编译会产生警告乃至报错，例如在 A + B Problem
-中的输出语句忘加分号就会产生下列情况：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xenonwzh@XenonWZH-Laptop:~$ g++ test.cpp -O2 -o test</span><br><span class="line">test.cpp: In function ‘int main()’:</span><br><span class="line">test.cpp:6:36: error: expected ‘;’ before ‘return’</span><br><span class="line">    6 |     std::cout &lt;&lt; a + b &lt;&lt; std::endl</span><br><span class="line">      |                                    ^</span><br><span class="line">      |                                    ;</span><br><span class="line">    7 |     return 0;</span><br><span class="line">      |     ~~~~~~</span><br></pre></td></tr></table></figure>
-<p>该情况为报错，导致程序无法通过编译。</p>
-<p>又例如在程序中定义了一个变量但始终未使用，编译将出现下列情况：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xenonwzh@XenonWZH-Laptop:~$ g++ test.cpp -O2 -Wall -o test</span><br><span class="line">test.cpp: In function ‘int main()’:</span><br><span class="line">test.cpp:4:15: warning: unused variable ‘c’ [-Wunused-variable]</span><br><span class="line">    4 |     int a, b, c;</span><br><span class="line">      |</span><br></pre></td></tr></table></figure>
-<p>该情况为警告，程序可以通过编译，但可能在运行中得不到想要的答案，若你对自己的程序很有把握可以忽略警告。</p>
-<h2 id="产生更多的警告">产生更多的警告</h2>
-<p>由于 GCC 能产生的警告少之又少，同时如 <code>=</code> 与
-<code>==</code> 不分等常见错误在 GCC
-的默认设置下不会警告，所以我们一般会在编译中添加参数以生成更多的警告，用法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -Wall</span><br></pre></td></tr></table></figure>
-<p>利用该命令就可以产生如上一个例子的警告。</p>
-<h2 id="忽略特定的警告">忽略特定的警告</h2>
-<p>由于开启了 <code>-Wall</code>
-容易误伤，所以我们可以利用参数忽略特定的警告。</p>
-<p>例如我们使用了 <code>scanf</code> 函数，但是 GCC
-警告我们没有使用该函数的返回值：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">test.cpp: In function ‘int main()’:</span><br><span class="line">test.cpp:18:14: warning: ignoring return value of ‘int scanf(const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]</span><br><span class="line">   18 |         scanf(&quot;%d%d%d&quot;, &amp;x, &amp;y, &amp;z);</span><br><span class="line">      |         ~~~~~^~~~~~~~~~~~~~~~~~~~~~</span><br></pre></td></tr></table></figure>
-<p>我们可以在其中提取警告的类型。我们看到了
-<code>[-Wunused-result]</code>，说明该类型为
-<code>unused-result</code>。</p>
-<p>我们可以使用 <code>-Wno</code> 参数来忽略警告，使用时应在
-<code>-Wno</code> 后紧跟警告类型，例子如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -Wall -Wno-unused-result</span><br></pre></td></tr></table></figure>
-<p>接下来就没有烦人的未使用 <code>scanf</code> 返回值的警告了。</p>
-<h1 id="宏定义">宏定义</h1>
-<p>我们可以利用 GCC 编译来代替 C++ 中简单的宏定义。</p>
-<p>参数为 <code>-D</code>，使用时应紧跟定义宏。例子如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -DDEBUG</span><br></pre></td></tr></table></figure>
-<p>其中 <code>-DDEBUG</code> 相当于在 <code>test.cpp</code>
-中添加下列语句：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br></pre></td></tr></table></figure>
-<p>该参数可在调试或其他场合中使用，非常方便。</p>
-<p>例如把调试的语句在定义 DEBUG 宏时才执行，文件输入输出在没定义 DEBUG
-时执行，在考场上可有效避免非知识原因的爆 0。</p>
-<p>同时注意在绝大多数 OJ 编译代码时参数都含有
-<code>-DONLINE_JUDGE</code>，可以利用该特性提升刷题体验。</p>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -784,6 +661,129 @@ class="math inline">\(x_j\)</span> 可用高斯消元求解，最后得解。</p
       </tags>
   </entry>
   <entry>
+    <title>GCC 使用及技巧</title>
+    <url>/gcc-compiler/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+<p>本文仅介绍 GCC 的使用以及在 OI 中使用的技巧，不涉及任何工程项目！</p>
+</blockquote>
+<h1 id="介绍">介绍</h1>
+<p>GCC 不用多说，是指的 GNU 编写的 C  C++ 编译器。包含
+gcc、g++、gdb等软件。</p>
+<span id="more"></span>
+<h1 id="安装">安装</h1>
+<p>大多数 C++ 的 IDE 都集成了 GCC（除了 Visual Studio 使用的 MSVC 和
+Xcode 默认使用的是 Clang）（Visual Studio Code 和 Vim
+等属于编辑器，不含有 GCC），若要安装 GCC 也很简单。</p>
+<p>Windows 上可选择 <a
+href="https://www.mingw-w64.org/">MinGW-w64</a>，macOS 可在安装 Homebrew
+的基础上在终端输入 <code>brew install gcc</code> 安装。</p>
+<p>Linux 上可使用 <code>sudo apt-get install build-essentia</code>
+命令（对于 Debian 及其衍生发行版），对于其他发行版则使用
+<code>sudo pacman -S gcc g++</code>（使用 Arch Linux 举例）。</p>
+<p>如果你是 Windows 10 或 Windows 11 用户，强烈推荐使用 <a
+href="https://docs.microsoft.com/zh-cn/windows/wsl/install">WSL2</a>
+安装 Ubuntu，在 Ubuntu 中使用
+GCC。这样可以避免本地与评测的环境差异。</p>
+<p>安装成功后可用 <code>gcc -v</code> 或 <code>g++ -v</code>
+检查安装。若安装成功应为下列输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xenonwzh@XenonWZH-Laptop:~$ gcc -v</span><br><span class="line">Using built-in specs.</span><br><span class="line">COLLECT_GCC=gcc</span><br><span class="line">COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper</span><br><span class="line">OFFLOAD_TARGET_NAMES=nvptx-none:hsa</span><br><span class="line">OFFLOAD_TARGET_DEFAULT=1</span><br><span class="line">Target: x86_64-linux-gnu</span><br><span class="line">Configured with: ../src/configure -v --with-pkgversion=&#x27;Ubuntu 9.3.0-17ubuntu1~20.04&#x27; --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-HskZEa/gcc-9-9.3.0/debian/tmp-nvptx/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu</span><br><span class="line">Thread model: posix</span><br><span class="line">gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</span><br></pre></td></tr></table></figure>
+<h1 id="部分-ide-与编辑器下-gcc-的设置">部分 IDE 与编辑器下 GCC
+的设置</h1>
+<h2 id="dev-c">Dev-C++</h2>
+<p>Dev-C++ 可在菜单栏中选择 工具，编译选项。之后会弹出下列窗口。</p>
+<p><img src="/images/gcc-devcpp.png" /></p>
+<p>在窗口中“编译时加入一下命令”打勾，可在里面输入 GCC 参数（不含
+<code>-o test</code>）。</p>
+<h2 id="visual-studio-code">Visual Studio Code</h2>
+<h3 id="code-runner">Code Runner</h3>
+<p>在 Visual Studio Code
+设置中点击“打开设置（json）”，在该json文件最外层大括号末尾添加下列语句：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;code-runner.executorMap&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;cpp&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即可在 <code>"cpp"</code> 对应的字符串中修改 <code>g++</code>
+参数。</p>
+<h3 id="c-c-官方扩展">C / C++ 官方扩展</h3>
+<p>在 Visual Studio Code 中打开编写程序的文件夹，打开一个 C++
+文件，在菜单栏中点击 终端、配置默认生成任务。之后在弹出的 json 文件中
+修改 <code>"args"</code> 参数即可。</p>
+<h3 id="clangd">clangd</h3>
+<p>打开文件夹，在文件夹下新建 <code>compile_flags.txt</code>
+文件，在该文件中添加 GCC 编译选项即可（同样不含
+<code>-o test</code>）</p>
+<h1 id="编译">编译</h1>
+<p>下文将以 <code>g++</code> 举例，<code>gcc</code> 同理。</p>
+<p>GCC 可编译单文件，语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp</span><br></pre></td></tr></table></figure>
+<p>此时可生成一个文件 <code>a.out</code>（Windows 下为
+<code>a.exe</code>）。</p>
+<p>若想让生成的程序变成指定文件名，可使用下列语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -o test</span><br></pre></td></tr></table></figure>
+<p>此时会生成名为 <code>test</code> 的文件（Windows 下为
+<code>test.exe</code>）</p>
+<p>若想使用新版本的特性，可使用下列指令（以 ISO C++ 14 为例）（目前的
+NOI 系列比赛使用的 GCC 已默认开启 ISO C++ 14）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -std=c++14</span><br></pre></td></tr></table></figure>
+<p>若想开启 O2 优化，可使用下列指令目前的 NOI 系列比赛使用的 GCC
+<strong>未</strong> 默认开启 O2）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -O2</span><br></pre></td></tr></table></figure>
+<p>若想使用 GDB 调试，则可以使用下列语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -g</span><br><span class="line">gdb a.out</span><br></pre></td></tr></table></figure>
+<p>以上如
+<code>-o</code>、<code>-std=c++14</code>、<code>-O2</code>、<code>-g</code>
+以及下列将介绍的参数均可叠加使用。</p>
+<h2 id="与-oi-无关的知识点">与 OI 无关的知识点</h2>
+<p>众所周知宏观的编译操作分为编译、链接两大操作，GCC
+也支持编译以及链接操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -c  # 编译，生成对象文件 test.o</span><br><span class="line">g++ test.o       # 链接，生成可执行文件 a.out</span><br></pre></td></tr></table></figure>
+<h1 id="警告">警告</h1>
+<p>GCC 编译会产生警告乃至报错，例如在 A + B Problem
+中的输出语句忘加分号就会产生下列情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xenonwzh@XenonWZH-Laptop:~$ g++ test.cpp -O2 -o test</span><br><span class="line">test.cpp: In function ‘int main()’:</span><br><span class="line">test.cpp:6:36: error: expected ‘;’ before ‘return’</span><br><span class="line">    6 |     std::cout &lt;&lt; a + b &lt;&lt; std::endl</span><br><span class="line">      |                                    ^</span><br><span class="line">      |                                    ;</span><br><span class="line">    7 |     return 0;</span><br><span class="line">      |     ~~~~~~</span><br></pre></td></tr></table></figure>
+<p>该情况为报错，导致程序无法通过编译。</p>
+<p>又例如在程序中定义了一个变量但始终未使用，编译将出现下列情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xenonwzh@XenonWZH-Laptop:~$ g++ test.cpp -O2 -Wall -o test</span><br><span class="line">test.cpp: In function ‘int main()’:</span><br><span class="line">test.cpp:4:15: warning: unused variable ‘c’ [-Wunused-variable]</span><br><span class="line">    4 |     int a, b, c;</span><br><span class="line">      |</span><br></pre></td></tr></table></figure>
+<p>该情况为警告，程序可以通过编译，但可能在运行中得不到想要的答案，若你对自己的程序很有把握可以忽略警告。</p>
+<h2 id="产生更多的警告">产生更多的警告</h2>
+<p>由于 GCC 能产生的警告少之又少，同时如 <code>=</code> 与
+<code>==</code> 不分等常见错误在 GCC
+的默认设置下不会警告，所以我们一般会在编译中添加参数以生成更多的警告，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -Wall</span><br></pre></td></tr></table></figure>
+<p>利用该命令就可以产生如上一个例子的警告。</p>
+<h2 id="忽略特定的警告">忽略特定的警告</h2>
+<p>由于开启了 <code>-Wall</code>
+容易误伤，所以我们可以利用参数忽略特定的警告。</p>
+<p>例如我们使用了 <code>scanf</code> 函数，但是 GCC
+警告我们没有使用该函数的返回值：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">test.cpp: In function ‘int main()’:</span><br><span class="line">test.cpp:18:14: warning: ignoring return value of ‘int scanf(const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]</span><br><span class="line">   18 |         scanf(&quot;%d%d%d&quot;, &amp;x, &amp;y, &amp;z);</span><br><span class="line">      |         ~~~~~^~~~~~~~~~~~~~~~~~~~~~</span><br></pre></td></tr></table></figure>
+<p>我们可以在其中提取警告的类型。我们看到了
+<code>[-Wunused-result]</code>，说明该类型为
+<code>unused-result</code>。</p>
+<p>我们可以使用 <code>-Wno</code> 参数来忽略警告，使用时应在
+<code>-Wno</code> 后紧跟警告类型，例子如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -Wall -Wno-unused-result</span><br></pre></td></tr></table></figure>
+<p>接下来就没有烦人的未使用 <code>scanf</code> 返回值的警告了。</p>
+<h1 id="宏定义">宏定义</h1>
+<p>我们可以利用 GCC 编译来代替 C++ 中简单的宏定义。</p>
+<p>参数为 <code>-D</code>，使用时应紧跟定义宏。例子如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ test.cpp -DDEBUG</span><br></pre></td></tr></table></figure>
+<p>其中 <code>-DDEBUG</code> 相当于在 <code>test.cpp</code>
+中添加下列语句：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br></pre></td></tr></table></figure>
+<p>该参数可在调试或其他场合中使用，非常方便。</p>
+<p>例如把调试的语句在定义 DEBUG 宏时才执行，文件输入输出在没定义 DEBUG
+时执行，在考场上可有效避免非知识原因的爆 0。</p>
+<p>同时注意在绝大多数 OJ 编译代码时参数都含有
+<code>-DONLINE_JUDGE</code>，可以利用该特性提升刷题体验。</p>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最近公共祖先学习笔记</title>
     <url>/lca-notes/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="概念">概念</h1>
@@ -896,6 +896,106 @@ class="math inline">\(y\)</span> 的深度差相加即为答案。</p>
       </tags>
   </entry>
   <entry>
+    <title>「洛谷 P1436」棋盘分割 - 区间 DP</title>
+    <url>/luogu-1436/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a href="https://www.luogu.com.cn/problem/P1436">洛谷链接</a></p>
+<p>将一个 <span class="math inline">\(8 \times 8\)</span>
+的棋盘进行如下分割：将原棋盘割下一块矩形棋盘并使剩下部分也是矩形，再将剩下的两部分中的任意一块继续如此分割，这样割了
+<span class="math inline">\(n - 1\)</span>
+次后，连同最后剩下的矩形棋盘共有 <span class="math inline">\(n\)</span>
+块矩形棋盘。(每次切割都只能沿着棋盘格子的边进行)</p>
+<p><img src="/images/p1436.png" /></p>
+<p>原棋盘上每一格有一个分值，一块矩形棋盘的总分为其所含各格分值之和。现在需要把棋盘按上述规则分割成
+<span class="math inline">\(n\)</span>
+块矩形棋盘，并使各矩形棋盘总分的平方和最小。</p>
+<p>请编程对给出的棋盘及 <span class="math inline">\(n\)</span>
+，求出平方和的最小值。</p>
+<p>数据范围：<span class="math inline">\(1 \leq n \leq 15\)</span></p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>显然这道题可以用区间 DP 来做。我们定义如下状态：</p>
+<p><span class="math display">\[
+f_{i, l, d, r, u} \quad i, l, d, r, u \in [1, 8] \cap \mathbb{Z} \wedge
+l \leq r \wedge d \leq u
+\]</span></p>
+<p>这个状态表示在这个棋盘中，从左下角 <span class="math inline">\((l,
+d)\)</span> 到右上角 <span class="math inline">\((r, u)\)</span>
+所构成的矩形被拆成 <span class="math inline">\(i\)</span>
+个矩形后平方和最小值。</p>
+<p>我们将 <span class="math inline">\(f_{1, l, d, r, u}\)</span>
+初始化为 <span class="math inline">\((l, d) \rightarrow (r, u)\)</span>
+这个矩形的总分平方和。</p>
+<p>对于一个矩形，我们只能横切或竖切分割成两个矩形，于是可以得到下列动态转移方程：</p>
+<p><span class="math display">\[
+\begin{cases}
+f_{i, l, d, r, u} = \min \limits_{l \leq j \leq r} \{ f_{i - 1, l, d, j,
+u} + f_{1, j + 1, d, r, u}, f_{1, l, d, j, u} + f_{i - 1, j + 1, d, r,
+u} \} \\
+f_{i, l, d, r, u} = \min \limits_{l \leq j \leq r} \{ f_{i - 1, l, d, r,
+j} + f_{1, l, j + 1, r, u}, f_{1, l, d, r, j} + f_{i - 1, l, j + 1, r,
+u} \}
+\end{cases}
+\]</span></p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXB = <span class="number">8</span>, MAXN = <span class="number">15</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> board[MAXB + <span class="number">1</span>][MAXB + <span class="number">1</span>], s[MAXB + <span class="number">1</span>][MAXB + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> f[MAXN + <span class="number">1</span>][MAXB + <span class="number">1</span>][MAXB + <span class="number">1</span>][MAXB + <span class="number">1</span>][MAXB + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getTri</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> d, <span class="keyword">int</span> r, <span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s[r][u] - s[r][d - <span class="number">1</span>] - s[l - <span class="number">1</span>][u] + s[l - <span class="number">1</span>][d - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x * x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(s));</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= MAXB; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= MAXB; j++) &#123;</span><br><span class="line">            s[i][j] = s[i - <span class="number">1</span>][j] + s[i][j - <span class="number">1</span>] - s[i - <span class="number">1</span>][j - <span class="number">1</span>] + board[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= MAXB; l++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> d = <span class="number">1</span>; d &lt;= MAXB; d++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> r = l; r &lt;= MAXB; r++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> u = d; u &lt;= MAXB; u++) &#123;</span><br><span class="line">                    f[<span class="number">1</span>][l][d][r][u] = <span class="built_in">pow</span>(<span class="built_in">getTri</span>(l, d, r, u));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= MAXB; l++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> d = <span class="number">1</span>; d &lt;= MAXB; d++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> r = l; r &lt;= MAXB; r++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> u = d; u &lt;= MAXB; u++) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> j = l; j &lt; r; j++) f[i][l][d][r][u] = std::<span class="built_in">min</span>(f[i][l][d][r][u], std::<span class="built_in">min</span>(f[i - <span class="number">1</span>][l][d][j][u] + f[<span class="number">1</span>][j + <span class="number">1</span>][d][r][u], f[<span class="number">1</span>][l][d][j][u] + f[i - <span class="number">1</span>][j + <span class="number">1</span>][d][r][u]));</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> j = d; j &lt; u; j++) f[i][l][d][r][u] = std::<span class="built_in">min</span>(f[i][l][d][r][u], std::<span class="built_in">min</span>(f[i - <span class="number">1</span>][l][d][r][j] + f[<span class="number">1</span>][l][j + <span class="number">1</span>][r][u], f[<span class="number">1</span>][l][d][r][j] + f[i - <span class="number">1</span>][l][j + <span class="number">1</span>][r][u]));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= MAXB; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= MAXB; j++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;board[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; f[n][<span class="number">1</span>][<span class="number">1</span>][MAXB][MAXB] &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>区间 DP</tag>
+        <tag>洛谷</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「SDOI2006」线性方程组 - 高斯消元</title>
+    <url>/luogu-2455/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a href="https://www.luogu.com.cn/problem/P2455">洛谷链接</a></p>
+<p>已知 <span class="math inline">\(n\)</span> 元线性一次方程组。</p>
+<p><span class="math display">\[
+\begin{cases}a_{1, 1} x_1 + a_{1, 2} x_2 + \cdots + a_{1, n} x_n = b_1
+\\ a_{2, 1} x_1 + a_{2, 2} x_2 + \cdots + a_{2, n} x_n = b_2 \\ \cdots
+\\ a_{n,1} x_1 + a_{n, 2} x_2 + \cdots + a_{n, n} x_n = b_n\end{cases}
+\]</span></p>
+<p>请根据输入的数据，编程输出方程组的解的情况。</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>对于求 <span class="math inline">\(n\)</span>
+元一次方程组，显然需要用高斯消元。但本题需要判断无解或无穷解。对于此类，我们可以在高斯消元后判断第
+<span class="math inline">\(i\)</span> 行第 <span
+class="math inline">\(i\)</span> 项是否为 <span
+class="math inline">\(0\)</span>。若为 <span
+class="math inline">\(0\)</span> 且最后一项不为 <span
+class="math inline">\(0\)</span>，无解。在判断有解的前提下，第 <span
+class="math inline">\(i\)</span> 行第 <span
+class="math inline">\(i\)</span> 项同时为 <span
+class="math inline">\(0\)</span> 则有无穷解。</p>
+<p>最后注意一下需要调换增广矩阵每一行的位置。对于第 <span
+class="math inline">\(i\)</span> 行可将未计算的行中最大的第 <span
+class="math inline">\(i\)</span> 项所在行调换。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> a[MAXN + <span class="number">1</span>][MAXN + <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">swaps</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n + <span class="number">1</span>; k++) &#123;</span><br><span class="line">        std::<span class="built_in">swap</span>(a[i][k], a[j][k]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">sorts</span><span class="params">(<span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxn = pos;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = pos + <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">fabs</span>(a[maxn][pos]) &lt; <span class="built_in">fabs</span>(a[i][pos])) &#123;</span><br><span class="line">            maxn = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pos != maxn) <span class="built_in">swaps</span>(pos, maxn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">gauss</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">sorts</span>(i);</span><br><span class="line">        <span class="keyword">if</span> (a[i][i] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n + <span class="number">1</span>; j++) a[i][j] /= a[i][i];</span><br><span class="line">        a[i][i] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i + <span class="number">1</span>; k &lt;= n + <span class="number">1</span>; k++) &#123;</span><br><span class="line">                a[j][k] -= a[i][k] * a[j][i] / a[i][i];</span><br><span class="line">            &#125;</span><br><span class="line">            a[j][i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt; <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            a[j][n + <span class="number">1</span>] -= a[i][n + <span class="number">1</span>] * a[j][i] / a[i][i];</span><br><span class="line">            a[j][i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> op = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i][i] == <span class="number">0</span> &amp;&amp; a[i][n + <span class="number">1</span>] != <span class="number">0</span>) op = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span> (a[i][i] == <span class="number">0</span> &amp;&amp; a[i][n + <span class="number">1</span>] == <span class="number">0</span> &amp;&amp; op == <span class="number">1</span>) op = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> op;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n + <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;a[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gauss</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> op = <span class="built_in">solve</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (op != <span class="number">1</span>) std::cout &lt;&lt; op &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">&quot;x%d=%.2lf\n&quot;</span>, i, a[i][n + <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>省选</tag>
+        <tag>高斯消元</tag>
+        <tag>洛谷</tag>
+        <tag>SDOI</tag>
+        <tag>2006</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「洛谷 P1182」数列分段 Section II - 二分答案</title>
     <url>/luogu-1182/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>学完 wxk 的康复训练</del></p>
@@ -941,119 +1041,9 @@ class="math inline">\(mid\)</span> 之下。</p>
         <tag>OI</tag>
         <tag>题解</tag>
         <tag>贪心</tag>
+        <tag>洛谷</tag>
         <tag>二分</tag>
         <tag>二分答案</tag>
-        <tag>洛谷</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「洛谷 P2371」墨墨的等式 - 最短路</title>
-    <url>/luogu-2371/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
-<p><a href="https://www.luogu.com.cn/problem/P2371">洛谷链接</a></p>
-<p>墨墨突然对等式很感兴趣，他正在研究 <span
-class="math inline">\(\sum_{i = 1}^n a_i x_i = b\)</span>
-存在非负整数解的条件，他要求你编写一个程序，给定 <span
-class="math inline">\(n, a_{1 \dots n}, l, r\)</span> 求出有多少 <span
-class="math inline">\(b \in [l, r]\)</span>
-可以使等式存在非负整数解。</p>
-<span id="more"></span>
-<h1 id="解题思路">解题思路</h1>
-<p>本题看似可以用完全背包可解，但由于该数据范围，肯定 T 飞。</p>
-<p>于是我们可以采用图论方法来解这道题。</p>
-<p>解决本题需要了解 <strong>同余最短路</strong>
-这个知识。具体同余最短路是什么，我们可以用本题举例。</p>
-<p>首先我们要做的是确定一个数 <span
-class="math inline">\(x\)</span>，表示为加其他数等同于加 <span
-class="math inline">\(x\)</span> 和 <span
-class="math inline">\(x\)</span> 的余数。在这里可以定义 <span
-class="math inline">\(x = \min \limits_{1 \leq j \leq n}
-a_j\)</span>，且对于 <span class="math inline">\(\forall i \in N
-\bigwedge i &lt; x\)</span>，计算出满足该题非负整数解条件的 <span
-class="math inline">\(b\)</span> 的最小值为 <span
-class="math inline">\(\text{dis}_i\)</span></p>
-<p>具体怎么计算 <span
-class="math inline">\(\text{dis}_i\)</span>，我们可以建立一张图。对于
-<span class="math inline">\(\forall i \in N \bigwedge i &lt;
-n\)</span>，建立连向 <span class="math inline">\((i + a_j) \mod
-x\)</span> 的权值为 <span class="math inline">\(a_j\)</span>
-的边。这条边表明我们可通过将当前 <span class="math inline">\(\mod
-x\)</span> 的数加上 <span class="math inline">\(a_j\)</span> 转化成
-<span class="math inline">\(\mod x = (i + a_j) \mod x\)</span>
-的数。</p>
-<p>接下来我们从 <span class="math inline">\(0\)</span>
-出发求最短路。求出的最短路 <span
-class="math inline">\(\text{dis}_i\)</span> 即为满足该数 <span
-class="math inline">\(\mod n = i\)</span> 且满足该题非负整数解条件的
-<span class="math inline">\(b\)</span> 的最小值。</p>
-<p>最后对于 <span class="math inline">\(b \mod x =
-i\)</span>，若我们总共有 <span class="math inline">\(\lfloor \frac{h -
-\text{dis}_i}{x} \rfloor + 1\)</span> 种满足小于等于 <span
-class="math inline">\(h\)</span>
-且符合条件的情况。最后将所有余数的情况相加即为答案。</p>
-<p>对于本题，我们可以先分别算出小于等于 <span
-class="math inline">\(r\)</span> 的情况总数和小于等于 <span
-class="math inline">\(l - 1\)</span>
-的情况总数，由于两者重复，我们仅需将两情况数相减即为 <span
-class="math inline">\(l \leq b \leq r\)</span> 的情况总数。</p>
-<h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">500000</span>;</span><br><span class="line"></span><br><span class="line">std::vector&lt; std::pair&lt;<span class="keyword">int</span>, <span class="keyword">long</span> <span class="keyword">long</span>&gt; &gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dis[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> ver)</span> </span>&#123;</span><br><span class="line">    e[from].<span class="built_in">push_back</span>( std::<span class="built_in">make_pair</span>(to, ver) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> std::queue&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> vis[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(dis, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(dis));</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="literal">false</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis));</span><br><span class="line">    dis[s] = <span class="number">0</span>, vis[s] = <span class="literal">true</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>(), vis[u] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = ed.first, w = ed.second;</span><br><span class="line">            <span class="keyword">if</span> (dis[v] &gt; dis[u] + w) &#123;</span><br><span class="line">                dis[v] = dis[u] + w;</span><br><span class="line">                <span class="keyword">if</span> (!vis[v]) q.<span class="built_in">push</span>(v), vis[v] = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> l, r;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[<span class="number">13</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; l &gt;&gt; r;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> minA = MAXN + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">        minA = std::<span class="built_in">min</span>(minA, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; minA; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] != minA) &#123;</span><br><span class="line">                <span class="built_in">add</span>(i, (i + a[j]) % minA, a[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">spfa</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; minA; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (r &gt;= dis[i]) ans += (r - dis[i]) / minA + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (l - <span class="number">1</span> &gt;= dis[i]) ans -= (l - <span class="number">1</span> - dis[i]) / minA + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>图论</tag>
-        <tag>洛谷</tag>
-        <tag>最短路</tag>
-        <tag>国家集训队</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「SDOI2006」线性方程组 - 高斯消元</title>
-    <url>/luogu-2455/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
-<p><a href="https://www.luogu.com.cn/problem/P2455">洛谷链接</a></p>
-<p>已知 <span class="math inline">\(n\)</span> 元线性一次方程组。</p>
-<p><span class="math display">\[
-\begin{cases}a_{1, 1} x_1 + a_{1, 2} x_2 + \cdots + a_{1, n} x_n = b_1
-\\ a_{2, 1} x_1 + a_{2, 2} x_2 + \cdots + a_{2, n} x_n = b_2 \\ \cdots
-\\ a_{n,1} x_1 + a_{n, 2} x_2 + \cdots + a_{n, n} x_n = b_n\end{cases}
-\]</span></p>
-<p>请根据输入的数据，编程输出方程组的解的情况。</p>
-<span id="more"></span>
-<h1 id="解题思路">解题思路</h1>
-<p>对于求 <span class="math inline">\(n\)</span>
-元一次方程组，显然需要用高斯消元。但本题需要判断无解或无穷解。对于此类，我们可以在高斯消元后判断第
-<span class="math inline">\(i\)</span> 行第 <span
-class="math inline">\(i\)</span> 项是否为 <span
-class="math inline">\(0\)</span>。若为 <span
-class="math inline">\(0\)</span> 且最后一项不为 <span
-class="math inline">\(0\)</span>，无解。在判断有解的前提下，第 <span
-class="math inline">\(i\)</span> 行第 <span
-class="math inline">\(i\)</span> 项同时为 <span
-class="math inline">\(0\)</span> 则有无穷解。</p>
-<p>最后注意一下需要调换增广矩阵每一行的位置。对于第 <span
-class="math inline">\(i\)</span> 行可将未计算的行中最大的第 <span
-class="math inline">\(i\)</span> 项所在行调换。</p>
-<h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> a[MAXN + <span class="number">1</span>][MAXN + <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">swaps</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n + <span class="number">1</span>; k++) &#123;</span><br><span class="line">        std::<span class="built_in">swap</span>(a[i][k], a[j][k]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">sorts</span><span class="params">(<span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxn = pos;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = pos + <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">fabs</span>(a[maxn][pos]) &lt; <span class="built_in">fabs</span>(a[i][pos])) &#123;</span><br><span class="line">            maxn = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pos != maxn) <span class="built_in">swaps</span>(pos, maxn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">gauss</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">sorts</span>(i);</span><br><span class="line">        <span class="keyword">if</span> (a[i][i] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n + <span class="number">1</span>; j++) a[i][j] /= a[i][i];</span><br><span class="line">        a[i][i] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i + <span class="number">1</span>; k &lt;= n + <span class="number">1</span>; k++) &#123;</span><br><span class="line">                a[j][k] -= a[i][k] * a[j][i] / a[i][i];</span><br><span class="line">            &#125;</span><br><span class="line">            a[j][i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt; <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            a[j][n + <span class="number">1</span>] -= a[i][n + <span class="number">1</span>] * a[j][i] / a[i][i];</span><br><span class="line">            a[j][i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> op = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i][i] == <span class="number">0</span> &amp;&amp; a[i][n + <span class="number">1</span>] != <span class="number">0</span>) op = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span> (a[i][i] == <span class="number">0</span> &amp;&amp; a[i][n + <span class="number">1</span>] == <span class="number">0</span> &amp;&amp; op == <span class="number">1</span>) op = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> op;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n + <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;a[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gauss</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> op = <span class="built_in">solve</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (op != <span class="number">1</span>) std::cout &lt;&lt; op &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">&quot;x%d=%.2lf\n&quot;</span>, i, a[i][n + <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>省选</tag>
-        <tag>高斯消元</tag>
-        <tag>洛谷</tag>
-        <tag>SDOI</tag>
-        <tag>2006</tag>
       </tags>
   </entry>
   <entry>
@@ -1114,66 +1104,6 @@ class="math inline">\(\text{bit}\)</span> 数组即可。</p>
         <tag>洛谷</tag>
         <tag>DP</tag>
         <tag>线性 DP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「NOI 2001」炮兵阵地 - 状压 DP</title>
-    <url>/noi2001-cannon/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
-<p><a href="https://www.luogu.com.cn/problem/P2704">洛谷链接</a></p>
-<p><a href="https://loj.ac/p/10173">LOJ 链接</a></p>
-<p>司令部的将军们打算在 <span class="math inline">\(N \times M\)</span>
-的网格地图上部署他们的炮兵部队。一个 <span class="math inline">\(N
-\times M\)</span> 的地图由 <span class="math inline">\(N\)</span> 行
-<span class="math inline">\(M\)</span>
-列组成，地图的每一格可能是山地（用 H 表示），也可能是平原（用 P
-表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图中黑色区域所示：</p>
-<p><img src="/images/cannon.png" /></p>
-<p>如果在地图中的灰色所标识的平原上部署一支炮兵部队，则图中的黑色的网格表示它能够攻击到的区域：沿横向左右各两格，沿纵向上下各两格。图上其它白色网格均攻击不到。从图上可见炮兵的攻击范围不受地形的影响。</p>
-<p>现在，将军们规划如何部署炮兵部队，在防止误伤的前提下（保证任何两支炮兵部队之间不能互相攻击，即任何一支炮兵部队都不在其他支炮兵部队的攻击范围内），在整个地图区域内最多能够摆放多少我军的炮兵部队。</p>
-<p>数据范围：<span class="math inline">\(N \leq 100\)</span>，<span
-class="math inline">\(M \leq 10\)</span></p>
-<span id="more"></span>
-<h1 id="解题思路">解题思路</h1>
-<p>显然这道题是状压 DP。</p>
-<p>对于这道题，由于放置本行的炮兵和上两行都有关，于是我们可以定义状态为：</p>
-<p><span class="math display">\[
-f_{i, j, k} \quad i \in [1, n] \cap \mathbb{Z}, j \in S_j, k \in S_k
-\]</span></p>
-<p>其中 <span class="math inline">\(i\)</span> 表示遍历到第 <span
-class="math inline">\(i\)</span> 行，<span
-class="math inline">\(j\)</span> 表示该行状态，<span
-class="math inline">\(k\)</span> 表示上一行状态。其中 <span
-class="math inline">\(S_j\)</span>，<span
-class="math inline">\(S_k\)</span> 分别表示 <span
-class="math inline">\(j\)</span> 和 <span
-class="math inline">\(k\)</span> 的合法情况的集合。</p>
-<p>于是我们可以很容易地推出下列状态转移方程：</p>
-<p><span class="math display">\[
-f_{i, j, k} = \max_{l \in S_l} f_{i - 1, k, l} + \text{cnt}_j \quad i
-\in (1, n] \cap \mathbb{Z}, j \in S_j, k \in S_k
-\]</span></p>
-<p>其中 <span class="math inline">\(l\)</span> 为上两行的状态，<span
-class="math inline">\(S_l\)</span> 同理。<span
-class="math inline">\(\text{cnt}_j\)</span> 表示的是在第 <span
-class="math inline">\(j\)</span> 行放置的炮兵数。</p>
-<p>对于该题，由于空间有限，我们可以先将合法的状态存起来，离散化一下，遍历的时候就直接用离散化过的数据遍历即可。时间复杂度为
-<span class="math inline">\(O(n(2^m)^3) =
-O(n8^m)\)</span>，空间复杂度远小于时间复杂度。</p>
-<h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>, MAXM = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">char</span> board[MAXN + <span class="number">1</span>][MAXM + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> f[MAXN + <span class="number">1</span>][<span class="number">30</span> * MAXM + <span class="number">1</span>][<span class="number">30</span> * MAXM + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> s[<span class="number">100</span> * MAXM + <span class="number">1</span>], len = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    s[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; m); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; (i &lt;&lt; <span class="number">1</span>)) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; (i &lt;&lt; <span class="number">2</span>)) <span class="keyword">continue</span>;</span><br><span class="line">        s[++len] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((s[x] &gt;&gt; i) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((board[pos][i + <span class="number">1</span>] == <span class="string">&#x27;H&#x27;</span>) &amp;&amp; ((s[now] &gt;&gt; i) &amp; <span class="number">1</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">getSet</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(<span class="number">1</span>, i)) &#123;</span><br><span class="line">            f[<span class="number">1</span>][i][<span class="number">0</span>] = <span class="built_in">count</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">check</span>(i, j)) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= len; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="built_in">check</span>(i - <span class="number">1</span>, k) &amp;&amp; (s[j] &amp; s[k]) == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt;= len; l++) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (<span class="built_in">check</span>(i - <span class="number">2</span>, l) &amp;&amp; (s[j] &amp; s[l]) == <span class="number">0</span>) &#123;</span><br><span class="line">                                f[i][j][k] = std::<span class="built_in">max</span>(f[i][j][k], f[i - <span class="number">1</span>][k][l] + <span class="built_in">count</span>(j));</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getAns</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= len; j++) &#123;</span><br><span class="line">            ans = std::<span class="built_in">max</span>(ans, f[n][i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    std::cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    std::cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            std::cin &gt;&gt; board[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getAns</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>2001</tag>
-        <tag>DP</tag>
-        <tag>状压 DP</tag>
-        <tag>NOI</tag>
       </tags>
   </entry>
   <entry>
@@ -1243,6 +1173,132 @@ class="math inline">\(m = \sqrt{\frac{x^3}{\gcd(z, x^3)}}\)</span> 和
         <tag>数论</tag>
         <tag>NOI Online</tag>
         <tag>2022</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「洛谷 P2371」墨墨的等式 - 最短路</title>
+    <url>/luogu-2371/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a href="https://www.luogu.com.cn/problem/P2371">洛谷链接</a></p>
+<p>墨墨突然对等式很感兴趣，他正在研究 <span
+class="math inline">\(\sum_{i = 1}^n a_i x_i = b\)</span>
+存在非负整数解的条件，他要求你编写一个程序，给定 <span
+class="math inline">\(n, a_{1 \dots n}, l, r\)</span> 求出有多少 <span
+class="math inline">\(b \in [l, r]\)</span>
+可以使等式存在非负整数解。</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>本题看似可以用完全背包可解，但由于该数据范围，肯定 T 飞。</p>
+<p>于是我们可以采用图论方法来解这道题。</p>
+<p>解决本题需要了解 <strong>同余最短路</strong>
+这个知识。具体同余最短路是什么，我们可以用本题举例。</p>
+<p>首先我们要做的是确定一个数 <span
+class="math inline">\(x\)</span>，表示为加其他数等同于加 <span
+class="math inline">\(x\)</span> 和 <span
+class="math inline">\(x\)</span> 的余数。在这里可以定义 <span
+class="math inline">\(x = \min \limits_{1 \leq j \leq n}
+a_j\)</span>，且对于 <span class="math inline">\(\forall i \in N
+\bigwedge i &lt; x\)</span>，计算出满足该题非负整数解条件的 <span
+class="math inline">\(b\)</span> 的最小值为 <span
+class="math inline">\(\text{dis}_i\)</span></p>
+<p>具体怎么计算 <span
+class="math inline">\(\text{dis}_i\)</span>，我们可以建立一张图。对于
+<span class="math inline">\(\forall i \in N \bigwedge i &lt;
+n\)</span>，建立连向 <span class="math inline">\((i + a_j) \mod
+x\)</span> 的权值为 <span class="math inline">\(a_j\)</span>
+的边。这条边表明我们可通过将当前 <span class="math inline">\(\mod
+x\)</span> 的数加上 <span class="math inline">\(a_j\)</span> 转化成
+<span class="math inline">\(\mod x = (i + a_j) \mod x\)</span>
+的数。</p>
+<p>接下来我们从 <span class="math inline">\(0\)</span>
+出发求最短路。求出的最短路 <span
+class="math inline">\(\text{dis}_i\)</span> 即为满足该数 <span
+class="math inline">\(\mod n = i\)</span> 且满足该题非负整数解条件的
+<span class="math inline">\(b\)</span> 的最小值。</p>
+<p>最后对于 <span class="math inline">\(b \mod x =
+i\)</span>，若我们总共有 <span class="math inline">\(\lfloor \frac{h -
+\text{dis}_i}{x} \rfloor + 1\)</span> 种满足小于等于 <span
+class="math inline">\(h\)</span>
+且符合条件的情况。最后将所有余数的情况相加即为答案。</p>
+<p>对于本题，我们可以先分别算出小于等于 <span
+class="math inline">\(r\)</span> 的情况总数和小于等于 <span
+class="math inline">\(l - 1\)</span>
+的情况总数，由于两者重复，我们仅需将两情况数相减即为 <span
+class="math inline">\(l \leq b \leq r\)</span> 的情况总数。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">500000</span>;</span><br><span class="line"></span><br><span class="line">std::vector&lt; std::pair&lt;<span class="keyword">int</span>, <span class="keyword">long</span> <span class="keyword">long</span>&gt; &gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dis[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> ver)</span> </span>&#123;</span><br><span class="line">    e[from].<span class="built_in">push_back</span>( std::<span class="built_in">make_pair</span>(to, ver) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> std::queue&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> vis[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(dis, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(dis));</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="literal">false</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis));</span><br><span class="line">    dis[s] = <span class="number">0</span>, vis[s] = <span class="literal">true</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>(), vis[u] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = ed.first, w = ed.second;</span><br><span class="line">            <span class="keyword">if</span> (dis[v] &gt; dis[u] + w) &#123;</span><br><span class="line">                dis[v] = dis[u] + w;</span><br><span class="line">                <span class="keyword">if</span> (!vis[v]) q.<span class="built_in">push</span>(v), vis[v] = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> l, r;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a[<span class="number">13</span>];</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; l &gt;&gt; r;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> minA = MAXN + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; a[i];</span><br><span class="line">        minA = std::<span class="built_in">min</span>(minA, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; minA; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] != minA) &#123;</span><br><span class="line">                <span class="built_in">add</span>(i, (i + a[j]) % minA, a[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">spfa</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; minA; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (r &gt;= dis[i]) ans += (r - dis[i]) / minA + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (l - <span class="number">1</span> &gt;= dis[i]) ans -= (l - <span class="number">1</span> - dis[i]) / minA + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>图论</tag>
+        <tag>洛谷</tag>
+        <tag>最短路</tag>
+        <tag>国家集训队</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「NOI 2001」炮兵阵地 - 状压 DP</title>
+    <url>/noi2001-cannon/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a href="https://www.luogu.com.cn/problem/P2704">洛谷链接</a></p>
+<p><a href="https://loj.ac/p/10173">LOJ 链接</a></p>
+<p>司令部的将军们打算在 <span class="math inline">\(N \times M\)</span>
+的网格地图上部署他们的炮兵部队。一个 <span class="math inline">\(N
+\times M\)</span> 的地图由 <span class="math inline">\(N\)</span> 行
+<span class="math inline">\(M\)</span>
+列组成，地图的每一格可能是山地（用 H 表示），也可能是平原（用 P
+表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图中黑色区域所示：</p>
+<p><img src="/images/cannon.png" /></p>
+<p>如果在地图中的灰色所标识的平原上部署一支炮兵部队，则图中的黑色的网格表示它能够攻击到的区域：沿横向左右各两格，沿纵向上下各两格。图上其它白色网格均攻击不到。从图上可见炮兵的攻击范围不受地形的影响。</p>
+<p>现在，将军们规划如何部署炮兵部队，在防止误伤的前提下（保证任何两支炮兵部队之间不能互相攻击，即任何一支炮兵部队都不在其他支炮兵部队的攻击范围内），在整个地图区域内最多能够摆放多少我军的炮兵部队。</p>
+<p>数据范围：<span class="math inline">\(N \leq 100\)</span>，<span
+class="math inline">\(M \leq 10\)</span></p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>显然这道题是状压 DP。</p>
+<p>对于这道题，由于放置本行的炮兵和上两行都有关，于是我们可以定义状态为：</p>
+<p><span class="math display">\[
+f_{i, j, k} \quad i \in [1, n] \cap \mathbb{Z}, j \in S_j, k \in S_k
+\]</span></p>
+<p>其中 <span class="math inline">\(i\)</span> 表示遍历到第 <span
+class="math inline">\(i\)</span> 行，<span
+class="math inline">\(j\)</span> 表示该行状态，<span
+class="math inline">\(k\)</span> 表示上一行状态。其中 <span
+class="math inline">\(S_j\)</span>，<span
+class="math inline">\(S_k\)</span> 分别表示 <span
+class="math inline">\(j\)</span> 和 <span
+class="math inline">\(k\)</span> 的合法情况的集合。</p>
+<p>于是我们可以很容易地推出下列状态转移方程：</p>
+<p><span class="math display">\[
+f_{i, j, k} = \max \limits_{l \in S_l} \{ f_{i - 1, k, l} + \text{cnt}_j
+\} \quad i \in (1, n] \cap \mathbb{Z}, j \in S_j, k \in S_k
+\]</span></p>
+<p>其中 <span class="math inline">\(l\)</span> 为上两行的状态，<span
+class="math inline">\(S_l\)</span> 同理。<span
+class="math inline">\(\text{cnt}_j\)</span> 表示的是在第 <span
+class="math inline">\(j\)</span> 行放置的炮兵数。</p>
+<p>对于该题，由于空间有限，我们可以先将合法的状态存起来，离散化一下，遍历的时候就直接用离散化过的数据遍历即可。时间复杂度为
+<span class="math inline">\(O(n(2^m)^3) =
+O(n8^m)\)</span>，空间复杂度远小于时间复杂度。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>, MAXM = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">char</span> board[MAXN + <span class="number">1</span>][MAXM + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> f[MAXN + <span class="number">1</span>][<span class="number">30</span> * MAXM + <span class="number">1</span>][<span class="number">30</span> * MAXM + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> s[<span class="number">100</span> * MAXM + <span class="number">1</span>], len = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    s[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; m); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; (i &lt;&lt; <span class="number">1</span>)) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; (i &lt;&lt; <span class="number">2</span>)) <span class="keyword">continue</span>;</span><br><span class="line">        s[++len] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((s[x] &gt;&gt; i) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((board[pos][i + <span class="number">1</span>] == <span class="string">&#x27;H&#x27;</span>) &amp;&amp; ((s[now] &gt;&gt; i) &amp; <span class="number">1</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">getSet</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(<span class="number">1</span>, i)) &#123;</span><br><span class="line">            f[<span class="number">1</span>][i][<span class="number">0</span>] = <span class="built_in">count</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">check</span>(i, j)) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= len; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="built_in">check</span>(i - <span class="number">1</span>, k) &amp;&amp; (s[j] &amp; s[k]) == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt;= len; l++) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (<span class="built_in">check</span>(i - <span class="number">2</span>, l) &amp;&amp; (s[j] &amp; s[l]) == <span class="number">0</span>) &#123;</span><br><span class="line">                                f[i][j][k] = std::<span class="built_in">max</span>(f[i][j][k], f[i - <span class="number">1</span>][k][l] + <span class="built_in">count</span>(j));</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getAns</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= len; j++) &#123;</span><br><span class="line">            ans = std::<span class="built_in">max</span>(ans, f[n][i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    std::cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    std::cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            std::cin &gt;&gt; board[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getAns</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>2001</tag>
+        <tag>DP</tag>
+        <tag>状压 DP</tag>
+        <tag>NOI</tag>
       </tags>
   </entry>
   <entry>
@@ -1327,6 +1383,78 @@ b)\)</span> 即可。</p>
         <tag>数论</tag>
         <tag>NOIP</tag>
         <tag>2012</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NOIP2021 行记</title>
+    <url>/noip2021/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>又滚来记流水账了。。。</del></p>
+<h1 id="day--">Day -???</h1>
+<p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
+<p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
+<h1 id="day--2">Day -2</h1>
+<p>成功申请停课。。。</p>
+<p>顺带在昨天过了 <a
+href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了
+2 天的 bug，我太蒻了 QWQ。</del></p>
+<p>看了一下图论基础，准备刷一下 DP 题。</p>
+<p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
+<span id="more"></span>
+<h1 id="day--1">Day -1</h1>
+<p>刷了一下题，摸了一会儿鱼。</p>
+<p>看了一下正睿 OI 的题 <del>真难</del>。</p>
+<p>打算刷一下 <a href="https://loj.ac/p?tagIds=186">LibreOJ NOIP Round
+#1 的题</a>。</p>
+<p>顺带复习了一下 KMP 算法和字符串哈希（lyd 的书真好用）。</p>
+<h1 id="day-0">Day 0</h1>
+<p>上午刷题的时候发现 "INORI FOR U"
+买的键盘到了，粉色红轴，就观摩了一会儿。</p>
+<p>中午爸爸把身份证送到学校了，顺带还送来了手机，终于可以在电脑上登炉石了！</p>
+<p>然而发现现在炉石也要防沉迷，只能晚上玩。。。</p>
+<p>晚上简简单单的刷了一下题，玩了一下炉石，就去睡觉了。</p>
+<h1 id="day-1">Day 1</h1>
+<p>早上起晚了，跑着去吃早饭，赶紧吃完早饭就上车。</p>
+<p>到了天府七中之后，看了一下，环境比电子科大的好，电脑配置四代 i5 加上
+8G 内存，勉强能用。</p>
+<p>考试前开了 Linux 开始打板子，结果老师说考试前不能动电脑，然后把 Linux
+关了。。。</p>
+<p>考试开始后读了一下题，一眼看出来了 T4 是大模拟。</p>
+<p>首先看了一下 T1，看着数据范围应该用 <span
+class="math inline">\(O(n)\)</span>
+的算法，于是想到了先在输入数据中取到询问最大值，类似于埃氏筛法的算法，最后挨个查询的做法。感觉极限数据的答案会超过
+<span class="math inline">\(1 \times
+10^7\)</span>，于是数组和筛法的次数都开了两倍，写 +
+调用力一个小时就把大样例过了，于是就开始做下一道题。</p>
+<p>T2 花了半个小时才读懂，开始想怎么把数拆成二进制后用 k
+枚举，然后发现这种方法不可行。最终还是想不出正解，就花了一点时间写了一个
+<span class="math inline">\(O(n^m)\)</span>
+的复杂度的暴力，大样例花了三秒钟才跑出来，有点慌。</p>
+<p>T3 看了一下，很明显是 DP，并且不是背包或线性
+DP。知道这道题我写不出来正解后果断打暴力，由于不会将 <span
+class="math inline">\(n^2\)</span> 乘在方差里，最终的结果只能用 double
+存（精度爆炸）。到了最后也只能过第一个样例。</p>
+<p>T4 很明显大模拟，花了 80min 写了一个邻接表 + 爆搜（没有处理 opt = 3
+的情况），跑路。</p>
+<p>这次至少把题做完了。。。</p>
+<p>估分：100 + 20 + 12 + 0 = 132</p>
+<p>回家看了一下洛谷群，发现第一题可能会被卡。</p>
+<p>分数 -= 20。。。</p>
+<h1 id="day-2">Day 2</h1>
+<p>补文化课ing</p>
+<p>顺带看了一下有道小图灵，省一无望了，<del>可能省二都没了</del>（意料之中）。</p>
+<h1 id="day">Day ???</h1>
+<p>分数 70 + 0 + 0 + 0 = 70pts，省三。。。</p>
+<p>打算在期末调考之前 AFO 了。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>行记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>行记</tag>
+        <tag>2021</tag>
+        <tag>NOIP</tag>
       </tags>
   </entry>
   <entry>
@@ -1477,75 +1605,52 @@ F(n) = F(1) \times
       </tags>
   </entry>
   <entry>
-    <title>NOIP2021 行记</title>
-    <url>/noip2021/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><del>又滚来记流水账了。。。</del></p>
-<h1 id="day--">Day -???</h1>
-<p>CSP-S2021 第二轮成绩出来了，72分，稳过。</p>
-<p>我们学校的 NOIP 名单也出来了，全校参赛不到 10 个人。。。</p>
-<h1 id="day--2">Day -2</h1>
-<p>成功申请停课。。。</p>
-<p>顺带在昨天过了 <a
-href="https://www.luogu.com.cn/problem/P3371">单源最短路径（弱化版）</a>。<del>调了
-2 天的 bug，我太蒻了 QWQ。</del></p>
-<p>看了一下图论基础，准备刷一下 DP 题。</p>
-<p>考点也出来了，在天府七中（离家好远啊，开车将近一个小时），不过还好终于在成都考了。</p>
+    <title>「SCOI2005」互不侵犯 - 状压 DP</title>
+    <url>/scoi2005-king/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a href="https://www.luogu.com.cn/problem/P1896">洛谷链接</a></p>
+<p><a href="https://loj.ac/p/2153">LOJ 链接</a></p>
+<p>在 <span class="math inline">\(N \times N\)</span> 的棋盘里面放 <span
+class="math inline">\(K\)</span>
+个国王，使他们互不攻击，共有多少种摆放方案。国王能攻击到它上下左右，以及左上左下右上右下八个方向上附近的各一个格子，共
+<span class="math inline">\(8\)</span> 个格子。</p>
 <span id="more"></span>
-<h1 id="day--1">Day -1</h1>
-<p>刷了一下题，摸了一会儿鱼。</p>
-<p>看了一下正睿 OI 的题 <del>真难</del>。</p>
-<p>打算刷一下 <a href="https://loj.ac/p?tagIds=186">LibreOJ NOIP Round
-#1 的题</a>。</p>
-<p>顺带复习了一下 KMP 算法和字符串哈希（lyd 的书真好用）。</p>
-<h1 id="day-0">Day 0</h1>
-<p>上午刷题的时候发现 "INORI FOR U"
-买的键盘到了，粉色红轴，就观摩了一会儿。</p>
-<p>中午爸爸把身份证送到学校了，顺带还送来了手机，终于可以在电脑上登炉石了！</p>
-<p>然而发现现在炉石也要防沉迷，只能晚上玩。。。</p>
-<p>晚上简简单单的刷了一下题，玩了一下炉石，就去睡觉了。</p>
-<h1 id="day-1">Day 1</h1>
-<p>早上起晚了，跑着去吃早饭，赶紧吃完早饭就上车。</p>
-<p>到了天府七中之后，看了一下，环境比电子科大的好，电脑配置四代 i5 加上
-8G 内存，勉强能用。</p>
-<p>考试前开了 Linux 开始打板子，结果老师说考试前不能动电脑，然后把 Linux
-关了。。。</p>
-<p>考试开始后读了一下题，一眼看出来了 T4 是大模拟。</p>
-<p>首先看了一下 T1，看着数据范围应该用 <span
-class="math inline">\(O(n)\)</span>
-的算法，于是想到了先在输入数据中取到询问最大值，类似于埃氏筛法的算法，最后挨个查询的做法。感觉极限数据的答案会超过
-<span class="math inline">\(1 \times
-10^7\)</span>，于是数组和筛法的次数都开了两倍，写 +
-调用力一个小时就把大样例过了，于是就开始做下一道题。</p>
-<p>T2 花了半个小时才读懂，开始想怎么把数拆成二进制后用 k
-枚举，然后发现这种方法不可行。最终还是想不出正解，就花了一点时间写了一个
-<span class="math inline">\(O(n^m)\)</span>
-的复杂度的暴力，大样例花了三秒钟才跑出来，有点慌。</p>
-<p>T3 看了一下，很明显是 DP，并且不是背包或线性
-DP。知道这道题我写不出来正解后果断打暴力，由于不会将 <span
-class="math inline">\(n^2\)</span> 乘在方差里，最终的结果只能用 double
-存（精度爆炸）。到了最后也只能过第一个样例。</p>
-<p>T4 很明显大模拟，花了 80min 写了一个邻接表 + 爆搜（没有处理 opt = 3
-的情况），跑路。</p>
-<p>这次至少把题做完了。。。</p>
-<p>估分：100 + 20 + 12 + 0 = 132</p>
-<p>回家看了一下洛谷群，发现第一题可能会被卡。</p>
-<p>分数 -= 20。。。</p>
-<h1 id="day-2">Day 2</h1>
-<p>补文化课ing</p>
-<p>顺带看了一下有道小图灵，省一无望了，<del>可能省二都没了</del>（意料之中）。</p>
-<h1 id="day">Day ???</h1>
-<p>分数 70 + 0 + 0 + 0 = 70pts，省三。。。</p>
-<p>打算在期末调考之前 AFO 了。</p>
+<h1 id="解题思路">解题思路</h1>
+<p>很明显这是一道状压 DP 的题目。我们可以定义数组 <span
+class="math inline">\(f_{i, j, l}\)</span>，状态表示中 <span
+class="math inline">\(i\)</span> 表示行数，<span
+class="math inline">\(j\)</span> 表示已经放下的国王数，<span
+class="math inline">\(l\)</span> 表示当前这行的国王放置状态。其中 <span
+class="math inline">\(l\)</span> 使用二进制表示子集存储，<span
+class="math inline">\(1\)</span> 表示放置国王。整个 <span
+class="math inline">\(f\)</span> 表示当前状态的可能数。</p>
+<p>显然我们可以推出下列状态转移方程（<span
+class="math inline">\(\text{cnt}_x\)</span> 表示 <span
+class="math inline">\(x\)</span> 状态下当前行的国王数，<span
+class="math inline">\(\text{reach}\)</span> 代表添加一行可达到 <span
+class="math inline">\(l\)</span> 的情况的集合）：</p>
+<p><span class="math display">\[
+f_{i, j + \text{cnt}_m, l} = \sum_{\text{reach}} f_{i - 1, j, m} \quad j
+\in [\text{cnt}_l, k - \text{cnt}_j]
+\]</span></p>
+<p>对于 <span class="math inline">\(f\)</span>
+的初始化，我们仅需要做的是将 <span class="math inline">\(i = 1\)</span>
+的所有合法的序列赋值为 <span class="math inline">\(1\)</span> 即可。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[MAXN + <span class="number">1</span>][MAXN * MAXN + <span class="number">1</span>][<span class="number">1</span> &lt;&lt; MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">counts</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; (<span class="number">1</span> &lt;&lt; i) &lt;= x; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((x &gt;&gt; i) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        <span class="keyword">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (((i &gt;&gt; each) &amp; <span class="number">1</span>) &amp;&amp; (((i &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((i &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                con = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="built_in">counts</span>(i);</span><br><span class="line">        <span class="keyword">if</span> (con &amp;&amp; cnt &lt;= k) f[<span class="number">1</span>][cnt][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; n); j++) &#123;</span><br><span class="line">            <span class="keyword">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (((j &gt;&gt; each) &amp; <span class="number">1</span>) &amp; (((j &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((j &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                    con = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> cntJ = <span class="built_in">counts</span>(j);</span><br><span class="line">            <span class="keyword">if</span> (con &amp;&amp; cntJ &lt;= k) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; (<span class="number">1</span> &lt;&lt; n); l++) &#123;</span><br><span class="line">                    con = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">if</span> ((j &amp; <span class="number">1</span>) &amp;&amp; ((l &amp; <span class="number">1</span>) || ((l &gt;&gt; <span class="number">1</span>) &amp; <span class="number">1</span>))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">if</span> (((j &gt;&gt; (n - <span class="number">1</span>)) &amp; <span class="number">1</span>) &amp;&amp; (((l &gt;&gt; (n - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((l &gt;&gt; (n - <span class="number">2</span>)) &amp; <span class="number">1</span>))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (((j &gt;&gt; each) &amp; <span class="number">1</span>) &amp;&amp; (((l &gt;&gt; each) &amp; <span class="number">1</span>) || ((l &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((l &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                            con = <span class="literal">false</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">int</span> cntL = <span class="built_in">counts</span>(l);</span><br><span class="line">                    <span class="keyword">if</span> (con &amp;&amp; cntJ + cntL &lt;= k) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> m = cntL; m &lt;= k - cntJ; m++) &#123;</span><br><span class="line">                            f[i][m + cntJ][j] += f[i - <span class="number">1</span>][m][l];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">getAns</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        ans += f[n][k][i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getAns</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>日常</category>
-        <category>行记</category>
+        <category>OI</category>
+        <category>题解</category>
       </categories>
       <tags>
-        <tag>日常</tag>
-        <tag>行记</tag>
-        <tag>2021</tag>
-        <tag>NOIP</tag>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>省选</tag>
+        <tag>DP</tag>
+        <tag>状压 DP</tag>
+        <tag>SCOI</tag>
+        <tag>2005</tag>
       </tags>
   </entry>
   <entry>
@@ -1689,55 +1794,6 @@ class="math inline">\(n\)</span>
       </tags>
   </entry>
   <entry>
-    <title>「SCOI2005」互不侵犯 - 状压 DP</title>
-    <url>/scoi2005-king/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
-<p><a href="https://www.luogu.com.cn/problem/P1896">洛谷链接</a></p>
-<p><a href="https://loj.ac/p/2153">LOJ 链接</a></p>
-<p>在 <span class="math inline">\(N \times N\)</span> 的棋盘里面放 <span
-class="math inline">\(K\)</span>
-个国王，使他们互不攻击，共有多少种摆放方案。国王能攻击到它上下左右，以及左上左下右上右下八个方向上附近的各一个格子，共
-<span class="math inline">\(8\)</span> 个格子。</p>
-<span id="more"></span>
-<h1 id="解题思路">解题思路</h1>
-<p>很明显这是一道状压 DP 的题目。我们可以定义数组 <span
-class="math inline">\(f_{i, j, l}\)</span>，状态表示中 <span
-class="math inline">\(i\)</span> 表示行数，<span
-class="math inline">\(j\)</span> 表示已经放下的国王数，<span
-class="math inline">\(l\)</span> 表示当前这行的国王放置状态。其中 <span
-class="math inline">\(l\)</span> 使用二进制表示子集存储，<span
-class="math inline">\(1\)</span> 表示放置国王。整个 <span
-class="math inline">\(f\)</span> 表示当前状态的可能数。</p>
-<p>显然我们可以推出下列状态转移方程（<span
-class="math inline">\(\text{cnt}_x\)</span> 表示 <span
-class="math inline">\(x\)</span> 状态下当前行的国王数，<span
-class="math inline">\(\text{reach}\)</span> 代表添加一行可达到 <span
-class="math inline">\(l\)</span> 的情况的集合）：</p>
-<p><span class="math display">\[
-f_{i, j + \text{cnt}_m, l} = \sum_{\text{reach}} f_{i - 1, j, m} \quad j
-\in [\text{cnt}_l, k - \text{cnt}_j]
-\]</span></p>
-<p>对于 <span class="math inline">\(f\)</span>
-的初始化，我们仅需要做的是将 <span class="math inline">\(i = 1\)</span>
-的所有合法的序列赋值为 <span class="math inline">\(1\)</span> 即可。</p>
-<h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[MAXN + <span class="number">1</span>][MAXN * MAXN + <span class="number">1</span>][<span class="number">1</span> &lt;&lt; MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">counts</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; (<span class="number">1</span> &lt;&lt; i) &lt;= x; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((x &gt;&gt; i) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        <span class="keyword">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (((i &gt;&gt; each) &amp; <span class="number">1</span>) &amp;&amp; (((i &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((i &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                con = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="built_in">counts</span>(i);</span><br><span class="line">        <span class="keyword">if</span> (con &amp;&amp; cnt &lt;= k) f[<span class="number">1</span>][cnt][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; n); j++) &#123;</span><br><span class="line">            <span class="keyword">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (((j &gt;&gt; each) &amp; <span class="number">1</span>) &amp; (((j &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((j &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                    con = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> cntJ = <span class="built_in">counts</span>(j);</span><br><span class="line">            <span class="keyword">if</span> (con &amp;&amp; cntJ &lt;= k) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; (<span class="number">1</span> &lt;&lt; n); l++) &#123;</span><br><span class="line">                    con = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">if</span> ((j &amp; <span class="number">1</span>) &amp;&amp; ((l &amp; <span class="number">1</span>) || ((l &gt;&gt; <span class="number">1</span>) &amp; <span class="number">1</span>))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">if</span> (((j &gt;&gt; (n - <span class="number">1</span>)) &amp; <span class="number">1</span>) &amp;&amp; (((l &gt;&gt; (n - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((l &gt;&gt; (n - <span class="number">2</span>)) &amp; <span class="number">1</span>))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> each = <span class="number">1</span>; each &lt; n - <span class="number">1</span>; each++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (((j &gt;&gt; each) &amp; <span class="number">1</span>) &amp;&amp; (((l &gt;&gt; each) &amp; <span class="number">1</span>) || ((l &gt;&gt; (each - <span class="number">1</span>)) &amp; <span class="number">1</span>) || ((l &gt;&gt; (each + <span class="number">1</span>)) &amp; <span class="number">1</span>))) &#123;</span><br><span class="line">                            con = <span class="literal">false</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">int</span> cntL = <span class="built_in">counts</span>(l);</span><br><span class="line">                    <span class="keyword">if</span> (con &amp;&amp; cntJ + cntL &lt;= k) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> m = cntL; m &lt;= k - cntJ; m++) &#123;</span><br><span class="line">                            f[i][m + cntJ][j] += f[i - <span class="number">1</span>][m][l];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">getAns</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        ans += f[n][k][i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getAns</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>省选</tag>
-        <tag>DP</tag>
-        <tag>状压 DP</tag>
-        <tag>SCOI</tag>
-        <tag>2005</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>「SCOI2010」传送带 - 三分</title>
     <url>/scoi2010-walk/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
@@ -1781,6 +1837,59 @@ class="math inline">\(O(\log_3^2 n)\)</span></p>
         <tag>SCOI</tag>
         <tag>三分</tag>
         <tag>2010</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「UVa 1599」Ideal Path - 最短路 + BFS</title>
+    <url>/uva-1599/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
+<p><a
+href="https://onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=448&amp;page=show_problem&amp;problem=4474">UVa
+链接</a></p>
+<p>给定一个 <span class="math inline">\(n\)</span> 个点 <span
+class="math inline">\(m\)</span> 条边的无向图，每条边上都涂有 <span
+class="math inline">\(1\)</span> 种颜色。求点 <span
+class="math inline">\(1\)</span> 到点 <span
+class="math inline">\(n\)</span>
+的一条路径，使得经过的边数最少，在此前提下，经过边的颜色序列最小。可能有自环与重边。输入保证至少存在一条连接
+<span class="math inline">\(1\)</span> 和 <span
+class="math inline">\(n\)</span> 的道路。</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>本题为求图论最短路，由于不需要考虑边权，可使用 BFS。</p>
+<p>这道题在路径最短的情况下使得颜色所组成的字典序最小，可以分开解决。</p>
+<p>首先解决最短路问题，求出所有的从 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span> 的最短路路径。这一步可通过记录从 <span
+class="math inline">\(n\)</span> 到 <span
+class="math inline">\(1\)</span> 可到达所有点的步数即可。利用该方法可从
+<span class="math inline">\(1\)</span>
+遍历可达路径，只要满足在记录中将达到的点的步数为之前的点的步数减一即为从
+<span class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span> 的最短路或最短路的一部分，这一步可通过
+BFS 解决，代码中对应的是 <code>bfsK</code> 函数。</p>
+<p>接下来就要解决字典序最小。我们需要再一次使用 BFS
+以求出在所有最短路中字典序最小的一条。由于最终长度相同，我们始终仅需选择字典序最小的节点。若两节点字典序相同，则都存入考虑范围。由于该次
+BFS
+无需进行队列弹出操作，且存入的节点同一层可能有多个，存储全部队列空间可能会爆，所以我们需要将队列改写滚动样式，仅存储最上层和次上层即可。代码中对应的是
+<code>bfsCol</code> 函数。</p>
+<p>注意在 <code>bfsCol</code>
+函数中合理处理最短路步数的标记。同时注意应在全部字典序的节点都压入队列时再进行滚动操作。</p>
+<h1 id="代码演示">代码演示</h1>
+<p>这次 AC 代码有点丑，请见谅 ≧ ﹏ ≦</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>, INF = <span class="number">200000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">std::vector&lt; std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> vis[MAXN + <span class="number">1</span>], ans;</span><br><span class="line"><span class="keyword">int</span> col[INF + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfsK</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> std::queue&lt; std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; qK;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">-1</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis));</span><br><span class="line">    qK.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>(n, <span class="number">0</span>) );</span><br><span class="line">    vis[n] = <span class="number">0</span>, ans = INF;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!qK.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> u = qK.<span class="built_in">front</span>();</span><br><span class="line">        qK.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">if</span> (u.first == <span class="number">1</span> &amp;&amp; u.second &lt; ans) ans = u.second;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u.first]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[ed.first] == <span class="number">-1</span>) &#123;</span><br><span class="line">                vis[ed.first] = u.second + <span class="number">1</span>;</span><br><span class="line">                qK.<span class="built_in">push</span>(std::<span class="built_in">make_pair</span>(ed.first, u.second + <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfsCol</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> std::vector&lt;<span class="keyword">int</span>&gt; qCol;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> mk[MAXN + <span class="number">1</span>];  <span class="comment">// 此为已访问节点的标记</span></span><br><span class="line">    <span class="built_in">memset</span>(col, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(col));</span><br><span class="line">    <span class="built_in">memset</span>(mk, <span class="literal">false</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(mk));</span><br><span class="line">    qCol.<span class="built_in">clear</span>();</span><br><span class="line">    qCol.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cnt = ans - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (cnt &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">static</span> std::vector&lt;<span class="keyword">int</span>&gt; uSet;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;  <span class="comment">// 注意滚动的时机</span></span><br><span class="line">            uSet.<span class="built_in">clear</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each : qCol) uSet.<span class="built_in">push_back</span>(each);</span><br><span class="line">            qCol.<span class="built_in">clear</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> u : uSet) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (vis[ed.first] == cnt) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!mk[ed.first]) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (col[cnt] &gt;= ed.second) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (col[cnt] &gt; ed.second) qCol.<span class="built_in">clear</span>();</span><br><span class="line">                            col[cnt] = ed.second;</span><br><span class="line">                            mk[ed.first] = <span class="literal">true</span>;</span><br><span class="line">                            flag = <span class="literal">false</span>;</span><br><span class="line">                            qCol.<span class="built_in">push_back</span>(ed.first);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (col[cnt] &gt; ed.second) col[cnt] = ed.second;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;  <span class="comment">// 若无符合条件的节点，说明已遍历完。最短路步数加一。</span></span><br><span class="line">            cnt--;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> u : uSet) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (vis[ed.first] == cnt) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!mk[ed.first]) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (col[cnt] &gt;= ed.second) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (col[cnt] &gt; ed.second) qCol.<span class="built_in">clear</span>();</span><br><span class="line">                                col[cnt] = ed.second;</span><br><span class="line">                                mk[ed.first] = <span class="literal">true</span>;</span><br><span class="line">                                flag = <span class="literal">false</span>;</span><br><span class="line">                                qCol.<span class="built_in">push_back</span>(ed.first);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (col[cnt] &gt; ed.second) col[cnt] = ed.second;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (std::cin &gt;&gt; n &gt;&gt; m) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) e[i].<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, x, y, z; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">            <span class="keyword">if</span> (x == y) <span class="keyword">continue</span>;</span><br><span class="line">            e[x].<span class="built_in">push_back</span>( std::<span class="built_in">make_pair</span>(y, z) );</span><br><span class="line">            e[y].<span class="built_in">push_back</span>( std::<span class="built_in">make_pair</span>(x, z) );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) std::<span class="built_in">sort</span>(e[i].<span class="built_in">begin</span>(), e[i].<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="built_in">bfsK</span>();</span><br><span class="line">        <span class="built_in">bfsCol</span>();</span><br><span class="line"></span><br><span class="line">        std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line">        <span class="comment">// UVA毒瘤！卡我输出格式！</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = ans - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) <span class="built_in">printf</span>(<span class="string">&quot;%d%c&quot;</span>, col[i], i == <span class="number">0</span> ? <span class="string">&#x27;\n&#x27;</span> : <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OI</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>题解</tag>
+        <tag>图论</tag>
+        <tag>最短路</tag>
+        <tag>BFS</tag>
+        <tag>UVa</tag>
       </tags>
   </entry>
   <entry>
@@ -1872,59 +1981,6 @@ class="math inline">\(B\)</span> 不能相等，否则无解。</p>
         <tag>SCOI</tag>
         <tag>差分约束</tag>
         <tag>2011</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「UVa 1599」Ideal Path - 最短路 + BFS</title>
-    <url>/uva-1599/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="题意描述">题意描述</h1>
-<p><a
-href="https://onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=448&amp;page=show_problem&amp;problem=4474">UVa
-链接</a></p>
-<p>给定一个 <span class="math inline">\(n\)</span> 个点 <span
-class="math inline">\(m\)</span> 条边的无向图，每条边上都涂有 <span
-class="math inline">\(1\)</span> 种颜色。求点 <span
-class="math inline">\(1\)</span> 到点 <span
-class="math inline">\(n\)</span>
-的一条路径，使得经过的边数最少，在此前提下，经过边的颜色序列最小。可能有自环与重边。输入保证至少存在一条连接
-<span class="math inline">\(1\)</span> 和 <span
-class="math inline">\(n\)</span> 的道路。</p>
-<span id="more"></span>
-<h1 id="解题思路">解题思路</h1>
-<p>本题为求图论最短路，由于不需要考虑边权，可使用 BFS。</p>
-<p>这道题在路径最短的情况下使得颜色所组成的字典序最小，可以分开解决。</p>
-<p>首先解决最短路问题，求出所有的从 <span
-class="math inline">\(1\)</span> 到 <span
-class="math inline">\(n\)</span> 的最短路路径。这一步可通过记录从 <span
-class="math inline">\(n\)</span> 到 <span
-class="math inline">\(1\)</span> 可到达所有点的步数即可。利用该方法可从
-<span class="math inline">\(1\)</span>
-遍历可达路径，只要满足在记录中将达到的点的步数为之前的点的步数减一即为从
-<span class="math inline">\(1\)</span> 到 <span
-class="math inline">\(n\)</span> 的最短路或最短路的一部分，这一步可通过
-BFS 解决，代码中对应的是 <code>bfsK</code> 函数。</p>
-<p>接下来就要解决字典序最小。我们需要再一次使用 BFS
-以求出在所有最短路中字典序最小的一条。由于最终长度相同，我们始终仅需选择字典序最小的节点。若两节点字典序相同，则都存入考虑范围。由于该次
-BFS
-无需进行队列弹出操作，且存入的节点同一层可能有多个，存储全部队列空间可能会爆，所以我们需要将队列改写滚动样式，仅存储最上层和次上层即可。代码中对应的是
-<code>bfsCol</code> 函数。</p>
-<p>注意在 <code>bfsCol</code>
-函数中合理处理最短路步数的标记。同时注意应在全部字典序的节点都压入队列时再进行滚动操作。</p>
-<h1 id="代码演示">代码演示</h1>
-<p>这次 AC 代码有点丑，请见谅 ≧ ﹏ ≦</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>, INF = <span class="number">200000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">std::vector&lt; std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> vis[MAXN + <span class="number">1</span>], ans;</span><br><span class="line"><span class="keyword">int</span> col[INF + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfsK</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> std::queue&lt; std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; qK;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">-1</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis));</span><br><span class="line">    qK.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>(n, <span class="number">0</span>) );</span><br><span class="line">    vis[n] = <span class="number">0</span>, ans = INF;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!qK.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> u = qK.<span class="built_in">front</span>();</span><br><span class="line">        qK.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">if</span> (u.first == <span class="number">1</span> &amp;&amp; u.second &lt; ans) ans = u.second;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u.first]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[ed.first] == <span class="number">-1</span>) &#123;</span><br><span class="line">                vis[ed.first] = u.second + <span class="number">1</span>;</span><br><span class="line">                qK.<span class="built_in">push</span>(std::<span class="built_in">make_pair</span>(ed.first, u.second + <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfsCol</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> std::vector&lt;<span class="keyword">int</span>&gt; qCol;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">bool</span> mk[MAXN + <span class="number">1</span>];  <span class="comment">// 此为已访问节点的标记</span></span><br><span class="line">    <span class="built_in">memset</span>(col, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(col));</span><br><span class="line">    <span class="built_in">memset</span>(mk, <span class="literal">false</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(mk));</span><br><span class="line">    qCol.<span class="built_in">clear</span>();</span><br><span class="line">    qCol.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cnt = ans - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (cnt &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">static</span> std::vector&lt;<span class="keyword">int</span>&gt; uSet;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;  <span class="comment">// 注意滚动的时机</span></span><br><span class="line">            uSet.<span class="built_in">clear</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> each : qCol) uSet.<span class="built_in">push_back</span>(each);</span><br><span class="line">            qCol.<span class="built_in">clear</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> u : uSet) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (vis[ed.first] == cnt) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!mk[ed.first]) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (col[cnt] &gt;= ed.second) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (col[cnt] &gt; ed.second) qCol.<span class="built_in">clear</span>();</span><br><span class="line">                            col[cnt] = ed.second;</span><br><span class="line">                            mk[ed.first] = <span class="literal">true</span>;</span><br><span class="line">                            flag = <span class="literal">false</span>;</span><br><span class="line">                            qCol.<span class="built_in">push_back</span>(ed.first);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (col[cnt] &gt; ed.second) col[cnt] = ed.second;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;  <span class="comment">// 若无符合条件的节点，说明已遍历完。最短路步数加一。</span></span><br><span class="line">            cnt--;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> u : uSet) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (vis[ed.first] == cnt) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!mk[ed.first]) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (col[cnt] &gt;= ed.second) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (col[cnt] &gt; ed.second) qCol.<span class="built_in">clear</span>();</span><br><span class="line">                                col[cnt] = ed.second;</span><br><span class="line">                                mk[ed.first] = <span class="literal">true</span>;</span><br><span class="line">                                flag = <span class="literal">false</span>;</span><br><span class="line">                                qCol.<span class="built_in">push_back</span>(ed.first);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (col[cnt] &gt; ed.second) col[cnt] = ed.second;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (std::cin &gt;&gt; n &gt;&gt; m) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) e[i].<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, x, y, z; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">            <span class="keyword">if</span> (x == y) <span class="keyword">continue</span>;</span><br><span class="line">            e[x].<span class="built_in">push_back</span>( std::<span class="built_in">make_pair</span>(y, z) );</span><br><span class="line">            e[y].<span class="built_in">push_back</span>( std::<span class="built_in">make_pair</span>(x, z) );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) std::<span class="built_in">sort</span>(e[i].<span class="built_in">begin</span>(), e[i].<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="built_in">bfsK</span>();</span><br><span class="line">        <span class="built_in">bfsCol</span>();</span><br><span class="line"></span><br><span class="line">        std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line">        <span class="comment">// UVA毒瘤！卡我输出格式！</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = ans - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) <span class="built_in">printf</span>(<span class="string">&quot;%d%c&quot;</span>, col[i], i == <span class="number">0</span> ? <span class="string">&#x27;\n&#x27;</span> : <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>OI</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>OI</tag>
-        <tag>题解</tag>
-        <tag>图论</tag>
-        <tag>最短路</tag>
-        <tag>BFS</tag>
-        <tag>UVa</tag>
       </tags>
   </entry>
 </search>
