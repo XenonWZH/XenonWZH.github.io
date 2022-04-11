@@ -52,9 +52,9 @@
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="区间 DP" scheme="https://xenonwzh.github.io/tags/%E5%8C%BA%E9%97%B4-DP/"/>
-    
     <category term="洛谷" scheme="https://xenonwzh.github.io/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
+    <category term="区间 DP" scheme="https://xenonwzh.github.io/tags/%E5%8C%BA%E9%97%B4-DP/"/>
     
   </entry>
   
@@ -470,9 +470,9 @@ class=&quot;math inline&quot;&gt;\(\&amp;amp;\)&lt;/span&gt; 是按位与操作�
     
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     
-    <category term="位运算" scheme="https://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="位运算" scheme="https://xenonwzh.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
     <category term="洛谷" scheme="https://xenonwzh.github.io/tags/%E6%B4%9B%E8%B0%B7/"/>
     
@@ -768,9 +768,9 @@ gcc、g++、gdb等软件。&lt;/p&gt;</summary>
     
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
+    
+    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     
     <category term="SCOI" scheme="https://xenonwzh.github.io/tags/SCOI/"/>
     
