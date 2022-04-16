@@ -1,0 +1,920 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="XenonWZH">
+  <meta name="keywords" content="OI, XenonWZH, blog">
+  
+    <meta name="description" content="XenonWZH&#39;s Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XenonWZH&#39;s Blog">
+<meta property="og:url" content="https://xenonwzh.github.io/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="XenonWZH&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI, XenonWZH, blog">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>XenonWZH&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"xenonwzh.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XenonWZH&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="玻璃晴朗，橘子辉煌">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/luogu-1436/" target="_self">
+          「洛谷 P1436」棋盘分割 - 区间 DP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/luogu-1436/" target="_self">
+          
+          题意描述 洛谷链接 将一个 \(8 \times 8\) 的棋盘进行如下分割：将原棋盘割下一块矩形棋盘并使剩下部分也是矩形，再将剩下的两部分中的任意一块继续如此分割，这样割了 \(n - 1\) 次后，连同最后剩下的矩形棋盘共有 \(n\) 块矩形棋盘。(每次切割都只能沿着棋盘格子的边进行)  原棋盘上每一格有一个分值，一块矩形棋盘的总分为其所含各格分值之和。现在需要把棋盘按上述规
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-09 10:34" pubdate>
+              2022-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/">洛谷</a>
+            
+              <a href="/tags/%E5%8C%BA%E9%97%B4-DP/">区间 DP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/noi2001-cannon/" target="_self">
+          「NOI 2001」炮兵阵地 - 状压 DP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/noi2001-cannon/" target="_self">
+          
+          题意描述 洛谷链接 LOJ 链接 司令部的将军们打算在 \(N \times M\) 的网格地图上部署他们的炮兵部队。一个 \(N \times M\) 的地图由 \(N\) 行 \(M\) 列组成，地图的每一格可能是山地（用 H 表示），也可能是平原（用 P 表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-09 09:54" pubdate>
+              2022-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/2001/">2001</a>
+            
+              <a href="/tags/DP/">DP</a>
+            
+              <a href="/tags/%E7%8A%B6%E5%8E%8B-DP/">状压 DP</a>
+            
+              <a href="/tags/NOI/">NOI</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/jsoi2008-sphere/" target="_self">
+          「JSOI2008」球形空间产生器 - 高斯消元
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/jsoi2008-sphere/" target="_self">
+          
+          题意描述 洛谷链接 有一个球形空间产生器能够在 \(n\) 维空间中产生一个坚硬的球体。现在，你被困在了这个 \(n\) 维球体中，你只知道球面上 \(n + 1\) 个点的坐标，你需要以最快的速度确定这个 \(n\) 维球体的球心坐标，以便于摧毁这个球形空间产生器。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-09 09:23" pubdate>
+              2022-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E7%9C%81%E9%80%89/">省选</a>
+            
+              <a href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/">高斯消元</a>
+            
+              <a href="/tags/JSOI/">JSOI</a>
+            
+              <a href="/tags/2008/">2008</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/luogu-2455/" target="_self">
+          「SDOI2006」线性方程组 - 高斯消元
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/luogu-2455/" target="_self">
+          
+          题意描述 洛谷链接 已知 \(n\) 元线性一次方程组。 \[\begin{cases} a_{1, 1} x_1 + a_{1, 2} x_2 + \cdots + a_{1, n} x_n &#x3D; b_1 \\ a_{2, 1} x_1 + a_{2, 2} x_2 + \cdots + a_{2, n} x_n &#x3D; b_2 \\ \cdots \\ a_{n,1} x_1 + a_
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-09 08:04" pubdate>
+              2022-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E7%9C%81%E9%80%89/">省选</a>
+            
+              <a href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/">高斯消元</a>
+            
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/">洛谷</a>
+            
+              <a href="/tags/SDOI/">SDOI</a>
+            
+              <a href="/tags/2006/">2006</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/noio2022-math/" target="_self">
+          「NOI Online 2022 入门组」数学游戏 - 数论
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/noio2022-math/" target="_self">
+          
+          题意描述 洛谷链接 Kri 喜欢玩数字游戏。 一天，他在草稿纸上写下了 \(t\) 对正整数 \((x, y)\)，并对于每一对正整数计算出了 \(z &#x3D; xy \gcd(x, y)\)。 可是调皮的 Zay 找到了 Kri 的草稿纸，并把每一组的 \(y\) 都擦除了，还可能改动了一些 \(z\)。 现在 Kri 想请你帮忙还原每一组的 \(y\)，具体地，对于每一组中的 \(x
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-28 16:08" pubdate>
+              2022-03-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+            
+              <a href="/tags/NOI-Online/">NOI Online</a>
+            
+              <a href="/tags/2022/">2022</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/noio2022/" target="_self">
+          NOI Online 2022 行记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/noio2022/" target="_self">
+          
+          纪念一下这个 爆炸 的考试 Day 0 晚上考完数学考试就到机房刷题。写了几道状压 DP。没过多久就下课了。然后回寝睡觉。 Day 1 早上起来后看了一下 7FA4 上的 DP 题，感觉没啥做的，就看了会儿 B 站 然后发现鸽子 Alan Becker 居然更新了。 没过多久就开始考试，提前开网页，题目加载出来后把题面扔在了我们学校的 OI 群里。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-26 11:34" pubdate>
+              2022-03-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%97%A5%E5%B8%B8/">日常</a>
+            
+              <a href="/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/">行记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8/">日常</a>
+            
+              <a href="/tags/%E8%A1%8C%E8%AE%B0/">行记</a>
+            
+              <a href="/tags/NOI-Online/">NOI Online</a>
+            
+              <a href="/tags/2022/">2022</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/scoi2005-king/" target="_self">
+          「SCOI2005」互不侵犯 - 状压 DP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/scoi2005-king/" target="_self">
+          
+          题意描述 洛谷链接 LOJ 链接 在 \(N \times N\) 的棋盘里面放 \(K\) 个国王，使他们互不攻击，共有多少种摆放方案。国王能攻击到它上下左右，以及左上左下右上右下八个方向上附近的各一个格子，共 \(8\) 个格子。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-25 15:56" pubdate>
+              2022-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E7%9C%81%E9%80%89/">省选</a>
+            
+              <a href="/tags/DP/">DP</a>
+            
+              <a href="/tags/%E7%8A%B6%E5%8E%8B-DP/">状压 DP</a>
+            
+              <a href="/tags/SCOI/">SCOI</a>
+            
+              <a href="/tags/2005/">2005</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/noip2012-mod/" target="_self">
+          「NOIP2012」同余方程 - 拓展欧几里得定理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/noip2012-mod/" target="_self">
+          
+          题意描述 洛谷链接 LOJ 链接 求关于 \(x\) 的同余方程 \(ax \equiv 1 \pmod {b}\) 的最小正整数解。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-21 21:31" pubdate>
+              2022-03-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+            
+              <a href="/tags/NOIP/">NOIP</a>
+            
+              <a href="/tags/2012/">2012</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/luogu-2371/" target="_self">
+          「洛谷 P2371」墨墨的等式 - 最短路
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/luogu-2371/" target="_self">
+          
+          题意描述 洛谷链接 墨墨突然对等式很感兴趣，他正在研究 \(\sum_{i &#x3D; 1}^n a_i x_i &#x3D; b\) 存在非负整数解的条件，他要求你编写一个程序，给定 \(n, a_{1 \dots n}, l, r\) 求出有多少 \(b \in [l, r]\) 可以使等式存在非负整数解。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-19 15:54" pubdate>
+              2022-03-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a>
+            
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/">洛谷</a>
+            
+              <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a>
+            
+              <a href="/tags/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F/">国家集训队</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/cf-618f/" target="_self">
+          「Codeforces 618F」Double Knapsack - 构造 + 鸽巢原理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/cf-618f/" target="_self">
+          
+          题意描述 Codeforces 链接 给你两个可重集 \(A, B\)，\(A, B\) 的元素个数都为 \(n\)，它们中每个元素的大小 \(x\in [1,n]\)。请你分别找出 \(A, B\) 的子集，使得它们中的元素之和相等。 数据范围：\(1 \leq n \leq 10^6\)
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-12 16:45" pubdate>
+              2022-03-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OI/">OI</a>
+            
+              <a href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OI/">OI</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+              <a href="/tags/%E6%9E%84%E9%80%A0/">构造</a>
+            
+              <a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+            
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/">前缀和</a>
+            
+              <a href="/tags/%E9%B8%BD%E5%B7%A2%E5%8E%9F%E7%90%86/">鸽巢原理</a>
+            
+              <a href="/tags/Codeforces/">Codeforces</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="XenonWZH">
+  <meta name="keywords" content="OI, XenonWZH, blog">
+  
+    <meta name="description" content="题意描述 洛谷链接 本题定义了一个新语言名为 A++，语言的循环定义如下： 123F i x y    循环体E 本循环相当于 1for (int i &#x3D; x; i &lt;&#x3D; y; i++) 输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。 其中满足 x，y 必为常数或 n，n 远大于 x，y。 具体信息可详见洛谷，链接见上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「NOIP2017」时间复杂度 - 模拟">
+<meta property="og:url" content="https://xenonwzh.github.io/noip2017-complexity/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="题意描述 洛谷链接 本题定义了一个新语言名为 A++，语言的循环定义如下： 123F i x y    循环体E 本循环相当于 1for (int i &#x3D; x; i &lt;&#x3D; y; i++) 输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。 其中满足 x，y 必为常数或 n，n 远大于 x，y。 具体信息可详见洛谷，链接见上">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-24T03:54:47.000Z">
+<meta property="article:modified_time" content="2022-03-18T23:59:31.509Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="NOIP">
+<meta property="article:tag" content="2017">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>「NOIP2017」时间复杂度 - 模拟 - XenonWZH&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"xenonwzh.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>XenonWZH&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="「NOIP2017」时间复杂度 - 模拟">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-24 11:54" pubdate>
+        2021年8月24日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">「NOIP2017」时间复杂度 - 模拟</h1>
+            
+            <div class="markdown-body">
+              <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3952">洛谷链接</a></p>
+<p>本题定义了一个新语言名为 A++，语言的循环定义如下： <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">F <span class="hljs-selector-tag">i</span> x y<br>    循环体<br>E<br></code></pre></div></td></tr></table></figure>
+本循环相当于 <figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = x; i &lt;= y; i++)<br></code></pre></div></td></tr></table></figure>
+输入一个程序和时间复杂度，判断时间复杂度是否和程序相符。 其中满足 x，y
+必为常数或 n，n 远大于 x，y。</p>
+<p>具体信息可详见洛谷，链接见上</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>显然本题为一道模拟题。</p>
+<h2 id="模型建立">模型建立</h2>
+<p>解题思路为通过 A++ 循环分析该代码的时间复杂度。 时间复杂度可通过存储
+<span class="math inline">\(O(n^k)\)</span> 的指数达到目的。 通过新建
+<code>depth</code> 变量存储有效增加代码时间复杂度的个数，使用
+<code>maxn</code> 变量存储 <code>depth</code> 的最大值即可记录该 A++
+代码的时间复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp">std::cin &gt;&gt; l &gt;&gt; tmp;<br><span class="hljs-keyword">if</span> (tmp[<span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;1&#x27;</span>) o = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">else</span> &#123;<br>    o = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> each = <span class="hljs-number">4</span>; tmp[each] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>; each++) &#123;<br>        o = o * <span class="hljs-number">10</span> + tmp[each] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>本题由于有嵌套循环的可能，所以可以写一个栈来模拟。 又由于 A++
+中变量不可重名，故有遍历栈的需求。 故可以写一个手工栈，栈中存有 A++
+变量名。 <figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> top = <span class="hljs-number">0</span>;<br>std::string stack[<span class="hljs-number">100</span>];<br></code></pre></div></td></tr></table></figure></p>
+<p>此时输入 F 则入栈，输入 E 则出栈，注意当 F 与 E
+没有一一对应时需要处理为 ERR。 <figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp">std::cin &gt;&gt; tmp;<br><span class="hljs-keyword">if</span> (tmp == <span class="hljs-string">&quot;F&quot;</span>) &#123;<br>    std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;<br>    <span class="hljs-comment">// 处理后续</span><br>    top++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">if</span> (top == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// A++语法错误，输出ERR及处理后续</span><br>    &#125; <span class="hljs-keyword">else</span> top--;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="循环处理">循环处理</h2>
+<p>首先处理 A++ 循环中申明的变量，若变量重复，则处理为 ERR。
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; top; j++)<br>    <span class="hljs-keyword">if</span>(stack[j] == stack[top])<br>        err = <span class="hljs-literal">true</span>;<br></code></pre></div></td></tr></table></figure></p>
+<p>循环可分4种情况讨论： 1. x，y 均为 n； 2. x 为 n，y 为常数； 3. x
+为常数，y 为 n； 4. x，y 均为常数。</p>
+<p>第一种情况显然时间复杂度为 <span
+class="math inline">\(O(1)\)</span>。 第二种情况由于 n 远大于
+x，故这个循环和循环内部的任何语句都不会被执行，此时需要新建变量
+<code>unknown</code> 来记录该层层数，在这个层数之上则不记录时间复杂度。
+第三种情况由于 n 远大于 y，时间复杂度为 <span
+class="math inline">\(O(n)\)</span>，所以需要 <code>depth++</code>。
+第四种情况则需要分两种情况讨论。</p>
+<ol type="1">
+<li><span class="math inline">\(x \leq y\)</span></li>
+<li><span class="math inline">\(x &gt; y\)</span>
+其中第一种情况显然时间复杂度为 <span
+class="math inline">\(O(1)\)</span>。
+第二种情况得循环及其内部也不会被执行，等同 x 为 n，y 为常数的情况。
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (x == <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y == <span class="hljs-string">&quot;n&quot;</span>) f[top] = <span class="hljs-literal">false</span>;<br><span class="hljs-keyword">if</span> (x == <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y != <span class="hljs-string">&quot;n&quot;</span>) &#123;<br>    f[top] = <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span> (top &lt; unshown)<br>        unshown = top;<br>&#125;<br><span class="hljs-keyword">if</span> (x != <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y == <span class="hljs-string">&quot;n&quot;</span>) &#123;<br>    <span class="hljs-keyword">if</span> (top &lt; unshown) &#123;<br>        f[top] = <span class="hljs-literal">true</span>;<br>        depth++;<br>    &#125; <span class="hljs-keyword">else</span> f[top] = <span class="hljs-literal">false</span>;<br>&#125;<br><span class="hljs-keyword">if</span> (x != <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y != <span class="hljs-string">&quot;n&quot;</span>) &#123;<br>    nx = ny = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; x.<span class="hljs-built_in">length</span>(); j++) nx = nx * <span class="hljs-number">10</span> + x[j] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; y.<span class="hljs-built_in">length</span>(); j++) ny = ny * <span class="hljs-number">10</span> + y[j] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>    <span class="hljs-keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown) unshown = top;<br>    f[top] = <span class="hljs-literal">false</span>;<br>&#125;<br>top++;<br><span class="hljs-keyword">if</span> (depth &gt; maxn) maxn = depth;<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<p>最后在收到 E 的时候结束循环，弹出栈。 若栈已空，则说明 F 与 E
+不匹配，处理为 ERR。 此时则需检测这层循环中 <code>depth</code>
+有无变化，若有变化则 <code>depth--</code>
+表明这层循环已退出时间复杂度的统计，以便处理其他循环。 同时需注意处理
+<code>unknown</code> 变量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (top == <span class="hljs-number">0</span>) err = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">if</span> (top - <span class="hljs-number">1</span> == unshown) unshown = <span class="hljs-number">100</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (f[top - <span class="hljs-number">1</span>]) depth--;<br>    top--;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> t, l, o, nx, ny, unshown;<br>    std::string tmp, stack[<span class="hljs-number">100</span>], x, y;<br>    <span class="hljs-type">int</span> depth, top, maxn;<br>    <span class="hljs-type">bool</span> err, f[<span class="hljs-number">100</span>];<br>    <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(f));<br><br>    std::cin &gt;&gt; t;<br><br>    <span class="hljs-keyword">while</span> (t &gt; <span class="hljs-number">0</span>) &#123;<br>        top = depth = maxn = <span class="hljs-number">0</span>;<br>        unshown = <span class="hljs-number">100</span>;<br>        err = <span class="hljs-literal">false</span>;<br><br>        std::cin &gt;&gt; l &gt;&gt; tmp;<br><br>        <span class="hljs-keyword">if</span> (tmp[<span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;1&#x27;</span>) o = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">else</span> &#123;<br>            o = <span class="hljs-number">0</span>;<br><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> each = <span class="hljs-number">4</span>; tmp[each] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; tmp[each] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>; each++) &#123;<br>                o = o * <span class="hljs-number">10</span> + tmp[each] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> each = <span class="hljs-number">0</span>; each &lt; l; each++) &#123;<br>            std::cin &gt;&gt; tmp;<br><br>            <span class="hljs-keyword">if</span> (tmp == <span class="hljs-string">&quot;F&quot;</span>) &#123;<br>                std::cin &gt;&gt; stack[top] &gt;&gt; x &gt;&gt; y;<br><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; top; j++)<br>                    <span class="hljs-keyword">if</span> (stack[j] == stack[top])<br>                        err = <span class="hljs-literal">true</span>;<br><br>                <span class="hljs-keyword">if</span> (x == <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y == <span class="hljs-string">&quot;n&quot;</span>) f[top] = <span class="hljs-literal">false</span>;<br><br>                <span class="hljs-keyword">if</span> (x == <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y != <span class="hljs-string">&quot;n&quot;</span>) &#123;<br>                    f[top] = <span class="hljs-literal">false</span>;<br>                    <span class="hljs-keyword">if</span> (top &lt; unshown) unshown = top;<br>                &#125;<br><br>                <span class="hljs-keyword">if</span> (x != <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y == <span class="hljs-string">&quot;n&quot;</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (top &lt; unshown) &#123;<br>                        f[top] = <span class="hljs-literal">true</span>;<br>                        depth++;<br>                    &#125; <span class="hljs-keyword">else</span> f[top] = <span class="hljs-literal">false</span>;<br>                &#125;<br><br>                <span class="hljs-keyword">if</span> (x != <span class="hljs-string">&quot;n&quot;</span> &amp;&amp; y != <span class="hljs-string">&quot;n&quot;</span>) &#123;<br>                    nx = ny = <span class="hljs-number">0</span>;<br><br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; x.<span class="hljs-built_in">length</span>(); j++) nx = nx * <span class="hljs-number">10</span> + x[j] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; y.<span class="hljs-built_in">length</span>(); j++) ny = ny * <span class="hljs-number">10</span> + y[j] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>                    <span class="hljs-keyword">if</span> (nx &gt; ny &amp;&amp; top &lt; unshown) unshown = top;<br><br>                    f[top] = <span class="hljs-literal">false</span>;<br>                &#125;<br><br>                top++;<br><br>                <span class="hljs-keyword">if</span> (depth &gt; maxn) maxn = depth;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (top == <span class="hljs-number">0</span>) err = <span class="hljs-literal">true</span>;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">if</span> (top - <span class="hljs-number">1</span> == unshown)<br>                        unshown = <span class="hljs-number">100</span>;<br>                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (f[top - <span class="hljs-number">1</span>])<br>                        depth--;<br><br>                    top--;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (err || top != <span class="hljs-number">0</span>) std::cout &lt;&lt; <span class="hljs-string">&quot;ERR&quot;</span> &lt;&lt; std::endl;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (maxn == o) std::cout &lt;&lt; <span class="hljs-string">&quot;Yes&quot;</span> &lt;&lt; std::endl;<br>        <span class="hljs-keyword">else</span> std::cout &lt;&lt; <span class="hljs-string">&quot;No&quot;</span> &lt;&lt; std::endl;<br><br>        t--;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/OI/">OI</a>
+                    
+                      <a class="hover-with-bg" href="/categories/OI/%E9%A2%98%E8%A7%A3/">题解</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OI/">OI</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%88/">栈</a>
+                    
+                      <a class="hover-with-bg" href="/tags/NOIP/">NOIP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/2017/">2017</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/prefix-sum-notes/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">前缀和学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://xenonwzh.github.io/noip2017-complexity/';
+          this.page.identifier = '/noip2017-complexity/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'xenonwzhs-blog' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
