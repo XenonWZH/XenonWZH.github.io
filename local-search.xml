@@ -4,6 +4,41 @@
   
   
   <entry>
+    <title>「联合省选 2022」预处理器 - 模拟</title>
+    <link href="/pro2022-preprocessor/"/>
+    <url>/pro2022-preprocessor/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题意描述">题意描述</h1><p><a href="https://www.luogu.com.cn/problem/P8289">洛谷链接</a></p><p><a href="https://loj.ac/p/3700">LOJ 链接</a></p><p>对于该题，你需要展开 <code>#define</code> 宏定义。本题中的宏定义与C++ 中的宏定义大致相同，不过有下列特点：</p><ul><li>可以用 <code>#undef</code> 取消宏定义；</li><li>可以进行多次展开。如<code>#define a b+e</code>，<code>#define b c+d</code>，对于<code>a</code> 最终展开结果为 <code>c+d+e</code>；</li><li>可以进行递归展开，但若待展开的宏名与正在进行展开的某个宏名相同，为了防止无限递归，此时宏名就不再展开。如<code>#define a b+c</code>，<code>#define b a+a</code>，对于<code>b</code> 的展开结果即为 <code>b+c+b+c</code>。</li></ul><p>其他细节详见题面。</p><span id="more"></span><h1 id="解题思路">解题思路</h1><p><del>一道让 OI 倒退 15 年的题</del></p><p>本题是一道细节超多的模拟题。</p><p>首先我们需要解决这道题的输入。以分隔符为界，分段读入即可。每个分隔符（包括空格）可以看成单独一个字符串读入即可。</p><p>然后我们可以用 <code>std::map&lt;std::string, std::string&gt;</code>存储 <code>#define</code> 的对应关系。对于<code>#undef</code>，我们仅需在 <code>map</code> 中删除该项即可。</p><p>最后我们需要解决的是字符串展开问题，也是本题中细节最多的部分。</p><p>由于本题中涉及了递归展开，我们可以考虑使用递归来编写处理函数<code>solve</code>。首先考虑在 <code>map</code>中是否有已经定义的字符串或者是否被打标记，若 <code>map</code>中没有或被打了标记则直接输出。若有，则进行以下操作：</p><ol type="1"><li>进行标记（在本代码中使用 <code>vis</code> 进行）；</li><li>展开当前的字符串；</li><li>将字符串分段读入（读入方式见上）；</li><li>对于每段字符串分别递归求解；</li><li>取消标记。</li></ol><p>注意 4步很重要，若直接展开后递归，则无法处理两将要展开的字符串并列的情况。接下来为该情况Hack 数据：</p><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-number">3</span><br><span class="hljs-selector-id">#define</span> <span class="hljs-selector-tag">a</span> <span class="hljs-selector-tag">b</span>+<span class="hljs-selector-tag">c</span><br><span class="hljs-selector-id">#define</span> <span class="hljs-selector-tag">b</span> <span class="hljs-selector-tag">a</span>+<span class="hljs-selector-tag">a</span><br><span class="hljs-selector-tag">b</span><br></code></pre></div></td></tr></table></figure><p>结果应为 <code>b+c+b+c</code>，但是直接展开后递归的结果会是<code>b+c+a</code>。</p><h1 id="代码演示">代码演示</h1><figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tuple&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><br>std::map&lt;std::string, std::string&gt; def;<br>std::map&lt;std::string, <span class="hljs-type">bool</span>&gt; vis;<br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">bool</span> <span class="hljs-title">isID</span><span class="hljs-params">(<span class="hljs-type">char</span> ch)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> ((ch &gt;= <span class="hljs-string">&#x27;A&#x27;</span> &amp;&amp; ch &lt;= <span class="hljs-string">&#x27;Z&#x27;</span>) || (ch &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; ch &lt;= <span class="hljs-string">&#x27;z&#x27;</span>) || (ch &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) || ch == <span class="hljs-string">&#x27;_&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-comment">// tuple 中第一项代表读到的字符串，第二项表示是否为分隔符，第三项表示结束位置对应 src 的下标</span><br><span class="hljs-comment">// 建议可以学一下 tuple 的用法</span><br><span class="hljs-function"><span class="hljs-keyword">inline</span> std::tuple&lt;std::string, <span class="hljs-type">bool</span>, <span class="hljs-type">int</span>&gt; <span class="hljs-title">reads</span><span class="hljs-params">(std::string src, <span class="hljs-type">int</span> pos)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isID</span>(src[pos])) &#123;<br>        std::string str = <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-type">int</span> len = src.<span class="hljs-built_in">length</span>();<br>        <span class="hljs-keyword">while</span> (pos &lt; len &amp;&amp; <span class="hljs-built_in">isID</span>(src[pos])) &#123;<br>            str += src.<span class="hljs-built_in">substr</span>(pos, <span class="hljs-number">1</span>);<br>            pos++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">make_tuple</span>(str, <span class="hljs-literal">true</span>, pos);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        std::string str = <span class="hljs-string">&quot;&quot;</span>;<br>        str += src.<span class="hljs-built_in">substr</span>(pos, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">make_tuple</span>(str, <span class="hljs-literal">false</span>, pos + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 这个函数专门读 #define</span><br><span class="hljs-function"><span class="hljs-keyword">inline</span> std::pair&lt;std::string, <span class="hljs-type">int</span>&gt; <span class="hljs-title">readDef</span><span class="hljs-params">(std::string src, <span class="hljs-type">int</span> pos)</span> </span>&#123;<br>    <span class="hljs-type">int</span> len = src.<span class="hljs-built_in">length</span>();<br>    <span class="hljs-keyword">while</span> (pos &lt; len &amp;&amp; <span class="hljs-built_in">isspace</span>(src[pos])) pos++;<br>    std::string str = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">while</span> (pos &lt; len &amp;&amp; !<span class="hljs-built_in">isspace</span>(src[pos])) str += src[pos++];<br>    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">make_pair</span>(str, pos);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">(std::string str)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (def.<span class="hljs-built_in">count</span>(str) != <span class="hljs-number">0</span> &amp;&amp; !vis[str]) &#123;<br>        vis[str] = <span class="hljs-literal">true</span>;<br>        std::string src = str;  <span class="hljs-comment">// 注意要存原先字符串以在取消标记时使用</span><br>        str = def[str];<br>        std::tuple&lt;std::string, <span class="hljs-type">bool</span>, <span class="hljs-type">int</span>&gt; getReads = std::<span class="hljs-built_in">make_tuple</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-type">int</span> len = str.<span class="hljs-built_in">length</span>();<br>        std::vector&lt;std::string&gt; vec;<br>        <span class="hljs-keyword">while</span> (std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads) &lt; len) &#123;<br>            getReads = <span class="hljs-built_in">reads</span>(str, std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads));<br>            vec.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">0</span>&gt;(getReads));<br>        &#125;<br>        <span class="hljs-keyword">for</span> (std::string each : vec) <span class="hljs-built_in">solve</span>(each);<br>        vis[src] = <span class="hljs-literal">false</span>;<br>    &#125; <span class="hljs-keyword">else</span> std::cout &lt;&lt; str;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    std::cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    std::cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> XEDEBUG</span><br>    <span class="hljs-built_in">freopen</span>(<span class="hljs-string">&quot;preprocessor.in&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, stdin);<br>    <span class="hljs-built_in">freopen</span>(<span class="hljs-string">&quot;preprocessor.out&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>, stdout);<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>    <span class="hljs-type">int</span> n;<br><br>    std::cin &gt;&gt; n;<br>    std::cin.<span class="hljs-built_in">ignore</span>();<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        std::string str;<br>        std::<span class="hljs-built_in">getline</span>(std::cin, str);<br>        std::tuple&lt;std::string, <span class="hljs-type">bool</span>, <span class="hljs-type">int</span>&gt; getReads = std::<span class="hljs-built_in">make_tuple</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-type">int</span> len = str.<span class="hljs-built_in">length</span>();<br><br>        <span class="hljs-keyword">while</span> (std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads) &lt; len) &#123;<br>            getReads = <span class="hljs-built_in">reads</span>(str, std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads));<br><br>            <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">1</span>&gt;(getReads)) &#123;<br>                vis.<span class="hljs-built_in">clear</span>();<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> each : def) vis[each.first] = <span class="hljs-literal">false</span>;<br>                <span class="hljs-built_in">solve</span>(std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">0</span>&gt;(getReads));<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">0</span>&gt;(getReads) == <span class="hljs-string">&quot;#&quot;</span>) &#123;<br>                getReads = <span class="hljs-built_in">reads</span>(str, std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads));<br>                <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">0</span>&gt;(getReads) == <span class="hljs-string">&quot;define&quot;</span>) &#123;<br>                    std::pair&lt;std::string, <span class="hljs-type">int</span>&gt; from = <span class="hljs-built_in">readDef</span>(str, std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads));<br>                    std::string to = str.<span class="hljs-built_in">substr</span>(from.second + <span class="hljs-number">1</span>);<br>                    def[from.first] = to;<br>                    getReads = std::<span class="hljs-built_in">make_tuple</span>(to, <span class="hljs-literal">true</span>, len);<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">0</span>&gt;(getReads) == <span class="hljs-string">&quot;undef&quot;</span>) &#123;<br>                    std::string from = str.<span class="hljs-built_in">substr</span>(std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads) + <span class="hljs-number">1</span>);<br>                    def.<span class="hljs-built_in">erase</span>(from);<br>                    getReads = std::<span class="hljs-built_in">make_tuple</span>(from, <span class="hljs-literal">true</span>, len);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    std::cout &lt;&lt; <span class="hljs-string">&quot;#&quot;</span>;<br>                    getReads = std::<span class="hljs-built_in">make_tuple</span>(<span class="hljs-string">&quot;#&quot;</span>, <span class="hljs-literal">false</span>, std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">2</span>&gt;(getReads) + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> std::cout &lt;&lt; std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-number">0</span>&gt;(getReads);<br>        &#125;<br><br>        std::cout &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;<br>    &#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> XEDEBUG</span><br>    <span class="hljs-built_in">fclose</span>(stdin);<br>    <span class="hljs-built_in">fclose</span>(stdout);<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>OI</category>
+      
+      <category>题解</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>OI</tag>
+      
+      <tag>题解</tag>
+      
+      <tag>模拟</tag>
+      
+      <tag>省选</tag>
+      
+      <tag>2022</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>「洛谷 P1436」棋盘分割 - 区间 DP</title>
     <link href="/luogu-1436/"/>
     <url>/luogu-1436/</url>
@@ -26,9 +61,9 @@
       
       <tag>题解</tag>
       
-      <tag>区间 DP</tag>
-      
       <tag>洛谷</tag>
+      
+      <tag>区间 DP</tag>
       
     </tags>
     
@@ -96,9 +131,9 @@
       
       <tag>题解</tag>
       
-      <tag>省选</tag>
-      
       <tag>高斯消元</tag>
+      
+      <tag>省选</tag>
       
       <tag>JSOI</tag>
       
@@ -133,11 +168,11 @@
       
       <tag>题解</tag>
       
+      <tag>高斯消元</tag>
+      
       <tag>省选</tag>
       
       <tag>洛谷</tag>
-      
-      <tag>高斯消元</tag>
       
       <tag>SDOI</tag>
       
@@ -499,11 +534,11 @@
       
       <tag>题解</tag>
       
+      <tag>省选</tag>
+      
       <tag>数论</tag>
       
       <tag>DFS</tag>
-      
-      <tag>省选</tag>
       
       <tag>HAOI</tag>
       
@@ -777,11 +812,11 @@
       
       <tag>贪心</tag>
       
-      <tag>洛谷</tag>
-      
       <tag>二分</tag>
       
       <tag>二分答案</tag>
+      
+      <tag>洛谷</tag>
       
     </tags>
     
