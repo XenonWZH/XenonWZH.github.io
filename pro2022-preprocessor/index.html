@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意描述 洛谷链接 LOJ 链接 对于该题，你需要展开 #define 宏定义。本题中的宏定义与 C++ 中的宏定义大致相同，不过有下列特点：  可以用 #undef 取消宏定义； 可以进行多次展开。如 #define a b+e，#define b c+d，对于 a 最终展开结果为 c+d+e； 可以进行递归展开，但若待展开的宏名与正在进行展开的某个宏名相同，为了防止无限递归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「联合省选 2022」预处理器 - 模拟">
+<meta property="og:url" content="https://xenonwzh.github.io/pro2022-preprocessor/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="题意描述 洛谷链接 LOJ 链接 对于该题，你需要展开 #define 宏定义。本题中的宏定义与 C++ 中的宏定义大致相同，不过有下列特点：  可以用 #undef 取消宏定义； 可以进行多次展开。如 #define a b+e，#define b c+d，对于 a 最终展开结果为 c+d+e； 可以进行递归展开，但若待展开的宏名与正在进行展开的某个宏名相同，为了防止无限递归">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-21T13:11:36.000Z">
+<meta property="article:modified_time" content="2022-04-21T13:40:56.235Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="模拟">
+<meta property="article:tag" content="省选">
+<meta property="article:tag" content="2022">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/pro2022-preprocessor/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/pro2022-preprocessor/","path":"pro2022-preprocessor/","title":"「联合省选 2022」预处理器 - 模拟"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「联合省选 2022」预处理器 - 模拟 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题意描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">代码演示</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/pro2022-preprocessor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「联合省选 2022」预处理器 - 模拟 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「联合省选 2022」预处理器 - 模拟
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-04-21 21:11:36 / 修改时间：21:40:56" itemprop="dateCreated datePublished" datetime="2022-04-21T21:11:36+08:00">2022-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/pro2022-preprocessor/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="pro2022-preprocessor/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8289">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/3700">LOJ 链接</a></p>
+<p>对于该题，你需要展开 <code>#define</code> 宏定义。本题中的宏定义与
+C++ 中的宏定义大致相同，不过有下列特点：</p>
+<ul>
+<li>可以用 <code>#undef</code> 取消宏定义；</li>
+<li>可以进行多次展开。如
+<code>#define a b+e</code>，<code>#define b c+d</code>，对于
+<code>a</code> 最终展开结果为 <code>c+d+e</code>；</li>
+<li>可以进行递归展开，但若待展开的宏名与正在进行展开的某个宏名相同，为了防止无限递归，此时宏名就不再展开。如
+<code>#define a b+c</code>，<code>#define b a+a</code>，对于
+<code>b</code> 的展开结果即为 <code>b+c+b+c</code>。</li>
+</ul>
+<p>其他细节详见题面。</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p><del>一道让 OI 倒退 15 年的题</del></p>
+<p>本题是一道细节超多的模拟题。</p>
+<p>首先我们需要解决这道题的输入。以分隔符为界，分段读入即可。每个分隔符（包括空格）可以看成单独一个字符串读入即可。</p>
+<p>然后我们可以用 <code>std::map&lt;std::string, std::string&gt;</code>
+存储 <code>#define</code> 的对应关系。对于
+<code>#undef</code>，我们仅需在 <code>map</code> 中删除该项即可。</p>
+<p>最后我们需要解决的是字符串展开问题，也是本题中细节最多的部分。</p>
+<p>由于本题中涉及了递归展开，我们可以考虑使用递归来编写处理函数
+<code>solve</code>。首先考虑在 <code>map</code>
+中是否有已经定义的字符串或者是否被打标记，若 <code>map</code>
+中没有或被打了标记则直接输出。若有，则进行以下操作：</p>
+<ol type="1">
+<li>进行标记（在本代码中使用 <code>vis</code> 进行）；</li>
+<li>展开当前的字符串；</li>
+<li>将字符串分段读入（读入方式见上）；</li>
+<li>对于每段字符串分别递归求解；</li>
+<li>取消标记。</li>
+</ol>
+<p>注意 4
+步很重要，若直接展开后递归，则无法处理两将要展开的字符串并列的情况。接下来为该情况
+Hack 数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">#define a b+c</span><br><span class="line">#define b a+a</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
+<p>结果应为 <code>b+c+b+c</code>，但是直接展开后递归的结果会是
+<code>b+c+a</code>。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tuple&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::map&lt;std::string, std::string&gt; def;</span><br><span class="line">std::map&lt;std::string, <span class="type">bool</span>&gt; vis;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">isID</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((ch &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;Z&#x27;</span>) || (ch &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;z&#x27;</span>) || (ch &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;9&#x27;</span>) || ch == <span class="string">&#x27;_&#x27;</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// tuple 中第一项代表读到的字符串，第二项表示是否为分隔符，第三项表示结束位置对应 src 的下标</span></span><br><span class="line"><span class="comment">// 建议可以学一下 tuple 的用法</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> std::tuple&lt;std::string, <span class="type">bool</span>, <span class="type">int</span>&gt; <span class="title">reads</span><span class="params">(std::string src, <span class="type">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isID</span>(src[pos])) &#123;</span><br><span class="line">        std::string str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="type">int</span> len = src.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">while</span> (pos &lt; len &amp;&amp; <span class="built_in">isID</span>(src[pos])) &#123;</span><br><span class="line">            str += src.<span class="built_in">substr</span>(pos, <span class="number">1</span>);</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> std::<span class="built_in">make_tuple</span>(str, <span class="literal">true</span>, pos);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::string str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        str += src.<span class="built_in">substr</span>(pos, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> std::<span class="built_in">make_tuple</span>(str, <span class="literal">false</span>, pos + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个函数专门读 #define</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> std::pair&lt;std::string, <span class="type">int</span>&gt; <span class="title">readDef</span><span class="params">(std::string src, <span class="type">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> len = src.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">while</span> (pos &lt; len &amp;&amp; <span class="built_in">isspace</span>(src[pos])) pos++;</span><br><span class="line">    std::string str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> (pos &lt; len &amp;&amp; !<span class="built_in">isspace</span>(src[pos])) str += src[pos++];</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">make_pair</span>(str, pos);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(std::string str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (def.<span class="built_in">count</span>(str) != <span class="number">0</span> &amp;&amp; !vis[str]) &#123;</span><br><span class="line">        vis[str] = <span class="literal">true</span>;</span><br><span class="line">        std::string src = str;  <span class="comment">// 注意要存原先字符串以在取消标记时使用</span></span><br><span class="line">        str = def[str];</span><br><span class="line">        std::tuple&lt;std::string, <span class="type">bool</span>, <span class="type">int</span>&gt; getReads = std::<span class="built_in">make_tuple</span>(<span class="string">&quot;&quot;</span>, <span class="literal">true</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="type">int</span> len = str.<span class="built_in">length</span>();</span><br><span class="line">        std::vector&lt;std::string&gt; vec;</span><br><span class="line">        <span class="keyword">while</span> (std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads) &lt; len) &#123;</span><br><span class="line">            getReads = <span class="built_in">reads</span>(str, std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads));</span><br><span class="line">            vec.<span class="built_in">push_back</span>(std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(getReads));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (std::string each : vec) <span class="built_in">solve</span>(each);</span><br><span class="line">        vis[src] = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> std::cout &lt;&lt; str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    std::cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> XEDEBUG</span></span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;preprocessor.in&quot;</span>, <span class="string">&quot;r&quot;</span>, stdin);</span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;preprocessor.out&quot;</span>, <span class="string">&quot;w&quot;</span>, stdout);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    std::cin.<span class="built_in">ignore</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        std::string str;</span><br><span class="line">        std::<span class="built_in">getline</span>(std::cin, str);</span><br><span class="line">        std::tuple&lt;std::string, <span class="type">bool</span>, <span class="type">int</span>&gt; getReads = std::<span class="built_in">make_tuple</span>(<span class="string">&quot;&quot;</span>, <span class="literal">true</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="type">int</span> len = str.<span class="built_in">length</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads) &lt; len) &#123;</span><br><span class="line">            getReads = <span class="built_in">reads</span>(str, std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (std::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(getReads)) &#123;</span><br><span class="line">                vis.<span class="built_in">clear</span>();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> each : def) vis[each.first] = <span class="literal">false</span>;</span><br><span class="line">                <span class="built_in">solve</span>(std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(getReads));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(getReads) == <span class="string">&quot;#&quot;</span>) &#123;</span><br><span class="line">                getReads = <span class="built_in">reads</span>(str, std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads));</span><br><span class="line">                <span class="keyword">if</span> (std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(getReads) == <span class="string">&quot;define&quot;</span>) &#123;</span><br><span class="line">                    std::pair&lt;std::string, <span class="type">int</span>&gt; from = <span class="built_in">readDef</span>(str, std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads));</span><br><span class="line">                    std::string to = str.<span class="built_in">substr</span>(from.second + <span class="number">1</span>);</span><br><span class="line">                    def[from.first] = to;</span><br><span class="line">                    getReads = std::<span class="built_in">make_tuple</span>(to, <span class="literal">true</span>, len);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(getReads) == <span class="string">&quot;undef&quot;</span>) &#123;</span><br><span class="line">                    std::string from = str.<span class="built_in">substr</span>(std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads) + <span class="number">1</span>);</span><br><span class="line">                    def.<span class="built_in">erase</span>(from);</span><br><span class="line">                    getReads = std::<span class="built_in">make_tuple</span>(from, <span class="literal">true</span>, len);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    std::cout &lt;&lt; <span class="string">&quot;#&quot;</span>;</span><br><span class="line">                    getReads = std::<span class="built_in">make_tuple</span>(<span class="string">&quot;#&quot;</span>, <span class="literal">false</span>, std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(getReads) + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> std::cout &lt;&lt; std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(getReads);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> XEDEBUG</span></span><br><span class="line">    <span class="built_in">fclose</span>(stdin);</span><br><span class="line">    <span class="built_in">fclose</span>(stdout);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag"># 模拟</a>
+              <a href="/tags/%E7%9C%81%E9%80%89/" rel="tag"># 省选</a>
+              <a href="/tags/2022/" rel="tag"># 2022</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/luogu-1436/" rel="prev" title="「洛谷 P1436」棋盘分割 - 区间 DP">
+                  <i class="fa fa-chevron-left"></i> 「洛谷 P1436」棋盘分割 - 区间 DP
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/strongly-connected-component-notes/" rel="next" title="Tarjan 有向图强连通分量学习笔记">
+                  Tarjan 有向图强连通分量学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

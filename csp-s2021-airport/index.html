@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="论正解 \(O(n \log n)\) 我用 \(O(n^2)\) 的算法怎么卡过的。。。 这道题我不打算写正解。。。 题目描述 洛谷链接 一个机场有国内场和国际场两种航班，每种航班中有多个廊桥，飞机可停在廊桥边，一个廊桥对应一个飞机。若在该场的廊桥已全部停完，则飞机则无法停靠。给定廊桥数量，所有国内航班和国际航班的降落时间和起飞时间，飞机到达时从前到后依次停靠，问国内廊桥和国际廊桥分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「CSP-S2021」廊桥分配 - 技巧">
+<meta property="og:url" content="https://xenonwzh.github.io/csp-s2021-airport/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="论正解 \(O(n \log n)\) 我用 \(O(n^2)\) 的算法怎么卡过的。。。 这道题我不打算写正解。。。 题目描述 洛谷链接 一个机场有国内场和国际场两种航班，每种航班中有多个廊桥，飞机可停在廊桥边，一个廊桥对应一个飞机。若在该场的廊桥已全部停完，则飞机则无法停靠。给定廊桥数量，所有国内航班和国际航班的降落时间和起飞时间，飞机到达时从前到后依次停靠，问国内廊桥和国际廊桥分">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-03T05:43:02.000Z">
+<meta property="article:modified_time" content="2022-02-11T03:01:51.404Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="CSP">
+<meta property="article:tag" content="2021">
+<meta property="article:tag" content="模拟">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/csp-s2021-airport/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/csp-s2021-airport/","path":"csp-s2021-airport/","title":"「CSP-S2021」廊桥分配 - 技巧"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「CSP-S2021」廊桥分配 - 技巧 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">40 分思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">前缀和优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E8%AF%BB%E4%BC%98%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">快读优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E8%A7%A3"><span class="nav-number">2.4.</span> <span class="nav-text">正解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">代码演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E4%BB%8B%E7%BB%8D%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.</span> <span class="nav-text">本文介绍的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E8%A7%A3%E8%8B%A5%E6%83%B3%E7%9C%8B%E6%80%9D%E8%B7%AF%E8%AF%B7%E7%A7%BB%E6%AD%A5-huaruoji-%E7%9A%84%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.2.</span> <span class="nav-text">正解（若想看思路请移步
+huaruoji 的博客）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp-s2021-airport/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「CSP-S2021」廊桥分配 - 技巧 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「CSP-S2021」廊桥分配 - 技巧
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-03 13:43:02" itemprop="dateCreated datePublished" datetime="2021-11-03T13:43:02+08:00">2021-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-11 11:01:51" itemprop="dateModified" datetime="2022-02-11T11:01:51+08:00">2022-02-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/csp-s2021-airport/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="csp-s2021-airport/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><del>论正解 <span class="math inline">\(O(n \log n)\)</span> 我用
+<span class="math inline">\(O(n^2)\)</span>
+的算法怎么卡过的。。。</del></p>
+<p>这道题我不打算写正解。。。</p>
+<h1 id="题目描述">题目描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7913">洛谷链接</a></p>
+<p>一个机场有国内场和国际场两种航班，每种航班中有多个廊桥，飞机可停在廊桥边，一个廊桥对应一个飞机。若在该场的廊桥已全部停完，则飞机则无法停靠。给定廊桥数量，所有国内航班和国际航班的降落时间和起飞时间，飞机到达时从前到后依次停靠，问国内廊桥和国际廊桥分别分配几个才可使可停靠飞机数最大。</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<blockquote>
+<p>注意该思路不是正解，相对正解不够优，本文只是介绍该方法的卡常 AC
+方法！（基于€€￡给的数据比较水的基础上）</p>
+</blockquote>
+<h2 id="分思路">40 分思路</h2>
+<p>复杂度为 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p>首先通过进场时间排序。</p>
+<p>可分别计算国内场和国际场。假设有无限个廊桥，分别用 <span
+class="math inline">\(O(n^2)\)</span>
+的算法模拟廊桥的情况，若廊桥不够则多加入一个廊桥。</p>
+<p>记录廊桥仅需记录此时的廊桥最后飞机的出发时间和在此廊桥停靠的个数即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; chFl[MAXN];</span><br><span class="line"><span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; abFl[MAXN];</span><br><span class="line"><span class="type">int</span> chTop = <span class="number">1</span>, abTop = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">memset</span>(chFl, <span class="number">0</span>, <span class="built_in">sizeof</span>(chFl));</span><br><span class="line"><span class="built_in">memset</span>(abFl, <span class="number">0</span>, <span class="built_in">sizeof</span>(abFl));</span><br><span class="line">chFl[<span class="number">0</span>] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ch[<span class="number">0</span>].second);</span><br><span class="line">abFl[<span class="number">0</span>] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ab[<span class="number">0</span>].second);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m1; i++) &#123;</span><br><span class="line">    <span class="type">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; chTop; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (chFl[j].second &lt;= ch[i].first) &#123;</span><br><span class="line">            con = <span class="literal">false</span>;</span><br><span class="line">            chFl[j] = std::<span class="built_in">make_pair</span>(chFl[j].first + <span class="number">1</span>, ch[i].second);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (con) &#123;</span><br><span class="line">        chFl[chTop++] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ch[i].second);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m2; i++) &#123;</span><br><span class="line">    <span class="type">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; abTop; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (abFl[j].second &lt;= ab[i].first) &#123;</span><br><span class="line">            con = <span class="literal">false</span>;</span><br><span class="line">            abFl[j] = std::<span class="built_in">make_pair</span>(abFl[j].first + <span class="number">1</span>, ab[i].second);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (con) &#123;</span><br><span class="line">        abFl[abTop++] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ab[i].second);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将 <code>n</code> 分解成
+<code>(0, n), (1, n - 1), (2, n - 2) ... (n, 0)</code> 共
+<code>n + 1</code>
+种情况，在这些情况的处理下，将各个情况的飞机数相加，取最大值即为答案。</p>
+<p>不过显然这种做法不够优，最终数据会超时。</p>
+<h2 id="前缀和优化">前缀和优化</h2>
+<p>此时已经有 40 分了，在加上前缀和的 <del>玄学</del> 优化即可达到 95
+分的分数。</p>
+<p>在最后计算答案之前（即为将 <code>n</code> 分解成
+<code>(0, n), (1, n - 1), (2, n - 2) ... (n, 0)</code> 共
+<code>n + 1</code>
+种情况时）可将国内场的飞机数和国际场的飞机数分别做一个前缀和，以便计算。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> chSum[MAXN], abSum[MAXN];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    chSum[i] = chSum[i - <span class="number">1</span>] + chFl[i - <span class="number">1</span>].first;</span><br><span class="line">    abSum[i] = abSum[i - <span class="number">1</span>] + abFl[i - <span class="number">1</span>].first;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着即可在 <span class="math inline">\(O(n)\)</span>
+的复杂度中计算出最终答案。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (chSum[i] + abSum[n - i] &gt; ans) &#123;</span><br><span class="line">        ans = chSum[i] + abSum[n - i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<p>利用前缀和，就可把整个计算最终答案的过程从 <span
+class="math inline">\(O(n^2)\)</span> 优化到 <span
+class="math inline">\(O(n)\)</span>。最终答案就可多 45 分。</p>
+<h2 id="快读优化">快读优化</h2>
+<p>在这 95 分的基础上，只需写一下快读，即可 AC。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span> ch = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (ch &lt; <span class="string">&#x27;0&#x27;</span> || ch &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">&#x27;-&#x27;</span>) w = <span class="number">-1</span>;</span><br><span class="line">        ch = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ch &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        x = x * <span class="number">10</span> + (ch - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        ch = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m1, m2;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m1 &gt;&gt; m2;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ch[MAXN];</span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ab[MAXN];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x, y; i &lt; m1; i++) &#123;</span><br><span class="line">        x = <span class="built_in">read</span>(); y = <span class="built_in">read</span>();</span><br><span class="line">        ch[i] = std::<span class="built_in">make_pair</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x, y; i &lt; m2; i++) &#123;</span><br><span class="line">        x = <span class="built_in">read</span>(); y = <span class="built_in">read</span>();</span><br><span class="line">        ab[i] = std::<span class="built_in">make_pair</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="正解">正解</h2>
+<p>这里在 huaruoji 的博客中已经讲得很清楚了，这里就不在赘述。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huaruoji/p/15450554.html">CSP2021
+游记 - huaruoji</a></p>
+<h1 id="代码演示">代码演示</h1>
+<h2 id="本文介绍的代码">本文介绍的代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">100007</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span> ch = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (ch &lt; <span class="string">&#x27;0&#x27;</span> || ch &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">&#x27;-&#x27;</span>) w = <span class="number">-1</span>;</span><br><span class="line">        ch = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ch &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        x = x * <span class="number">10</span> + (ch - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        ch = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m1, m2;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m1 &gt;&gt; m2;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ch[MAXN];</span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ab[MAXN];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x, y; i &lt; m1; i++) &#123;</span><br><span class="line">        x = <span class="built_in">read</span>(); y = <span class="built_in">read</span>();</span><br><span class="line">        ch[i] = std::<span class="built_in">make_pair</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x, y; i &lt; m2; i++) &#123;</span><br><span class="line">        x = <span class="built_in">read</span>(); y = <span class="built_in">read</span>();</span><br><span class="line">        ab[i] = std::<span class="built_in">make_pair</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::<span class="built_in">sort</span>(ch, ch + m1);</span><br><span class="line">    std::<span class="built_in">sort</span>(ab, ab + m2);</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; chFl[MAXN];</span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; abFl[MAXN];</span><br><span class="line">    <span class="type">int</span> chTop = <span class="number">1</span>, abTop = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(chFl, <span class="number">0</span>, <span class="built_in">sizeof</span>(chFl));</span><br><span class="line">    <span class="built_in">memset</span>(abFl, <span class="number">0</span>, <span class="built_in">sizeof</span>(abFl));</span><br><span class="line">    chFl[<span class="number">0</span>] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ch[<span class="number">0</span>].second);</span><br><span class="line">    abFl[<span class="number">0</span>] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ab[<span class="number">0</span>].second);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m1; i++) &#123;</span><br><span class="line">        <span class="type">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; chTop; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (chFl[j].second &lt;= ch[i].first) &#123;</span><br><span class="line">                con = <span class="literal">false</span>;</span><br><span class="line">                chFl[j] = std::<span class="built_in">make_pair</span>(chFl[j].first + <span class="number">1</span>, ch[i].second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (con) &#123;</span><br><span class="line">            chFl[chTop++] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ch[i].second);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m2; i++) &#123;</span><br><span class="line">        <span class="type">bool</span> con = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; abTop; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (abFl[j].second &lt;= ab[i].first) &#123;</span><br><span class="line">                con = <span class="literal">false</span>;</span><br><span class="line">                abFl[j] = std::<span class="built_in">make_pair</span>(abFl[j].first + <span class="number">1</span>, ab[i].second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (con) &#123;</span><br><span class="line">            abFl[abTop++] = std::<span class="built_in">make_pair</span>(<span class="number">1</span>, ab[i].second);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> chSum[MAXN], abSum[MAXN];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        chSum[i] = chSum[i - <span class="number">1</span>] + chFl[i - <span class="number">1</span>].first;</span><br><span class="line">        abSum[i] = abSum[i - <span class="number">1</span>] + abFl[i - <span class="number">1</span>].first;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (chSum[i] + abSum[n - i] &gt; ans) &#123;</span><br><span class="line">            ans = chSum[i] + abSum[n - i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="正解若想看思路请移步-huaruoji-的博客">正解（若想看思路请移步
+huaruoji 的博客）</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P7913 [CSP-S 2021] 廊桥分配</span></span><br><span class="line"><span class="comment">// WzhDnwzWzh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">100007</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m1, m2;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m1 &gt;&gt; m2;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ch[MAXN];</span><br><span class="line">    <span class="type">static</span> std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ab[MAXN];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x, y; i &lt; m1; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        ch[i] = std::<span class="built_in">make_pair</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x, y; i &lt; m2; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        ab[i] = std::<span class="built_in">make_pair</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::<span class="built_in">sort</span>(ch, ch + m1);</span><br><span class="line">    std::<span class="built_in">sort</span>(ab, ab + m2);</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> std::priority_queue&lt; <span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt;, std::greater&lt;<span class="type">int</span>&gt; &gt; chN;</span><br><span class="line">    <span class="type">static</span> std::priority_queue&lt; <span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt;, std::greater&lt;<span class="type">int</span>&gt; &gt; abN;</span><br><span class="line">    <span class="type">static</span> std::priority_queue&lt; std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;, std::vector&lt; std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt;, std::greater&lt; std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; &gt; chU;</span><br><span class="line">    <span class="type">static</span> std::priority_queue&lt; std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;, std::vector&lt; std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt;, std::greater&lt; std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; &gt; abU;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> chH[MAXN];</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> abH[MAXN];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(chH, <span class="number">0</span>, <span class="built_in">sizeof</span>(chH));</span><br><span class="line">    <span class="built_in">memset</span>(abH, <span class="number">0</span>, <span class="built_in">sizeof</span>(abH));</span><br><span class="line">    chH[<span class="number">0</span>] = abH[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        chN.<span class="built_in">push</span>(i);</span><br><span class="line">        abN.<span class="built_in">push</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    chU.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>(ch[<span class="number">0</span>].second, <span class="number">0</span>) );</span><br><span class="line">    abU.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>(ab[<span class="number">0</span>].second, <span class="number">0</span>) );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m1; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!chU.<span class="built_in">empty</span>() &amp;&amp; chU.<span class="built_in">top</span>().first &lt;= ch[i].first) &#123;</span><br><span class="line">            chN.<span class="built_in">push</span>( chU.<span class="built_in">top</span>().second );</span><br><span class="line">            chU.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!chN.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            chH[chN.<span class="built_in">top</span>()]++;</span><br><span class="line">            chU.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>( ch[i].second, chN.<span class="built_in">top</span>() ) );</span><br><span class="line">            chN.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m2; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!abU.<span class="built_in">empty</span>() &amp;&amp; abU.<span class="built_in">top</span>().first &lt;= ab[i].first) &#123;</span><br><span class="line">            abN.<span class="built_in">push</span>( abU.<span class="built_in">top</span>().second );</span><br><span class="line">            abU.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!abN.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            abH[abN.<span class="built_in">top</span>()]++;</span><br><span class="line">            abU.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>( ab[i].second, abN.<span class="built_in">top</span>() ) );</span><br><span class="line">            abN.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> chS[MAXN], abS[MAXN];</span><br><span class="line">    chS[<span class="number">0</span>] = abS[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        chS[i] = chS[i - <span class="number">1</span>] + chH[i - <span class="number">1</span>];</span><br><span class="line">        abS[i] = abS[i - <span class="number">1</span>] + abH[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (chS[i] + abS[n - i] &gt; ans) &#123;</span><br><span class="line">            ans = chS[i] + abS[n - i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; ans &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag"># 前缀和</a>
+              <a href="/tags/CSP/" rel="tag"># CSP</a>
+              <a href="/tags/2021/" rel="tag"># 2021</a>
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag"># 模拟</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/csp-s2021-2/" rel="prev" title="CSP-S2021 第二轮 行记">
+                  <i class="fa fa-chevron-left"></i> CSP-S2021 第二轮 行记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/noip2021/" rel="next" title="NOIP2021 行记">
+                  NOIP2021 行记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
