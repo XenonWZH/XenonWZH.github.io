@@ -266,9 +266,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-05-18 18:53:04 / 修改时间：19:23:03" itemprop="dateCreated datePublished" datetime="2022-05-18T18:53:04+08:00">2022-05-18</time>
+      <time title="创建时间：2022-05-18 18:53:04" itemprop="dateCreated datePublished" datetime="2022-05-18T18:53:04+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-19 14:13:46" itemprop="dateModified" datetime="2022-05-19T14:13:46+08:00">2022-05-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -336,23 +342,14 @@ class="math inline">\(n\)</span> 对情侣，那么我们称婚姻 <span
 class="math inline">\(i\)</span> 为不安全的，否则婚姻 <span
 class="math inline">\(i\)</span> 就是安全的。</p>
 <p>给定所需信息，你的任务是判断每对婚姻是否安全。</p>
-<h1 id="解题思路">解题思路</h1>
-<p>显然这道题考得是图的连通性。</p>
-<p>由于若一人感情不和，随之不和的是异性，我们可以在异性之间连有向边。</p>
-<p>于是我们可以考虑用以下方式建图：</p>
-<ul>
-<li><p>对于夫妻，我们连一条 <span class="math inline">\(G_i \rightarrow
-B_i\)</span> 的有向边；</p></li>
-<li><p>对于情侣，我们连一条 <span class="math inline">\(B_i \rightarrow
-G_j\)</span> 的有向边。</p></li>
-</ul>
-<p>接下来跑一边 Tarjan 求强连通分量。若 <span
-class="math inline">\(G_i\)</span> 和 <span
-class="math inline">\(B_i\)</span>
-在同一个强连通分量中，则他们的婚姻是不安全的。</p>
-<h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">4000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Edge</span> *edges;</span><br><span class="line">    <span class="type">int</span> dfn, low;</span><br><span class="line">    <span class="type">bool</span> visited;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Connected</span> *connected;</span><br><span class="line">&#125; N[<span class="number">2</span> * MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    Node *from, *to;</span><br><span class="line">    Edge *next;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Edge</span>(Node *from, Node *to) : <span class="built_in">from</span>(from), <span class="built_in">to</span>(to), <span class="built_in">next</span>(from-&gt;edges) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Connected</span> &#123;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">&#125; connecteds[<span class="number">2</span> * MAXN];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line">std::string girl[MAXN], boy[MAXN];</span><br><span class="line">std::map&lt;std::string, <span class="type">int</span>&gt; mp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">addEdge</span><span class="params">(<span class="type">int</span> from, <span class="type">int</span> to)</span> </span>&#123;</span><br><span class="line">    N[from].edges = <span class="keyword">new</span> <span class="built_in">Edge</span>(&amp;N[from], &amp;N[to]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(Node *x)</span> </span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> num = <span class="number">0</span>, counts = <span class="number">0</span>;</span><br><span class="line">    <span class="type">static</span> std::stack&lt;Node *&gt; stk;</span><br><span class="line">    x-&gt;dfn = x-&gt;low = ++num;</span><br><span class="line">    stk.<span class="built_in">push</span>(x);</span><br><span class="line">    x-&gt;visited = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Edge *edges = x-&gt;edges; edges; edges = edges-&gt;next) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!edges-&gt;to-&gt;dfn) &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(edges-&gt;to);</span><br><span class="line">            x-&gt;low = std::<span class="built_in">min</span>(x-&gt;low, edges-&gt;to-&gt;low);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (edges-&gt;to-&gt;visited) &#123;</span><br><span class="line">            x-&gt;low = std::<span class="built_in">min</span>(x-&gt;low, edges-&gt;to-&gt;dfn);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (x-&gt;dfn == x-&gt;low) &#123;</span><br><span class="line">        counts++;</span><br><span class="line">        Node *y;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            y = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            y-&gt;visited = <span class="literal">false</span>;</span><br><span class="line">            y-&gt;connected = &amp;connecteds[counts];</span><br><span class="line">            connecteds[counts].size++;</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        std::cin &gt;&gt; girl[i] &gt;&gt; boy[i];</span><br><span class="line">        mp[girl[i]] = <span class="number">2</span> * i;</span><br><span class="line">        mp[boy[i]] = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">addEdge</span>(mp[girl[i]], mp[boy[i]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        std::string g, b;</span><br><span class="line">        std::cin &gt;&gt; g &gt;&gt; b;</span><br><span class="line">        <span class="built_in">addEdge</span>(mp[b], mp[g]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!N[i].dfn) &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(&amp;N[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (N[mp[girl[i]]].connected == N[mp[boy[i]]].connected) <span class="built_in">puts</span>(<span class="string">&quot;Unsafe&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;Safe&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/luogu-1407/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -519,9 +516,15 @@ B）。一个扩展就是在一个学校的接收学校列表中引入一个新�
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-05-18 14:28:32 / 修改时间：22:16:45" itemprop="dateCreated datePublished" datetime="2022-05-18T14:28:32+08:00">2022-05-18</time>
+      <time title="创建时间：2022-05-18 14:28:32" itemprop="dateCreated datePublished" datetime="2022-05-18T14:28:32+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-19 14:12:49" itemprop="dateModified" datetime="2022-05-19T14:12:49+08:00">2022-05-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1486,6 +1489,8 @@ OI 群里。</p>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
 
 
 

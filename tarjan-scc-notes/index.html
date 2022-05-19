@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://xenonwzh.github.io/images/tarjan-scc-graph.png">
 <meta property="og:image" content="https://xenonwzh.github.io/images/tarjan-scc-edges.png">
 <meta property="article:published_time" content="2022-05-18T06:28:32.000Z">
-<meta property="article:modified_time" content="2022-05-18T14:16:45.143Z">
+<meta property="article:modified_time" content="2022-05-19T06:12:49.182Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="学习笔记">
@@ -277,9 +277,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-05-18 14:28:32 / 修改时间：22:16:45" itemprop="dateCreated datePublished" datetime="2022-05-18T14:28:32+08:00">2022-05-18</time>
+      <time title="创建时间：2022-05-18 14:28:32" itemprop="dateCreated datePublished" datetime="2022-05-18T14:28:32+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-19 14:12:49" itemprop="dateModified" datetime="2022-05-19T14:12:49+08:00">2022-05-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -397,9 +403,39 @@ class="math inline">\(x\)</span>、<span class="math inline">\(x\)</span>
 class="math inline">\(\text{low}_i\)</span>，表示由节点 <span
 class="math inline">\(i\)</span> 开始搜索所能到达的点中，在搜索树上是
 <span class="math inline">\(i\)</span> 的祖先的节点中最小的时间戳。</p>
-<blockquote>
-<p>To be continued...</p>
-</blockquote>
+<p>于是我们可以对节点 <span class="math inline">\(x\)</span>
+进行下列操作：</p>
+<ol type="1">
+<li><p>当节点 <span class="math inline">\(x\)</span> 第一次被访问时，把
+<span class="math inline">\(x\)</span> 入栈，初始化 <span
+class="math inline">\(\text{low}_x = \text{dfn}_x\)</span>；</p></li>
+<li><p>扫描从 <span class="math inline">\(x\)</span> 出发的边 <span
+class="math inline">\(x \rightarrow y\)</span>：</p>
+<ol type="1">
+<li><p>若 <span class="math inline">\(y\)</span> 没访问过，则说明 <span
+class="math inline">\(y\)</span> 是 <span
+class="math inline">\(x\)</span> 的树枝边，递归访问 <span
+class="math inline">\(y\)</span>，从 <span
+class="math inline">\(y\)</span> 回溯后，令 <span
+class="math inline">\(\text{low}_x = \min \{ \text{low}_x, \text{low}_y
+\}\)</span>；</p></li>
+<li><p>若 <span class="math inline">\(y\)</span> 被访问过并且 <span
+class="math inline">\(y\)</span> 在栈中，则令 <span
+class="math inline">\(\text{low}_x = \min \{ \text{low}_x, \text{dfn}_y
+\}\)</span>。</p></li>
+</ol></li>
+<li><p>从 <span class="math inline">\(x\)</span> 回溯之前，判断是否有
+<span class="math inline">\(\text{low}_x =
+\text{dfn}_x\)</span>。若成立，则不断从栈中弹出节点，直至 <span
+class="math inline">\(x\)</span> 出栈。</p></li>
+</ol>
+<p>显然在第三步中当 <span class="math inline">\(\text{low}_x =
+\text{dfn}_x\)</span> 时，栈顶到栈中 <span
+class="math inline">\(x\)</span> 之间必有节点都通过树枝边或横插边连向
+<span
+class="math inline">\(x\)</span>，且其中的其余节点有至少一条路径连线该节点。即这些节点构成一个环，属于同一个强连通分量。此时只需在出栈的时候记录其中节点属于同一强连通分量即可。</p>
+<p>Tarjan 的时间复杂度为 <span class="math inline">\(O(n +
+m)\)</span>，是一个非常高效的算法。</p>
 <h3 id="代码模板">代码模板</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    dfn[x] = low[x] = ++num;</span><br><span class="line">    sta.<span class="built_in">push</span>(x);</span><br><span class="line">    ins[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> each : e[x]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!dfn[each]) &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(each);</span><br><span class="line">            low[x] = std::<span class="built_in">min</span>(low[x], low[each]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ins[each]) &#123;</span><br><span class="line">            low[x] = std::<span class="built_in">min</span>(low[x], dfn[each]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dfn[x] == low[x]) &#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        <span class="type">int</span> y;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            y = sta.<span class="built_in">top</span>();</span><br><span class="line">            sta.<span class="built_in">pop</span>();</span><br><span class="line">            ins[y] = <span class="number">0</span>;</span><br><span class="line">            c[y] = cnt, scc[cnt].<span class="built_in">push_back</span>(y);</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="缩点">缩点</h2>
@@ -505,6 +541,8 @@ class="math inline">\(1\)</span>，答案则为该连通分量内节点个数，
 <script src="/js/third-party/search/local-search.js"></script>
 
 
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
 
 
 
