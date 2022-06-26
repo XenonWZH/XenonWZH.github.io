@@ -20,33 +20,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="题意描述 洛谷链接 有一个球形空间产生器能够在 \(n\) 维空间中产生一个坚硬的球体。现在，你被困在了这个 \(n\) 维球体中，你只知道球面上 \(n + 1\) 个点的坐标，你需要以最快的速度确定这个 \(n\) 维球体的球心坐标，以便于摧毁这个球形空间产生器。">
+    <meta name="description" content="题意描述 洛谷链接 公元11380年，一颗巨大的陨石坠落在南极。于是，灾难降临了，地球上出现了一系列反常的现象。当人们焦急万分的时候，一支中国科学家组成的南极考察队赶到了出事地点。经过一番侦察，科学家们发现陨石上刻有若干行密文，每一行都包含5个整数： 1231 1 1 1 60 0 6 3 578 0 11 3 2845 著名的科学家 SS 发现，这些密文实际上是一种复杂运算的结果。为了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「JSOI2008」球形空间产生器 - 高斯消元">
-<meta property="og:url" content="https://xenonwzh.github.io/jsoi2008-sphere/index.html">
+<meta property="og:title" content="「NOI 2001」陨石的秘密 - 线性 DP">
+<meta property="og:url" content="https://xenonwzh.github.io/noi2001-secret/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="题意描述 洛谷链接 有一个球形空间产生器能够在 \(n\) 维空间中产生一个坚硬的球体。现在，你被困在了这个 \(n\) 维球体中，你只知道球面上 \(n + 1\) 个点的坐标，你需要以最快的速度确定这个 \(n\) 维球体的球心坐标，以便于摧毁这个球形空间产生器。">
+<meta property="og:description" content="题意描述 洛谷链接 公元11380年，一颗巨大的陨石坠落在南极。于是，灾难降临了，地球上出现了一系列反常的现象。当人们焦急万分的时候，一支中国科学家组成的南极考察队赶到了出事地点。经过一番侦察，科学家们发现陨石上刻有若干行密文，每一行都包含5个整数： 1231 1 1 1 60 0 6 3 578 0 11 3 2845 著名的科学家 SS 发现，这些密文实际上是一种复杂运算的结果。为了">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-09T01:23:15.000Z">
-<meta property="article:modified_time" content="2022-04-09T01:40:40.000Z">
+<meta property="article:published_time" content="2022-06-21T02:15:37.000Z">
+<meta property="article:modified_time" content="2022-06-26T14:08:24.026Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
-<meta property="article:tag" content="高斯消元">
-<meta property="article:tag" content="省选">
-<meta property="article:tag" content="JSOI">
-<meta property="article:tag" content="2008">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="2001">
+<meta property="article:tag" content="线性 DP">
+<meta property="article:tag" content="NOI">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xenonwzh.github.io/jsoi2008-sphere/">
+<link rel="canonical" href="https://xenonwzh.github.io/noi2001-secret/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/jsoi2008-sphere/","path":"jsoi2008-sphere/","title":"「JSOI2008」球形空间产生器 - 高斯消元"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/noi2001-secret/","path":"noi2001-secret/","title":"「NOI 2001」陨石的秘密 - 线性 DP"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>「JSOI2008」球形空间产生器 - 高斯消元 | XenonWZH's Blog</title>
+<title>「NOI 2001」陨石的秘密 - 线性 DP | XenonWZH's Blog</title>
   
 
 
@@ -247,7 +247,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/jsoi2008-sphere/">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noi2001-secret/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -260,12 +260,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="「JSOI2008」球形空间产生器 - 高斯消元 | XenonWZH's Blog">
+      <meta itemprop="name" content="「NOI 2001」陨石的秘密 - 线性 DP | XenonWZH's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          「JSOI2008」球形空间产生器 - 高斯消元
+          「NOI 2001」陨石的秘密 - 线性 DP
         </h1>
 
         <div class="post-meta-container">
@@ -275,9 +275,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-04-09 09:23:15 / 修改时间：09:40:40" itemprop="dateCreated datePublished" datetime="2022-04-09T09:23:15+08:00">2022-04-09</time>
+      <time title="创建时间：2022-06-21 10:15:37" itemprop="dateCreated datePublished" datetime="2022-06-21T10:15:37+08:00">2022-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-26 22:08:24" itemprop="dateModified" datetime="2022-06-26T22:08:24+08:00">2022-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,8 +315,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/jsoi2008-sphere/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jsoi2008-sphere/" itemprop="commentCount"></span>
+    <a title="disqus" href="/noi2001-secret/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noi2001-secret/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -325,39 +331,62 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4035">洛谷链接</a></p>
-<p>有一个球形空间产生器能够在 <span class="math inline">\(n\)</span>
-维空间中产生一个坚硬的球体。现在，你被困在了这个 <span
-class="math inline">\(n\)</span> 维球体中，你只知道球面上 <span
-class="math inline">\(n + 1\)</span>
-个点的坐标，你需要以最快的速度确定这个 <span
-class="math inline">\(n\)</span>
-维球体的球心坐标，以便于摧毁这个球形空间产生器。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5694">洛谷链接</a></p>
+<p>公元11380年，一颗巨大的陨石坠落在南极。于是，灾难降临了，地球上出现了一系列反常的现象。当人们焦急万分的时候，一支中国科学家组成的南极考察队赶到了出事地点。经过一番侦察，科学家们发现陨石上刻有若干行密文，每一行都包含5个整数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1 6</span><br><span class="line">0 0 6 3 57</span><br><span class="line">8 0 11 3 2845</span><br></pre></td></tr></table></figure>
+<p>著名的科学家 SS
+发现，这些密文实际上是一种复杂运算的结果。为了便于大家理解这种运算，他定义了一种
+SS 表达式：</p>
+<ol type="1">
+<li>SS 表达式是仅由 <code>&#123;</code>, <code>&#125;</code>, <code>[</code>,
+<code>]</code>, <code>(</code>, <code>)</code> 组成的字符串。</li>
+<li>一个空串是 SS 表达式。</li>
+<li>如果 $ A $ 是SS表达式，且 $ A $ 中不含字符 <code>&#123;</code>,
+<code>&#125;</code>, <code>[</code>, <code>]</code>，则 $ (A) $
+是SS表达式。</li>
+<li>如果 $ A $ 是 SS 表达式，且 $ A $ 中不含字符 <code>&#123;</code>,
+<code>&#125;</code>，则 $ [A] $ 是 SS 表达式。</li>
+<li>如果 $ A $ 是 SS 表达式，则 $ {A} $ 是 SS 表达式。</li>
+<li>如果 $ A $ 和 $ B $ 都是 SS 表达式，则 $ AB $ 也是 SS 表达式。</li>
+</ol>
+<p>一个 SS 表达式 $ E $ 的深度 $ D(E) $定义如下：</p>
+<p><span class="math display">\[
+\scriptstyle{
+D(E) =
+\begin{cases}
+\scriptstyle{0}, &amp; \scriptstyle{\text{如果 } E \text{ 是空串}} \\
+\scriptstyle{D(A) + 1}, &amp;  \scriptstyle{\text{如果 } E = (A) \text{
+或者 } E = [A] \text{ 或者 } E = \{A\}, \text{ 其中 } A \text{ 是 SS
+表达式}} \\
+\scriptstyle{\max(D(A), D(B))}, &amp;  \scriptstyle{\text{ 如果 } E =
+AB, \text{其中 } A, B \text{ 是 SS 表达式}}
+\end{cases}
+}
+\]</span></p>
+<p>例如 <code>()&#123;()&#125;[]</code> 的深度为 $ 2 $。</p>
+<p>密文中的复杂运算是这样进行的：</p>
+<p>设密文中每行前 $ 4 $ 个数依次为 $ L_1, L_2, L_3, D $，求出所有深度为
+$ D $，含有 $ L_1 $ 对 <code>&#123;&#125;</code>，$ L_2 $ 对 <code>[]</code>，$
+L_3 $ 对 <code>()</code> 的 SS 串的个数，并用这个数对当前的年份 $ 11380
+$ 求余数，这个余数就是密文中每行的第 $ 5 $
+个数，我们称之为“神秘数”。</p>
+<p>密文中某些行的第五个数已经模糊不清，而这些数字正是揭开陨石秘密的钥匙。现在科学家们聘请你来计算这个神秘数。</p>
 <span id="more"></span>
 <h1 id="解题思路">解题思路</h1>
-<p>对于本题，我们可以感性感知到这道题是高斯消元。于是我们可以通过距离公式推出下列式子：</p>
+<p>本题显然可以想到用线性 DP 求解。</p>
+<p>对于这道题，我们定义状态为：</p>
 <p><span class="math display">\[
-\sum_{j = 1}^{n} (a_{i, j} - x_j)^2 = \text{dis} \quad i \in [1, n] \cap
-\mathbb{Z}
+f_{i, j, k, l} \quad i \in [0, d], j \in [0, l1], k \in [0, l2], l \in
+[0, l3]
 \]</span></p>
-<p>其中 <span class="math inline">\(\text{dis}\)</span> 为常量。</p>
-<p>对于该式化简会出现二次项，不好计算，我们需要把二次项化掉，同时化掉
-<span class="math inline">\(\text{dis}\)</span>。</p>
-<p>于是我们可以将相邻两项作差，得到下列式子：</p>
-<p><span class="math display">\[
-\sum_{j = 1}^{n} ( a_{i, j}^2 - a_{i + 1, j}^2 - 2(a_{i, j} - a_{i + 1,
-j})x_j ) = 0 \quad i \in [1, n] \cap \mathbb{Z}
-\]</span></p>
-<p>然后移项得到下列式子：</p>
-<p><span class="math display">\[
-\sum_{j = 1}^{n} 2(a_{i, j} - a_{i + 1})x_j = \sum_{j = 1}^{n} (a_{i,
-j}^2 - a_{i + 1, j}^2) \quad i \in [1, n] \cap \mathbb{Z}
-\]</span></p>
-<p>由于 <span class="math inline">\(a_{i, j}\)</span>，<span
-class="math inline">\(n\)</span> 为常量，故 <span
-class="math inline">\(x_j\)</span> 可用高斯消元求解，最后得解。</p>
+<p>其中 <span class="math inline">\(f_{i, j, k, l}\)</span> 表示长度为
+<span class="math inline">\(i\)</span>，有 <span
+class="math inline">\(j\)</span> 个 $$</p>
+<blockquote>
+<p>To be continue...</p>
+</blockquote>
 <h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">double</span> pos[MAXN + <span class="number">2</span>][MAXN + <span class="number">1</span>], a[MAXN + <span class="number">1</span>][MAXN + <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">gauss</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt;= n + <span class="number">1</span>; j++) a[i][j] /= a[i][i];</span><br><span class="line">        a[i][i] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = i + <span class="number">1</span>; k &lt;= n + <span class="number">1</span>; k++) &#123;</span><br><span class="line">                a[j][k] -= a[i][k] * a[j][i] / a[i][i];</span><br><span class="line">            &#125;</span><br><span class="line">            a[j][i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt; <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            a[j][n + <span class="number">1</span>] -= a[i][n + <span class="number">1</span>] * a[j][i] / a[i][i];</span><br><span class="line">            a[j][i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        a[i][n + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            a[i][j] = <span class="number">2</span> * (pos[i][j] - pos[i + <span class="number">1</span>][j]);</span><br><span class="line">            a[i][n + <span class="number">1</span>] += pos[i][j] * pos[i][j] - pos[i + <span class="number">1</span>][j] * pos[i + <span class="number">1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            std::cin &gt;&gt; pos[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gauss</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.3f &quot;</span>, a[i][n + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXL = <span class="number">10</span>, MAXD = <span class="number">30</span>, MOD = <span class="number">11380</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> l1, l2, l3, d;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;l1, &amp;l2, &amp;l3, &amp;d);</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> f[MAXD + <span class="number">1</span>][MAXL + <span class="number">1</span>][MAXL + <span class="number">1</span>][MAXL + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in">sizeof</span>(f));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= d; i++) f[i][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= d; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= l1; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt;= l2; k++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> l = <span class="number">0</span>; l &lt;= l3; l++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt;= j; m++) &#123;</span><br><span class="line">                            <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt;= k; n++) &#123;</span><br><span class="line">                                <span class="keyword">for</span> (<span class="type">int</span> r = <span class="number">0</span>; r &lt;= l; r++) &#123;</span><br><span class="line">                                    f[i][j][k][l] = (f[i][j][k][l] + f[i - <span class="number">1</span>][m - <span class="number">1</span>][n][r] * f[i][j - m][k - n][l - r]) % MOD;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt;= k; m++) &#123;</span><br><span class="line">                            <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt;= l; n++) &#123;</span><br><span class="line">                                f[i][j][k][l] = (f[i][j][k][l] + f[i - <span class="number">1</span>][<span class="number">0</span>][m - <span class="number">1</span>][n] * f[i][j][k - m][l - n]) % MOD;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (l &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="type">int</span> m = <span class="number">1</span>; m &lt;= l; m++) &#123;</span><br><span class="line">                            f[i][j][k][l] = (f[i][j][k][l] + f[i - <span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>][m - <span class="number">1</span>] * f[i][j][k][l - m]) % MOD;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (f[d][l1][l2][l3] - (d ? f[d - <span class="number">1</span>][l1][l2][l3] : <span class="number">0</span>) + MOD) % MOD);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -369,23 +398,23 @@ class="math inline">\(x_j\)</span> 可用高斯消元求解，最后得解。</p
           <div class="post-tags">
               <a href="/tags/OI/" rel="tag"># OI</a>
               <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
-              <a href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag"># 高斯消元</a>
-              <a href="/tags/%E7%9C%81%E9%80%89/" rel="tag"># 省选</a>
-              <a href="/tags/JSOI/" rel="tag"># JSOI</a>
-              <a href="/tags/2008/" rel="tag"># 2008</a>
+              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/2001/" rel="tag"># 2001</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7-DP/" rel="tag"># 线性 DP</a>
+              <a href="/tags/NOI/" rel="tag"># NOI</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/luogu-2455/" rel="prev" title="「SDOI2006」线性方程组 - 高斯消元">
-                  <i class="fa fa-chevron-left"></i> 「SDOI2006」线性方程组 - 高斯消元
+                <a href="/luogu-4321/" rel="prev" title="「洛谷 P4321」三步必杀 - 前缀和">
+                  <i class="fa fa-chevron-left"></i> 「洛谷 P4321」三步必杀 - 前缀和
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/noi2001-cannon/" rel="next" title="「NOI 2001」炮兵阵地 - 状压 DP">
-                  「NOI 2001」炮兵阵地 - 状压 DP <i class="fa fa-chevron-right"></i>
+                <a href="/to-be-continue/" rel="next" title="To be Continue...">
+                  To be Continue... <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
