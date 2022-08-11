@@ -20,34 +20,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="题意描述 洛谷链接 一些学校连入一个电脑网络。那些学校已订立了协议：每个学校都会给其它的一些学校分发软件（称作“接受学校”）。注意即使 \(B\) 在 \(A\) 学校的分发列表中，\(A\) 也不一定在 \(B\) 学校的列表中。 你要写一个程序计算，根据协议，为了让网络中所有的学校都用上新软件，必须接受新软件副本的最少学校数目（子任务 A）。更进一步，我们想要确定通过给任意一个学校发">
+    <meta name="description" content="题意描述 Kiana 最近沉迷于一款神奇的游戏无法自拔。 简单来说，这款游戏是在一个平面上进行的。有一架弹弓位于 $ (0, 0) $ 处，每次 Kiana 可以用它向第一象限发射一只小鸟，小鸟们的飞行轨迹均为形如 $ y &#x3D; ax ^ 2 + bx $ 的曲线，其中 $ a \(，\) b $ 是 Kiana 指定的参数，且必须满足 $ a &lt; 0 $。当小鸟落回地面（即 $ x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「洛谷 P2746」校园网 Network of Schools - 强连通分量">
-<meta property="og:url" content="https://xenonwzh.github.io/luogu-2746/index.html">
+<meta property="og:title" content="「NOIP 2016」愤怒的小鸟 - 状压 DP">
+<meta property="og:url" content="https://xenonwzh.github.io/noip2016-angrybirds/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="题意描述 洛谷链接 一些学校连入一个电脑网络。那些学校已订立了协议：每个学校都会给其它的一些学校分发软件（称作“接受学校”）。注意即使 \(B\) 在 \(A\) 学校的分发列表中，\(A\) 也不一定在 \(B\) 学校的列表中。 你要写一个程序计算，根据协议，为了让网络中所有的学校都用上新软件，必须接受新软件副本的最少学校数目（子任务 A）。更进一步，我们想要确定通过给任意一个学校发">
+<meta property="og:description" content="题意描述 Kiana 最近沉迷于一款神奇的游戏无法自拔。 简单来说，这款游戏是在一个平面上进行的。有一架弹弓位于 $ (0, 0) $ 处，每次 Kiana 可以用它向第一象限发射一只小鸟，小鸟们的飞行轨迹均为形如 $ y &#x3D; ax ^ 2 + bx $ 的曲线，其中 $ a \(，\) b $ 是 Kiana 指定的参数，且必须满足 $ a &lt; 0 $。当小鸟落回地面（即 $ x">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-18T06:29:46.000Z">
-<meta property="article:modified_time" content="2022-05-18T06:36:50.000Z">
+<meta property="article:published_time" content="2022-08-11T06:49:14.000Z">
+<meta property="article:modified_time" content="2022-08-11T07:06:13.500Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
-<meta property="article:tag" content="图论">
-<meta property="article:tag" content="洛谷">
-<meta property="article:tag" content="Tarjan">
-<meta property="article:tag" content="强连通分量">
-<meta property="article:tag" content="USACO">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="状压 DP">
+<meta property="article:tag" content="NOIP">
+<meta property="article:tag" content="2016">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xenonwzh.github.io/luogu-2746/">
+<link rel="canonical" href="https://xenonwzh.github.io/noip2016-angrybirds/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/luogu-2746/","path":"luogu-2746/","title":"「洛谷 P2746」校园网 Network of Schools - 强连通分量"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/noip2016-angrybirds/","path":"noip2016-angrybirds/","title":"「NOIP 2016」愤怒的小鸟 - 状压 DP"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>「洛谷 P2746」校园网 Network of Schools - 强连通分量 | XenonWZH's Blog</title>
+<title>「NOIP 2016」愤怒的小鸟 - 状压 DP | XenonWZH's Blog</title>
   
 
 
@@ -248,7 +247,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-2746/">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noip2016-angrybirds/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -261,12 +260,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="「洛谷 P2746」校园网 Network of Schools - 强连通分量 | XenonWZH's Blog">
+      <meta itemprop="name" content="「NOIP 2016」愤怒的小鸟 - 状压 DP | XenonWZH's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          「洛谷 P2746」校园网 Network of Schools - 强连通分量
+          「NOIP 2016」愤怒的小鸟 - 状压 DP
         </h1>
 
         <div class="post-meta-container">
@@ -278,7 +277,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-05-18 14:29:46 / 修改时间：14:36:50" itemprop="dateCreated datePublished" datetime="2022-05-18T14:29:46+08:00">2022-05-18</time>
+      <time title="创建时间：2022-08-11 14:49:14 / 修改时间：15:06:13" itemprop="dateCreated datePublished" datetime="2022-08-11T14:49:14+08:00">2022-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,8 +309,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/luogu-2746/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-2746/" itemprop="commentCount"></span>
+    <a title="disqus" href="/noip2016-angrybirds/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noip2016-angrybirds/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -326,25 +325,44 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2746">洛谷链接</a></p>
-<p>一些学校连入一个电脑网络。那些学校已订立了协议：每个学校都会给其它的一些学校分发软件（称作“接受学校”）。注意即使
-<span class="math inline">\(B\)</span> 在 <span
-class="math inline">\(A\)</span> 学校的分发列表中，<span
-class="math inline">\(A\)</span> 也不一定在 <span
-class="math inline">\(B\)</span> 学校的列表中。</p>
-<p>你要写一个程序计算，根据协议，为了让网络中所有的学校都用上新软件，必须接受新软件副本的最少学校数目（子任务
-A）。更进一步，我们想要确定通过给任意一个学校发送新软件，这个软件就会分发到网络中的所有学校。为了完成这个任务，我们可能必须扩展接收学校列表，使其加入新成员。计算最少需要增加几个扩展，使得不论我们给哪个学校发送新软件，它都会到达其余所有的学校（子任务
-B）。一个扩展就是在一个学校的接收学校列表中引入一个新成员。</p>
+<p>Kiana 最近沉迷于一款神奇的游戏无法自拔。<br />
+简单来说，这款游戏是在一个平面上进行的。有一架弹弓位于 $ (0, 0) $
+处，每次 Kiana 可以用它向第一象限发射一只小鸟，小鸟们的飞行轨迹均为形如
+$ y = ax ^ 2 + bx $ 的曲线，其中 $ a <span
+class="math inline">\(，\)</span> b $ 是 Kiana 指定的参数，且必须满足 $
+a &lt; 0 $。当小鸟落回地面（即 $ x $ 轴）时，它就会瞬间消失。</p>
+<p>在游戏的某个关卡里，平面的第一象限中有 $ n $ 只猪，其中第 $ i $
+只猪所在的坐标为 $ (x_i, y_i) $。如果某只小鸟的飞行轨迹经过了 $ (x_i,
+y_i) $，那么第 $ i $
+只猪就会被消灭掉，同时小鸟将会沿着原先的轨迹继续飞行；如果一只小鸟的飞行轨迹没有经过
+$ (x_i, y_i) $，那么这只小鸟飞行的全过程就不会对第 $ i $
+只猪产生任何影响。 例如，若两只猪分别位于 $ (1, 3) $ 和 $ (3, 3)
+$，Kiana 可以选择发射一只飞行轨迹为 $ y = -x ^ 2 + 4x $
+的小鸟，这样两只猪就会被这只小鸟一起消灭。<br />
+而这个游戏的目的，就是通过发射小鸟消灭所有的猪。</p>
+<p>假设这款游戏一共有 $ T $ 个关卡，现在 Kiana
+想知道，对于每一个关卡，至少需要发射多少只小鸟才能消灭所有的猪。由于她不会算，所以希望由你告诉她。</p>
+<p>数据范围：$ 1 n <span class="math inline">\(，\)</span> 0 m <span
+class="math inline">\(，\)</span> 0 &lt; x_i, y_i &lt; 10 <span
+class="math inline">\(，\)</span> 1 T $。</p>
 <span id="more"></span>
 <h1 id="解题思路">解题思路</h1>
-<p>显然这道题考的是强连通分量。将学校用节点表示，分发关系用有向边表示，接着用
-Tarjan 求一遍之后缩点即可。</p>
-<p>第一问答案即为缩点后入度为 <span class="math inline">\(0\)</span>
-的节点个数，第二问答案即为入度为 <span class="math inline">\(0\)</span>
-和出度为 <span class="math inline">\(0\)</span>
-的节点数两者的最大值。</p>
+<p>很明显是状压
+DP。先枚举每两个猪是否构成抛物线，以及抛物线后可达到另外的哪些猪。将抛物线可达到的猪的集合存为
+<span class="math inline">\(g_i\)</span>，抛物线个数为 <span
+class="math inline">\(\text{sizeG}\)</span>。</p>
+<p>接下来我们定义 <span class="math inline">\(f_i\)</span> 为已清除
+<span class="math inline">\(i\)</span>
+集合的猪所需最少的鸟的数量。显然我们可推出下列状态转移方程：</p>
+<p><span class="math display">\[
+f_{i \bigcap g_j} = \min\{f_{i \bigcap g_j}, f_i + 1\} \quad i \in [1,
+n], j \in [1, \text{sizeG}]
+\]</span></p>
+<p>初始化 <span class="math inline">\(f_i = +\infty\)</span>。答案 <span
+class="math inline">\(f_S\)</span>，其中 <span
+class="math inline">\(S\)</span> 为全集。</p>
 <h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; e[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> dfn[MAXN + <span class="number">1</span>], low[MAXN + <span class="number">1</span>], num = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">std::stack&lt;<span class="type">int</span>&gt; sta;</span><br><span class="line"><span class="type">int</span> ins[MAXN + <span class="number">1</span>], c[MAXN + <span class="number">1</span>];</span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; scc[MAXN + <span class="number">1</span>];</span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; ec[MAXN + <span class="number">1</span>], ecRev[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    dfn[x] = low[x] = ++num;</span><br><span class="line">    sta.<span class="built_in">push</span>(x);</span><br><span class="line">    ins[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> each : e[x]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!dfn[each]) &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(each);</span><br><span class="line">            low[x] = std::<span class="built_in">min</span>(low[x], low[each]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ins[each]) &#123;</span><br><span class="line">            low[x] = std::<span class="built_in">min</span>(low[x], dfn[each]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dfn[x] == low[x]) &#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        <span class="type">int</span> y;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            y = sta.<span class="built_in">top</span>();</span><br><span class="line">            sta.<span class="built_in">pop</span>();</span><br><span class="line">            ins[y] = <span class="number">0</span>;</span><br><span class="line">            c[y] = cnt, scc[cnt].<span class="built_in">push_back</span>(y);</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, x; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x) != EOF) &#123;</span><br><span class="line">            <span class="keyword">if</span> (x == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">            e[i].<span class="built_in">push_back</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(dfn, <span class="number">0</span>, <span class="built_in">sizeof</span>(dfn));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[i]) &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> each : e[i]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (c[i] == c[each]) <span class="keyword">continue</span>;</span><br><span class="line">            ec[c[i]].<span class="built_in">push_back</span>(c[each]);</span><br><span class="line">            ecRev[c[each]].<span class="built_in">push_back</span>(c[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> count1 = <span class="number">0</span>, count2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ecRev[i].<span class="built_in">size</span>() == <span class="number">0</span>) count1++;</span><br><span class="line">        <span class="keyword">if</span> (ec[i].<span class="built_in">size</span>() == <span class="number">0</span>) count2++;</span><br><span class="line">    &#125;</span><br><span class="line">    count2 = std::<span class="built_in">max</span>(count1, count2);</span><br><span class="line">    <span class="keyword">if</span> (cnt == <span class="number">1</span>) count1 = <span class="number">1</span>, count2 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; count1 &lt;&lt; std::endl &lt;&lt;  count2 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">double</span> EPS = <span class="number">1e-6</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    <span class="type">static</span> <span class="type">double</span> x[MAXN], y[MAXN];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf&quot;</span>, &amp;x[i], &amp;y[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> g[MAXN * MAXN];</span><br><span class="line">    <span class="built_in">memset</span>(g, <span class="number">0</span>, <span class="built_in">sizeof</span>(g));</span><br><span class="line">    <span class="type">int</span> sizeG = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">fabs</span>(x[j] - x[i]) &lt; EPS) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">double</span> a = (x[i] * y[j] - x[j] * y[i]) / (x[i] * x[j] * x[j] - x[i] * x[i] * x[j]);</span><br><span class="line">            <span class="type">double</span> b = (x[i] * x[i] * y[j] - x[j] * x[j] * y[i]) / (x[i] * x[i] * x[j] - x[i] * x[j] * x[j]);</span><br><span class="line">            <span class="keyword">if</span> (a &gt; -EPS) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">fabs</span>(a * x[k] * x[k] + b * x[k] - y[k]) &lt; EPS) &#123;</span><br><span class="line">                    g[sizeG] |= (<span class="number">1</span> &lt;&lt; k);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            sizeG++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> f[<span class="number">1</span> &lt;&lt; MAXN];</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="built_in">sizeof</span>(f));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) f[<span class="number">1</span> &lt;&lt; i] = <span class="number">1</span>;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; sizeG; j++) &#123;</span><br><span class="line">            f[i | g[j]] = std::<span class="built_in">min</span>(f[i | g[j]], f[i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            f[i | (<span class="number">1</span> &lt;&lt; j)] = std::<span class="built_in">min</span>(f[i | (<span class="number">1</span> &lt;&lt; j)], f[i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f[(<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -356,25 +374,21 @@ Tarjan 求一遍之后缩点即可。</p>
           <div class="post-tags">
               <a href="/tags/OI/" rel="tag"># OI</a>
               <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
-              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
-              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"># 洛谷</a>
-              <a href="/tags/Tarjan/" rel="tag"># Tarjan</a>
-              <a href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" rel="tag"># 强连通分量</a>
-              <a href="/tags/USACO/" rel="tag"># USACO</a>
+              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/%E7%8A%B6%E5%8E%8B-DP/" rel="tag"># 状压 DP</a>
+              <a href="/tags/NOIP/" rel="tag"># NOIP</a>
+              <a href="/tags/2016/" rel="tag"># 2016</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/tarjan-scc-notes/" rel="prev" title="Tarjan 强连通分量学习笔记">
-                  <i class="fa fa-chevron-left"></i> Tarjan 强连通分量学习笔记
+                <a href="/luogu-4341/" rel="prev" title="「洛谷 P4341」外星联络 - Trie">
+                  <i class="fa fa-chevron-left"></i> 「洛谷 P4341」外星联络 - Trie
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/luogu-1407/" rel="next" title="「洛谷 P1407」稳定婚姻 - 强连通分量">
-                  「洛谷 P1407」稳定婚姻 - 强连通分量 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
