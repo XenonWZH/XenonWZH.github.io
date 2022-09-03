@@ -20,31 +20,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="题意描述 HydroOJ 链接 求一个有 \(n\) 的元素的可重数集 \(\{a_i\}\) 的子集的算术和的异或和。 数据范围：\(a_i &gt; 0\)，\(1 &lt; n &lt; 1000\)，\(\sum a_i \le 2000000\)。">
+    <meta name="description" content="题意描述 洛谷链接 给你一棵 \(n\) 个点的树，点带权，对于每个节点求出距离它不超过 \(k\) 的所有节点权值和 \(m_i\)。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「BZOJ 3687」简单题 - 位运算">
-<meta property="og:url" content="https://xenonwzh.github.io/bzoj-3687/index.html">
+<meta property="og:title" content="「洛谷 P3047」Nearby Cows - 树形 DP">
+<meta property="og:url" content="https://xenonwzh.github.io/luogu-3047/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="题意描述 HydroOJ 链接 求一个有 \(n\) 的元素的可重数集 \(\{a_i\}\) 的子集的算术和的异或和。 数据范围：\(a_i &gt; 0\)，\(1 &lt; n &lt; 1000\)，\(\sum a_i \le 2000000\)。">
+<meta property="og:description" content="题意描述 洛谷链接 给你一棵 \(n\) 个点的树，点带权，对于每个节点求出距离它不超过 \(k\) 的所有节点权值和 \(m_i\)。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-31T04:01:57.000Z">
-<meta property="article:modified_time" content="2022-08-31T07:51:57.344Z">
+<meta property="article:published_time" content="2022-09-03T12:39:16.000Z">
+<meta property="article:modified_time" content="2022-09-03T13:24:12.119Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
-<meta property="article:tag" content="位运算">
 <meta property="article:tag" content="题解">
-<meta property="article:tag" content="BZOJ">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="树形 DP">
+<meta property="article:tag" content="洛谷">
+<meta property="article:tag" content="USACO">
+<meta property="article:tag" content="2012">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xenonwzh.github.io/bzoj-3687/">
+<link rel="canonical" href="https://xenonwzh.github.io/luogu-3047/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/bzoj-3687/","path":"bzoj-3687/","title":"「BZOJ 3687」简单题 - 位运算"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/luogu-3047/","path":"luogu-3047/","title":"「洛谷 P3047」Nearby Cows - 树形 DP"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>「BZOJ 3687」简单题 - 位运算 | XenonWZH's Blog</title>
+<title>「洛谷 P3047」Nearby Cows - 树形 DP | XenonWZH's Blog</title>
   
 
 
@@ -245,7 +248,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/bzoj-3687/">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-3047/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -258,12 +261,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="「BZOJ 3687」简单题 - 位运算 | XenonWZH's Blog">
+      <meta itemprop="name" content="「洛谷 P3047」Nearby Cows - 树形 DP | XenonWZH's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          「BZOJ 3687」简单题 - 位运算
+          「洛谷 P3047」Nearby Cows - 树形 DP
         </h1>
 
         <div class="post-meta-container">
@@ -275,7 +278,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-08-31 12:01:57 / 修改时间：15:51:57" itemprop="dateCreated datePublished" datetime="2022-08-31T12:01:57+08:00">2022-08-31</time>
+      <time title="创建时间：2022-09-03 20:39:16 / 修改时间：21:24:12" itemprop="dateCreated datePublished" datetime="2022-09-03T20:39:16+08:00">2022-09-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,8 +310,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/bzoj-3687/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bzoj-3687/" itemprop="commentCount"></span>
+    <a title="disqus" href="/luogu-3047/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-3047/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -323,40 +326,37 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://hydro.ac/d/bzoj/p/3687">HydroOJ 链接</a></p>
-<p>求一个有 <span class="math inline">\(n\)</span> 的元素的可重数集
-<span class="math inline">\(\{a_i\}\)</span>
-的子集的算术和的异或和。</p>
-<p>数据范围：<span class="math inline">\(a_i &gt; 0\)</span>，<span
-class="math inline">\(1 &lt; n &lt; 1000\)</span>，<span
-class="math inline">\(\sum a_i \le 2000000\)</span>。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3047">洛谷链接</a></p>
+<p>给你一棵 <span class="math inline">\(n\)</span>
+个点的树，点带权，对于每个节点求出距离它不超过 <span
+class="math inline">\(k\)</span> 的所有节点权值和 <span
+class="math inline">\(m_i\)</span>。</p>
 <span id="more"></span>
 <h1 id="解题思路">解题思路</h1>
-<p>本题有一种位运算的妙解。</p>
-<p>首先对于 <span class="math inline">\(\sum a_i \le
-2000000\)</span>，我们可以直接开一个大小为 <span
-class="math inline">\(2000000\)</span> 的 <code>bitset</code>
-来存储算术和的情况。</p>
-<p>定义 <span class="math inline">\(f_i\)</span> 表示算术和 <span
-class="math inline">\(i\)</span> 是否对答案有效。由于最终为异或和，当
-<span class="math inline">\(i\)</span> 出现次数为偶数时，我们就可忽略
-<span class="math inline">\(i\)</span>，即 <span
-class="math inline">\(f_i = \text{false}\)</span>。</p>
-<p>每对于一个新增的数 <span
-class="math inline">\(a\)</span>，我们有两种情况：</p>
-<ul>
-<li>算术和没有 <span class="math inline">\(a\)</span>，则 <span
-class="math inline">\(f\)</span> 保持原样。</li>
-<li>算数和有 <span class="math inline">\(a\)</span>，则对于 <span
-class="math inline">\(f\)</span> 中所有为 <code>true</code> 的情况加上
-<code>a</code>。反应在 <code>bitset</code> 上为
-<code>f &lt;&lt; a</code>。</li>
-</ul>
-<p>将两者异或就可得出 <code>f</code> 中的反映到 <code>a</code>
-的所有算术和情况。最后将 <code>f</code> 中所有为 <code>true</code>
-的情况求异或和即可。</p>
+<p>本题树形 DP 可做。首先我们统计 <span class="math inline">\(f_{i,
+j}\)</span>，<span class="math inline">\(f_{i, j}\)</span> 表示以 <span
+class="math inline">\(i\)</span> 为根的子树中距离为 <span
+class="math inline">\(j\)</span> 的节点个数。</p>
+<p>于是有下列方程：</p>
+<p><span class="math display">\[
+f_{i, j} = f_{i, j} + f_{e, j - 1} \quad i \rightarrow e
+\]</span></p>
+<p>接下来就是换根。对于 <span class="math inline">\(i\)</span>
+节点，我们有一下方程：</p>
+<p><span class="math display">\[
+f_{i, j} = f_{i, j} + f_{e, j - 1} \quad e \rightarrow i
+\]</span></p>
+<p>然而此时必有重复，因为在统计 <span class="math inline">\(f_{e,
+j}\)</span> 时，<span class="math inline">\(f_{i, j - 2}\)</span>
+已被统计。故这里简单容斥一下即可。</p>
+<p><span class="math display">\[
+f_{i, j} \cup f_{e, j - 1} = f_{i, j} + f_{e, j - 1} - f_{i, j} \cap
+f_{e, j - 1} \\
+\Rightarrow f_{i, j} = f_{i, j} + f_{e, j - 1} - f_{i, j - 2} \quad e
+\rightarrow i
+\]</span></p>
 <h1 id="代码演示">代码演示</h1>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bitset&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1000</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXS = <span class="number">2000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">static</span> std::bitset&lt;MAXS + 1&gt; f;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line">        sum += a;</span><br><span class="line">        f ^= (f &lt;&lt; a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sum; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (f[i]) &#123;</span><br><span class="line">            ans ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1e5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXK = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    std::vector&lt;<span class="keyword">struct</span> Edge&gt; e;</span><br><span class="line">    <span class="type">int</span> f[MAXK + <span class="number">1</span>];</span><br><span class="line">&#125; N[MAXN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    Node *s, *t;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Edge</span>(Node *s, Node *t) : <span class="built_in">s</span>(s), <span class="built_in">t</span>(t) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">addEdge</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">    N[s].e.<span class="built_in">push_back</span>(<span class="built_in">Edge</span>(&amp;N[s], &amp;N[t]));</span><br><span class="line">    N[t].e.<span class="built_in">push_back</span>(<span class="built_in">Edge</span>(&amp;N[t], &amp;N[s]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dp1</span><span class="params">(Node *v, Node *fa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (Edge *e = &amp;v-&gt;e.<span class="built_in">front</span>(); e &amp;&amp; e &lt;= &amp;v-&gt;e.<span class="built_in">back</span>(); e++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e-&gt;t == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dp1</span>(e-&gt;t, v);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) v-&gt;f[i] += e-&gt;t-&gt;f[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dp2</span><span class="params">(Node *v, Node *fa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (Edge *e = &amp;v-&gt;e.<span class="built_in">front</span>(); e &amp;&amp; e &lt;= &amp;v-&gt;e.<span class="built_in">back</span>(); e++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e-&gt;t == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = k; i &gt;= <span class="number">2</span>; i--) e-&gt;t-&gt;f[i] -= e-&gt;t-&gt;f[i - <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) e-&gt;t-&gt;f[i] += v-&gt;f[i - <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">dp2</span>(e-&gt;t, v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> s, t;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;s, &amp;t);</span><br><span class="line">        <span class="built_in">addEdge</span>(s, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N[i].f[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dp1</span>(&amp;N[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">dp2</span>(&amp;N[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= k; j++) ans += N[i].f[j];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -367,23 +367,23 @@ class="math inline">\(f\)</span> 中所有为 <code>true</code> 的情况加上
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/OI/" rel="tag"># OI</a>
-              <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
               <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
-              <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/%E6%A0%91%E5%BD%A2-DP/" rel="tag"># 树形 DP</a>
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"># 洛谷</a>
+              <a href="/tags/USACO/" rel="tag"># USACO</a>
+              <a href="/tags/2012/" rel="tag"># 2012</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/luogu-2619/" rel="prev" title="「洛谷 P2619」Tree I - 二分答案 + 最小生成树">
-                  <i class="fa fa-chevron-left"></i> 「洛谷 P2619」Tree I - 二分答案 + 最小生成树
+                <a href="/bzoj-3029/" rel="prev" title="「BZOJ 3029」守卫者的挑战 - 概率与期望">
+                  <i class="fa fa-chevron-left"></i> 「BZOJ 3029」守卫者的挑战 - 概率与期望
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/bzoj-3029/" rel="next" title="「BZOJ 3029」守卫者的挑战 - 概率与期望">
-                  「BZOJ 3029」守卫者的挑战 - 概率与期望 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
