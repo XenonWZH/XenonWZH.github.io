@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,148 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/scoi2010-trade/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/scoi2010-trade/" class="post-title-link" itemprop="url">「SCOI2010」股票交易 - 背包 DP + 单调队列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-14 15:01:38" itemprop="dateCreated datePublished" datetime="2022-07-14T15:01:38+08:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-15 17:15:05" itemprop="dateModified" datetime="2022-07-15T17:15:05+08:00">2022-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/scoi2010-trade/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="scoi2010-trade/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2569">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/10183">LOJ 链接</a></p>
+<p>最近 <span class="math inline">\(\text{lxhgww}\)</span>
+又迷上了投资股票，通过一段时间的观察和学习，他总结出了股票行情的一些规律。</p>
+<p>通过一段时间的观察，<span
+class="math inline">\(\text{lxhgww}\)</span> 预测到了未来 <span
+class="math inline">\(T\)</span> 天内某只股票的走势，第 <span
+class="math inline">\(i\)</span> 天的股票买入价为每股 <span
+class="math inline">\(AP_i\)</span>，第 <span
+class="math inline">\(i\)</span> 天的股票卖出价为每股 <span
+class="math inline">\(BP_i\)</span>（数据保证对于每个 <span
+class="math inline">\(i\)</span>，都有 <span class="math inline">\(AP_i
+\geq BP_i\)</span>），但是每天不能无限制地交易，于是股票交易所规定第
+<span class="math inline">\(i\)</span> 天的一次买入至多只能购买 <span
+class="math inline">\(AS_i\)</span> 股，一次卖出至多只能卖出 <span
+class="math inline">\(BS_i\)</span> 股。</p>
+<p>另外，股票交易所还制定了两个规定。为了避免大家疯狂交易，股票交易所规定在两次交易（某一天的买入或者卖出均算是一次交易）之间，至少要间隔
+<span class="math inline">\(W\)</span> 天，也就是说如果在第 <span
+class="math inline">\(i\)</span> 天发生了交易，那么从第 <span
+class="math inline">\(i+1\)</span> 天到第 <span
+class="math inline">\(i+W\)</span>
+天，均不能发生交易。同时，为了避免垄断，股票交易所还规定在任何时间，一个人的手里的股票数不能超过
+<span class="math inline">\(\text{MaxP}\)</span>。</p>
+<p>在第 <span class="math inline">\(1\)</span> 天之前，<span
+class="math inline">\(\text{lxhgww}\)</span>
+手里有一大笔钱（可以认为钱的数目无限），但是没有任何股票，当然，<span
+class="math inline">\(T\)</span> 天以后，<span
+class="math inline">\(\text{lxhgww}\)</span>
+想要赚到最多的钱，聪明的程序员们，你们能帮助他吗？</p>
+<p><span class="math inline">\(0\leq W&lt;T\leq
+2000,1\leq\text{MaxP}\leq2000,1\leq BP_i\leq AP_i\leq 1000,1\leq
+AS_i,BS_i\leq\text{MaxP}\)</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/scoi2010-trade/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1301,118 +1443,6 @@ class="math inline">\(M \leq 10\)</span></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/noi2001-cannon/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/jsoi2008-sphere/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/jsoi2008-sphere/" class="post-title-link" itemprop="url">「JSOI2008」球形空间产生器 - 高斯消元</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-04-09 09:23:15 / 修改时间：09:40:40" itemprop="dateCreated datePublished" datetime="2022-04-09T09:23:15+08:00">2022-04-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/jsoi2008-sphere/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jsoi2008-sphere/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4035">洛谷链接</a></p>
-<p>有一个球形空间产生器能够在 <span class="math inline">\(n\)</span>
-维空间中产生一个坚硬的球体。现在，你被困在了这个 <span
-class="math inline">\(n\)</span> 维球体中，你只知道球面上 <span
-class="math inline">\(n + 1\)</span>
-个点的坐标，你需要以最快的速度确定这个 <span
-class="math inline">\(n\)</span>
-维球体的球心坐标，以便于摧毁这个球形空间产生器。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/jsoi2008-sphere/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
