@@ -28,16 +28,16 @@
 <meta property="og:description" content="题意描述 洛谷链接 对于给出的 \(n\) 个询问，每次求有多少个数对 \((x,y)\)，满足 \(a \le x \le b\)，\(c \le y \le d\)，且 \(\gcd(x,y) &#x3D; k\)，\(\gcd(x,y)\) 函数为 \(x\) 和 \(y\) 的最大公约数。 对于 \(100\%\) 的数据满足：\(1 \le n,k \le 5 \times 10^4\">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-04T11:25:06.000Z">
-<meta property="article:modified_time" content="2022-09-05T00:13:09.177Z">
+<meta property="article:modified_time" content="2022-09-05T07:22:15.685Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="数论">
-<meta property="article:tag" content="线性筛">
-<meta property="article:tag" content="莫比乌斯反演">
 <meta property="article:tag" content="省选">
 <meta property="article:tag" content="HAOI">
+<meta property="article:tag" content="线性筛">
+<meta property="article:tag" content="莫比乌斯反演">
 <meta property="article:tag" content="2011">
 <meta name="twitter:card" content="summary">
 
@@ -167,7 +167,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -286,7 +286,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-05 08:13:09" itemprop="dateModified" datetime="2022-09-05T08:13:09+08:00">2022-09-05</time>
+      <time title="修改时间：2022-09-05 15:22:15" itemprop="dateModified" datetime="2022-09-05T15:22:15+08:00">2022-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,7 +351,7 @@ class="math inline">\(1 \le c \le d \le 5 \times 10^4\)</span>。</p>
 <h1 id="解题思路">解题思路</h1>
 <p>本题要求以下式子的值：</p>
 <p><span class="math display">\[
-\sum\limits_{x = a}^b{ \sum\limits_{y = c}^d{ [\gcd(x, y) = k] } }
+\sum_{x = a}^b{ \sum_{y = c}^d{ [\gcd(x, y) = k] } }
 \]</span></p>
 <p>看到单元函数我们可以想到尝试用莫比乌斯反演化简。</p>
 <p>首先我们设函数 <span class="math inline">\(A(n, m, k) = \sum_{i =
@@ -361,50 +361,47 @@ class="math inline">\(1 \le c \le d \le 5 \times 10^4\)</span>。</p>
 <p>于是我们只需求出 <span class="math inline">\(A(n, m, k)\)</span>
 的值即可。设以下函数：</p>
 <p><span class="math display">\[
-f(k) = \sum\limits_{i = 1}^n{ \sum\limits_{j = 1}^m{ [\gcd(i, j) = k] }
-}
+f(k) = \sum_{i = 1}^n{ \sum_{j = 1}^m{ [\gcd(i, j) = k] } }
 \]</span></p>
 <p><span class="math display">\[
-F(d) = \sum\limits_{d | k}{f(k)}
+F(d) = \sum_{d | k}{f(k)}
 \]</span></p>
 <p>我们可以将函数 <span class="math inline">\(F(d)\)</span>
 进行化简：</p>
 <p><span class="math display">\[
 \begin{align*}
-F(d) &amp;= \sum\limits_{d | k}{f(k)} \\
-&amp;= \sum\limits_{d | k}{ \sum\limits_{i = 1}^n{ \sum\limits_{j =
-1}^m{ [\gcd(i, j) = k] } } } \\
+F(d) &amp;= \sum_{d | k}{f(k)} \\
+&amp;= \sum_{d | k}{ \sum_{i = 1}^n{ \sum_{j = 1}^m{ [\gcd(i, j) = k] }
+} } \\
 &amp;= \sum_{t = 1}^{ \min\{ \lfloor \frac{n}{d} \rfloor , \lfloor
-\frac{m}{d} \rfloor \} }{ \sum\limits_{i = 1}^n{ \sum\limits_{j = 1}^m{
-[\gcd(i, j) = td] } } } \\
-&amp;= \sum\limits_{i = 1}^n{ \sum\limits_{j = 1}^m{ [d | \gcd(i, j)] }
-} \\
-&amp;= \sum\limits_{i = 1}^n{ \sum\limits_{j = 1}^m{ [d | i][d | j] } }
-\\
+\frac{m}{d} \rfloor \} }{ \sum_{i = 1}^n{ \sum_{j = 1}^m{ [\gcd(i, j) =
+td] } } } \\
+&amp;= \sum_{i = 1}^n{ \sum_{j = 1}^m{ [d | \gcd(i, j)] } } \\
+&amp;= \sum_{i = 1}^n{ \sum_{j = 1}^m{ [d | i][d | j] } } \\
 &amp;= \lfloor \frac{n}{d} \rfloor \lfloor \frac{m}{d} \rfloor
 \end{align*}
 \]</span></p>
 <p>又由于 <span class="math inline">\(F(d) = \sum_{d |
 k}{f(k)}\)</span>，我们可以进行莫比乌斯反演：</p>
 <p><span class="math display">\[
-f(k) = \sum\limits_{k | d}{\mu(\frac{d}{k})F(d)}
+f(k) = \sum_{k | d}{\mu(\frac{d}{k})F(d)}
 \]</span></p>
 <p>然后接着进行化简：</p>
 <p><span class="math display">\[
 \begin{align*}
-f(k) &amp;= \sum\limits_{k | d}{\mu(\frac{d}{k})F(d)} \\
-&amp;= \sum\limits_{k | d}{\mu(\frac{d}{k}) \lfloor \frac{n}{d} \rfloor
-\lfloor \frac{m}{d} \rfloor } \\
-&amp;= \sum\limits_{t = 1}^{ \min\{ \lfloor \frac{n}{k} \rfloor ,
-\lfloor \frac{m}{k} \rfloor \} }{\mu(t) \lfloor \frac{n}{tk} \rfloor
-\lfloor \frac{m}{tk} \rfloor }
+f(k) &amp;= \sum_{k | d}{\mu(\frac{d}{k})F(d)} \\
+&amp;= \sum_{k | d}{\mu(\frac{d}{k}) \lfloor \frac{n}{d} \rfloor \lfloor
+\frac{m}{d} \rfloor } \\
+&amp;= \sum_{t = 1}^{ \min\{ \lfloor \frac{n}{k} \rfloor , \lfloor
+\frac{m}{k} \rfloor \} }{\mu(t) \lfloor \frac{n}{tk} \rfloor \lfloor
+\frac{m}{tk} \rfloor }
 \end{align*}
 \]</span></p>
 <p>于是我们可以得出：</p>
 <p><span class="math display">\[
-A(n, m, k) = \sum\limits_{t = 1}^{ \min\{ \lfloor \frac{n}{k} \rfloor ,
-\lfloor \frac{m}{k} \rfloor \} }{\mu(t) \lfloor \frac{n}{tk} \rfloor
-\lfloor \frac{m}{tk} \rfloor }
+A(n, m, k) = \sum_{t = 1}^{ \min\{ \lfloor \frac{n}{k} \rfloor , \lfloor
+\frac{m}{k} \rfloor \} }{\mu(t) \lfloor \frac{n}{tk} \rfloor \lfloor
+\frac{m}{tk} \rfloor }
 \]</span></p>
 <p>此时对于单词询问的时间复杂度为 <span
 class="math inline">\(O(n)\)</span>，直接运行 <span
@@ -420,8 +417,8 @@ n&#39; = \lfloor \frac{n}{k} \rfloor, m&#39; = \lfloor \frac{m}{k}
 \rfloor
 \]</span></p>
 <p><span class="math display">\[
-A&#39;(n&#39;, m&#39;) = A(n, m, k) = \sum\limits_{t = 1}^{
-\min\{n&#39;, m&#39;\} }{\mu(t) \lfloor \frac{n&#39;}{t} \rfloor \lfloor
+A&#39;(n&#39;, m&#39;) = A(n, m, k) = \sum_{t = 1}^{ \min\{n&#39;,
+m&#39;\} }{\mu(t) \lfloor \frac{n&#39;}{t} \rfloor \lfloor
 \frac{m&#39;}{t} \rfloor }
 \]</span></p>
 <p>对于 <span class="math inline">\(A&#39;(n&#39;,
@@ -444,10 +441,10 @@ class="math inline">\(O(\sqrt{n})\)</span>，可过此题。</p>
               <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
-              <a href="/tags/%E7%BA%BF%E6%80%A7%E7%AD%9B/" rel="tag"># 线性筛</a>
-              <a href="/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/" rel="tag"># 莫比乌斯反演</a>
               <a href="/tags/%E7%9C%81%E9%80%89/" rel="tag"># 省选</a>
               <a href="/tags/HAOI/" rel="tag"># HAOI</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E7%AD%9B/" rel="tag"># 线性筛</a>
+              <a href="/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/" rel="tag"># 莫比乌斯反演</a>
               <a href="/tags/2011/" rel="tag"># 2011</a>
           </div>
 
@@ -460,6 +457,9 @@ class="math inline">\(O(\sqrt{n})\)</span>，可过此题。</p>
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/luogu-2257/" rel="next" title="「洛谷 P2257」YY 的 GCD - 莫比乌斯反演">
+                  「洛谷 P2257」YY 的 GCD - 莫比乌斯反演 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
