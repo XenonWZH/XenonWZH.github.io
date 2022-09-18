@@ -28,12 +28,12 @@
 <meta property="og:description" content="又来记流水账了 QWQ Day 0 由于成都疫情一直在家，复习了一下初赛，然后继续刷题。由于现在基本等于停课状态准备算比较充分。 今年是线上考，事先试了一下设备。刷了一套初赛题之后就在洛谷上刷其它题去了（逃 还是复赛题有意思 补了几集《四月是你的谎言》就睡觉了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-18T04:38:36.000Z">
-<meta property="article:modified_time" content="2022-09-18T05:15:45.869Z">
+<meta property="article:modified_time" content="2022-09-18T14:48:25.378Z">
 <meta property="article:author" content="XenonWZH">
-<meta property="article:tag" content="日常">
-<meta property="article:tag" content="行记">
 <meta property="article:tag" content="CSP">
 <meta property="article:tag" content="2021">
+<meta property="article:tag" content="日常">
+<meta property="article:tag" content="行记">
 <meta name="twitter:card" content="summary">
 
 
@@ -275,7 +275,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-09-18 12:38:36 / 修改时间：13:15:45" itemprop="dateCreated datePublished" datetime="2022-09-18T12:38:36+08:00">2022-09-18</time>
+      <time title="创建时间：2022-09-18 12:38:36 / 修改时间：22:48:25" itemprop="dateCreated datePublished" datetime="2022-09-18T12:38:36+08:00">2022-09-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -333,9 +333,40 @@
 <p>毕竟是最后一场 CSP-S 了，还是有点紧张。</p>
 <p>实在无心复习，上午就更新了一下
 Blog，写了一下最近刷的部分题目的题解。</p>
-<blockquote>
-<p>咕咕咕。</p>
-</blockquote>
+<p>中午提前一个小时就进考场（实际上是腾讯会议），就在那里干瞪着瞪了一个小时。想着是最后一次参加
+CSP-S 了依然挺紧张的 QWQ</p>
+<p>提前十分钟等了系统，没过多久就开考了。</p>
+<p>前面的题都还算友好，但到了 T10 答案死活算出来都是 <span
+class="math inline">\(105 = \frac{ {8 \choose 2} {6 \choose 2} {4
+\choose 2} {2 \choose 2} }{4!}\)</span> 卡了 10 多分钟，实在没法了就蒙了
+C（考完后才发现 CCF 的语文不过关），然后发现选择题做完已经过去 40 min
+了，有点慌。</p>
+<p>然后做到读程序题，T1 看了一会儿带了样例算了算，发现是一个 <span
+class="math inline">\(\text{next}\)</span> 数组写得不太好的像 KMP
+的算法。时间复杂度最劣是 <span
+class="math inline">\(\Theta(nm)\)</span>（CCF 不分 <span
+class="math inline">\(O\)</span> 和 <span
+class="math inline">\(\Theta\)</span> 扣钱！），模拟几下就过掉了。</p>
+<p>阅读程序 T2
+没看懂，然后看了一下第一问才知道这是个排序。回头仔细研究了一下发现是
+<span class="math inline">\(k\)</span>
+个关键字的基数排序，题目答案就水落石出了。</p>
+<p>阅读程序 T3 一看就知道是进制转化，做了一半发现 <span
+class="math inline">\(n\)</span>
+可能是负数。自造了一些样例带进去算了一下发现是求 <span
+class="math inline">\(n\)</span> 的 <span
+class="math inline">\(k\)</span>
+进制补码。后面的事情就自然而然的解决了。然后看了一下时间还有不到半个小时。。。</p>
+<p>然后做了完善程序。第一题感觉是二分后处理尾部，没怎么看懂。就先做第二题，发现第二题考的是用记忆化搜索写的
+DP，且考得非常简单，就把第二题秒了。回头再看第一题，看了一会儿把确定的写了，最后两个空不确定的大致二选一猜了一下。写完整张卷子的时候距离考试结束只剩
+10min。。。</p>
+<p>最后检查了一遍答题卡和答案，检查的时候突然知道了阅读程序第一题最后两个空怎么做，飞速改完。在最后
+1min 提交这两个空的修改后又检查了一遍该题，真 TM 刺激。</p>
+<p>接着考完试之后在 JKFOI 聊了一会儿天，刷了一下洛谷
+<del>然后发现这套题骂声连篇</del>。</p>
+<p>最后还是估了一下分，洛谷数据 81.5pts，有道小图灵数据
+89pts，稳过。</p>
+<p>最后在 JKFOI 打了一局雀魂，上传了考试录像，这一天就结束了。</p>
 
     </div>
 
@@ -345,10 +376,10 @@ Blog，写了一下最近刷的部分题目的题解。</p>
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag"># 日常</a>
-              <a href="/tags/%E8%A1%8C%E8%AE%B0/" rel="tag"># 行记</a>
               <a href="/tags/CSP/" rel="tag"># CSP</a>
               <a href="/tags/2021/" rel="tag"># 2021</a>
+              <a href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag"># 日常</a>
+              <a href="/tags/%E8%A1%8C%E8%AE%B0/" rel="tag"># 行记</a>
           </div>
 
         
