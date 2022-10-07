@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,519 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-1365/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/luogu-1365/" class="post-title-link" itemprop="url">「洛谷 P1365」Easy - 概率与期望</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-15 09:58:18" itemprop="dateCreated datePublished" datetime="2022-07-15T09:58:18+08:00">2022-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 09:51:41" itemprop="dateModified" datetime="2022-09-04T09:51:41+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/luogu-1365/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-1365/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1365">洛谷链接</a></p>
+<p>有一种音游的计分方式为在一首歌中有 <span
+class="math inline">\(n\)</span> 次点击要做，成功了就是
+<code>o</code>，失败了就是 <code>x</code>，分数是按 combo 计算的，连续
+<span class="math inline">\(a\)</span> 个 combo 就有 <span
+class="math inline">\(a\times a\)</span> 分，combo 就是极大的连续
+<code>o</code>。</p>
+<p>Sevenkplus 闲的慌就看他打了一盘，有些地方跟运气无关要么是
+<code>o</code> 要么是 <code>x</code>，有些地方 <code>o</code> 或者
+<code>x</code> 各有 <span class="math inline">\(50\%\)</span>
+的可能性，用 <code>?</code> 号来表示。</p>
+<p>那么的期望得分是多少？</p>
+<p>数据范围：<span class="math inline">\(n\le3\times10^5\)</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/luogu-1365/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/scoi2010-trade/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/scoi2010-trade/" class="post-title-link" itemprop="url">「SCOI2010」股票交易 - 背包 DP + 单调队列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-14 15:01:38" itemprop="dateCreated datePublished" datetime="2022-07-14T15:01:38+08:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 10:22:14" itemprop="dateModified" datetime="2022-09-04T10:22:14+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/scoi2010-trade/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="scoi2010-trade/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2569">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/10183">LOJ 链接</a></p>
+<p>最近 <span class="math inline">\(\text{lxhgww}\)</span>
+又迷上了投资股票，通过一段时间的观察和学习，他总结出了股票行情的一些规律。</p>
+<p>通过一段时间的观察，<span
+class="math inline">\(\text{lxhgww}\)</span> 预测到了未来 <span
+class="math inline">\(T\)</span> 天内某只股票的走势，第 <span
+class="math inline">\(i\)</span> 天的股票买入价为每股 <span
+class="math inline">\(AP_i\)</span>，第 <span
+class="math inline">\(i\)</span> 天的股票卖出价为每股 <span
+class="math inline">\(BP_i\)</span>（数据保证对于每个 <span
+class="math inline">\(i\)</span>，都有 <span class="math inline">\(AP_i
+\geq BP_i\)</span>），但是每天不能无限制地交易，于是股票交易所规定第
+<span class="math inline">\(i\)</span> 天的一次买入至多只能购买 <span
+class="math inline">\(AS_i\)</span> 股，一次卖出至多只能卖出 <span
+class="math inline">\(BS_i\)</span> 股。</p>
+<p>另外，股票交易所还制定了两个规定。为了避免大家疯狂交易，股票交易所规定在两次交易（某一天的买入或者卖出均算是一次交易）之间，至少要间隔
+<span class="math inline">\(W\)</span> 天，也就是说如果在第 <span
+class="math inline">\(i\)</span> 天发生了交易，那么从第 <span
+class="math inline">\(i+1\)</span> 天到第 <span
+class="math inline">\(i+W\)</span>
+天，均不能发生交易。同时，为了避免垄断，股票交易所还规定在任何时间，一个人的手里的股票数不能超过
+<span class="math inline">\(\text{MaxP}\)</span>。</p>
+<p>在第 <span class="math inline">\(1\)</span> 天之前，<span
+class="math inline">\(\text{lxhgww}\)</span>
+手里有一大笔钱（可以认为钱的数目无限），但是没有任何股票，当然，<span
+class="math inline">\(T\)</span> 天以后，<span
+class="math inline">\(\text{lxhgww}\)</span>
+想要赚到最多的钱，聪明的程序员们，你们能帮助他吗？</p>
+<p><span class="math inline">\(0\leq W&lt;T\leq
+2000,1\leq\text{MaxP}\leq2000,1\leq BP_i\leq AP_i\leq 1000,1\leq
+AS_i,BS_i\leq\text{MaxP}\)</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/scoi2010-trade/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/sdoi2010-ancient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/sdoi2010-ancient/" class="post-title-link" itemprop="url">「SDIO2010」古代猪文 - 数论 + Lucas 定理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-14 13:31:24" itemprop="dateCreated datePublished" datetime="2022-07-14T13:31:24+08:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 09:53:29" itemprop="dateModified" datetime="2022-09-04T09:53:29+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/sdoi2010-ancient/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="sdoi2010-ancient/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2480">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/10229">LOJ 链接</a></p>
+<p>给定整数 <span class="math inline">\(g\)</span>，<span
+class="math inline">\(n\)</span>（<span class="math inline">\(1 \leq q,
+n \leq 10^9\)</span>），计算：</p>
+<p><span class="math display">\[
+g^{\sum_{d|n}{C_{n}^{d}}} \operatorname{mod} 999911659
+\]</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/sdoi2010-ancient/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-4321/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/luogu-4321/" class="post-title-link" itemprop="url">「洛谷 P4321」三步必杀 - 前缀和</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-20 13:17:53" itemprop="dateCreated datePublished" datetime="2022-06-20T13:17:53+08:00">2022-06-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-06 15:33:46" itemprop="dateModified" datetime="2022-09-06T15:33:46+08:00">2022-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/luogu-4321/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-4321/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4231">洛谷链接</a></p>
+<p><span class="math inline">\(N\)</span>
+个柱子排成一排，一开始每个柱子损伤度为 0。</p>
+<p>接下来勇仪会进行 <span class="math inline">\(M\)</span>
+次攻击，每次攻击可以用 4 个参数<span
+class="math inline">\(l\)</span>,<span
+class="math inline">\(r\)</span>,<span
+class="math inline">\(s\)</span>,<span
+class="math inline">\(e\)</span>来描述：</p>
+<p>表示这次攻击作用范围为第 <span class="math inline">\(l\)</span>
+个到第 <span class="math inline">\(r\)</span> 个之间所有的柱子（包含
+<span class="math inline">\(l\)</span>，<span
+class="math inline">\(r\)</span>），对第一个柱子的伤害为 <span
+class="math inline">\(s\)</span>，对最后一个柱子的伤害为 <span
+class="math inline">\(e\)</span>。</p>
+<p>攻击产生的伤害值是一个等差数列。若 <span class="math inline">\(l =
+1\)</span>，<span class="math inline">\(r = 5\)</span>，<span
+class="math inline">\(s = 2\)</span>，<span class="math inline">\(e =
+10\)</span>，则对第 1 ~ 5 个柱子分别产生 2, 4, 6, 8, 10 的伤害。</p>
+<p>鬼族们需要的是所有攻击完成之后每个柱子的损伤度。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/luogu-4321/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -949,500 +1462,6 @@ C++ 中的宏定义大致相同，不过有下列特点：</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/luogu-1436/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noi2001-cannon/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/noi2001-cannon/" class="post-title-link" itemprop="url">「NOI 2001」炮兵阵地 - 状压 DP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-04-09 09:54:21" itemprop="dateCreated datePublished" datetime="2022-04-09T09:54:21+08:00">2022-04-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:52:36" itemprop="dateModified" datetime="2022-09-04T09:52:36+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/noi2001-cannon/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noi2001-cannon/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2704">洛谷链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://loj.ac/p/10173">LOJ 链接</a></p>
-<p>司令部的将军们打算在 <span class="math inline">\(N \times M\)</span>
-的网格地图上部署他们的炮兵部队。一个 <span class="math inline">\(N
-\times M\)</span> 的地图由 <span class="math inline">\(N\)</span> 行
-<span class="math inline">\(M\)</span>
-列组成，地图的每一格可能是山地（用 H 表示），也可能是平原（用 P
-表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图中黑色区域所示：</p>
-<img src="/noi2001-cannon/cannon.png" class="">
-<p>如果在地图中的灰色所标识的平原上部署一支炮兵部队，则图中的黑色的网格表示它能够攻击到的区域：沿横向左右各两格，沿纵向上下各两格。图上其它白色网格均攻击不到。从图上可见炮兵的攻击范围不受地形的影响。</p>
-<p>现在，将军们规划如何部署炮兵部队，在防止误伤的前提下（保证任何两支炮兵部队之间不能互相攻击，即任何一支炮兵部队都不在其他支炮兵部队的攻击范围内），在整个地图区域内最多能够摆放多少我军的炮兵部队。</p>
-<p>数据范围：<span class="math inline">\(N \leq 100\)</span>，<span
-class="math inline">\(M \leq 10\)</span></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/noi2001-cannon/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/jsoi2008-sphere/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/jsoi2008-sphere/" class="post-title-link" itemprop="url">「JSOI2008」球形空间产生器 - 高斯消元</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-04-09 09:23:15" itemprop="dateCreated datePublished" datetime="2022-04-09T09:23:15+08:00">2022-04-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 10:18:13" itemprop="dateModified" datetime="2022-09-04T10:18:13+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/jsoi2008-sphere/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jsoi2008-sphere/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4035">洛谷链接</a></p>
-<p>有一个球形空间产生器能够在 <span class="math inline">\(n\)</span>
-维空间中产生一个坚硬的球体。现在，你被困在了这个 <span
-class="math inline">\(n\)</span> 维球体中，你只知道球面上 <span
-class="math inline">\(n + 1\)</span>
-个点的坐标，你需要以最快的速度确定这个 <span
-class="math inline">\(n\)</span>
-维球体的球心坐标，以便于摧毁这个球形空间产生器。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/jsoi2008-sphere/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-2455/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/luogu-2455/" class="post-title-link" itemprop="url">「SDOI2006」线性方程组 - 高斯消元</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-04-09 08:04:14" itemprop="dateCreated datePublished" datetime="2022-04-09T08:04:14+08:00">2022-04-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:52:08" itemprop="dateModified" datetime="2022-09-04T09:52:08+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/luogu-2455/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-2455/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2455">洛谷链接</a></p>
-<p>已知 <span class="math inline">\(n\)</span> 元线性一次方程组。</p>
-<p><span class="math display">\[
-\begin{cases}
-a_{1, 1} x_1 + a_{1, 2} x_2 + \cdots + a_{1, n} x_n = b_1 \\
-a_{2, 1} x_1 + a_{2, 2} x_2 + \cdots + a_{2, n} x_n = b_2 \\
-\cdots \\
-a_{n,1} x_1 + a_{n, 2} x_2 + \cdots + a_{n, n} x_n = b_n
-\end{cases}
-\]</span></p>
-<p>请根据输入的数据，编程输出方程组的解的情况。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/luogu-2455/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noio2022-math/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/noio2022-math/" class="post-title-link" itemprop="url">「NOI Online 2022 入门组」数学游戏 - 数论</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-03-28 16:08:25" itemprop="dateCreated datePublished" datetime="2022-03-28T16:08:25+08:00">2022-03-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:52:40" itemprop="dateModified" datetime="2022-09-04T09:52:40+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/noio2022-math/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noio2022-math/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8255">洛谷链接</a></p>
-<p>Kri 喜欢玩数字游戏。</p>
-<p>一天，他在草稿纸上写下了 <span class="math inline">\(t\)</span>
-对正整数 <span class="math inline">\((x,
-y)\)</span>，并对于每一对正整数计算出了 <span class="math inline">\(z =
-xy \gcd(x, y)\)</span>。</p>
-<p>可是调皮的 Zay 找到了 Kri 的草稿纸，并把每一组的 <span
-class="math inline">\(y\)</span> 都擦除了，还可能改动了一些 <span
-class="math inline">\(z\)</span>。</p>
-<p>现在 Kri 想请你帮忙还原每一组的 <span
-class="math inline">\(y\)</span>，具体地，对于每一组中的 <span
-class="math inline">\(x\)</span> 和 <span
-class="math inline">\(z\)</span>，你需要输出最小的正整数 <span
-class="math inline">\(z\)</span>，使得 <span class="math inline">\(z =
-xy \gcd(x, y)\)</span>。如果这样的 <span
-class="math inline">\(y\)</span> 不存在，也就是 Zay 一定改动了 <span
-class="math inline">\(z\)</span>，那么请输出 <span
-class="math inline">\(-1\)</span>。</p>
-<p>数据范围：<span class="math inline">\(1 \le t \le 5 \times
-{10}^5\)</span>，<span class="math inline">\(1 \le x \le
-{10}^9\)</span>，<span class="math inline">\(1 \le z &lt;
-2^{63}\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/noio2022-math/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
