@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题意描述 牛客链接（需付费） 在一个 \(2 \times 2\) 的网格上有四盏灯，每个网格一盏。这四盏灯的位置分别是左上角，右上角，左下角，右下角。 每盏灯有一个可供调节的耗电量，耗电量越高，则灯对周围提供的亮度越多。具体来说，若某一盏灯的耗电量为 \(x\)，那么它将会为自己的格子提供 \(x\) 的亮度，为相邻的两个格子提供 \(\lfloor \frac{x}{2} \rflo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「牛客 CSP-S 模拟赛」光 - 二分答案">
+<meta property="og:url" content="https://xenonwzh.github.io/nc-40645a/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="题意描述 牛客链接（需付费） 在一个 \(2 \times 2\) 的网格上有四盏灯，每个网格一盏。这四盏灯的位置分别是左上角，右上角，左下角，右下角。 每盏灯有一个可供调节的耗电量，耗电量越高，则灯对周围提供的亮度越多。具体来说，若某一盏灯的耗电量为 \(x\)，那么它将会为自己的格子提供 \(x\) 的亮度，为相邻的两个格子提供 \(\lfloor \frac{x}{2} \rflo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-08T03:36:20.000Z">
+<meta property="article:modified_time" content="2022-10-08T03:55:46.991Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="二分答案">
+<meta property="article:tag" content="牛客">
+<meta property="article:tag" content="2022">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/nc-40645a/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/nc-40645a/","path":"nc-40645a/","title":"「牛客 CSP-S 模拟赛」光 - 二分答案"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「牛客 CSP-S 模拟赛」光 - 二分答案 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题意描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">代码演示</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/nc-40645a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「牛客 CSP-S 模拟赛」光 - 二分答案 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「牛客 CSP-S 模拟赛」光 - 二分答案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-08 11:36:20 / 修改时间：11:55:46" itemprop="dateCreated datePublished" datetime="2022-10-08T11:36:20+08:00">2022-10-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/nc-40645a/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="nc-40645a/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="题意描述">题意描述</h1>
+<p><a
+target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/40645/A">牛客链接（需付费）</a></p>
+<p>在一个 <span class="math inline">\(2 \times 2\)</span>
+的网格上有四盏灯，每个网格一盏。这四盏灯的位置分别是左上角，右上角，左下角，右下角。</p>
+<p>每盏灯有一个可供调节的耗电量，耗电量越高，则灯对周围提供的亮度越多。具体来说，若某一盏灯的耗电量为
+<span class="math inline">\(x\)</span>，那么它将会为自己的格子提供 <span
+class="math inline">\(x\)</span> 的亮度，为相邻的两个格子提供 <span
+class="math inline">\(\lfloor \frac{x}{2} \rfloor\)</span>
+的亮度，为对角的格子提供 <span class="math inline">\(\lfloor \frac{x}{4}
+\rfloor\)</span>。其中 <span class="math inline">\(\lfloor x
+\rfloor\)</span> 表示对 <span class="math inline">\(x\)</span>
+向下取整。</p>
+<p>某一个<strong>格子的亮度</strong>是四盏灯对它提供的亮度之和。例如左上角的灯耗电量为
+<span class="math inline">\(4\)</span>，右上角的灯耗电量为 <span
+class="math inline">\(7\)</span>，右下角的灯耗电量为 <span
+class="math inline">\(8\)</span>，左下角的灯耗电量为 <span
+class="math inline">\(0\)</span>，那么左上角这个格子的亮度就是 <span
+class="math inline">\(4 + \lfloor \frac{7}{2} \rfloor + \lfloor
+\frac{8}{4} \rfloor + 0 = 9\)</span></p>
+<p>现在我们对 <strong>四个格子的最低亮度</strong>
+提出了要求，我们想要让四个格子的亮度都达到标准。你可以将每一盏灯的耗电量调节为任何一个大于等于零的整数，为了省电，你希望四盏灯的耗电量之和尽可能的小，请问
+<strong>四盏灯的最小耗电量之和</strong> 是多小？</p>
+<p>数据范围：四个格子的最低亮度均为正整数且不超过 <span
+class="math inline">\(1500\)</span>。</p>
+<span id="more"></span>
+<h1 id="解题思路">解题思路</h1>
+<p>本题由于直接算出四个格子的耗电量较为困难，可考虑二分答案，二分总耗电值。假设我们已经二分出了耗电值为
+<span
+class="math inline">\(\text{limit}\)</span>，我们可以枚举一下左上角和右下角的耗电值，然后判断出是否合法，再通过剩余的耗电值算出另外两个格子的耗电值是否合法即可。</p>
+<h1 id="代码演示">代码演示</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a, b, c, d;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= std::<span class="built_in">max</span>(std::<span class="built_in">max</span>(a, <span class="number">4</span> * d), std::<span class="built_in">max</span>(<span class="number">2</span> * b, <span class="number">2</span> * d)); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= std::<span class="built_in">max</span>(std::<span class="built_in">max</span>(<span class="number">4</span> * a, d), std::<span class="built_in">max</span>(<span class="number">2</span> * b, <span class="number">2</span> * d)); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i + j &gt; limit) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> ((limit - i - j) / <span class="number">2</span> &lt; std::<span class="built_in">max</span>(a - i - j / <span class="number">4</span>, d - i / <span class="number">4</span> - j)) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> res = limit - i - j;</span><br><span class="line">            <span class="type">int</span> y = std::<span class="built_in">max</span>(<span class="number">0</span>, b - i / <span class="number">2</span> - j / <span class="number">2</span>), z = std::<span class="built_in">max</span>(<span class="number">0</span>, c - i / <span class="number">2</span> - j / <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt;= res; k++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (k + (res - k) / <span class="number">4</span> &gt;= y &amp;&amp; k / <span class="number">4</span> + res - k &gt;= z) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;a, &amp;b, &amp;c, &amp;d);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> l = <span class="number">1</span>, r = a + b + c + d;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, l);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86/" rel="tag"># 二分</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" rel="tag"># 二分答案</a>
+              <a href="/tags/%E7%89%9B%E5%AE%A2/" rel="tag"># 牛客</a>
+              <a href="/tags/2022/" rel="tag"># 2022</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cf-1738d/" rel="prev" title="「Codeforces 1738D」Permutation Addicts - 图论 + DFS">
+                  <i class="fa fa-chevron-left"></i> 「Codeforces 1738D」Permutation Addicts - 图论 + DFS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/nc-40646a/" rel="next" title="「牛客 CSP-S 模拟赛」躲避技能 - 树上差分 + 贪心 + 高精度">
+                  「牛客 CSP-S 模拟赛」躲避技能 - 树上差分 + 贪心 + 高精度 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
