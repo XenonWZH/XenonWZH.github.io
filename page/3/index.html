@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-count">99</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,251 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noip2015-transport/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/noip2015-transport/" class="post-title-link" itemprop="url">「NOIP2015」运输计划 - 二分答案 + 最近公共祖先 + 树上差分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-09-27 10:50:32 / 修改时间：15:18:59" itemprop="dateCreated datePublished" datetime="2022-09-27T10:50:32+08:00">2022-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/noip2015-transport/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noip2015-transport/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2680">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/2425">LOJ 链接</a></p>
+<p>公元 <span class="math inline">\(2044\)</span>
+年，人类进入了宇宙纪元。</p>
+<p>L 国有 <span class="math inline">\(n\)</span> 个星球，还有 <span
+class="math inline">\(n - 1\)</span>
+条双向航道，每条航道建立在两个星球之间，这 <span class="math inline">\(n
+- 1\)</span> 条航道连通了 L 国的所有星球。</p>
+<p>小 P
+掌管一家物流公司，该公司有很多个运输计划，每个运输计划形如：有一艘物流飞船需要从
+<span class="math inline">\(u_i\)</span> 号星球沿最快的宇航路径飞行到
+<span class="math inline">\(v_i\)</span>
+号星球去。显然，飞船驶过一条航道是需要时间的，对于航道 <span
+class="math inline">\(j\)</span>，任意飞船驶过它所花费的时间为 <span
+class="math inline">\(t_j\)</span>，并且任意两艘飞船之间不会产生任何干扰。</p>
+<p>为了鼓励科技创新，L 国国王同意小 P 的物流公司参与 L
+国的航道建设，即允许小 P
+把某一条航道改造成虫洞，飞船驶过虫洞不消耗时间。</p>
+<p>在虫洞的建设完成前小 P 的物流公司就预接了 <span
+class="math inline">\(m\)</span> 个运输计划。在虫洞建设完成后，这 <span
+class="math inline">\(m\)</span>
+个运输计划会同时开始，所有飞船一起出发。当这 <span
+class="math inline">\(m\)</span> 个运输计划都完成时，小 P
+的物流公司的阶段性工作就完成了。</p>
+<p>如果小 P 可以自由选择将哪一条航道改造成虫洞，试求出小 P
+的物流公司完成阶段性工作所需要的最短时间是多少?</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/noip2015-transport/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp2022-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/csp2022-1/" class="post-title-link" itemprop="url">CSP-S 2022 第一轮 行记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-18 12:38:36" itemprop="dateCreated datePublished" datetime="2022-09-18T12:38:36+08:00">2022-09-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-26 09:26:10" itemprop="dateModified" datetime="2022-10-26T09:26:10+08:00">2022-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">行记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/csp2022-1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="csp2022-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><del>又来记流水账了 QWQ</del></p>
+<h1 id="day-0">Day 0</h1>
+<p>由于成都疫情一直在家，复习了一下初赛，然后继续刷题。由于现在基本等于停课状态准备算比较充分。</p>
+<p>今年是线上考，事先试了一下设备。刷了一套初赛题之后就在洛谷上刷其它题去了（逃
+<del>还是复赛题有意思</del></p>
+<p>补了几集《四月是你的谎言》就睡觉了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/csp2022-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1224,269 +1469,8 @@ class="math inline">\(1 \le c \le d \le 5 \times 10^4\)</span>。</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/mobius-notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/mobius-notes/" class="post-title-link" itemprop="url">莫比乌斯反演学习笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-04 09:36:39" itemprop="dateCreated datePublished" datetime="2022-09-04T09:36:39+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-05 15:21:58" itemprop="dateModified" datetime="2022-09-05T15:21:58+08:00">2022-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/mobius-notes/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="mobius-notes/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="莫比乌斯函数">莫比乌斯函数</h1>
-<p>了解莫比乌斯反演前，我们先要了解莫比乌斯函数。记 <span
-class="math inline">\(\mu(n)\)</span> 为莫比乌斯函数，<span
-class="math inline">\(n\)</span> 可被分解质因数为 <span
-class="math inline">\(n = \prod_{i = 1}^{m}{ {p_i}^{c_i} }\)</span>
-定义如下：</p>
-<p><span class="math display">\[
-\mu(n) = \begin{cases}
-1 &amp; n = 1 \\
-0 &amp; \exists i \in [1, m], c_i &gt; 1 \\
-(-1)^m &amp; \forall i \in [1, m], c_i = 1 \\
-\end{cases}
-\]</span></p>
-<p>形式化地解释一下：</p>
-<ul>
-<li>当 <span class="math inline">\(n = 1\)</span> 时，<span
-class="math inline">\(\mu(n) = 1\)</span>；</li>
-<li>当 <span class="math inline">\(n\)</span>
-存在至少一个出现次数大于等于两次的质因子时，<span
-class="math inline">\(\mu(n) = 0\)</span>；</li>
-<li>当 <span class="math inline">\(n\)</span>
-的所有质因子仅出现过一次，且 <span class="math inline">\(n\)</span>
-有奇数个质因子时，<span class="math inline">\(\mu(n) =
--1\)</span>；</li>
-<li>当 <span class="math inline">\(n\)</span>
-的所有质因子仅出现过一次，且 <span class="math inline">\(n\)</span>
-有偶数个质因子时，<span class="math inline">\(\mu(n) = 1\)</span>。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/mobius-notes/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-5154/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/luogu-5154/" class="post-title-link" itemprop="url">「洛谷 P5154」数列游戏 - 区间 DP + 线性 DP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-03 22:05:26" itemprop="dateCreated datePublished" datetime="2022-09-03T22:05:26+08:00">2022-09-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 10:19:49" itemprop="dateModified" datetime="2022-09-04T10:19:49+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/luogu-5154/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-5154/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5154">洛谷链接</a></p>
-<p>有一次，HKE 和 LJC 在玩一个游戏。</p>
-<p>游戏的规则是这样的：LJC 在纸上写下两个长度均为 <span
-class="math inline">\(n\)</span> 的数列 <span
-class="math inline">\(a\)</span> 和 <span
-class="math inline">\(b\)</span>，两个数列一一对应。HKE
-每次可以找两个相邻的数 <span class="math inline">\(a_i\)</span> 和 <span
-class="math inline">\(a_{i + 1}\)</span>，如果它们两个不互质，HKE
-可以选择得到 <span class="math inline">\((b_i + b_{i + 1})\)</span>
-分，然后擦掉 <span class="math inline">\(a\)</span> 和 <span
-class="math inline">\(b\)</span> 位置上的第 <span
-class="math inline">\(i, i + 1\)</span>
-个数，并把两个序列重新按顺序编号。当所有相邻的数互质时，游戏结束。</p>
-<p>HKE 想知道他最大得分是多少。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/luogu-5154/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

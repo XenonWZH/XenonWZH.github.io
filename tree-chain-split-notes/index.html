@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="树链剖分是一个很常见的处理树上问题的算法，但之前一直没学 &#x2F;kk，现在终于把这个坑补了。 这里只讲了重链剖分，不涉及其他剖分方式。 概念 树链剖分是一种把树上问题转化为序列问题的算法。它可以将树上的一条路径所经过的点用序列中的若干条区间表示。 首先我们需要知道几个概念：重儿子、轻儿子、重边、轻边。我们定义对于一个节点 \(u\) 的儿子为 \(v\)，我们定义以 \(v\) 为根的子树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树链剖分学习笔记">
+<meta property="og:url" content="https://xenonwzh.github.io/tree-chain-split-notes/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="树链剖分是一个很常见的处理树上问题的算法，但之前一直没学 &#x2F;kk，现在终于把这个坑补了。 这里只讲了重链剖分，不涉及其他剖分方式。 概念 树链剖分是一种把树上问题转化为序列问题的算法。它可以将树上的一条路径所经过的点用序列中的若干条区间表示。 首先我们需要知道几个概念：重儿子、轻儿子、重边、轻边。我们定义对于一个节点 \(u\) 的儿子为 \(v\)，我们定义以 \(v\) 为根的子树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oi-wiki.org/graph/images/hld.png">
+<meta property="article:published_time" content="2022-11-05T03:25:07.000Z">
+<meta property="article:modified_time" content="2022-11-05T05:13:30.248Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="树">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="树链剖分">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oi-wiki.org/graph/images/hld.png">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/tree-chain-split-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/tree-chain-split-notes/","path":"tree-chain-split-notes/","title":"树链剖分学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树链剖分学习笔记 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E9%93%BE%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8"><span class="nav-number">1.1.</span> <span class="nav-text">重链及其性质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">节点定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%96%E5%88%86"><span class="nav-number">2.2.</span> <span class="nav-text">剖分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E5%BA%8F%E5%88%97"><span class="nav-number">2.3.</span> <span class="nav-text">维护序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82-lca"><span class="nav-number">2.4.</span> <span class="nav-text">求 LCA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">例题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/tree-chain-split-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树链剖分学习笔记 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树链剖分学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-05 11:25:07 / 修改时间：13:13:30" itemprop="dateCreated datePublished" datetime="2022-11-05T11:25:07+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/tree-chain-split-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="tree-chain-split-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>树链剖分是一个很常见的处理树上问题的算法，但之前一直没学
+/kk，现在终于把这个坑补了。</p>
+<p>这里只讲了重链剖分，不涉及其他剖分方式。</p>
+<h1 id="概念">概念</h1>
+<p>树链剖分是一种把树上问题转化为序列问题的算法。它可以将树上的一条路径所经过的点用序列中的若干条区间表示。</p>
+<p>首先我们需要知道几个概念：重儿子、轻儿子、重边、轻边。我们定义对于一个节点
+<span class="math inline">\(u\)</span> 的儿子为 <span
+class="math inline">\(v\)</span>，我们定义以 <span
+class="math inline">\(v\)</span> 为根的子树中节点最多的子树所对应的
+<span class="math inline">\(v\)</span> 为重儿子，其余的 <span
+class="math inline">\(v\)</span>
+为轻儿子。父亲连向重儿子的边为重边，父亲连向轻儿子的边为轻边。如果同时有多个以
+<span class="math inline">\(v\)</span>
+为根的子树节点数相同且最大，则选取任意一个 <span
+class="math inline">\(v\)</span>
+为重儿子，其余为轻儿子。这样对于每个非叶节点，我们都有一个重儿子和一个重边。</p>
+<span id="more"></span>
+<p>接下来以下列的图举例（图片引用自 OI Wiki）：</p>
+<p><img src="https://oi-wiki.org/graph/images/hld.png" /></p>
+<h2 id="重链及其性质">重链及其性质</h2>
+<p>同时我们定义重链为由重边组成的极大的链，即以一条重边延伸出只有重边且最大的链。如上图中绿框所示。我们可以很容易地得出树上每个点属于且仅属于一条重链。于是我们可以将树上问题转化成重链上的问题。</p>
+<p>我们可以发现，对于每个轻儿子，其子树大小至多为父亲的 <span
+class="math inline">\(\frac{1}{2}\)</span>。又通过 LCA
+的思想，我们可以得出重链的一个性质：对于树上任意一条路径，所经过的点可被拆分成不超过
+<span class="math inline">\(\log n\)</span>
+条重链（头尾的重链可不完整）。于是我们可以将路径问题转化为 <span
+class="math inline">\(\log n\)</span> 条序列上的问题。</p>
+<p>接下来我们需要将数转化为序列，这里我们可以使用 DFS
+序，<strong>且遍历时优先遍历重儿子</strong>，这样每条重链就可保证在序列中是连续的。</p>
+<h1 id="实现方式">实现方式</h1>
+<p>我们将求出树上所有重链的操作叫做剖分。</p>
+<h2 id="节点定义">节点定义</h2>
+<p>首先对于每个节点，我们需要维护它的子树大小，DFS
+序，深度以及所在的重链、父节点和重儿子。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    std::vector&lt;<span class="keyword">struct</span> Edge&gt; e;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Chain</span> *chain;</span><br><span class="line">    <span class="type">int</span> size, dfn, depth;</span><br><span class="line">    Node *fa, *ch;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="剖分">剖分</h2>
+<p>对于树链剖分问题，我们可以先将这棵树进行两次 DFS 以进行剖分。第一次
+DFS 求出每颗子树的大小，第二次 DFS
+则求出每个点的重儿子。由于我们可以得出每个轻儿子必为重链的开头，于是我们存重链时仅需存储其深度最小的节点，且每遍历到一个轻节点就新建重链，每遍历到一个重节点就将其归入父亲的重链。于是我们可以在第二次
+DFS 时同时将树进行剖分。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Chain</span> &#123;</span><br><span class="line">    Node *top;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Chain</span>(Node *top) : <span class="built_in">top</span>(top) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs1</span><span class="params">(Node *v, Node *fa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    v-&gt;size = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Edge &amp;e : v-&gt;e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.t == fa) <span class="keyword">continue</span>;</span><br><span class="line">        e.t-&gt;fa = v;</span><br><span class="line">        e.t-&gt;depth = v-&gt;depth + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">dfs1</span>(e.t, v);</span><br><span class="line">        v-&gt;size += e.t-&gt;size;</span><br><span class="line">        <span class="keyword">if</span> (!v-&gt;ch || v-&gt;ch-&gt;size &lt; e.t-&gt;size) v-&gt;ch = e.t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs2</span><span class="params">(Node *v)</span> </span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> ts = <span class="number">0</span>;</span><br><span class="line">    v-&gt;dfn = ++ts;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!v-&gt;fa || v != v-&gt;fa-&gt;ch) v-&gt;chain = <span class="keyword">new</span> <span class="built_in">Chain</span>(v);</span><br><span class="line">    <span class="keyword">else</span> v-&gt;chain = v-&gt;fa-&gt;chain;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (v-&gt;ch) <span class="built_in">dfs2</span>(v-&gt;ch);</span><br><span class="line">    <span class="keyword">for</span> (Edge &amp;e : v-&gt;e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.t-&gt;fa == v &amp;&amp; e.t != v-&gt;ch) &#123;</span><br><span class="line">            <span class="built_in">dfs2</span>(e.t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">split</span><span class="params">(Node *v)</span> </span>&#123;</span><br><span class="line">    v-&gt;depth = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dfs1</span>(v);</span><br><span class="line">    <span class="built_in">dfs2</span>(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="维护序列">维护序列</h2>
+<p>接下来我们就可在 DFS 序上操作了。对于每个点 <span
+class="math inline">\(u\)</span>，在序列 <span
+class="math inline">\(a\)</span> 上对应的是 <span
+class="math inline">\(a_{\text{dfn}_u}\)</span>（<span
+class="math inline">\(\text{dfn}_u\)</span> 为 <span
+class="math inline">\(u\)</span> 的 DFS
+序）。我们这里可以选择线段树维护（实际上选择其它任意数据结构均可）。</p>
+<p>这时我们求路径的时候可以使用类似于倍增求 LCA
+的思想：看两个重链开头的深度，然后更深的往上跳到父亲的重链，同时将这条重链纳入统计。最后跳到同一重链后将两点之间路径纳入统计即可。时间复杂度为
+<span class="math inline">\(O(n \log n)\)</span>。代码演示如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">update</span><span class="params">(Node *u, Node *v, <span class="type">int</span> w)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (u-&gt;chain != v-&gt;chain) &#123;</span><br><span class="line">        <span class="keyword">if</span> (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">        segment-&gt;<span class="built_in">update</span>(u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn, w);</span><br><span class="line">        u = u-&gt;chain-&gt;top-&gt;fa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (u-&gt;depth &gt; v-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    segment-&gt;<span class="built_in">update</span>(u-&gt;dfn, v-&gt;dfn, w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">query</span><span class="params">(Node *u, Node *v)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (u-&gt;chain != v-&gt;chain) &#123;</span><br><span class="line">        <span class="keyword">if</span> (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">        res += segment-&gt;<span class="built_in">query</span>(u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn);</span><br><span class="line">        u = u-&gt;chain-&gt;top-&gt;fa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (u-&gt;depth &gt; v-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    res += segment-&gt;<span class="built_in">query</span>(u-&gt;dfn, v-&gt;dfn);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="求-lca">求 LCA</h2>
+<p>用树链剖分也可以求 LCA，且比倍增求 LCA
+更快，常数小。方法和上述维护序列类似，这就不赘述了。</p>
+<h1 id="例题">例题</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3384">洛谷
+P3384「模板」轻重链剖分/树链剖分</a></p>
+<p>这道题是树链剖分模板，同时加了子树操作。在 DFS
+序中子树中所有节点是连续的，且开头必为根节点，所以我们只需要查询或修改线段树中的子树所在区间即可。即为
+<code>segment-&gt;query(nodes[v].dfn, nodes[v].dfn + nodes[v].size - 1)</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    std::vector&lt;<span class="keyword">struct</span> Edge&gt; e;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Chain</span> *chain;</span><br><span class="line">    <span class="type">int</span> size, dfn, depth;</span><br><span class="line">    Node *fa, *ch;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    Node *s, *t;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Edge</span>(Node *s, Node *t) : <span class="built_in">s</span>(s), <span class="built_in">t</span>(t) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Chain</span> &#123;</span><br><span class="line">    Node *top;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Chain</span>(Node *top) : <span class="built_in">top</span>(top) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">addEdge</span><span class="params">(Node *u, Node *v)</span> </span>&#123;</span><br><span class="line">    u-&gt;e.<span class="built_in">push_back</span>(<span class="built_in">Edge</span>(u, v));</span><br><span class="line">    v-&gt;e.<span class="built_in">push_back</span>(<span class="built_in">Edge</span>(v, u));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs1</span><span class="params">(Node *v, Node *fa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    v-&gt;size = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Edge &amp;e : v-&gt;e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.t == fa) <span class="keyword">continue</span>;</span><br><span class="line">        e.t-&gt;fa = v;</span><br><span class="line">        e.t-&gt;depth = v-&gt;depth + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">dfs1</span>(e.t, v);</span><br><span class="line">        v-&gt;size += e.t-&gt;size;</span><br><span class="line">        <span class="keyword">if</span> (!v-&gt;ch || v-&gt;ch-&gt;size &lt; e.t-&gt;size) v-&gt;ch = e.t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs2</span><span class="params">(Node *v)</span> </span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> ts = <span class="number">0</span>;</span><br><span class="line">    v-&gt;dfn = ++ts;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!v-&gt;fa || v != v-&gt;fa-&gt;ch) v-&gt;chain = <span class="keyword">new</span> <span class="built_in">Chain</span>(v);</span><br><span class="line">    <span class="keyword">else</span> v-&gt;chain = v-&gt;fa-&gt;chain;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (v-&gt;ch) <span class="built_in">dfs2</span>(v-&gt;ch);</span><br><span class="line">    <span class="keyword">for</span> (Edge &amp;e : v-&gt;e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.t-&gt;fa == v &amp;&amp; e.t != v-&gt;ch) &#123;</span><br><span class="line">            <span class="built_in">dfs2</span>(e.t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">split</span><span class="params">(Node *v)</span> </span>&#123;</span><br><span class="line">    v-&gt;depth = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dfs1</span>(v);</span><br><span class="line">    <span class="built_in">dfs2</span>(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SegT</span> &#123;</span><br><span class="line">    <span class="type">int</span> l, r;</span><br><span class="line">    SegT *lc, *rc;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> val, tag;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">SegT</span>(<span class="type">int</span> l, <span class="type">int</span> r, SegT *lc, SegT *rc) : <span class="built_in">l</span>(l), <span class="built_in">r</span>(r), <span class="built_in">lc</span>(lc), <span class="built_in">rc</span>(rc), <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">tag</span>(<span class="number">0</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">cover</span><span class="params">(<span class="type">const</span> <span class="type">long</span> <span class="type">long</span> delta)</span> </span>&#123;</span><br><span class="line">        val += (r - l + <span class="number">1</span>) * delta;</span><br><span class="line">        tag += delta;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pushDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (tag) &#123;</span><br><span class="line">            lc-&gt;<span class="built_in">cover</span>(tag);</span><br><span class="line">            rc-&gt;<span class="built_in">cover</span>(tag);</span><br><span class="line">            tag = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">const</span> <span class="type">int</span> l, <span class="type">const</span> <span class="type">int</span> r, <span class="type">const</span> <span class="type">long</span> <span class="type">long</span> delta)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; <span class="keyword">this</span>-&gt;r || r &lt; <span class="keyword">this</span>-&gt;l) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (l &lt;= <span class="keyword">this</span>-&gt;l &amp;&amp; r &gt;= <span class="keyword">this</span>-&gt;r) <span class="built_in">cover</span>(delta);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">pushDown</span>();</span><br><span class="line">            lc-&gt;<span class="built_in">update</span>(l, r, delta);</span><br><span class="line">            rc-&gt;<span class="built_in">update</span>(l, r, delta);</span><br><span class="line">            val = lc-&gt;val + rc-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">query</span><span class="params">(<span class="type">const</span> <span class="type">int</span> l, <span class="type">const</span> <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; <span class="keyword">this</span>-&gt;r || r &lt; <span class="keyword">this</span>-&gt;l) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (l &lt;= <span class="keyword">this</span>-&gt;l &amp;&amp; r &gt;= <span class="keyword">this</span>-&gt;r) <span class="keyword">return</span> val;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">pushDown</span>();</span><br><span class="line">            <span class="keyword">return</span> lc-&gt;<span class="built_in">query</span>(l, r) + rc-&gt;<span class="built_in">query</span>(l, r);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> SegT *<span class="title">build</span><span class="params">(<span class="type">const</span> <span class="type">int</span> l, <span class="type">const</span> <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; r) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (l == r) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">SegT</span>(l, r, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">const</span> <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">SegT</span>(l, r, <span class="built_in">build</span>(l, mid), <span class="built_in">build</span>(mid + <span class="number">1</span>, r));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; *segment;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">update</span><span class="params">(Node *u, Node *v, <span class="type">long</span> <span class="type">long</span> w)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (u-&gt;chain != v-&gt;chain) &#123;</span><br><span class="line">        <span class="keyword">if</span> (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">        segment-&gt;<span class="built_in">update</span>(u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn, w);</span><br><span class="line">        u = u-&gt;chain-&gt;top-&gt;fa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (u-&gt;depth &gt; v-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    segment-&gt;<span class="built_in">update</span>(u-&gt;dfn, v-&gt;dfn, w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">long</span> <span class="type">long</span> <span class="title">query</span><span class="params">(Node *u, Node *v)</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (u-&gt;chain != v-&gt;chain) &#123;</span><br><span class="line">        <span class="keyword">if</span> (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">        res += segment-&gt;<span class="built_in">query</span>(u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn);</span><br><span class="line">        u = u-&gt;chain-&gt;top-&gt;fa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (u-&gt;depth &gt; v-&gt;depth) std::<span class="built_in">swap</span>(u, v);</span><br><span class="line">    res += segment-&gt;<span class="built_in">query</span>(u-&gt;dfn, v-&gt;dfn);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, r, p;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;n, &amp;m, &amp;r, &amp;p);</span><br><span class="line"></span><br><span class="line">    <span class="function">std::vector&lt;Node&gt; <span class="title">nodes</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="function">std::vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">val</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;val[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;u, &amp;v);</span><br><span class="line">        <span class="built_in">addEdge</span>(&amp;nodes[u], &amp;nodes[v]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">split</span>(&amp;nodes[r]);</span><br><span class="line"></span><br><span class="line">    segment = SegT::<span class="built_in">build</span>(<span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) segment-&gt;<span class="built_in">update</span>(nodes[i].dfn, nodes[i].dfn, val[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="type">int</span> op;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;op);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (op == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="type">int</span> u, v;</span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> w;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %lld&quot;</span>, &amp;u, &amp;v, &amp;w);</span><br><span class="line">            <span class="built_in">update</span>(&amp;nodes[u], &amp;nodes[v], w);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">int</span> u, v;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;u, &amp;v);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">query</span>(&amp;nodes[u], &amp;nodes[v]) % p);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="type">int</span> v;</span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> w;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %lld&quot;</span>, &amp;v, &amp;w);</span><br><span class="line">            segment-&gt;<span class="built_in">update</span>(nodes[v].dfn, nodes[v].dfn + nodes[v].size - <span class="number">1</span>, w);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="type">int</span> v;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;v);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, segment-&gt;<span class="built_in">query</span>(nodes[v].dfn, nodes[v].dfn + nodes[v].size - <span class="number">1</span>) % p);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E6%A0%91/" rel="tag"># 树</a>
+              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+              <a href="/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" rel="tag"># 树链剖分</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/spoj-4354/" rel="prev" title="「SPOJ 4354」Snowflakes - Hash">
+                  <i class="fa fa-chevron-left"></i> 「SPOJ 4354」Snowflakes - Hash
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/noi2015-manager/" rel="next" title="「NOI 2015」软件包管理器 - 树链剖分">
+                  「NOI 2015」软件包管理器 - 树链剖分 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
