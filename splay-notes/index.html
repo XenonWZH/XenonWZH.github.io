@@ -20,17 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="一文概括 Splay 长文预警 平衡树 Splay 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。 二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是原序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。 于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为原序列。 然而在特">
+    <meta name="description" content="一文概括 Splay 长文预警 平衡树 Splay 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。 二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是排序后的序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。 于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为排序后序列。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Splay 学习笔记">
 <meta property="og:url" content="https://xenonwzh.github.io/splay-notes/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="一文概括 Splay 长文预警 平衡树 Splay 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。 二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是原序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。 于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为原序列。 然而在特">
+<meta property="og:description" content="一文概括 Splay 长文预警 平衡树 Splay 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。 二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是排序后的序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。 于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为排序后序列。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://xenonwzh.github.io/splay-notes/balanced_tree.png">
 <meta property="og:image" content="https://xenonwzh.github.io/splay-notes/rotate.png">
+<meta property="og:image" content="https://xenonwzh.github.io/splay-notes/zig-zag.png">
+<meta property="og:image" content="https://xenonwzh.github.io/splay-notes/zig-zig.png">
 <meta property="article:published_time" content="2022-11-08T08:15:33.000Z">
-<meta property="article:modified_time" content="2022-11-08T12:21:42.095Z">
+<meta property="article:modified_time" content="2022-11-08T15:30:19.602Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="学习笔记">
@@ -151,7 +153,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">平衡树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">旋转</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">平衡树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">平衡操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC"><span class="nav-number">2.1.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#splay-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">Splay 操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">二叉搜索树操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%90%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">查询排名操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%AC%AC-k-%E5%A4%A7%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">查询第 \(k\)
+大操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%89%8D%E9%A9%B1-%E5%90%8E%E7%BB%A7"><span class="nav-number">3.4.</span> <span class="nav-text">查询前驱 &#x2F; 后继</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">3.5.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -279,7 +282,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-11-08 16:15:33 / 修改时间：20:21:42" itemprop="dateCreated datePublished" datetime="2022-11-08T16:15:33+08:00">2022-11-08</time>
+      <time title="创建时间：2022-11-08 16:15:33 / 修改时间：23:30:19" itemprop="dateCreated datePublished" datetime="2022-11-08T16:15:33+08:00">2022-11-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -331,18 +334,115 @@
 <h1 id="平衡树">平衡树</h1>
 <p>Splay
 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。</p>
-<p>二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是原序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。</p>
-<p>于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为原序列。</p>
+<p>二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是排序后的序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。</p>
+<p>于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为排序后序列。</p>
 <p>然而在特殊数据下，二叉搜索树很容易退化成一颗链，于是就有了一种优化版本：平衡树。平衡树可以让二叉搜索树随时变化，以求深度保持相对较小，即“平衡”。而
 Splay 就是一种平衡树。</p>
 <span id="more"></span>
 <p>如左图是一颗退化成链的二叉搜索树，右图为一颗平衡树。</p>
 <img src="/splay-notes/balanced_tree.png" class="">
-<h1 id="旋转">旋转</h1>
+<h1 id="平衡操作">平衡操作</h1>
+<h2 id="旋转">旋转</h2>
 <p>Splay
-有很多操作，其中旋转操作最为基本的操作之一。旋转分为左旋和右旋，方式如下图：</p>
+有很多操作，其中旋转操作最为基本的操作之一。旋转分为左旋和右旋。左旋是将一个节点和它的左儿子互换位置，右旋是将一个点和它右儿子互换位置；同时保持中序遍历不变且仍然是一颗排序二叉树。方式如下图（接下来的图片都是使用
+Windows 画图鼠绘，画的不好请见谅）：</p>
 <img src="/splay-notes/rotate.png" class="">
-<p>使用旋转操作可以改变 Splay 的形态，同时不影响其中序遍历的顺序。</p>
+<p>合理运用旋转可以让整棵树保持平衡。</p>
+<h2 id="splay-操作">Splay 操作</h2>
+<p>顾名思义，Splay 操作是 Splay
+最重要的操作之一，也是最具有特点的操作。</p>
+<p>Splay 操作为将一个点通过旋转移到指定的点的儿子。假设我们需要将 <span
+class="math inline">\(x\)</span> 旋转至 <span
+class="math inline">\(y\)</span> 的儿子（若不指定 <span
+class="math inline">\(y\)</span> 则为将 <span
+class="math inline">\(x\)</span> 旋转至根节点），同时 <span
+class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span> 之间间隔节点 <span
+class="math inline">\(A\)</span>（距离 <span
+class="math inline">\(x\)</span> 更近）、<span
+class="math inline">\(B\)</span>（距离 <span
+class="math inline">\(y\)</span> 更近），则有 <span
+class="math inline">\(4\)</span> 种情况：</p>
+<ol type="1">
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子；</li>
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子；</li>
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子；</li>
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子。</li>
+</ol>
+<p>由于 <span class="math inline">\(1\)</span> 与 <span
+class="math inline">\(2\)</span>、<span class="math inline">\(3\)</span>
+与 <span class="math inline">\(4\)</span>
+情况基本相同，操作对称。于是我们只需要将 Splay 分为操作 <span
+class="math inline">\(1\)</span>、<span class="math inline">\(3\)</span>
+两类。Splay 具体操作如下：</p>
+<ul>
+<li>第 <span class="math inline">\(1\)</span> 种情况：<span
+class="math inline">\(A\)</span> 向上旋转，<span
+class="math inline">\(x\)</span> 向上旋转。这种操作称作 zig-zag
+操作。</li>
+</ul>
+<img src="/splay-notes/zig-zag.png" class="">
+<ul>
+<li>第 <span class="math inline">\(3\)</span> 种情况：<span
+class="math inline">\(x\)</span> 向上旋转，<span
+class="math inline">\(x\)</span> 向上旋转。这种操作称作 zig-zig
+操作。</li>
+</ul>
+<img src="/splay-notes/zig-zig.png" class="">
+<p>若想将 <span class="math inline">\(x\)</span> 转至 <span
+class="math inline">\(y\)</span> 的儿子，只需要不停进行该操作即可。</p>
+<p>为了让整颗树尽量保持平衡，<strong>我们需要在每次点操作后都将其 Splay
+操作旋转至根节点</strong>。</p>
+<p>已经过证明：使用 Splay 操作旋转节点，可将该平衡树操作时间复杂度降至
+<span class="math inline">\(O(\log n)\)</span>，证明略。</p>
+<h1 id="二叉搜索树操作">二叉搜索树操作</h1>
+<p>接下来将介绍 Splay 在二叉搜索树种的应用。模板：<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3369">洛谷 P3369
+普通平衡树</a></p>
+<p>为了方便，我们可以先加入 <span
+class="math inline">\(+\infty\)</span>、<span
+class="math inline">\(-\infty\)</span> 两点。</p>
+<h2 id="插入操作">插入操作</h2>
+<p>由于是二叉搜索树，我们可从根节点开始遍历。每到一个点就看若小于这个节点，就进入左儿子；大于这个节点，就进入右儿子。直到找到的儿子为空，就将其插入至该节点。</p>
+<p>插入后为保持平衡，需要将插入的节点 Splay 操作至根节点。</p>
+<h2 id="查询排名操作">查询排名操作</h2>
+<p>查询排名，就相当于查询小于这个数的数字个数。我们可以先求出每颗子树大小，然后根节点开始遍历。每到一个点就看若小于这个节点，就进入左儿子；大于这个节点，就进入右儿子，同时将左子树大小纳入统计。最终查询到这个点，纳入统计的点（或纳入统计的子树种的点）的个数即为排名。</p>
+<p>查询完后，将查询到的点 Splay 到根。</p>
+<h2 id="查询第-k-大操作">查询第 <span class="math inline">\(k\)</span>
+大操作</h2>
+<p>依然从根开始遍历。每到一个点就看这个点的左子树大小：如果大于 <span
+class="math inline">\(k\)</span>，就进入左子树；如果小于 <span
+class="math inline">\(k\)</span>，就先将 <span
+class="math inline">\(k\)</span> 减去左子树大小和根节点大小，若 <span
+class="math inline">\(k \le 0\)</span> 就返回该点，否则进入右子树查询第
+<span class="math inline">\(k\)</span> 大。</p>
+<p>查询完后，将查询到的点 Splay 到根。</p>
+<h2 id="查询前驱-后继">查询前驱 / 后继</h2>
+<p>查询前驱 / 后继当然有其他方法，但在 Splay 中有特殊的方法。</p>
+<p>我们可以把将要查询的点 Splay
+操作至根节点。查询前驱即查询左子树的最右端点，查询后继则是查询右子树的最左端点。</p>
+<p>查完前驱 / 后继后，将查询到的点 Splay 到根。</p>
+<h2 id="删除">删除</h2>
+<p>由于 Splay 的特性，我们可以利用特殊方法删除节点。</p>
+<p>我们可以先求出这个点的前驱和后继，然后将前驱 Splay
+操作至根节点，然后将后继 Splay
+操作至前驱的儿子。显然现在前驱的右儿子是后继，左子树只有要删除的一个点。于是接下来直接删除该点即可。</p>
+<h1 id="代码实现">代码实现</h1>
+<blockquote>
+<p>咕咕咕</p>
+</blockquote>
 
     </div>
 
