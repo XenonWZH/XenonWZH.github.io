@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="题意描述 题目链接之后再加 在这一轮的星际战争中，我方在宇宙中建立了 \(n\) 个据点，以 \(m\) 个单向虫洞连接。我们把终点为据点 \(u\) 的所有虫洞归为据点 \(u\) 的虫洞。 战火纷飞之中这些虫洞很难长久存在，敌人的打击随时可能到来。这些打击中的有效打击可以分为两类：  敌人会摧毁某个虫洞，这会使它连接的两个据点无法再通过这个虫洞直接到达，但这样的打击无法摧毁它连接的两">
+    <meta name="description" content="题意描述 洛谷链接 LOJ 链接 在这一轮的星际战争中，我方在宇宙中建立了 \(n\) 个据点，以 \(m\) 个单向虫洞连接。我们把终点为据点 \(u\) 的所有虫洞归为据点 \(u\) 的虫洞。 战火纷飞之中这些虫洞很难长久存在，敌人的打击随时可能到来。这些打击中的有效打击可以分为两类：  敌人会摧毁某个虫洞，这会使它连接的两个据点无法再通过这个虫洞直接到达，但这样的打击无法摧毁它">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「CSP-S 2022」星战 - 图论 + Hash">
 <meta property="og:url" content="https://xenonwzh.github.io/csp2022-galaxy/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="题意描述 题目链接之后再加 在这一轮的星际战争中，我方在宇宙中建立了 \(n\) 个据点，以 \(m\) 个单向虫洞连接。我们把终点为据点 \(u\) 的所有虫洞归为据点 \(u\) 的虫洞。 战火纷飞之中这些虫洞很难长久存在，敌人的打击随时可能到来。这些打击中的有效打击可以分为两类：  敌人会摧毁某个虫洞，这会使它连接的两个据点无法再通过这个虫洞直接到达，但这样的打击无法摧毁它连接的两">
+<meta property="og:description" content="题意描述 洛谷链接 LOJ 链接 在这一轮的星际战争中，我方在宇宙中建立了 \(n\) 个据点，以 \(m\) 个单向虫洞连接。我们把终点为据点 \(u\) 的所有虫洞归为据点 \(u\) 的虫洞。 战火纷飞之中这些虫洞很难长久存在，敌人的打击随时可能到来。这些打击中的有效打击可以分为两类：  敌人会摧毁某个虫洞，这会使它连接的两个据点无法再通过这个虫洞直接到达，但这样的打击无法摧毁它">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-04T13:26:41.000Z">
-<meta property="article:modified_time" content="2022-11-04T14:02:13.626Z">
+<meta property="article:modified_time" content="2022-11-08T03:20:59.943Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -275,9 +275,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-11-04 21:26:41 / 修改时间：22:02:13" itemprop="dateCreated datePublished" datetime="2022-11-04T21:26:41+08:00">2022-11-04</time>
+      <time title="创建时间：2022-11-04 21:26:41" itemprop="dateCreated datePublished" datetime="2022-11-04T21:26:41+08:00">2022-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-08 11:20:59" itemprop="dateModified" datetime="2022-11-08T11:20:59+08:00">2022-11-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -325,8 +331,8 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="题意描述">题意描述</h1>
-<p><a
-target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GJ411x7h7">题目链接之后再加</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8819">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/3891">LOJ 链接</a></p>
 <p>在这一轮的星际战争中，我方在宇宙中建立了 <span
 class="math inline">\(n\)</span> 个据点，以 <span
 class="math inline">\(m\)</span> 个单向虫洞连接。我们把终点为据点 <span
