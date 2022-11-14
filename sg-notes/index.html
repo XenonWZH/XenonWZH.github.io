@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="SG 函数是解决博弈论问题的一种方法。 博弈论概念 公平组合游戏 首先我们需要了解以下几个概念。 公平组合游戏指的是一类满足下列条件的游戏：  有两名玩家交替操作； 每名玩家可用的操作与玩家的先后无关； 无法移动的玩家判负。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SG 函数学习笔记">
+<meta property="og:url" content="https://xenonwzh.github.io/sg-notes/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="SG 函数是解决博弈论问题的一种方法。 博弈论概念 公平组合游戏 首先我们需要了解以下几个概念。 公平组合游戏指的是一类满足下列条件的游戏：  有两名玩家交替操作； 每名玩家可用的操作与玩家的先后无关； 无法移动的玩家判负。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-14T03:32:47.000Z">
+<meta property="article:modified_time" content="2022-11-14T06:19:36.198Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="博弈论">
+<meta property="article:tag" content="SG 函数">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/sg-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/sg-notes/","path":"sg-notes/","title":"SG 函数学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SG 函数学习笔记 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E8%AE%BA%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">博弈论概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E7%BB%84%E5%90%88%E6%B8%B8%E6%88%8F"><span class="nav-number">1.1.</span> <span class="nav-text">公平组合游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F"><span class="nav-number">1.2.</span> <span class="nav-text">有向图游戏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">2.</span> <span class="nav-text">Nim 游戏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sg-%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">SG 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mex-%E8%BF%90%E7%AE%97"><span class="nav-number">3.1.</span> <span class="nav-text">mex 运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">3.2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">3.3.</span> <span class="nav-text">性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%9C%E8%B4%9F%E6%80%A7%E8%B4%A8"><span class="nav-number">3.3.1.</span> <span class="nav-text">胜负性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%9A%84%E5%92%8C"><span class="nav-number">3.3.2.</span> <span class="nav-text">有向图游戏的和</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/sg-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SG 函数学习笔记 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SG 函数学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-14 11:32:47 / 修改时间：14:19:36" itemprop="dateCreated datePublished" datetime="2022-11-14T11:32:47+08:00">2022-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/sg-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="sg-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>SG 函数是解决博弈论问题的一种方法。</p>
+<h1 id="博弈论概念">博弈论概念</h1>
+<h2 id="公平组合游戏">公平组合游戏</h2>
+<p>首先我们需要了解以下几个概念。</p>
+<p>公平组合游戏指的是一类满足下列条件的游戏：</p>
+<ol type="1">
+<li>有两名玩家交替操作；</li>
+<li>每名玩家可用的操作与玩家的先后无关；</li>
+<li>无法移动的玩家判负。</li>
+</ol>
+<span id="more"></span>
+<p>如 Nim
+游戏就属于公平组合游戏。而像绝大多数棋类游戏则不是公平组合游戏，因为玩家只能操作黑棋或白棋子，不满足条件
+<span class="math inline">\(2\)</span>，且判负也不满足条件 <span
+class="math inline">\(3\)</span>。</p>
+<p>我们将公平组合游戏中先操作的人叫做先手，之后操作的叫做后手。</p>
+<h2 id="有向图游戏">有向图游戏</h2>
+<p>对于一张
+DAG（有向无环图），图中仅有唯一起点，在起点上有一枚棋子，两名玩家交替移动这枚棋子，无法移动的玩家判负。这样的游戏成为有向图游戏。</p>
+<p>我们可以发现：公平组合游戏可转化为有向图游戏，其中节点表示状态，边表示状态转移。</p>
+<p>SG 函数则可以解决有向图游戏中先手是否有必胜策略的问题。</p>
+<h1 id="nim-游戏">Nim 游戏</h1>
+<p>Nim 游戏可参照 <a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2197">洛谷题面</a>。简单而言就是有
+<span class="math inline">\(n\)</span> 堆石子 <span
+class="math inline">\(a_n\)</span>，两人交替取石子。每次可从任意一堆中取走任意数量的石子，且不能不取。取完所有石子的玩家获胜，问先手是否有必胜策略。</p>
+<p>这里可以引出一个 Nim 游戏的定理：Nim 博弈先手必胜，当且仅当 <span
+class="math inline">\(\oplus_{i = 1}^n{a_i} &gt; 0\)</span>（<span
+class="math inline">\(\oplus_{i = 1}^n{a_i}\)</span> 表示 <span
+class="math inline">\(a_n\)</span> 的异或和）。</p>
+<p>证明：首先当所有石子取完时必败，此时 <span
+class="math inline">\(\oplus_{i = 1}^n{a_i} = 0\)</span>。然后对于任意
+<span class="math inline">\(\oplus_{i = 1}^n{a_i} = 0\)</span>
+的局面，显然无论怎么取石子，都会使 <span class="math inline">\(\oplus_{i
+= 1}^n{a_i} \ne 0\)</span>；对于任意 <span
+class="math inline">\(\oplus_{i = 1}^n{a_i} \ne 0\)</span>
+的局面，只要我们选择石头最多的那一堆，都可以一步变化为 <span
+class="math inline">\(\oplus_{i = 1}^n{a_i} = 0\)</span> 的局面。</p>
+<p>于是我们可以使用数学归纳法证明：</p>
+<ul>
+<li>当 <span class="math inline">\(\oplus_{i = 1}^n{a_i} &gt; 0\)</span>
+时，先手只要每次选石子时将局面变化至 <span
+class="math inline">\(\oplus_{i = 1}^n{a_i} =
+0\)</span>，后手只能将局面变化成 <span class="math inline">\(\oplus_{i =
+1}^n{a_i} &gt; 0\)</span>。又由于石子总数总能减小，且 <span
+class="math inline">\(\oplus_{i = 1}^n{a_i} &gt; 0\)</span>
+时肯定有剩余石子，于是可导致最后的石子被先手拿走。</li>
+<li>当 <span class="math inline">\(\oplus_{i = 1}^n{a_i} = 0\)</span>
+时，先手无论如何都只能将状态变化为 <span class="math inline">\(\oplus_{i
+= 1}^n{a_i} &gt;
+0\)</span>，于是后手就可以用上述相同的方法拿走最后石子，故先手必败。</li>
+</ul>
+<h1 id="sg-函数">SG 函数</h1>
+<h2 id="mex-运算">mex 运算</h2>
+<p>我们首先定义一种运算 mex。设 <span class="math inline">\(S\)</span>
+表示一个非负整数即可，<span
+class="math inline">\(\operatorname{mex}(S)\)</span> 即为不属于 <span
+class="math inline">\(S\)</span> 的最小非负整数。可用下列等式表示：</p>
+<p><span class="math display">\[
+\operatorname{mex}(S) = \min\limits_{x \in \complement_\mathbb{N}S}
+\{x\}
+\]</span></p>
+<h2 id="概念">概念</h2>
+<p>在有向图游戏中，假设从节点 <span class="math inline">\(u\)</span>
+可一步到达的节点集合为 <span class="math inline">\(E_u\)</span>，定义 SG
+函数为 <span class="math inline">\(E\)</span> 中所有节点的 SG
+函数值的集合的 <span class="math inline">\(\text{mex}\)</span>
+运算。即为下列等式：</p>
+<p><span class="math display">\[
+\operatorname{SG}(u) = \operatorname{mex}(\{ x | x =
+\operatorname{SG}(v), v \in E_u \})
+\]</span></p>
+<p>当 <span class="math inline">\(u\)</span> 没有可出的节点时，我们定义
+<span class="math inline">\(\operatorname{SG}(u) = 0\)</span>。</p>
+<p>特别得，我们定义整个有向图游戏 <span class="math inline">\(G\)</span>
+的 SG 函数值为该游戏的起点节点 <span class="math inline">\(s\)</span> 的
+SG 函数值，即 <span class="math inline">\(\operatorname{SG}(G) =
+\operatorname{SG}(s)\)</span>。</p>
+<h2 id="性质">性质</h2>
+<h3 id="胜负性质">胜负性质</h3>
+<p>我们可以得到下列性质：</p>
+<ul>
+<li>对于有向图游戏 <span class="math inline">\(G\)</span>，当 <span
+class="math inline">\(\operatorname{SG}(G) &gt; 0\)</span>
+时，先手必胜；</li>
+<li>对于有向图游戏 <span class="math inline">\(G\)</span>，当 <span
+class="math inline">\(\operatorname{SG}(G) = 0\)</span>
+时，先手必败。</li>
+</ul>
+<p>证明：首先对于一个没有出度的点 <span
+class="math inline">\(u\)</span>，满足 <span
+class="math inline">\(\operatorname{SG}(u) = 0\)</span>
+且该状态必败。于是我们可以使用数学归纳法证明：</p>
+<ul>
+<li>对于节点 <span
+class="math inline">\(u\)</span>，存在可一步到达的节点 <span
+class="math inline">\(v\)</span> 且 <span
+class="math inline">\(\operatorname{SG}(v) = 0\)</span> 时，说明 <span
+class="math inline">\(SG(u) &gt; 0\)</span>，且此时玩家可将状态移动到
+<span class="math inline">\(v\)</span> 以达到必胜。</li>
+<li>对于节点 <span class="math inline">\(u\)</span>，可一步到达的节点
+<span class="math inline">\(v\)</span> 均满足 <span
+class="math inline">\(\operatorname{SG}(v) &gt; 0\)</span> 时，说明
+<span class="math inline">\(\operatorname{SG}(x) =
+0\)</span>，且此时无论玩家怎么移动都会将状态转移到后一个玩家必胜的状态，即当前玩家必败。</li>
+</ul>
+<h3 id="有向图游戏的和">有向图游戏的和</h3>
+<p>对于一种有向图游戏 <span class="math inline">\(G\)</span>，设 <span
+class="math inline">\(G\)</span> 包含 <span
+class="math inline">\(n\)</span> 种有向图游戏 <span
+class="math inline">\(H_n\)</span>，玩家每次操作为任意选择一个 <span
+class="math inline">\(H_i\)</span> 进行一次操作，则 <span
+class="math inline">\(G\)</span> 被称为有向图游戏 <span
+class="math inline">\(H_{1 \cdots n}\)</span> 的和，它的 SG
+函数值满足下列等式：</p>
+<p><span class="math display">\[
+\operatorname{SG}(G) = \oplus_{i = 1}^n{\operatorname{SG}(H_i)}
+\]</span></p>
+<p>证明方法与 Nim 游戏的证明方法类似。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag"># 博弈论</a>
+              <a href="/tags/SG-%E5%87%BD%E6%95%B0/" rel="tag"># SG 函数</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/luogu-4360/" rel="prev" title="「洛谷 P4341」锯木厂选址 - 斜率优化 DP">
+                  <i class="fa fa-chevron-left"></i> 「洛谷 P4341」锯木厂选址 - 斜率优化 DP
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
