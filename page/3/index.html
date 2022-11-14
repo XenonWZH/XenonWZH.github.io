@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">106</span>
+        <span class="site-state-item-count">109</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,133 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1738d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cf-1738d/" class="post-title-link" itemprop="url">「Codeforces 1738D」Permutation Addicts - 图论 + DFS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-07 21:50:30 / 修改时间：22:22:03" itemprop="dateCreated datePublished" datetime="2022-10-07T21:50:30+08:00">2022-10-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/cf-1738d/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cf-1738d/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1738/problem/D">Codeforces
+链接</a></p>
+<p>有一个 <span class="math inline">\(n\)</span> 个数的排列 <span
+class="math inline">\(a\)</span> 和一个数 <span class="math inline">\(k
+(0 \le k \le n)\)</span>，你计算出了一个有 <span
+class="math inline">\(n\)</span> 个数的序列 <span
+class="math inline">\(b\)</span>，计算方法如下：</p>
+<ul>
+<li>当 <span class="math inline">\(a_i \le k\)</span> 时，若存在 <span
+class="math inline">\(a_j &gt; k (1 \le j &lt; i)\)</span> 且 <span
+class="math inline">\(i - j\)</span> 最小，则 <span
+class="math inline">\(b_{a_i} = a_j\)</span>，否则 <span
+class="math inline">\(b_{a_i} = n + 1\)</span>；</li>
+<li>当 <span class="math inline">\(a_i &gt; k\)</span> 时，若存在 <span
+class="math inline">\(a_j \le k (1 \le j &lt; i)\)</span> 且 <span
+class="math inline">\(i - j\)</span> 最小，则 <span
+class="math inline">\(b_{a_i} = a_j\)</span>，否则 <span
+class="math inline">\(b_{a_i} = 0\)</span>。</li>
+</ul>
+<p>目前你知道 <span class="math inline">\(b\)</span> 与 <span
+class="math inline">\(n\)</span>，请求出任意一种 <span
+class="math inline">\(a\)</span> 及对应的 <span
+class="math inline">\(k\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/cf-1738d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1300,132 +1427,6 @@ class="math inline">\(m\)</span>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/jsoi2010-banquet/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-5782/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/luogu-5782/" class="post-title-link" itemprop="url">「洛谷 P5782」和平委员会 - 2-SAT</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-09-18 11:15:36 / 修改时间：11:41:38" itemprop="dateCreated datePublished" datetime="2022-09-18T11:15:36+08:00">2022-09-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/luogu-5782/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-5782/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5782">洛谷链接</a></p>
-<p>根据宪法，Byteland
-民主共和国的公众和平委员会应该在国会中通过立法程序来创立。
-不幸的是，由于某些党派代表之间的不和睦而使得这件事存在障碍。
-此委员会必须满足下列条件：</p>
-<ul>
-<li>每个党派都在委员会中恰有 <span class="math inline">\(1\)</span>
-个代表。</li>
-<li>如果 <span class="math inline">\(2\)</span>
-个代表彼此厌恶，则他们不能都属于委员会。</li>
-</ul>
-<p>每个党在议会中有 <span class="math inline">\(2\)</span>
-个代表。代表从 <span class="math inline">\(1\)</span> 编号到 <span
-class="math inline">\(2n\)</span>。 编号为 <span
-class="math inline">\(2i-1\)</span> 和 <span
-class="math inline">\(2i\)</span> 的代表属于第 <span
-class="math inline">\(i\)</span> 个党派。</p>
-<p>任务：写一程序读入党派的数量和关系不友好的代表对，计算决定建立和平委员会是否可能，若行，则列出委员会的成员表。</p>
-<p>对于 <span class="math inline">\(100\%\)</span> 的数据，<span
-class="math inline">\(1 \leq n \leq 8000\)</span>，<span
-class="math inline">\(0 \leq m \leq 20000\)</span>，<span
-class="math inline">\(1 \leq a &lt; b \leq 8000\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/luogu-5782/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
