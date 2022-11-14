@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="题意描述 洛谷链接 LOJ 链接 在一个 \(2\) 维平面上有两条传送带，每一条传送带可以看成是一条线段。两条传送带分别为线段 \(\text{AB}\) 和线段 \(\text{CD}\)。lxhgww 在 \(\text{AB}\) 上的移动速度为 \(P\)，在 \(CD\) 上的移动速度为 \(Q\)，在平面上的移动速度 \(R\)。现在 lxhgww 想从 \(\text A">
+    <meta name="description" content="题意描述 洛谷链接 LibreOJ 链接 在一个 \(2\) 维平面上有两条传送带，每一条传送带可以看成是一条线段。两条传送带分别为线段 \(\text{AB}\) 和线段 \(\text{CD}\)。lxhgww 在 \(\text{AB}\) 上的移动速度为 \(P\)，在 \(CD\) 上的移动速度为 \(Q\)，在平面上的移动速度 \(R\)。现在 lxhgww 想从 \(\te">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「SCOI2010」传送带 - 三分">
 <meta property="og:url" content="https://xenonwzh.github.io/scoi2010-walk/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
-<meta property="og:description" content="题意描述 洛谷链接 LOJ 链接 在一个 \(2\) 维平面上有两条传送带，每一条传送带可以看成是一条线段。两条传送带分别为线段 \(\text{AB}\) 和线段 \(\text{CD}\)。lxhgww 在 \(\text{AB}\) 上的移动速度为 \(P\)，在 \(CD\) 上的移动速度为 \(Q\)，在平面上的移动速度 \(R\)。现在 lxhgww 想从 \(\text A">
+<meta property="og:description" content="题意描述 洛谷链接 LibreOJ 链接 在一个 \(2\) 维平面上有两条传送带，每一条传送带可以看成是一条线段。两条传送带分别为线段 \(\text{AB}\) 和线段 \(\text{CD}\)。lxhgww 在 \(\text{AB}\) 上的移动速度为 \(P\)，在 \(CD\) 上的移动速度为 \(Q\)，在平面上的移动速度 \(R\)。现在 lxhgww 想从 \(\te">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-08T08:28:24.000Z">
-<meta property="article:modified_time" content="2022-09-04T01:53:14.944Z">
+<meta property="article:modified_time" content="2022-11-14T08:11:08.610Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -164,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,7 +175,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -283,7 +283,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:53:14" itemprop="dateModified" datetime="2022-09-04T09:53:14+08:00">2022-09-04</time>
+      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,7 +332,7 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="题意描述">题意描述</h1>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2571">洛谷链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://loj.ac/p/10017">LOJ 链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/10017">LibreOJ 链接</a></p>
 <p>在一个 <span class="math inline">\(2\)</span>
 维平面上有两条传送带，每一条传送带可以看成是一条线段。两条传送带分别为线段
 <span class="math inline">\(\text{AB}\)</span> 和线段 <span
