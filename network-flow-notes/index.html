@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="网络流是一个图论中很大的知识点，这里只涉及部分内容。 概念 一张有向图 \(G &#x3D; (V, E)\)，对于每条边 \((u， v) \in E\) 都有一个权值 \(c(u, v) &gt; 0\)，称为边的 容量。且对于图上没有的边 \((u， v) \notin E\)，\(c(u, v) &#x3D; 0\)，则这张图叫做一个 网络，图中有两个特殊的点 \(s \in V\) 和 \(t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络流学习笔记">
+<meta property="og:url" content="https://xenonwzh.github.io/network-flow-notes/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="网络流是一个图论中很大的知识点，这里只涉及部分内容。 概念 一张有向图 \(G &#x3D; (V, E)\)，对于每条边 \((u， v) \in E\) 都有一个权值 \(c(u, v) &gt; 0\)，称为边的 容量。且对于图上没有的边 \((u， v) \notin E\)，\(c(u, v) &#x3D; 0\)，则这张图叫做一个 网络，图中有两个特殊的点 \(s \in V\) 和 \(t">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xenonwzh.github.io/network-flow-notes/network.png">
+<meta property="og:image" content="https://oi-wiki.org/graph/flow/images/flow2.png">
+<meta property="article:published_time" content="2022-11-15T06:34:58.000Z">
+<meta property="article:modified_time" content="2022-11-15T12:33:55.709Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="图论">
+<meta property="article:tag" content="网络流">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xenonwzh.github.io/network-flow-notes/network.png">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/network-flow-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/network-flow-notes/","path":"network-flow-notes/","title":"网络流学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络流学习笔记 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">最大流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#edmonds-karp-%E5%8A%A8%E8%83%BD%E7%AE%97%E6%B3%95ek-%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">Edmonds-Karp 动能算法（EK
+算法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dinic-%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">Dinic 算法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/network-flow-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网络流学习笔记 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络流学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-15 14:34:58 / 修改时间：20:33:55" itemprop="dateCreated datePublished" datetime="2022-11-15T14:34:58+08:00">2022-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/network-flow-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="network-flow-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>网络流是一个图论中很大的知识点，这里只涉及部分内容。</p>
+<h1 id="概念">概念</h1>
+<p>一张有向图 <span class="math inline">\(G = (V,
+E)\)</span>，对于每条边 <span class="math inline">\((u， v) \in
+E\)</span> 都有一个权值 <span class="math inline">\(c(u, v) &gt;
+0\)</span>，称为边的 <strong>容量</strong>。且对于图上没有的边 <span
+class="math inline">\((u， v) \notin E\)</span>，<span
+class="math inline">\(c(u, v) = 0\)</span>，则这张图叫做一个
+<strong>网络</strong>，图中有两个特殊的点 <span class="math inline">\(s
+\in V\)</span> 和 <span class="math inline">\(t \in
+V\)</span>，这两个点称为 <strong>源点</strong> 和
+<strong>汇点</strong>。</p>
+<span id="more"></span>
+<p>我们设 <span class="math inline">\(f(u, v)\)</span>
+是一个两个自变量均为节点（<span class="math inline">\(u \in V, v \in
+V\)</span>）的函数，且满足下列性质：</p>
+<ul>
+<li><span class="math inline">\(f(u, v) \le c(u,
+v)\)</span>（容量限制）</li>
+<li><span class="math inline">\(f(u, v) = -f(v,
+u)\)</span>（斜对称）</li>
+<li><span class="math inline">\(\forall u \in \complement_V\{s, t\},
+\sum_{(u, x) \in E}{f(u, x)} = \sum_{(x, v) \in E}{f(x,
+v)}\)</span>（流量守恒）</li>
+</ul>
+<p>则我们称 <span class="math inline">\(f(u, v)\)</span> 为网络的
+<strong>流函数</strong>。对于 <span class="math inline">\((u, v) \in
+E\)</span>，<span class="math inline">\(f(u, v)\)</span> 称为这条边的
+<strong>流量</strong>。<span class="math inline">\(c(u, v) - f(u,
+v)\)</span> 称为这条边的 <strong>剩余流量</strong>。<span
+class="math inline">\(\sum_{(s, u) \in E}{f(s, u)}\)</span>
+则被称为整个网络的流量。</p>
+<p>像下图就是一张网络。在边上标记的数字为 <span
+class="math inline">\(f(u, v) / c(u, v)\)</span>。</p>
+<img src="/network-flow-notes/network.png" class="">
+<p>通过流函数性质我们可以发现：除了源点和汇点外，任何节点都不储存流，且流入总量等于流出总量。于是可以形象化地表述为：在不超过容量限制地前提下，流从源点经过网络流向汇点。</p>
+<h1 id="最大流">最大流</h1>
+<p>我们把拥有最大流量的网络流称为最大流，即为 <span
+class="math inline">\(\sum_{(s, u) \in E}{f(s, u)}\)</span>
+最大化。如《概念》上图所示。解决最大流问题最常用 Edmonds-Karp 和 Dinic
+两种算法。</p>
+<h2 id="edmonds-karp-动能算法ek-算法">Edmonds-Karp 动能算法（EK
+算法）</h2>
+<p>在介绍 EK 算法前，我们需要先了解增广路。</p>
+<p>在原图 <span class="math inline">\(G\)</span>
+中若一条从源点到汇点的路径上所有边的剩余容量都大于 <span
+class="math inline">\(0\)</span>，这条路被称为
+<strong>增广路</strong>。</p>
+<p>EK 算法则是不停地使用 BFS
+算法求出增广路，然后扩大该路的流量，直至网络中不存在增广路为止。</p>
+<p>方法是每次从源点开始 BFS，寻找 <span class="math inline">\(f(u, v)
+&lt; c(u, v)\)</span> 的边，任意找到一条从 <span
+class="math inline">\(s\)</span> 到 <span
+class="math inline">\(t\)</span> 的路径，同时存储最小剩余容量 <span
+class="math inline">\(\text{minF}\)</span>，于是网络流量可增加 <span
+class="math inline">\(\text{minF}\)</span>。</p>
+<p>同时注意由于斜对称性质，需要给每条边加反流量，即 <span
+class="math inline">\(f(v, u) = -f(u,
+v)\)</span>。加反边可利用流函数的特性找到更优的增广路，找到多条增广路来抵消不优的增广路，从而得到最优的增广路。形象化地话就看下图（图片引用自
+OI Wiki）：</p>
+<p><img src="https://oi-wiki.org/graph/flow/images/flow2.png" /></p>
+<p>这种算法的最差时间复杂度为 <span
+class="math inline">\(O(nm^2)\)</span>。</p>
+<p>然而直接求最大流问题，用得最多，且最高效的算法是 Dinic 算法。</p>
+<h2 id="dinic-算法">Dinic 算法</h2>
+<p>每次 BFS 只找一条增广路属实浪费，于是衍生出来了 Dinic 算法。</p>
+<p>我们需要直到一个概念：在任意时刻，网络中所有节点以及剩余容量大于
+<span class="math inline">\(0\)</span> 的边组成的子图叫做
+<strong>残量网络</strong>。</p>
+<p>Dinic 算法的核心就是通过 BFS 构建出的
+<strong>分层图</strong>，然后使用 DFS
+在分层图上找增广路，在回溯时实时更新流量，直到找不到增广路为止。最后再使用
+BFS 构建分层图，如此往复，直到构建不出分层图即得出答案。</p>
+<p>Dinic
+可进行当前弧优化。即对于每个点，它的某个出边在增广后就没用了。于是我们在下一次
+DFS 的时候就可以直接从下一条边遍历即可。</p>
+<p>代码实现如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    std::vector&lt;<span class="keyword">struct</span> Edge&gt; e;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Edge</span> *c;</span><br><span class="line">    <span class="type">int</span> l;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    Node *s, *t;</span><br><span class="line">    <span class="type">int</span> c, f, r;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Edge</span>(Node *s, Node *t, <span class="type">int</span> c, <span class="type">int</span> r) : <span class="built_in">s</span>(s), <span class="built_in">t</span>(t), <span class="built_in">c</span>(c), <span class="built_in">f</span>(<span class="number">0</span>), <span class="built_in">r</span>(r) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">addEdge</span><span class="params">(Node *s, Node *t, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    s-&gt;e.<span class="built_in">emplace_back</span>(s, t, c, t-&gt;e.<span class="built_in">size</span>());</span><br><span class="line">    t-&gt;e.<span class="built_in">emplace_back</span>(t, s, <span class="number">0</span>, s-&gt;e.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Dinic</span> &#123;</span><br><span class="line">    std::vector&lt;Node&gt; &amp;nodes;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Dinic</span>(std::vector&lt;Node&gt; &amp;nodes) : <span class="built_in">nodes</span>(nodes) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">level</span><span class="params">(Node *s, Node *t, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            nodes[i].c = nodes[i].e.<span class="built_in">begin</span>();</span><br><span class="line">            nodes[i].l = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        std::queue&lt;Node *&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(s);</span><br><span class="line"></span><br><span class="line">        s-&gt;l = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            Node *u = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[u, v, c, f, r] : u-&gt;e) &#123;</span><br><span class="line">                <span class="keyword">if</span> (f &lt; c &amp;&amp; !v-&gt;l) &#123;</span><br><span class="line">                    v-&gt;l = u-&gt;l + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (v == t) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">else</span> q.<span class="built_in">push</span>(v);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(Node *s, Node *t, <span class="type">int</span> limit = INT_MAX)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s == t) <span class="keyword">return</span> limit;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;e = s-&gt;c; e != s-&gt;e.<span class="built_in">end</span>(); e++) &#123;</span><br><span class="line">            <span class="keyword">auto</span> &amp;[u, v, c, f, r] = *e;</span><br><span class="line">            <span class="keyword">if</span> (f &lt; c &amp;&amp; v-&gt;l == s-&gt;l + <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="type">int</span> flow = <span class="built_in">find</span>(v, t, std::<span class="built_in">min</span>(limit, c - f));</span><br><span class="line">                <span class="keyword">if</span> (flow) &#123;</span><br><span class="line">                    f += flow;</span><br><span class="line">                    v-&gt;e[r].f -= flow;</span><br><span class="line">                    <span class="keyword">return</span> flow;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(Node *s, Node *t, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">level</span>(s, t, n)) &#123;</span><br><span class="line">            <span class="type">int</span> f;</span><br><span class="line">            <span class="keyword">while</span> ((f = <span class="built_in">find</span>(s, t)) &gt; <span class="number">0</span>) res += f;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Dinic 的时间复杂度为 <span
+class="math inline">\(O(n^2m)\)</span>，处理二分图最大匹配时复杂度甚至可达
+<span class="math inline">\(O(m \sqrt{n})\)</span>
+<del>吊打匈牙利算法</del>，是一种非常高效的算法。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag"># 网络流</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/loj-10243/" rel="prev" title="「LibreOJ #10243」移棋子游戏 - 图论 + 博弈论 + SG 函数">
+                  <i class="fa fa-chevron-left"></i> 「LibreOJ #10243」移棋子游戏 - 图论 + 博弈论 + SG 函数
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
