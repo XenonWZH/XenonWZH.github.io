@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="每一个少年终将梦醒  参加了最后一次 OI 系列的考试，终于也 AFO 了。几年伴随我的 OI 历程也在此结束。梦结束了。 接下来 whk 加油！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AFter OI - NOIP2022 游记">
+<meta property="og:url" content="https://xenonwzh.github.io/afo/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="每一个少年终将梦醒  参加了最后一次 OI 系列的考试，终于也 AFO 了。几年伴随我的 OI 历程也在此结束。梦结束了。 接下来 whk 加油！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-28T02:18:07.000Z">
+<meta property="article:modified_time" content="2022-11-28T09:08:54.097Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="日常">
+<meta property="article:tag" content="行记">
+<meta property="article:tag" content="NOIP">
+<meta property="article:tag" content="2022">
+<meta property="article:tag" content="AFO">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/afo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/afo/","path":"afo/","title":"AFter OI - NOIP2022 游记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AFter OI - NOIP2022 游记 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%80%83%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">考试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E5%BF%86"><span class="nav-number">2.</span> <span class="nav-text">回忆</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">114</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/afo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AFter OI - NOIP2022 游记 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AFter OI - NOIP2022 游记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-28 10:18:07 / 修改时间：17:08:54" itemprop="dateCreated datePublished" datetime="2022-11-28T10:18:07+08:00">2022-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">行记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/afo/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="afo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>每一个少年终将梦醒</p>
+</blockquote>
+<p>参加了最后一次 OI 系列的考试，终于也 AFO 了。几年伴随我的 OI
+历程也在此结束。梦结束了。</p>
+<p>接下来 whk 加油！</p>
+<span id="more"></span>
+<h1 id="考试">考试</h1>
+<p>由于疫情，NOIP2022
+并未在成都考，考点设立在绵阳南山中学。于是我们还需要提早几天去绵阳准备。随着整个
+JKFOI
+入住酒店，吃了好几天的外卖。同时也是第一次见到了高一的学弟学妹们。</p>
+<p>考前的几天并不好过，每天都写不进去题，WakaTime
+的每日统计时间也大幅下降，也就考前一天的数据相较之前可看了。每天吃外卖没啥蔬菜，营养也不均衡，导致心理一直挺焦虑的。</p>
+<p>考试当天早上 7:25 才起床
+<del>设了闹钟但只在工作日响</del>，原本计划起床后再复习一下板子的计划直接泡汤了。直接火速洗漱收拾行李带着早饭赶到车上。到考场之前都还没把面包吃完。</p>
+<p>来到考场后不久就开始考试了。先花了 10min 读了前两题。看 T1
+没啥思路，就手动算了一下一张图中 C 和 F
+的个数。不一会儿就想到了可以统计每一行连续可选点的个数。然后对于每一列向上统计可选的每行可选点的方案数。对于每个点将两个相乘就是以该点为左下角的
+C 的方案数。接着由于 F 即为 C
+的左下角加一个竖线，我们可以统计每一列向下可选点的个数，将其与 C
+相乘就是 F 的方案数。于是 T1 大概花了 30min 就切掉了。复杂度 <span
+class="math inline">\(O(n^2)\)</span>。</p>
+<p>接下来看 T2，<span class="math inline">\(k = 2n - 2\)</span>
+的情况并不难想。空出来一个栈，然后将其它的栈的元素个数限定在 <span
+class="math inline">\(2\)</span>
+以内，每遇到相同的就消去即可。花了一点时间把这 <span
+class="math inline">\(15\text{pts}\)</span>
+的部分分打了，于是开始想正解。然而想了好一会儿都每想出来。就把这改了一下看能不能骗点后面的分。</p>
+<p>接下来看 T3。一眼看出来要用 Tarjan 边双连通分量缩点 + 树形 DP
+计数。于是开始写 Tarjan，但始终写不对。想着写出 Tarjan
+要花一定时间加上树形 DP
+也可能写挂于是果断换成暴力。直接状压存点加上必守边判断，复杂度 <span
+class="math inline">\(O(nm2^n)\)</span>，预估可得 <span
+class="math inline">\(35\text{pts}\)</span>。</p>
+<p>然后看了 T4，先敲了一颗线段树打了 <span class="math inline">\(O(qn^2
+\log n)\)</span> 的暴力，预估 <span
+class="math inline">\(8\text{pts}\)</span>，然后看后面的数据点看似可以预处理优化。把线段树预处理了，优化到
+<span class="math inline">\(\Theta (qn^2 + n^2 \log n)\)</span>，把
+<span class="math inline">\(l\)</span> 预处理后优化到了 <span
+class="math inline">\(\Theta (qn + n^2 \log n)\)</span>，在把 <span
+class="math inline">\(r\)</span> 预处理后就可优化到 <span
+class="math inline">\(O(n^2 \log n)\)</span> 了，预估得分 <span
+class="math inline">\(20\text{pts}\)</span>。</p>
+<p>最后半小时留给想 T2，最后仍然没想出来就检查了一下文件，最后一场 OI
+考试就结束了。预估得分为 <span class="math inline">\(100 + 15 + 35 + 20
+= 170\)</span>，省一应该没问题。</p>
+<p>回家后测了一下民间数据，发现 T2 写挂了 QWQ，于是预估得分变为了 <span
+class="math inline">\(100 + [0, 15] + 35 + 20 = [155,
+170]\)</span>。之后看了一下小图灵估分 <span
+class="math inline">\(165\)</span> 省一，InfOJ / MarsOJ 估分 <span
+class="math inline">\(170\)</span>，好受些了。</p>
+<p>接下来就该回学校，进行长达一个月（可能更长）的 whk 恶补了。</p>
+<h1 id="回忆">回忆</h1>
+<p><del>接下来有点偏向碎碎念了 QWQ</del></p>
+<p>小学的时候对编程很感兴趣，学了 Scratch，也接触了一点 C
+语言。这也促使我走上了 OI 的道路。</p>
+<p>到了初中，我加入了 XCSYOI，作为这个学校的第一届学生也是第一届
+OIer，开始了系统的 OI
+训练。初一时阴差阳错地成为了当年学校中为数不多的进入复赛的一员，拿了普及组的省二。然而我们初中以文化课闻名，竞赛倒是其次。这就导致了文化课学业多，竞赛训练时间少，学的知识也学得很浅很少，甚至直到初中毕业连图论都没教。于是初中时拿了三个省二就退役了。</p>
+<p>中考失利，于是来到了成都教科院附中的 JKFOI。认识了更多的
+OIer，也有了更多的训练时间。但随着一学期的结束，我们这届的 OIer
+仅剩三人。在高一拿省一的一个都没有。这是强省非强校的通病——自学。没有国集学长教，没有金牌教练带，学习刷题也只能靠自己。虽说也能出现像上一届
+ympc2005 的 NOI 银牌大佬，但这只属于疯狂停课练习外培的个例。</p>
+<p>于是开始组建了 JKFOJ，启用了每日亿题和 Joker Fool Round
+组题赛，买了蓝书慢慢啃，停晚自习停政史地来机房练习。直到后面晚上熬夜打
+Codeforces 和完全停课。水平渐长。</p>
+<p>参加外培，第一次在高一国庆，那时什么都听不懂，硬是罚做了六天。第二次是高二暑假，由于疫情改为了线上外培，逐渐开始能理解讲的内容，也能做出来一些题了。</p>
+<p>于是开始参加竞赛。从 2021 的 CSP 爆炸到 NOIP，又从 2022 的 CSP
+的低级错误直到最后一次参加
+NOIP，中途犯下了不少的失误。我是一个毛病挺多，也比较粗心的人，竞赛就把这些问题显现出来了，之前的游记中也有写到。</p>
+<p>但 OI
+毕竟是竞赛。每个省从初赛的几千人，到几百人参加复赛，又到几十人拿到省一参加省选，最终组成十几人的省队。强的留下来，弱的被淘汰。不能晋级只能说明还不够强。胜者赢得光辉耀眼，获得名声成就；败者输的彻头彻尾，退出竞赛舞台；只要一步出了差错就被甩到千里之外。竞赛的本质何尝是如此呢。</p>
+<p>从初中怀梦，直到现在梦醒。中途 OI
+或成调味，或成主菜，陪伴了许多实现。为了 OI，我失去了许多。但也因为
+OI，即使被淘汰，我也得到了许多、学到了许多。如果问我再一次从头成为一名
+OIer，答案肯定是愿意的。</p>
+<p>我终究没有过人的实力，无法冲击四川省队。感谢 OI
+为我带来的一切，感谢老师、教练和家长对我的支持。每一个少年或将怀梦，每一个少年终将梦醒。忆梦之繁华，坚定前方之道路。OI
+的历程终将结束，接下来是 AFter OI 的时间。我则需要恶补落下的 whk。</p>
+<p>OI 已结束，whk 加油！</p>
+<p>AFOed on Nov. 26th 2022.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag"># 日常</a>
+              <a href="/tags/%E8%A1%8C%E8%AE%B0/" rel="tag"># 行记</a>
+              <a href="/tags/NOIP/" rel="tag"># NOIP</a>
+              <a href="/tags/2022/" rel="tag"># 2022</a>
+              <a href="/tags/AFO/" rel="tag"># AFO</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/luogu-8858/" rel="prev" title="「洛谷 P8858」折线 - 贪心 + 树状数组 + 二分">
+                  <i class="fa fa-chevron-left"></i> 「洛谷 P8858」折线 - 贪心 + 树状数组 + 二分
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
