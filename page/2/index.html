@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,6 +229,131 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1747d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cf-1747d/" class="post-title-link" itemprop="url">「Codeforces 1747D」Yet Another Problem - 构造 + 二分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-12 20:58:12 / 修改时间：21:25:40" itemprop="dateCreated datePublished" datetime="2022-11-12T20:58:12+08:00">2022-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/cf-1747d/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cf-1747d/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1747/D">Codeforces
+链接</a></p>
+<p>你有一个长度为 <span class="math inline">\(n (1 \le n \le 2 \times
+10^5)\)</span> 的整数序列 <span class="math inline">\(a\)</span>。</p>
+<p>你需要回答 <span class="math inline">\(q (1 \le q \le 2 \times
+10^5)\)</span> 个独立的问题，每次询问如下：</p>
+<p>给定 <span class="math inline">\(l\)</span> 和 <span
+class="math inline">\(r\)</span>，你可以对序列做若干次操作（也可以不做），每次操作，你需要选择两个数
+<span class="math inline">\(L\)</span> 与 <span
+class="math inline">\(R\)</span>，其中必须满足 <span
+class="math inline">\(l\le L\le R\le r\)</span> 且 <span
+class="math inline">\(R-L+1\)</span> 为奇数。然后将 <span
+class="math inline">\(a_L\sim a_R\)</span> 的所有数改为 <span
+class="math inline">\(a_L\sim a_R\)</span> 的异或和，即 <span
+class="math inline">\(a_L\oplus a_{L+1}\oplus \sim \oplus
+a_R\)</span>。</p>
+<p>你的目标是将 <span class="math inline">\(a_l\sim a_r\)</span>
+的所有数变为 <span
+class="math inline">\(0\)</span>。每次询问完后，序列复原。</p>
+<p>询问的答案即为最小操作数。如果总是不能达到目标，则答案为 <span
+class="math inline">\(-1\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/cf-1747d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1301,145 +1426,6 @@ class="math inline">\(u\)</span> 的虫洞。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/csp2022-galaxy/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp2022-game/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/csp2022-game/" class="post-title-link" itemprop="url">「CSP-S 2022」策略游戏 - 贪心 + 线段树</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-04 20:55:51" itemprop="dateCreated datePublished" datetime="2022-11-04T20:55:51+08:00">2022-11-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/csp2022-game/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="csp2022-game/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8818">洛谷链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://loj.ac/p/3890">LibreOJ 链接</a></p>
-<p>小 L 和小 Q 在玩一个策略游戏。</p>
-<p>有一个长度为 <span class="math inline">\(n\)</span> 的数组 <span
-class="math inline">\(A\)</span> 和一个长度为 <span
-class="math inline">\(m\)</span> 的数组 <span
-class="math inline">\(B\)</span>，在此基础上定义一个大小为 <span
-class="math inline">\(n \times m\)</span> 的矩阵 <span
-class="math inline">\(C\)</span>，满足 <span class="math inline">\(C_{i
-j} = A_i \times B_j\)</span>。所有下标均从 <span
-class="math inline">\(1\)</span> 开始。</p>
-<p>游戏一共会进行 <span class="math inline">\(q\)</span>
-轮，在每一轮游戏中，会事先给出 <span class="math inline">\(4\)</span>
-个参数 <span class="math inline">\(l_1, r_1, l_2, r_2\)</span>，满足
-<span class="math inline">\(1 \le l_1 \le r_1 \le n\)</span>、<span
-class="math inline">\(1 \le l_2 \le r_2 \le m\)</span>。</p>
-<p>游戏中，小 L 先选择一个 <span class="math inline">\(l_1 \sim
-r_1\)</span> 之间的下标 <span class="math inline">\(x\)</span>，然后小 Q
-选择一个 <span class="math inline">\(l_2 \sim r_2\)</span> 之间的下标
-<span class="math inline">\(y\)</span>。定义这一轮游戏中二人的得分是
-<span class="math inline">\(C_{x y}\)</span>。</p>
-<p>小 L 的目标是使得这个得分尽可能大，小 Q
-的目标是使得这个得分尽可能小。同时两人都是足够聪明的玩家，每次都会采用最优的策略。</p>
-<p>请问：按照二人的最优策略，每轮游戏的得分分别是多少？</p>
-<p>对于所有数据，<span class="math inline">\(1 \le n, m, q \le
-{10}^5\)</span>，<span class="math inline">\(-{10}^9 \le A_i, B_i \le
-{10}^9\)</span>。对于每轮游戏而言，<span class="math inline">\(1 \le l_1
-\le r_1 \le n\)</span>，<span class="math inline">\(1 \le l_2 \le r_2
-\le m\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/csp2022-game/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
