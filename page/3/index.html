@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">117</span>
+        <span class="site-state-item-count">118</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,384 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/poj-3691/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/poj-3691/" class="post-title-link" itemprop="url">「POJ 3691」DNA repair - AC 自动机 + DP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-06 14:49:58 / 修改时间：15:40:05" itemprop="dateCreated datePublished" datetime="2022-11-06T14:49:58+08:00">2022-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/poj-3691/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="poj-3691/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="http://poj.org/problem?id=3691">POJ 链接</a></p>
+<p>生物学家终于发明了修复 DNA
+的技术，能够将包含各种遗传疾病的DNA片段进行修复。</p>
+<p>为了简单起见，DNA 看作是一个由
+<code>A</code>、<code>G</code>、<code>C</code>、<code>T</code>
+构成的字符串。</p>
+<p>修复技术就是通过改变字符串中的一些字符，从而消除字符串中包含的致病片段。</p>
+<p>例如，我们可以通过改变两个字符，将 DNA 片段 <code>AAGCAG</code> 变为
+<code>AGGCAC</code>，从而使得 DNA 片段中不再包含致病片段
+<code>AAG</code>、<code>AGC</code>、<code>CAG</code>，以达到修复该DNA片段的目的。</p>
+<p>需注意，被修复的 DNA 片段中，仍然只能包含字符
+<code>A</code>、<code>G</code>、<code>C</code>、<code>T</code>。</p>
+<p>请你帮助生物学家修复给定的 DNA
+片段，并且修复过程中改变的字符数量要尽可能的少。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/poj-3691/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noi2015-manager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/noi2015-manager/" class="post-title-link" itemprop="url">「NOI 2015」软件包管理器 - 树链剖分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-05 13:13:44" itemprop="dateCreated datePublished" datetime="2022-11-05T13:13:44+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/noi2015-manager/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noi2015-manager/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2146">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/2130">LibreOJ 链接</a></p>
+<p>你决定设计你自己的软件包管理器。不可避免地，你要解决软件包之间的依赖问题。如果软件包
+<span class="math inline">\(A\)</span> 依赖软件包 <span
+class="math inline">\(B\)</span>，那么安装软件包 <span
+class="math inline">\(A\)</span> 以前，必须先安装软件包 <span
+class="math inline">\(B\)</span>。同时，如果想要卸载软件包 <span
+class="math inline">\(B\)</span>，则必须卸载软件包 <span
+class="math inline">\(A\)</span>。现在你已经获得了所有的软件包之间的依赖关系。而且，由于你之前的工作，除
+<span class="math inline">\(0\)</span>
+号软件包以外，在你的管理器当中的软件包都会依赖一个且仅一个软件包，而
+<span class="math inline">\(0\)</span>
+号软件包不依赖任何一个软件包。依赖关系不存在环（若有 <span
+class="math inline">\(m \ (m \geq 2)\)</span> 个软件包<span
+class="math inline">\(A_1, A_2, A_3, \ldots ,A_m\)</span>，其中 <span
+class="math inline">\(A_1\)</span> 依赖 <span
+class="math inline">\(A_2\)</span>，<span
+class="math inline">\(A_2\)</span> 依赖 <span
+class="math inline">\(A_3\)</span>，<span
+class="math inline">\(A_3\)</span> 依赖 <span
+class="math inline">\(A_4\)</span>，……，<span
+class="math inline">\(A_{m−1}\)</span> 依赖 <span
+class="math inline">\(A_m\)</span>，而 <span
+class="math inline">\(A_m\)</span> 依赖 <span
+class="math inline">\(A_1\)</span>，则称这 <span
+class="math inline">\(m\)</span>
+个软件包的依赖关系构成环），当然也不会有一个软件包依赖自己。</p>
+<p>现在你要为你的软件包管理器写一个依赖解决程序。根据反馈，用户希望在安装和卸载某个软件包时，快速地知道这个操作实际上会改变多少个软件包的安装状态（即安装操作会安装多少个未安装的软件包，或卸载操作会卸载多少个已安装的软件包），你的任务就是实现这个部分。注意，安装一个已安装的软件包，或卸载一个未安装的软件包，都不会改变任何软件包的安装状态，即在此情况下，改变安装状态的软件包数为
+<span class="math inline">\(0\)</span>。</p>
+<p>对于所有数据，<span class="math inline">\(n \leq 100000, \ q \leq
+100000\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/noi2015-manager/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/tree-chain-split-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/tree-chain-split-notes/" class="post-title-link" itemprop="url">树链剖分学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-05 11:25:07 / 修改时间：13:13:30" itemprop="dateCreated datePublished" datetime="2022-11-05T11:25:07+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/tree-chain-split-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="tree-chain-split-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>树链剖分是一个很常见的处理树上问题的算法，但之前一直没学
+/kk，现在终于把这个坑补了。</p>
+<p>这里只讲了重链剖分，不涉及其他剖分方式。</p>
+<h1 id="概念">概念</h1>
+<p>树链剖分是一种把树上问题转化为序列问题的算法。它可以将树上的一条路径所经过的点用序列中的若干条区间表示。</p>
+<p>首先我们需要知道几个概念：重儿子、轻儿子、重边、轻边。我们定义对于一个节点
+<span class="math inline">\(u\)</span> 的儿子为 <span
+class="math inline">\(v\)</span>，我们定义以 <span
+class="math inline">\(v\)</span> 为根的子树中节点最多的子树所对应的
+<span class="math inline">\(v\)</span> 为重儿子，其余的 <span
+class="math inline">\(v\)</span>
+为轻儿子。父亲连向重儿子的边为重边，父亲连向轻儿子的边为轻边。如果同时有多个以
+<span class="math inline">\(v\)</span>
+为根的子树节点数相同且最大，则选取任意一个 <span
+class="math inline">\(v\)</span>
+为重儿子，其余为轻儿子。这样对于每个非叶节点，我们都有一个重儿子和一个重边。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/tree-chain-split-notes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1169,386 +1547,8 @@ class="math inline">\(M\)</span> 列的格子。</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1746d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/cf-1746d/" class="post-title-link" itemprop="url">「Codeforces 1746D」Paths on the Tree - 贪心</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-23 22:13:01" itemprop="dateCreated datePublished" datetime="2022-10-23T22:13:01+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-24 09:08:24" itemprop="dateModified" datetime="2022-10-24T09:08:24+08:00">2022-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/cf-1746d/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cf-1746d/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1746/D">Codeforces
-链接</a></p>
-<p>给定一个 <span class="math inline">\(n\)</span>
-个节点的树，其节点被标记为 <span class="math inline">\(1\)</span> 到
-<span class="math inline">\(n\)</span>，而且该树的根为 <span
-class="math inline">\(1\)</span>，另外也给定一个积分序列 <span
-class="math inline">\(s\)</span></p>
-<p>如果下列两个条件都满足，则我们称路径集合k可用：</p>
-<ul>
-<li><p>该集合内所有路径从 <span class="math inline">\(1\)</span>
-开始</p></li>
-<li><p><span class="math inline">\(c_i\)</span> 为覆盖节点 <span
-class="math inline">\(i\)</span>
-的路径数量，对于每对拥有同个父节点的节点 <span
-class="math inline">\((u,v)\)</span>，要求<span
-class="math inline">\(|c_u-c_v|\)</span> 小于等于1</p></li>
-</ul>
-<p>对于每个路径集合，其权值被定义为 <span
-class="math inline">\(\sum\limits_{i=1}^n{c_i s_i}\)</span></p>
-<p>显而易见，每组数据至少有一个可用的路径集合，找出所有可用路径集合中的最大权值</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/cf-1746d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/ybtoj723-tee/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ybtoj723-tee/" class="post-title-link" itemprop="url">「YbtOJ CSP-S 模拟赛」砍苹果树 - 树上差分</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-10-23 21:59:49 / 修改时间：22:11:04" itemprop="dateCreated datePublished" datetime="2022-10-23T21:59:49+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/ybtoj723-tee/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="ybtoj723-tee/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="http://noip.ybtoj.com.cn/contest/723/problem/1">YbtOJ
-链接（需付费）</a></p>
-<p>小 K 有一棵 <span class="math inline">\(n\)</span> 个点，<span
-class="math inline">\(n - 1\)</span> 条边的苹果树，将树上的边称为 A
-类边。</p>
-<p>小 K 还往这棵树上加上了 <span class="math inline">\(m\)</span>
-条边，称加上的边为 B 类边。</p>
-<p>作为小 K 的好朋友，你想要砍掉小 K
-的苹果树，但是你发现砍掉一条边不一定能使苹果树不连通，于是你需要求出：有多少选取
-<strong>恰好一条 A 类边和恰好一条 B 类边</strong>
-的方案，使得这两条边删去之后，原图不连通。</p>
-<p>两种方案不同当且仅当一条边在第一种方案中被删除了但在第二种方案中没有被删除。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ybtoj723-tee/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/nc-40646a/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/nc-40646a/" class="post-title-link" itemprop="url">「牛客 CSP-S 模拟赛」躲避技能 - 树上差分 + 贪心 + 高精度</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-08 11:56:07" itemprop="dateCreated datePublished" datetime="2022-10-08T11:56:07+08:00">2022-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-23 22:02:23" itemprop="dateModified" datetime="2022-10-23T22:02:23+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/nc-40646a/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="nc-40646a/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a
-target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/40646/A">牛客链接（需付费）</a></p>
-<p>鸡尾酒是一个多操手，他可以同时操作 <span
-class="math inline">\(m\)</span> 个账号。今天，他使用这些账号一起打一个
-boss。这个 boss 战的地图共有 <span class="math inline">\(n\)</span>
-个关键点，其中有 <span class="math inline">\(n - 1\)</span>
-条边，每条边连接着两个不同的点，使得从任意点出发可以到达其他所有的点。鸡尾酒的
-<span class="math inline">\(m\)</span> 个账号分别编号 <span
-class="math inline">\(1\)</span> 至 <span
-class="math inline">\(m\)</span>，一开始，第 <span
-class="math inline">\(i\)</span> 个账号在点 <span
-class="math inline">\(s_i\)</span>。<strong>可能有两个账号在同一位置</strong>。</p>
-<p>现在，boss 放出了一个致命技能。boss 在地图上标出了 <span
-class="math inline">\(m\)</span>
-个关键点，想成功躲避这个技能，必须在每一个被标记的点上，都有一个账号站在上面。<strong>注意，可能会有点被多次标记，多次标记的点需要有多个账号站在上面</strong>。</p>
-<p>由于鸡尾酒无法分身，所以
-<strong>他必须先把一个账号移动到一个位置，才能动另一个账号，不能同时移动多个账号</strong>。假设鸡尾酒的任意账号通过第
-<span class="math inline">\(i\)</span> 条边的时间为 <span
-class="math inline">\(w_i\)</span>，请帮鸡尾酒求出他成功躲避技能所需要的最少时间。</p>
-<p>数据范围：<span class="math inline">\(1 \le n, m \le
-10^5\)</span>，<span class="math inline">\(1 \le w_i \le
-10^{100}\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/nc-40646a/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
