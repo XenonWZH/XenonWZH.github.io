@@ -28,7 +28,7 @@
 <meta property="og:description" content="XenonWZH&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="XenonWZH">
-<meta property="article:tag" content="OI, XenonWZH, blog">
+<meta property="article:tag" content="XenonWZH, blog">
 <meta name="twitter:card" content="summary">
 
 
@@ -72,7 +72,7 @@
       <h1 class="site-title">XenonWZH's Blog</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌 | AFO</p>
+      <p class="site-subtitle" itemprop="description">玻璃晴朗，橘子辉煌</p>
   </div>
 
   <div class="site-nav-right">
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">109</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">123</span>
+        <span class="site-state-item-count">125</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,513 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/tree-chain-split-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/tree-chain-split-notes/" class="post-title-link" itemprop="url">树链剖分学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-05 11:25:07 / 修改时间：13:13:30" itemprop="dateCreated datePublished" datetime="2022-11-05T11:25:07+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/tree-chain-split-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="tree-chain-split-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>树链剖分是一个很常见的处理树上问题的算法，但之前一直没学
+/kk，现在终于把这个坑补了。</p>
+<p>这里只讲了重链剖分，不涉及其他剖分方式。</p>
+<h1 id="概念">概念</h1>
+<p>树链剖分是一种把树上问题转化为序列问题的算法。它可以将树上的一条路径所经过的点用序列中的若干条区间表示。</p>
+<p>首先我们需要知道几个概念：重儿子、轻儿子、重边、轻边。我们定义对于一个节点
+<span class="math inline">\(u\)</span> 的儿子为 <span
+class="math inline">\(v\)</span>，我们定义以 <span
+class="math inline">\(v\)</span> 为根的子树中节点最多的子树所对应的
+<span class="math inline">\(v\)</span> 为重儿子，其余的 <span
+class="math inline">\(v\)</span>
+为轻儿子。父亲连向重儿子的边为重边，父亲连向轻儿子的边为轻边。如果同时有多个以
+<span class="math inline">\(v\)</span>
+为根的子树节点数相同且最大，则选取任意一个 <span
+class="math inline">\(v\)</span>
+为重儿子，其余为轻儿子。这样对于每个非叶节点，我们都有一个重儿子和一个重边。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/tree-chain-split-notes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/spoj-4354/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/spoj-4354/" class="post-title-link" itemprop="url">「SPOJ 4354」Snowflakes - Hash</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-04 22:16:56 / 修改时间：22:32:37" itemprop="dateCreated datePublished" datetime="2022-11-04T22:16:56+08:00">2022-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/spoj-4354/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="spoj-4354/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/TWINSNOW/">SPOJ 链接</a></p>
+<p>有 <span class="math inline">\(n (n \le 10^5)\)</span>
+个雪花。每个雪花是 <span class="math inline">\(6\)</span>
+个数组成的一个环。若两个环经过旋转（也可不旋转）后环上数字相等，则两个雪花相同。若两个环顺时针和逆时针数字相同则两个环也相同。判断是否有相同的雪花。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/spoj-4354/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp2022-galaxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/csp2022-galaxy/" class="post-title-link" itemprop="url">「CSP-S 2022」星战 - 图论 + Hash</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-04 21:26:41" itemprop="dateCreated datePublished" datetime="2022-11-04T21:26:41+08:00">2022-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/csp2022-galaxy/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="csp2022-galaxy/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8819">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/3891">LibreOJ 链接</a></p>
+<p>在这一轮的星际战争中，我方在宇宙中建立了 <span
+class="math inline">\(n\)</span> 个据点，以 <span
+class="math inline">\(m\)</span> 个单向虫洞连接。我们把终点为据点 <span
+class="math inline">\(u\)</span> 的所有虫洞归为据点 <span
+class="math inline">\(u\)</span> 的虫洞。</p>
+<p>战火纷飞之中这些虫洞很难长久存在，敌人的打击随时可能到来。这些打击中的有效打击可以分为两类：</p>
+<ol type="1">
+<li>敌人会摧毁某个虫洞，这会使它连接的两个据点无法再通过这个虫洞直接到达，但这样的打击无法摧毁它连接的两个据点。</li>
+<li>敌人会摧毁某个据点，由于虫洞的主要技术集中在出口处，这会导致该据点的所有还未被摧毁的虫洞被一同摧毁。而从这个据点出发的虫洞则<strong>不会摧毁</strong>。</li>
+</ol>
+<p>注意：摧毁只会导致虫洞不可用，而不会消除它的存在。</p>
+<p>为了抗击敌人并维护各部队和各据点之间的联系，我方发展出了两种特种部队负责修复虫洞：</p>
+<ul>
+<li>A 型特种部队则可以将某个特定的虫洞修复。</li>
+<li>B 型特种部队可以将某据点的所有损坏的虫洞修复。</li>
+</ul>
+<p>考虑到敌人打击的特点，我方并未在据点上储备过多的战略物资。因此只要这个据点的某一条虫洞被修复，处于可用状态，那么这个据点也是可用的。</p>
+<p>我方掌握了一种苛刻的空间特性，利用这一特性我方战舰可以沿着虫洞瞬移到敌方阵营，实现精确打击。</p>
+<p>为了把握发动反攻的最佳时机，指挥部必须关注战场上的所有变化，为了寻找一个能够进行反攻的时刻。总指挥认为：</p>
+<ul>
+<li>如果从我方的任何据点出发，在选择了合适的路线的前提下，可以进行无限次的虫洞穿梭（可以多次经过同一据点或同一虫洞），那么这个据点就可以<strong>实现反击</strong>。</li>
+<li>为了使虫洞穿梭的过程连续，尽量减少战舰在据点切换虫洞时的质能损耗，当且仅当<strong>只有一个从该据点出发的虫洞可用</strong>时，这个据点可以<strong>实现连续穿梭</strong>。</li>
+<li>如果我方所有据点都可以<strong>实现反击</strong>，也都可以<strong>实现连续穿梭</strong>，那么这个时刻就是一个绝佳的<strong>反攻</strong>时刻。</li>
+</ul>
+<p>总司令为你下达命令，要求你根据战场上实时反馈的信息，迅速告诉他当前的时刻是否能够进行一次<strong>反攻</strong>。</p>
+<p>对于所有数据保证：<span class="math inline">\(1 \le n \le 5 \times
+{10}^5\)</span>，<span class="math inline">\(1 \le m \le 5 \times
+{10}^5\)</span>，<span class="math inline">\(1 \le q \le 5 \times
+{10}^5\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/csp2022-galaxy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp2022-game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/csp2022-game/" class="post-title-link" itemprop="url">「CSP-S 2022」策略游戏 - 贪心 + 线段树</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-04 20:55:51" itemprop="dateCreated datePublished" datetime="2022-11-04T20:55:51+08:00">2022-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/csp2022-game/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="csp2022-game/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8818">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/3890">LibreOJ 链接</a></p>
+<p>小 L 和小 Q 在玩一个策略游戏。</p>
+<p>有一个长度为 <span class="math inline">\(n\)</span> 的数组 <span
+class="math inline">\(A\)</span> 和一个长度为 <span
+class="math inline">\(m\)</span> 的数组 <span
+class="math inline">\(B\)</span>，在此基础上定义一个大小为 <span
+class="math inline">\(n \times m\)</span> 的矩阵 <span
+class="math inline">\(C\)</span>，满足 <span class="math inline">\(C_{i
+j} = A_i \times B_j\)</span>。所有下标均从 <span
+class="math inline">\(1\)</span> 开始。</p>
+<p>游戏一共会进行 <span class="math inline">\(q\)</span>
+轮，在每一轮游戏中，会事先给出 <span class="math inline">\(4\)</span>
+个参数 <span class="math inline">\(l_1, r_1, l_2, r_2\)</span>，满足
+<span class="math inline">\(1 \le l_1 \le r_1 \le n\)</span>、<span
+class="math inline">\(1 \le l_2 \le r_2 \le m\)</span>。</p>
+<p>游戏中，小 L 先选择一个 <span class="math inline">\(l_1 \sim
+r_1\)</span> 之间的下标 <span class="math inline">\(x\)</span>，然后小 Q
+选择一个 <span class="math inline">\(l_2 \sim r_2\)</span> 之间的下标
+<span class="math inline">\(y\)</span>。定义这一轮游戏中二人的得分是
+<span class="math inline">\(C_{x y}\)</span>。</p>
+<p>小 L 的目标是使得这个得分尽可能大，小 Q
+的目标是使得这个得分尽可能小。同时两人都是足够聪明的玩家，每次都会采用最优的策略。</p>
+<p>请问：按照二人的最优策略，每轮游戏的得分分别是多少？</p>
+<p>对于所有数据，<span class="math inline">\(1 \le n, m, q \le
+{10}^5\)</span>，<span class="math inline">\(-{10}^9 \le A_i, B_i \le
+{10}^9\)</span>。对于每轮游戏而言，<span class="math inline">\(1 \le l_1
+\le r_1 \le n\)</span>，<span class="math inline">\(1 \le l_2 \le r_2
+\le m\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/csp2022-game/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1005,505 +1512,6 @@ class="math inline">\(n - 1\)</span> 条边的苹果树，将树上的边称为 
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/ybtoj723-tee/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/nc-40646a/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/nc-40646a/" class="post-title-link" itemprop="url">「牛客 CSP-S 模拟赛」躲避技能 - 树上差分 + 贪心 + 高精度</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-08 11:56:07" itemprop="dateCreated datePublished" datetime="2022-10-08T11:56:07+08:00">2022-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-23 22:02:23" itemprop="dateModified" datetime="2022-10-23T22:02:23+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/nc-40646a/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="nc-40646a/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a
-target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/40646/A">牛客链接（需付费）</a></p>
-<p>鸡尾酒是一个多操手，他可以同时操作 <span
-class="math inline">\(m\)</span> 个账号。今天，他使用这些账号一起打一个
-boss。这个 boss 战的地图共有 <span class="math inline">\(n\)</span>
-个关键点，其中有 <span class="math inline">\(n - 1\)</span>
-条边，每条边连接着两个不同的点，使得从任意点出发可以到达其他所有的点。鸡尾酒的
-<span class="math inline">\(m\)</span> 个账号分别编号 <span
-class="math inline">\(1\)</span> 至 <span
-class="math inline">\(m\)</span>，一开始，第 <span
-class="math inline">\(i\)</span> 个账号在点 <span
-class="math inline">\(s_i\)</span>。<strong>可能有两个账号在同一位置</strong>。</p>
-<p>现在，boss 放出了一个致命技能。boss 在地图上标出了 <span
-class="math inline">\(m\)</span>
-个关键点，想成功躲避这个技能，必须在每一个被标记的点上，都有一个账号站在上面。<strong>注意，可能会有点被多次标记，多次标记的点需要有多个账号站在上面</strong>。</p>
-<p>由于鸡尾酒无法分身，所以
-<strong>他必须先把一个账号移动到一个位置，才能动另一个账号，不能同时移动多个账号</strong>。假设鸡尾酒的任意账号通过第
-<span class="math inline">\(i\)</span> 条边的时间为 <span
-class="math inline">\(w_i\)</span>，请帮鸡尾酒求出他成功躲避技能所需要的最少时间。</p>
-<p>数据范围：<span class="math inline">\(1 \le n, m \le
-10^5\)</span>，<span class="math inline">\(1 \le w_i \le
-10^{100}\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/nc-40646a/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/nc-40645a/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/nc-40645a/" class="post-title-link" itemprop="url">「牛客 CSP-S 模拟赛」光 - 二分答案</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-10-08 11:36:20 / 修改时间：11:55:46" itemprop="dateCreated datePublished" datetime="2022-10-08T11:36:20+08:00">2022-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/nc-40645a/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="nc-40645a/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a
-target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/40645/A">牛客链接（需付费）</a></p>
-<p>在一个 <span class="math inline">\(2 \times 2\)</span>
-的网格上有四盏灯，每个网格一盏。这四盏灯的位置分别是左上角，右上角，左下角，右下角。</p>
-<p>每盏灯有一个可供调节的耗电量，耗电量越高，则灯对周围提供的亮度越多。具体来说，若某一盏灯的耗电量为
-<span class="math inline">\(x\)</span>，那么它将会为自己的格子提供 <span
-class="math inline">\(x\)</span> 的亮度，为相邻的两个格子提供 <span
-class="math inline">\(\lfloor \frac{x}{2} \rfloor\)</span>
-的亮度，为对角的格子提供 <span class="math inline">\(\lfloor \frac{x}{4}
-\rfloor\)</span>。其中 <span class="math inline">\(\lfloor x
-\rfloor\)</span> 表示对 <span class="math inline">\(x\)</span>
-向下取整。</p>
-<p>某一个<strong>格子的亮度</strong>是四盏灯对它提供的亮度之和。例如左上角的灯耗电量为
-<span class="math inline">\(4\)</span>，右上角的灯耗电量为 <span
-class="math inline">\(7\)</span>，右下角的灯耗电量为 <span
-class="math inline">\(8\)</span>，左下角的灯耗电量为 <span
-class="math inline">\(0\)</span>，那么左上角这个格子的亮度就是 <span
-class="math inline">\(4 + \lfloor \frac{7}{2} \rfloor + \lfloor
-\frac{8}{4} \rfloor + 0 = 9\)</span></p>
-<p>现在我们对 <strong>四个格子的最低亮度</strong>
-提出了要求，我们想要让四个格子的亮度都达到标准。你可以将每一盏灯的耗电量调节为任何一个大于等于零的整数，为了省电，你希望四盏灯的耗电量之和尽可能的小，请问
-<strong>四盏灯的最小耗电量之和</strong> 是多小？</p>
-<p>数据范围：四个格子的最低亮度均为正整数且不超过 <span
-class="math inline">\(1500\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/nc-40645a/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1738d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/cf-1738d/" class="post-title-link" itemprop="url">「Codeforces 1738D」Permutation Addicts - 图论 + DFS</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-10-07 21:50:30 / 修改时间：22:22:03" itemprop="dateCreated datePublished" datetime="2022-10-07T21:50:30+08:00">2022-10-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/cf-1738d/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cf-1738d/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1738/problem/D">Codeforces
-链接</a></p>
-<p>有一个 <span class="math inline">\(n\)</span> 个数的排列 <span
-class="math inline">\(a\)</span> 和一个数 <span class="math inline">\(k
-(0 \le k \le n)\)</span>，你计算出了一个有 <span
-class="math inline">\(n\)</span> 个数的序列 <span
-class="math inline">\(b\)</span>，计算方法如下：</p>
-<ul>
-<li>当 <span class="math inline">\(a_i \le k\)</span> 时，若存在 <span
-class="math inline">\(a_j &gt; k (1 \le j &lt; i)\)</span> 且 <span
-class="math inline">\(i - j\)</span> 最小，则 <span
-class="math inline">\(b_{a_i} = a_j\)</span>，否则 <span
-class="math inline">\(b_{a_i} = n + 1\)</span>；</li>
-<li>当 <span class="math inline">\(a_i &gt; k\)</span> 时，若存在 <span
-class="math inline">\(a_j \le k (1 \le j &lt; i)\)</span> 且 <span
-class="math inline">\(i - j\)</span> 最小，则 <span
-class="math inline">\(b_{a_i} = a_j\)</span>，否则 <span
-class="math inline">\(b_{a_i} = 0\)</span>。</li>
-</ul>
-<p>目前你知道 <span class="math inline">\(b\)</span> 与 <span
-class="math inline">\(n\)</span>，请求出任意一种 <span
-class="math inline">\(a\)</span> 及对应的 <span
-class="math inline">\(k\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/cf-1738d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1738c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/cf-1738c/" class="post-title-link" itemprop="url">「Codeforces 1738C」Even Number Addicts - 博弈论</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-10-07 21:18:27 / 修改时间：22:25:36" itemprop="dateCreated datePublished" datetime="2022-10-07T21:18:27+08:00">2022-10-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/cf-1738c/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cf-1738c/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1738/C">Codeforces
-链接</a></p>
-<p>Alice 和 Bob 玩一个游戏，这个游戏中有一个有 <span
-class="math inline">\(n\)</span> 项的序列 <span
-class="math inline">\(a\)</span>，Alice 先手，两人轮流在 <span
-class="math inline">\(a\)</span> 中取走一个数。若最终取完后 Alice
-取走的数的和为偶数则 Alice 获胜，否则 Bob
-获胜。若两人均按最优策略决策，求出最终的获胜方。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/cf-1738c/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
