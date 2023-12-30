@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,6 +229,147 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noi2015-manager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/noi2015-manager/" class="post-title-link" itemprop="url">「NOI 2015」软件包管理器 - 树链剖分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-05 13:13:44" itemprop="dateCreated datePublished" datetime="2022-11-05T13:13:44+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/noi2015-manager/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="noi2015-manager/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2146">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/2130">LibreOJ 链接</a></p>
+<p>你决定设计你自己的软件包管理器。不可避免地，你要解决软件包之间的依赖问题。如果软件包
+<span class="math inline">\(A\)</span> 依赖软件包 <span
+class="math inline">\(B\)</span>，那么安装软件包 <span
+class="math inline">\(A\)</span> 以前，必须先安装软件包 <span
+class="math inline">\(B\)</span>。同时，如果想要卸载软件包 <span
+class="math inline">\(B\)</span>，则必须卸载软件包 <span
+class="math inline">\(A\)</span>。现在你已经获得了所有的软件包之间的依赖关系。而且，由于你之前的工作，除
+<span class="math inline">\(0\)</span>
+号软件包以外，在你的管理器当中的软件包都会依赖一个且仅一个软件包，而
+<span class="math inline">\(0\)</span>
+号软件包不依赖任何一个软件包。依赖关系不存在环（若有 <span
+class="math inline">\(m \ (m \geq 2)\)</span> 个软件包<span
+class="math inline">\(A_1, A_2, A_3, \ldots ,A_m\)</span>，其中 <span
+class="math inline">\(A_1\)</span> 依赖 <span
+class="math inline">\(A_2\)</span>，<span
+class="math inline">\(A_2\)</span> 依赖 <span
+class="math inline">\(A_3\)</span>，<span
+class="math inline">\(A_3\)</span> 依赖 <span
+class="math inline">\(A_4\)</span>，……，<span
+class="math inline">\(A_{m−1}\)</span> 依赖 <span
+class="math inline">\(A_m\)</span>，而 <span
+class="math inline">\(A_m\)</span> 依赖 <span
+class="math inline">\(A_1\)</span>，则称这 <span
+class="math inline">\(m\)</span>
+个软件包的依赖关系构成环），当然也不会有一个软件包依赖自己。</p>
+<p>现在你要为你的软件包管理器写一个依赖解决程序。根据反馈，用户希望在安装和卸载某个软件包时，快速地知道这个操作实际上会改变多少个软件包的安装状态（即安装操作会安装多少个未安装的软件包，或卸载操作会卸载多少个已安装的软件包），你的任务就是实现这个部分。注意，安装一个已安装的软件包，或卸载一个未安装的软件包，都不会改变任何软件包的安装状态，即在此情况下，改变安装状态的软件包数为
+<span class="math inline">\(0\)</span>。</p>
+<p>对于所有数据，<span class="math inline">\(n \leq 100000, \ q \leq
+100000\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/noi2015-manager/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1396,122 +1537,6 @@ class="math inline">\(\sum\limits_{i=1}^n{c_i s_i}\)</span></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/cf-1746d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/ybtoj723-tee/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ybtoj723-tee/" class="post-title-link" itemprop="url">「YbtOJ CSP-S 模拟赛」砍苹果树 - 树上差分</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-10-23 21:59:49 / 修改时间：22:11:04" itemprop="dateCreated datePublished" datetime="2022-10-23T21:59:49+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/ybtoj723-tee/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="ybtoj723-tee/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="http://noip.ybtoj.com.cn/contest/723/problem/1">YbtOJ
-链接（需付费）</a></p>
-<p>小 K 有一棵 <span class="math inline">\(n\)</span> 个点，<span
-class="math inline">\(n - 1\)</span> 条边的苹果树，将树上的边称为 A
-类边。</p>
-<p>小 K 还往这棵树上加上了 <span class="math inline">\(m\)</span>
-条边，称加上的边为 B 类边。</p>
-<p>作为小 K 的好朋友，你想要砍掉小 K
-的苹果树，但是你发现砍掉一条边不一定能使苹果树不连通，于是你需要求出：有多少选取
-<strong>恰好一条 A 类边和恰好一条 B 类边</strong>
-的方案，使得这两条边删去之后，原图不连通。</p>
-<p>两种方案不同当且仅当一条边在第一种方案中被删除了但在第二种方案中没有被删除。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ybtoj723-tee/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
