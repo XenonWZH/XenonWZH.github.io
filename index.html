@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">130</span>
+        <span class="site-state-item-count">127</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,161 +229,6 @@
 
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/real-numbers-theorem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/real-numbers-theorem/" class="post-title-link" itemprop="url">「数学分析」一种实数基本定理互证的路径</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-11-03 19:50:00" itemprop="dateCreated datePublished" datetime="2024-11-03T19:50:00+08:00">2024-11-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-04 20:07:06" itemprop="dateModified" datetime="2024-11-04T20:07:06+08:00">2024-11-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">一些想法</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/real-numbers-theorem/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="real-numbers-theorem/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="实数基本定理">实数基本定理</h1>
-<p><del>学数分的第一个梦魇 QWQ</del></p>
-<p>有七个实数基本定理, 且这七个定理两两等价, 均可说明实数的完备性.</p>
-<ul>
-<li>Dedekind 定理: 设 <span class="math inline">\(L\)</span> 与 <span
-class="math inline">\(U\)</span> 是 <span
-class="math inline">\(\mathbb{R}\)</span> 的两个子集, 若满足:
-<ol type="1">
-<li><span class="math inline">\(L \ne \varnothing\)</span> 且 <span
-class="math inline">\(U \ne \varnothing\)</span>;</li>
-<li><span class="math inline">\(L \cup U = \mathbb{R}\)</span>;</li>
-<li>对任意的 <span class="math inline">\(x \in L\)</span> 及 <span
-class="math inline">\(y \in U\)</span> 均有 <span
-class="math inline">\(x &lt; y\)</span>, 则存在唯一的实数 <span
-class="math inline">\(z\)</span> 使得 <span class="math display">\[x \le
-z \le y, \quad \forall x \in L, y \in U\]</span> 这个 <span
-class="math inline">\(z\)</span> 要么是 <span
-class="math inline">\(L\)</span> 的最大元, 要么是 <span
-class="math inline">\(U\)</span> 的最小元.</li>
-</ol></li>
-<li>确界原理: 设 <span class="math inline">\(A\)</span> 是 <span
-class="math inline">\(\mathbb{R}\)</span> 的一个非空子集. 若 <span
-class="math inline">\(A\)</span> 有上界, 则 <span
-class="math inline">\(A\)</span> 有上确界; 若 <span
-class="math inline">\(A\)</span> 有下界, 则 <span
-class="math inline">\(A\)</span> 有下确界.</li>
-<li>有限覆盖定理: 有界闭区间 <span class="math inline">\([a, b]\)</span>
-的任意一个由开区间构成的覆盖必有有限子覆盖.</li>
-<li>单调有界原理: 单调且有界的数列必收敛.</li>
-<li>闭区间套定理: 设有界闭区间列 <span class="math inline">\(\{ [a_n,
-b_n] \}\)</span> 满足:
-<ol type="1">
-<li>对任意的 <span class="math inline">\(n\)</span> 均有 <span
-class="math inline">\([a_{n + 1}, b_{n + 1}] \subseteq [a_n,
-b_n]\)</span>;</li>
-<li><span class="math inline">\(\lim\limits_{n \rightarrow \infty}(b_n -
-a_n) = 0\)</span>, 则存在唯一的实数 <span
-class="math inline">\(\xi\)</span> 使得 <span
-class="math inline">\(\bigcap\limits_{n = 1}^\infty[a_n, b_n] =
-\{\xi\}\)</span>.</li>
-</ol></li>
-<li>Bolzano-Weiersteass 定理 (致密性定理):
-任一有界数列必有收敛子列.</li>
-<li>Cauchy 收敛准则: 数列 <span class="math inline">\(\{x_n\}\)</span>
-收敛当且仅当它是柯西列.</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/real-numbers-theorem/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1393,6 +1238,120 @@ SQL 注入。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/ctf-password-notes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/ctf-info-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ctf-info-notes/" class="post-title-link" itemprop="url">OIer 的 CTF Web 信息泄露学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-09 19:35:05" itemprop="dateCreated datePublished" datetime="2023-02-09T19:35:05+08:00">2023-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-13 16:22:28" itemprop="dateModified" datetime="2023-02-13T16:22:28+08:00">2023-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/ctf-info-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="ctf-info-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>搜集信息是 CTFer
+的基本技能。网站的站长可能在部署等操作中忘记删除备份及重要的文件。我们可以通过这些文件找到
+flag。</p>
+<p>本文一切例题均可在 <a target="_blank" rel="noopener" href="https://www.ctfhub.com/">CTFHub</a>
+找到。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/ctf-info-notes/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
