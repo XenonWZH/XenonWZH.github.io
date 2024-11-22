@@ -28,11 +28,11 @@
 <meta property="og:description" content="考试信息 考试范围：向量代数，空间中的点、线、面，行列式，线性方程组，矩阵（仅包含矩阵运算、逆矩阵、矩阵的秩） 考试时长：2h 满分：100 分">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-12T05:12:09.000Z">
-<meta property="article:modified_time" content="2024-11-13T07:03:09.267Z">
+<meta property="article:modified_time" content="2024-11-19T07:40:21.688Z">
 <meta property="article:author" content="XenonWZH">
 <meta property="article:tag" content="数学">
-<meta property="article:tag" content="试题">
 <meta property="article:tag" content="高等代数">
+<meta property="article:tag" content="试题">
 <meta name="twitter:card" content="summary">
 
 
@@ -161,18 +161,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-count">115</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">129</span>
+        <span class="site-state-item-count">130</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -280,7 +280,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-13 15:03:09" itemprop="dateModified" datetime="2024-11-13T15:03:09+08:00">2024-11-13</time>
+      <time title="修改时间：2024-11-19 15:40:21" itemprop="dateModified" datetime="2024-11-19T15:40:21+08:00">2024-11-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -395,9 +395,51 @@ BA\)</span>, 且 <span class="math inline">\(r(A) = n\)</span>, 证明:
 \boldsymbol\gamma, A\boldsymbol\gamma = \boldsymbol{0} \}\]</span></li>
 </ol>
 <h1 id="试题解答">试题解答</h1>
-<blockquote>
-<p>TODO</p>
-</blockquote>
+<ol type="1">
+<li><ol type="1">
+<li><span class="math display">\[\begin{align*}
+\begin{vmatrix}
+5 &amp; 6 &amp; 7 &amp; 8 \\
+6 &amp; 7 &amp; 8 &amp; 5 \\
+7 &amp; 8 &amp; 5 &amp; 6 \\
+8 &amp; 5 &amp; 6 &amp; 7
+\end{vmatrix} &amp;\xlongequal[j = 2, 3, 4]{r_1 + r_j}
+26 \begin{vmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+6 &amp; 7 &amp; 8 &amp; 5 \\
+7 &amp; 8 &amp; 5 &amp; 6 \\
+8 &amp; 5 &amp; 6 &amp; 7
+\end{vmatrix} \xlongequal[j = 2, 3, 4]{r_j - 5r_1}
+26 \begin{vmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; 2 &amp; 3 &amp; 0 \\
+2 &amp; 3 &amp; 0 &amp; 1 \\
+3 &amp; 0 &amp; 1 &amp; 2
+\end{vmatrix} \\
+&amp;\xlongequal[j = 4, 3]{r_j - r_{j - 1}}
+26 \begin{vmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; 2 &amp; 3 &amp; 0 \\
+1 &amp; 1 &amp; -3 &amp; 1 \\
+1 &amp; -3 &amp; 1 &amp; 1
+\end{vmatrix} \xlongequal[j = 2, 3, 4]{r_j - r_1}
+26 \begin{vmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 2 &amp; -1 \\
+0 &amp; 0 &amp; 4 &amp; 0 \\
+0 &amp; 4 &amp; 0 &amp; 0
+\end{vmatrix} \\
+&amp; =
+26 \begin{vmatrix}
+1 &amp; 2 &amp; -1 \\
+0 &amp; 4 &amp; 0 \\
+4 &amp; 0 &amp; 0
+\end{vmatrix} = 416
+\end{align*}\]</span></li>
+<li><span class="math display">\[
+\]</span></li>
+</ol></li>
+</ol>
 
     </div>
 
@@ -408,8 +450,8 @@ BA\)</span>, 且 <span class="math inline">\(r(A) = n\)</span>, 证明:
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
-              <a href="/tags/%E8%AF%95%E9%A2%98/" rel="tag"># 试题</a>
               <a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" rel="tag"># 高等代数</a>
+              <a href="/tags/%E8%AF%95%E9%A2%98/" rel="tag"># 试题</a>
           </div>
 
         
