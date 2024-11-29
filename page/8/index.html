@@ -156,18 +156,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">129</span>
+        <span class="site-state-item-count">127</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,265 +229,6 @@
 
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/hnoi2006-road/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hnoi2006-road/" class="post-title-link" itemprop="url">「HNOI2006」公路修建问题 - 二分答案 + 最小生成树</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-31 11:33:19" itemprop="dateCreated datePublished" datetime="2022-08-31T11:33:19+08:00">2022-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:51:26" itemprop="dateModified" datetime="2022-09-04T09:51:26+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/hnoi2006-road/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="hnoi2006-road/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2323">洛谷链接</a></p>
-<p>OI island
-是一个非常漂亮的岛屿，自开发以来，到这儿来旅游的人很多。然而，由于该岛屿刚刚开发不久，所以那里的交通情况还是很糟糕。所以，OIER
-Association 组织成立了，旨在建立 OI island 的交通系统。</p>
-<p>OI island 有 <span class="math inline">\(n\)</span>
-个旅游景点，不妨将它们从 <span class="math inline">\(1\)</span> 到 <span
-class="math inline">\(n\)</span> 标号。现在，OIER Association
-需要修公路将这些景点连接起来。一条公路连接两个景点。公路有，不妨称它们为一级公路和二级公路。一级公路上的车速快，但是修路的花费要大一些。</p>
-<p>OIER Association 打算修 <span class="math inline">\(n-1\)</span>
-条公路将这些景点连接起来（使得任意两个景点之间都会有一条路径）。为了保证公路系统的效率，
-OIER Association 希望在这 <span class="math inline">\(n-1\)</span>
-条公路之中，至少有 <span class="math inline">\(k\)</span> 条 <span
-class="math inline">\((0 \le k \le n-1)\)</span> 一级公路。OIER
-Association
-也不希望为一条公路花费的钱。所以，他们希望在满足上述条件的情况下，花费最多的一条公路的花费尽可能的少。</p>
-<p>而你的任务就是，在给定一些可能修建的公路的情况下，选择 <span
-class="math inline">\(n-1\)</span> 条公路，满足上面的条件。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/hnoi2006-road/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/bzoj-2259/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/bzoj-2259/" class="post-title-link" itemprop="url">「BZOJ 2259」新型计算机 - 最短路</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-11 19:44:38" itemprop="dateCreated datePublished" datetime="2022-08-11T19:44:38+08:00">2022-08-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:50:52" itemprop="dateModified" datetime="2022-09-04T09:50:52+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/bzoj-2259/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bzoj-2259/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://hydro.ac/d/bzoj/p/2259">HydroOJ 链接</a></p>
-<p>Tim
-正在摆弄着他设计的“计算机”，他认为这台计算机原理很独特，因此利用它可以解决许多难题。
-但是，有一个难题他却解决不了，是这台计算机的输入问题。新型计算机的输入也很独特，假设输入序列中有一些数字（都是自然数——自然数包括
-<span class="math inline">\(0\)</span> ），计算机先读取第一个数字 <span
-class="math inline">\(s_1\)</span> ，然后顺序向后读入 <span
-class="math inline">\(s_1\)</span> 个数字。接着再读一个数字 <span
-class="math inline">\(s_2\)</span> ，顺序向后读入 <span
-class="math inline">\(s_2\)</span>
-个数字……依此类推。不过只有计算机正好将输入序列中的数字读完，它才能正确处理数据，否则计算机就会进行自毁性操作！</p>
-<p>Tim
-现在有一串输入序列。但可能不是合法的，也就是可能会对计算机造成破坏。于是他想对序列中的每一个数字做一些更改，加上一个数或者减去一个数，当然，仍然保持其为自然数。使得更改后的序列为一个新型计算机可以接受的合法序列。</p>
-<p>不过 Tim
-还希望更改的总代价最小，所谓总代价，就是对序列中每一个数操作的参数的绝对值之和。</p>
-<p>写一个程序：</p>
-<ol type="1">
-<li>从文件中读入原始的输入序列；</li>
-<li>计算将输入序列改变为合法序列需要的最小代价；</li>
-<li>向输出文件打印结果。</li>
-</ol>
-<p><span class="math inline">\(100\%\)</span> 的数据满足：<span
-class="math inline">\(n &lt; 1 \times 10^6 + 1\)</span></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/bzoj-2259/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1503,6 +1244,263 @@ class="math inline">\(s = 2\)</span>，<span class="math inline">\(e =
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/luogu-4321/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-219d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cf-219d/" class="post-title-link" itemprop="url">「Codeforces 219D」Choosing Capital for Treeland - 树形 DP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-19 14:35:22" itemprop="dateCreated datePublished" datetime="2022-05-19T14:35:22+08:00">2022-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 10:17:08" itemprop="dateModified" datetime="2022-09-04T10:17:08+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/cf-219d/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="cf-219d/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题目描述">题目描述</h1>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/219/D">Codeforces
+链接</a></p>
+<p>Treeland 国有 <span class="math inline">\(n\)</span> 个城市，这 <span
+class="math inline">\(n\)</span> 个城市连成了一颗树，有 <span
+class="math inline">\(n - 1\)</span>
+条道路连接了所有城市。每条道路只能单向通行。现在政府需要决定选择哪个城市为首都。假如城市
+i
+成为了首都，那么为了使首都能到达任意一个城市，不得不将一些道路翻转方向，记翻转道路的条数为
+<span class="math inline">\(k\)</span>。你的任务是找到所有满足 <span
+class="math inline">\(k\)</span> 最小的首都。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/cf-219d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-1407/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/luogu-1407/" class="post-title-link" itemprop="url">「洛谷 P1407」稳定婚姻 - 强连通分量</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-18 18:53:04" itemprop="dateCreated datePublished" datetime="2022-05-18T18:53:04+08:00">2022-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 09:51:44" itemprop="dateModified" datetime="2022-09-04T09:51:44+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/luogu-1407/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-1407/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1407">洛谷链接</a></p>
+<p>我们已知 <span class="math inline">\(n\)</span>
+对夫妻的婚姻状况，称第 <span class="math inline">\(i\)</span>
+对夫妻的男方为 <span class="math inline">\(B_i\)</span>，女方为 <span
+class="math inline">\(G_i\)</span>。若某男 <span
+class="math inline">\(B_i\)</span> 与某女 <span
+class="math inline">\(G_j\)</span>
+曾经交往过（无论是大学，高中，亦或是幼儿园阶段，<span
+class="math inline">\(i \le j\)</span>），则当某方与其配偶（即 <span
+class="math inline">\(B_i\)</span> 与 <span
+class="math inline">\(G_i\)</span>或 <span
+class="math inline">\(B_j\)</span> 与 <span
+class="math inline">\(G_j\)</span>）感情出现问题时，他们有私奔的可能性。不妨设
+<span class="math inline">\(B_i\)</span> 和其配偶 <span
+class="math inline">\(G_i\)</span> 感情不和，于是 <span
+class="math inline">\(B_i\)</span> 和 <span
+class="math inline">\(G_j\)</span> 旧情复燃，进而 <span
+class="math inline">\(B_j\)</span>
+因被戴绿帽而感到不爽，联系上了他的初恋情人 <span
+class="math inline">\(G_k\)</span>……一串串的离婚事件像多米诺骨牌一般接踵而至。若在
+<span class="math inline">\(B_i\)</span> 和 <span
+class="math inline">\(G_i\)</span> 离婚的前提下，这 <span
+class="math inline">\(2n\)</span> 个人最终依然能够结合成 <span
+class="math inline">\(n\)</span> 对情侣，那么我们称婚姻 <span
+class="math inline">\(i\)</span> 为不安全的，否则婚姻 <span
+class="math inline">\(i\)</span> 就是安全的。</p>
+<p>给定所需信息，你的任务是判断每对婚姻是否安全。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/luogu-1407/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
