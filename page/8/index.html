@@ -156,18 +156,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">127</span>
+        <span class="site-state-item-count">129</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,138 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/bzoj-2259/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/bzoj-2259/" class="post-title-link" itemprop="url">「BZOJ 2259」新型计算机 - 最短路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-11 19:44:38" itemprop="dateCreated datePublished" datetime="2022-08-11T19:44:38+08:00">2022-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-04 09:50:52" itemprop="dateModified" datetime="2022-09-04T09:50:52+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/bzoj-2259/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bzoj-2259/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://hydro.ac/d/bzoj/p/2259">HydroOJ 链接</a></p>
+<p>Tim
+正在摆弄着他设计的“计算机”，他认为这台计算机原理很独特，因此利用它可以解决许多难题。
+但是，有一个难题他却解决不了，是这台计算机的输入问题。新型计算机的输入也很独特，假设输入序列中有一些数字（都是自然数——自然数包括
+<span class="math inline">\(0\)</span> ），计算机先读取第一个数字 <span
+class="math inline">\(s_1\)</span> ，然后顺序向后读入 <span
+class="math inline">\(s_1\)</span> 个数字。接着再读一个数字 <span
+class="math inline">\(s_2\)</span> ，顺序向后读入 <span
+class="math inline">\(s_2\)</span>
+个数字……依此类推。不过只有计算机正好将输入序列中的数字读完，它才能正确处理数据，否则计算机就会进行自毁性操作！</p>
+<p>Tim
+现在有一串输入序列。但可能不是合法的，也就是可能会对计算机造成破坏。于是他想对序列中的每一个数字做一些更改，加上一个数或者减去一个数，当然，仍然保持其为自然数。使得更改后的序列为一个新型计算机可以接受的合法序列。</p>
+<p>不过 Tim
+还希望更改的总代价最小，所谓总代价，就是对序列中每一个数操作的参数的绝对值之和。</p>
+<p>写一个程序：</p>
+<ol type="1">
+<li>从文件中读入原始的输入序列；</li>
+<li>计算将输入序列改变为合法序列需要的最小代价；</li>
+<li>向输出文件打印结果。</li>
+</ol>
+<p><span class="math inline">\(100\%\)</span> 的数据满足：<span
+class="math inline">\(n &lt; 1 \times 10^6 + 1\)</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/bzoj-2259/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1386,143 +1518,6 @@ class="math inline">\(k\)</span> 最小的首都。</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-1407/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/luogu-1407/" class="post-title-link" itemprop="url">「洛谷 P1407」稳定婚姻 - 强连通分量</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-05-18 18:53:04" itemprop="dateCreated datePublished" datetime="2022-05-18T18:53:04+08:00">2022-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-04 09:51:44" itemprop="dateModified" datetime="2022-09-04T09:51:44+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/luogu-1407/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-1407/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1407">洛谷链接</a></p>
-<p>我们已知 <span class="math inline">\(n\)</span>
-对夫妻的婚姻状况，称第 <span class="math inline">\(i\)</span>
-对夫妻的男方为 <span class="math inline">\(B_i\)</span>，女方为 <span
-class="math inline">\(G_i\)</span>。若某男 <span
-class="math inline">\(B_i\)</span> 与某女 <span
-class="math inline">\(G_j\)</span>
-曾经交往过（无论是大学，高中，亦或是幼儿园阶段，<span
-class="math inline">\(i \le j\)</span>），则当某方与其配偶（即 <span
-class="math inline">\(B_i\)</span> 与 <span
-class="math inline">\(G_i\)</span>或 <span
-class="math inline">\(B_j\)</span> 与 <span
-class="math inline">\(G_j\)</span>）感情出现问题时，他们有私奔的可能性。不妨设
-<span class="math inline">\(B_i\)</span> 和其配偶 <span
-class="math inline">\(G_i\)</span> 感情不和，于是 <span
-class="math inline">\(B_i\)</span> 和 <span
-class="math inline">\(G_j\)</span> 旧情复燃，进而 <span
-class="math inline">\(B_j\)</span>
-因被戴绿帽而感到不爽，联系上了他的初恋情人 <span
-class="math inline">\(G_k\)</span>……一串串的离婚事件像多米诺骨牌一般接踵而至。若在
-<span class="math inline">\(B_i\)</span> 和 <span
-class="math inline">\(G_i\)</span> 离婚的前提下，这 <span
-class="math inline">\(2n\)</span> 个人最终依然能够结合成 <span
-class="math inline">\(n\)</span> 对情侣，那么我们称婚姻 <span
-class="math inline">\(i\)</span> 为不安全的，否则婚姻 <span
-class="math inline">\(i\)</span> 就是安全的。</p>
-<p>给定所需信息，你的任务是判断每对婚姻是否安全。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/luogu-1407/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1536,7 +1531,7 @@ class="math inline">\(i\)</span> 就是安全的。</p>
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1574,6 +1569,8 @@ class="math inline">\(i\)</span> 就是安全的。</p>
 <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>

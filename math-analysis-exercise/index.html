@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="节选自《数学分析入门》（陆亚明）  节选了一些有意思或者有难度的习题。 本人较菜，有错轻喷（欢迎指出错误 QAQ）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学分析习题集">
+<meta property="og:url" content="https://xenonwzh.github.io/math-analysis-exercise/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="节选自《数学分析入门》（陆亚明）  节选了一些有意思或者有难度的习题。 本人较菜，有错轻喷（欢迎指出错误 QAQ）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-23T07:16:52.000Z">
+<meta property="article:modified_time" content="2025-01-23T09:16:39.575Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="数学分析">
+<meta property="article:tag" content="习题">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/math-analysis-exercise/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/math-analysis-exercise/","path":"math-analysis-exercise/","title":"数学分析习题集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数学分析习题集 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞？</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E6%98%A0%E5%B0%84"><span class="nav-number">1.</span> <span class="nav-text">第一章 集合与映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#t14"><span class="nav-number">1.1.1.</span> <span class="nav-text">T1(4)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t8"><span class="nav-number">1.1.2.</span> <span class="nav-text">T8</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">1.2 映射与函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#t11"><span class="nav-number">2.0.1.</span> <span class="nav-text">T11</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t12"><span class="nav-number">2.0.2.</span> <span class="nav-text">T12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t174%E4%B8%89%E8%A7%92%E5%BD%A2%E4%B8%8D%E7%AD%89%E5%BC%8Ftriangle-inequality"><span class="nav-number">2.0.3.</span> <span class="nav-text">T17(4)（三角形不等式（triangle
+inequality））</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t19"><span class="nav-number">2.0.4.</span> <span class="nav-text">T19</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t23"><span class="nav-number">2.0.5.</span> <span class="nav-text">T23</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">2.1.</span> <span class="nav-text">1.3 集合的运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#t9"><span class="nav-number">2.1.1.</span> <span class="nav-text">T9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t15%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">T15（容斥原理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t17"><span class="nav-number">2.1.3.</span> <span class="nav-text">T17</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%95%B0%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">1.4 可数集</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">129</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/dian-nao-wang-zhe-32" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;dian-nao-wang-zhe-32" rel="noopener" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/huaruoji/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;huaruoji&#x2F;" rel="noopener" target="_blank">滑蒻稽</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gmxh.github.io/" title="https:&#x2F;&#x2F;gmxh.github.io" rel="noopener" target="_blank">孤芒星河</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/zxt881/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;zxt881&#x2F;" rel="noopener" target="_blank">zxtikes</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.cascade.moe/" title="https:&#x2F;&#x2F;blog.cascade.moe&#x2F;" rel="noopener" target="_blank">Cascade</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/math-analysis-exercise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数学分析习题集 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数学分析习题集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-23 15:16:52 / 修改时间：17:16:39" itemprop="dateCreated datePublished" datetime="2025-01-23T15:16:52+08:00">2025-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/%E4%B9%A0%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">习题</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/math-analysis-exercise/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="math-analysis-exercise/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>节选自《数学分析入门》（陆亚明）</p>
+</blockquote>
+<p>节选了一些有意思或者有难度的习题。</p>
+<p>本人较菜，有错轻喷（欢迎指出错误 QAQ）。</p>
+<span id="more"></span>
+<h2 id="第一章-集合与映射">第一章 集合与映射</h2>
+<h3 id="集合">1.1 集合</h3>
+<div class="note primary no-icon"><h4 id="t14">T1(4)</h4>
+<p>证明以下结论：<span class="math inline">\(\{ (x, y) \in
+\mathbb{Z}^{2} : x^{2} - 2y^{2} = 65 \} \neq \varnothing\)</span>。</p>
+</div>
+<p>取 <span class="math inline">\((x, y) \in \{ (x, y) \in
+\mathbb{Z}^{2} : x^2 - 2y^2 = 65 \}\)</span>，则有 <span
+class="math inline">\(x^{2} - 2y^{2} = 65\)</span>。故 <span
+class="math inline">\(x^{2} \equiv 2y^{2} \pmod 5\)</span>。 又有 <span
+class="math inline">\(0^{2} \bmod 5 = 0, 1^{2} \bmod 5 = 1, 2^{2} \bmod
+5 = 4, 3^{2} \bmod 5 = 4, 4^{2} \bmod 5 = 1\)</span>，且 <span
+class="math inline">\(2 \cdot 0^{2} \bmod 5 = 0, 2 \cdot 1^{2} \bmod 5 =
+2, 2 \cdot 2^{2} \bmod 5 = 3, 2 \cdot 3^{2} \bmod 5 = 3, 2 \cdot 4^{2}
+\bmod 5 = 2\)</span>。 故当且仅当 <span class="math inline">\(5|x,
+5|y\)</span> 时满足条件。此时有 <span class="math inline">\(25 | x^{2} -
+2y^{2}\)</span>，而 <span class="math inline">\(25 \nmid
+65\)</span>，故矛盾。 故 <span class="math inline">\(\{ (x, y) \in
+\mathbb{Z}^{2} : x^{2} - 2y^{2} = 65 \} = \varnothing\)</span>。</p>
+<div class="note primary no-icon"><h4 id="t8">T8</h4>
+<p>设 <span class="math inline">\(X\)</span> 是一个集合。令 <span
+class="math display">\[\mathscr{R} = \{ R \subseteq X \times X :
+\text{对任意的} \ S \subseteq X \times X \ \text{均有} \ R \circ S = S
+\circ R \}.\]</span> 证明 <span class="math inline">\(\mathscr{R} = \{
+\varnothing, \Delta_{X} \}\)</span>，其中 <span
+class="math inline">\(\Delta_{X} = \{ (x, x) : x \in X \}\)</span>。</p>
+</div>
+<p>显然有 <span class="math inline">\(\varnothing \circ S = S \circ
+\varnothing  = \varnothing, \Delta_{X} \circ S = S \circ \Delta_{X} =
+S\)</span>, 则 <span class="math inline">\(\varnothing, \Delta_{X} \in
+\mathscr{R}\)</span>。现讨论其他元素不满足条件。 设 <span
+class="math inline">\(R \in \mathscr{R}\)</span>，有下列情况。 - 若存在
+<span class="math inline">\((x, y) \in R \ (x \neq y)\)</span>, 则取
+<span class="math inline">\(S = \{ (y, x) \}, R&#39; = R \setminus \{
+(x, y) \}\)</span>。 故 <span class="math inline">\(R \circ S = \{ (y,
+y) \} \cup R&#39; \circ S\)</span>，且 <span class="math inline">\(S
+\circ R = \{ (x, y) \} \cup S \circ R&#39;\)</span> 故 <span
+class="math inline">\((y, y) \in S \circ R&#39;\)</span>。而 <span
+class="math inline">\(S = \{ (x, y) \}\)</span>，故矛盾； - 若存在 <span
+class="math inline">\((x, x) \in R, (y, y) \not\in R \ (x, y \in
+X)\)</span>，则取 <span class="math inline">\(S = \{ (x, y) \}, R&#39; =
+R \setminus \{ (x, x) \}\)</span>。 故 <span class="math inline">\(R
+\circ S = \varnothing, S \circ R = (x, y)\)</span>，矛盾。 综上，则
+<span class="math inline">\(\mathscr{R} = \{ \varnothing, \Delta_{X}
+\}\)</span>。</p>
+<h2 id="映射与函数">1.2 映射与函数</h2>
+<div class="note primary no-icon"><h4 id="t11">T11</h4>
+<p>设 <span class="math inline">\(f\)</span> 与 <span
+class="math inline">\(g\)</span> 均是定义在 <span
+class="math inline">\(\mathbb{Z}\)</span> 上的非常值函数，且对任意的
+<span class="math inline">\(x, y \in \mathbb{Z}\)</span> 有 <span
+class="math display">\[
+\begin{gather*}
+f(x + y) = f(x)g(y) + g(x)f(y), \\
+g(x + y) = g(x)g(y) - f(x)f(y).
+\end{gather*}
+\]</span> 求 <span class="math inline">\(f(0)\)</span> 和 <span
+class="math inline">\(g(0)\)</span> 的所有可能值。</p>
+</div>
+<p>取 <span class="math inline">\(y = 0\)</span>，有 <span
+class="math display">\[
+\begin{cases}
+f(x)(1 - g(0)) = g(x)f(0) \\
+g(x)(1 - g(0)) = f(x)f(0)
+\end{cases}
+\implies
+\begin{cases}
+(1 - g(0))f(x) - f(0)g(x) = 0 \\
+f(0)f(x) + (1 - g(0))g(x) = 0
+\end{cases}
+\]</span> 故由 Cramer 定理得，当且仅当 <span class="math display">\[
+\begin{vmatrix}
+1 - g(0) &amp; -f(0) \\
+f(0) &amp; 1 - g(0)
+\end{vmatrix}
+= (1 - g(0))^{2} + f(0)^{2} = 0
+\]</span> 时，<span class="math inline">\(f(x), g(x)\)</span>
+有非零解，即 <span class="math inline">\(f, g\)</span> 可为非常值函数。
+故 <span class="math inline">\(f(0) = 0, g(0) = 1\)</span>
+为唯一解。</p>
+<div class="note primary no-icon"><h4 id="t12">T12</h4>
+<p>设 <span class="math inline">\(f\)</span> 是定义在 <span
+class="math inline">\(\mathbb{R}\)</span>
+上的一个函数，证明它可写成一个奇函数与一个偶函数之和。</p>
+</div>
+<p>设 <span class="math inline">\(f(x) = g(x) + h(x)\)</span>，其中
+<span class="math inline">\(g(x), h(x)\)</span> 分别为奇函数，偶函数。则
+<span class="math inline">\(f(x) = -g(x) + h(x)\)</span>. 解得 <span
+class="math inline">\(g(x) = \frac{f(x) - f(-x)}{2}, h(x) = \frac{f(x) +
+f(-x)}{2}\)</span>，故 <span class="math inline">\(f\)</span>
+可写成一个奇函数与一个偶函数之和。</p>
+<div class="note primary no-icon"><h4
+id="t174三角形不等式triangle-inequality">T17(4)（三角形不等式（triangle
+inequality））</h4>
+<p>设 <span class="math inline">\(x \in \mathbb{R}\)</span>，用 <span
+class="math inline">\(\| x \|\)</span> 表示 <span
+class="math inline">\(x\)</span> 与离它最近的整数之间的距离，即 <span
+class="math inline">\(\| x \| = \min\limits_{n \in \mathbb{Z}} |x -
+n|\)</span>，证明：对任意的 <span class="math inline">\(x, y \in
+\mathbb{R}\)</span> 有 <span class="math inline">\(\| x + y \| \leq \| x
+\| + \| y \|\)</span>。</p>
+</div>
+<p>不难验证 <span class="math inline">\(\| x \|\)</span> 以 <span
+class="math inline">\(1\)</span> 为最小正周期。故不妨设 <span
+class="math inline">\(x, y \in \left[ -\frac{1}{2}, \frac{1}{2}
+\right]\)</span>，即证 <span class="math display">\[\min\{ |x + y|, |x +
+y - 1|, |x + y + 1| \} \leq |x| + |y|\]</span> 又有 <span
+class="math display">\[\min\{ |x + y|, |x + y - 1|, |x + y + 1| \} \leq
+|x + y| \leq |x| + |y|\]</span> 故原命题成立。</p>
+<div class="note primary no-icon"><h4 id="t19">T19</h4>
+<p>两个定义在 <span class="math inline">\(\mathbb{R}\)</span>
+上的周期函数的乘积是不是周期函数？</p>
+</div>
+<p>不是。例如 <span class="math inline">\(f(x) = \sin x, g(x) = \sin
+\sqrt{ 2 }x\)</span> 均是周期函数。 而对于 <span
+class="math inline">\(h(x) = f(x)g(x) = \sin x \sin \sqrt{ 2 }x =
+-\frac{1}{2}(\cos((1 + \sqrt{ 2 })x) + \cos((1 - \sqrt{ 2
+})x))\)</span>，有 <span class="math inline">\(\frac{1 + \sqrt{ 2 }}{1 -
+\sqrt{ 2 }} \not\in \mathbb{Q}\)</span>，则 <span
+class="math inline">\(h(x)\)</span> 不是周期函数。</p>
+<div class="note primary no-icon"><h4 id="t23">T23</h4>
+<p>设函数 <span class="math inline">\(f \colon \mathbb{Z}_{\geq 0} \to
+\mathbb{Z}_{\geq 0}\)</span> 满足 <span class="math inline">\(f(n + 1)
+&gt; f(f(n)) \ (\forall n \in \mathbb{Z}_{\geq
+0})\)</span>，证明：对任意的非负整数 <span
+class="math inline">\(n\)</span> 有 <span class="math inline">\(f(n) =
+n\)</span>。</p>
+</div>
+<p>有 <span class="math inline">\(f(n) &gt; f(f(n - 1)) &gt; f(f(f(n -
+2))) &gt; \cdots &gt; f(f(\cdots f(0) \cdots))\)</span>，则 <span
+class="math inline">\(f(n)\)</span> 至少比 <span
+class="math inline">\(n\)</span> 个非负整数大，即最坏情况有 <span
+class="math inline">\(f(n) \geq n\)</span>。 故有 <span
+class="math display">\[f(n + 1) &gt; f(f(n)) \geq f(n)\]</span> 即 <span
+class="math inline">\(f(x)\)</span> 严格单调递增。 则由 <span
+class="math inline">\(f(n + 1) &gt; f(f(n))\)</span> 推出 <span
+class="math inline">\(n + 1 &gt; f(n)\)</span>，故 <span
+class="math inline">\(f(n) = n\)</span>。</p>
+<h3 id="集合的运算">1.3 集合的运算</h3>
+<div class="note primary no-icon"><h4 id="t9">T9</h4>
+<p>设 <span class="math inline">\(X\)</span> 是一个集合，现考虑 <span
+class="math inline">\(2^{X}\)</span> 上的一个关系 <span
+class="math display">\[R = \{ (A, B) : A, B \subseteq X \ \text{且} A
+\triangle B \text{是有限集} \}.\]</span> 证明：<span
+class="math inline">\(R\)</span> 是 <span
+class="math inline">\(2^{X}\)</span> 上的一个等价关系。</p>
+</div>
+<p>有 <span class="math inline">\(x \triangle x = \varnothing, x
+\triangle y = y \triangle x\)</span>，即关系 <span
+class="math inline">\(R\)</span> 满足自反性与对称性。故只需证传递性。 设
+<span class="math inline">\((A, B), (B, C) \in R \ (A, B, C \subseteq
+X)\)</span>，且 <span class="math inline">\(A \triangle B = P, b
+\triangle C = Q\)</span>，则 <span class="math inline">\(P, Q\)</span>
+均为有限集。则 <span class="math inline">\(A = B \triangle P, C = B
+\triangle Q\)</span>。 则有 <span class="math display">\[
+\begin{align*}
+A \triangle C &amp;= (B \triangle P) \triangle (B \triangle Q) \\
+&amp;= (B \triangle B) \triangle (P \triangle Q) \\
+&amp;= \varnothing \triangle (P \triangle Q) \\
+&amp;= P \triangle Q
+\end{align*}
+\]</span> 又 <span class="math inline">\(P \triangle Q\)</span>
+为有限集，则 <span class="math inline">\(A \triangle C\)</span>
+为有限集，<span class="math inline">\((A, C) \in
+R\)</span>。故满足传递性，则 <span class="math inline">\(R\)</span> 是
+<span class="math inline">\(2^{X}\)</span> 上的一个等价关系。</p>
+<div class="note primary no-icon"><h4 id="t15容斥原理">T15（容斥原理）</h4>
+<p>设 <span class="math inline">\(X\)</span> 是一个有限集，<span
+class="math inline">\(A_{1}, A_{2}, \cdots, A_{n}\)</span> 均是 <span
+class="math inline">\(X\)</span> 的子集。若用 <span
+class="math inline">\(|S|\)</span> 表示 <span
+class="math inline">\(X\)</span> 的子集 <span
+class="math inline">\(S\)</span> 的元素个数，试利用关系式 <span
+class="math inline">\(|S| = \sum\limits_{a \in X} \chi_{S}(a)\)</span>
+证明： &gt; <span class="math display">\[\left| \left( \bigcup\limits_{k
+= 1}^{n} A_{k} \right)^{c} \right| = |X| + \sum\limits_{j=1}^{n}
+(-1)^{j} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j}
+\leq n} |A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap
+A_{i_{j}}|.\]</span></p>
+</div>
+<p>即证 <span class="math display">\[
+\begin{align*}
+\sum\limits_{a \in X} \chi_{\left( \bigcup\limits_{k = 1}^{n} A_{k}
+\right)^{c}}(a) &amp;= \sum\limits_{a \in X} \chi_{X}(a) +
+\sum\limits_{j=1}^{n} (-1)^{j} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt;
+\cdots &lt; i_{j} \leq n} \sum\limits_{a \in X} \chi_{A_{i_{1}} \cap
+A_{i_{2}} \cap \cdots \cap A_{i_{j}}}(a) \\
+\iff \sum\limits_{a \in X} \chi_{\bigcap \limits_{k = 1}^{n}
+A_{k}^{c}}(a) &amp;= \sum\limits_{a \in X} 1 + \sum\limits_{a \in X}
+\sum\limits_{j=1}^{n} (-1)^{j} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt;
+\cdots &lt; i_{j} \leq n} \chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots
+\chi_{A_{i_{j}}}(a) \\
+\iff \sum\limits_{a \in X} \prod\limits_{k=1}^{n} \chi_{A_{k}^{c}}(a)
+&amp;= \sum\limits_{a \in X} \left( 1 + \sum\limits_{j=1}^{n} (-1)^{j}
+\sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq n}
+\chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots \chi_{A_{i_{j}}}(a)
+\right) \\
+\iff \sum\limits_{a \in X} \prod\limits_{k=1}^{n} \left( 1 -
+\chi_{A_{k}}(a) \right) &amp;= \sum\limits_{a \in X} \left( 1 +
+\sum\limits_{j=1}^{n} (-1)^{j} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt;
+\cdots &lt; i_{j} \leq n} \chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots
+\chi_{A_{i_{j}}}(a) \right) \\
+\iff \sum\limits_{a \in X} \prod\limits_{k=1}^{n} \left( 1 -
+\chi_{A_{k}}(a) \right) &amp;= \sum\limits_{a \in X} \left( 1 +
+\sum\limits_{j=1}^{n} (-1)^{j} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt;
+\cdots &lt; i_{j} \leq n} \chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots
+\chi_{A_{i_{j}}}(a) \right) \\
+\end{align*}
+\]</span> 故只需证 <span class="math display">\[\prod\limits_{k=1}^{n}
+\left( 1 - \chi_{A_{k}}(a) \right) = 1 + \sum\limits_{j=1}^{n} (-1)^{j}
+\sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq n}
+\chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots
+\chi_{A_{i_{j}}}(a)\]</span> 由排列组合知上式成立。</p>
+<div class="note primary no-icon"><h4 id="t17">T17</h4>
+<p>设 <span class="math inline">\(n \geq 2\)</span>，<span
+class="math inline">\(A_{1}, A_{2}, \cdots, A_{n}\)</span>
+均是有限集。用 <span class="math inline">\(|S|\)</span> 表示集合 <span
+class="math inline">\(S\)</span> 的元素个数。证明： <span
+class="math display">\[|A_{1} \triangle A_{2} \triangle \cdots \triangle
+A_{n}| = \sum\limits_{1 \leq j \leq n} (-2)^{j - 1} \sum\limits_{1 \leq
+i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq n} |A_{i_{1}} \cap
+A_{i_{2}} \cap \cdots \cap A_{i_{j}}|.\]</span></p>
+</div>
+<p>设全集为 <span class="math inline">\(X\)</span>，即证 <span
+class="math display">\[
+\begin{align*}
+\sum\limits_{a \in X} \chi_{A_{1} \triangle A_{2} \triangle \cdots
+\triangle A_{n}}(a) &amp;= \sum\limits_{1 \leq j \leq n} (-2)^{j - 1}
+\sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq n}
+\sum\limits_{a \in X} \chi_{A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap
+A_{i_{j}}}(a) \\
+\iff \sum\limits_{a \in X} \chi_{A_{1} \triangle A_{2} \triangle \cdots
+\triangle A_{n}}(a) &amp;= \sum\limits_{a \in X} \sum\limits_{1 \leq j
+\leq n} (-2)^{j - 1} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots
+&lt; i_{j} \leq n} \chi_{A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap
+A_{i_{j}}}(a) \\
+\end{align*}
+\]</span> 故只需证 <span class="math display">\[\chi_{A_{1} \triangle
+A_{2} \triangle \cdots \triangle A_{n}}(a) = \sum\limits_{1 \leq j \leq
+n} (-2)^{j - 1} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt;
+i_{j} \leq n} \chi_{A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap
+A_{i_{j}}}(a)\]</span> 使用数学归纳法证明。当 <span
+class="math inline">\(n = 2\)</span> 时有 <span class="math display">\[
+\begin{align*}
+\chi_{A_{1} \triangle A_{2}}(a) &amp;= |\chi_{A_{1}}(a) -
+\chi_{A_{2}}(a)| \\
+\sum\limits_{1 \leq j \leq 2} (-2)^{j - 1} \sum\limits_{1 \leq i_{1}
+&lt; \cdots &lt; i_{j} \leq n} \chi_{A_{i_{1}} \cap \cdots \cap
+A_{i_{j}}}(a) &amp;= \chi_{A_{1}}(a) + \chi_{A_{2}}(a) -
+2\chi_{A_{1}}(a)\chi_{A_{2}}(a)
+\end{align*}
+\]</span> 根据集合的特征函数取值得到上述两式相等。 假设 <span
+class="math inline">\(n = k\)</span> 时成立，则 <span
+class="math inline">\(n = k + 1\)</span> 时，左式有 <span
+class="math display">\[
+\chi_{A_{1} \triangle A_{2} \triangle \cdots \triangle A_{k + 1}}(a) =
+|\chi_{A_{1} \triangle A_{2} \triangle \cdots \triangle A_{k}}(a)  -
+\chi_{A_{k + 1}}(a)|
+\]</span> 右式有 <span class="math display">\[
+\begin{align*}
+&amp; \sum\limits_{1 \leq j \leq k + 1} (-2)^{j - 1} \sum\limits_{1 \leq
+i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq k + 1} \chi_{A_{i_{1}} \cap
+A_{i_{2}} \cap \cdots \cap A_{i_{j}}}(a) \\
+=&amp; \sum\limits_{1 \leq j \leq k} (-2)^{j - 1} \sum\limits_{1 \leq
+i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq k} \chi_{A_{i_{1}} \cap
+A_{i_{2}} \cap \cdots \cap A_{i_{j}}}(a) + \\
+&amp; \sum\limits_{1 \leq j \leq k + 1} (-2)^{j - 1} \chi_{A_{k + 1}}(a)
+\sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j - 1} \leq k}
+\chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots \chi_{A_{i_{j - 1}}}(a)
+\\
+=&amp; \chi_{A_{1} \triangle A_{2} \triangle \cdots \triangle A_{k}}(a)
++ \chi_{A_{k + 1}}(a) \sum\limits_{0 \leq j \leq k} (-2)^{j}
+\sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq k}
+\chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots \chi_{A_{i_{j}}}(a) \\
+=&amp; \chi_{A_{1} \triangle A_{2} \triangle \cdots \triangle A_{k}}(a)
++ \chi_{A_{k + 1}}(a) \left( 1 - 2\sum\limits_{1 \leq j \leq k} (-2)^{j
+- 1} \sum\limits_{1 \leq i_{1} &lt; i_{2} &lt; \cdots &lt; i_{j} \leq k}
+\chi_{A_{i_{1}}}(a) \chi_{A_{i_{2}}}(a) \cdots \chi_{A_{i_{j}}}(a)
+\right) \\
+=&amp; \chi_{A_{1} \triangle A_{2} \triangle \cdots \triangle A_{k}}(a)
++ \chi_{A_{k + 1}}(a) \left( 1 - 2\chi_{A_{1} \triangle A_{2} \triangle
+\cdots \triangle A_{k}}(a) \right) \\
+=&amp; \chi_{A_{1} \triangle A_{2} \triangle \cdots \triangle A_{k}}(a)
++ \chi_{A_{k + 1}}(a) - 2\chi_{A_{1} \triangle A_{2} \triangle \cdots
+\triangle A_{k}}(a)\chi_{A_{k + 1}}(a)
+\end{align*}
+\]</span> 根据集合的特征函数取值得到上述两式相等。于是对 <span
+class="math inline">\(n = k + 1\)</span> 也成立。 综上，原式成立。</p>
+<h3 id="可数集">1.4 可数集</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" rel="tag"># 数学分析</a>
+              <a href="/tags/%E4%B9%A0%E9%A2%98/" rel="tag"># 习题</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/vandermonde-determinant/" rel="prev" title="「高等代数」浅谈缺项 Vandermonde 行列式">
+                  <i class="fa fa-chevron-left"></i> 「高等代数」浅谈缺项 Vandermonde 行列式
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"xenonwzhs-blog","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
