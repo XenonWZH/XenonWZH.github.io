@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">127</span>
+        <span class="site-state-item-count">129</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,6 +229,130 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/flow-fly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/flow-fly/" class="post-title-link" itemprop="url">「网络流 24 题」飞行员配对方案 - 最大流</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-22 11:19:41" itemprop="dateCreated datePublished" datetime="2022-11-22T11:19:41+08:00">2022-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-23 10:36:59" itemprop="dateModified" datetime="2022-11-23T10:36:59+08:00">2022-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/flow-fly/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="flow-fly/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2756">洛谷连接</a></p>
+<p>一共有 <span class="math inline">\(n\)</span> 个飞行员，其中有 <span
+class="math inline">\(m\)</span> 个外籍飞行员和 <span
+class="math inline">\((n - m)\)</span>
+个英国飞行员，<strong>外籍飞行员从 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(m\)</span> 编号</strong>，<strong>英国飞行员从
+<span class="math inline">\(m + 1\)</span> 到 <span
+class="math inline">\(n\)</span> 编号</strong>。
+对于给定的外籍飞行员与英国飞行员的配合情况，试设计一个算法找出最佳飞行员配对方案，使皇家空军一次能派出最多的飞机。</p>
+<p>对于 <span class="math inline">\(100\%\)</span> 的数据，保证 <span
+class="math inline">\(1 \leq m \leq n &lt; 100\)</span>，<span
+class="math inline">\(1 \leq u \leq m &lt; v \leq
+n\)</span>，同一组配对关系只会给出一次。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/flow-fly/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1244,125 +1368,6 @@ class="math inline">\([a, b]\)</span>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/ahoi2009-similar/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/luogu-6218/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/luogu-6218/" class="post-title-link" itemprop="url">「洛谷 P6218」Round Numbers - 数位 DP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-11-07 19:24:05 / 修改时间：20:09:13" itemprop="dateCreated datePublished" datetime="2022-11-07T19:24:05+08:00">2022-11-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/luogu-6218/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="luogu-6218/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6218">洛谷链接</a></p>
-<p>如果一个正整数的二进制表示中，<span class="math inline">\(0\)</span>
-的数目不小于 <span class="math inline">\(1\)</span>
-的数目，那么它就被称为「圆数」。</p>
-<p>例如，<span class="math inline">\(9\)</span> 的二进制表示为 <span
-class="math inline">\(1001\)</span>，其中有 <span
-class="math inline">\(2\)</span> 个 <span
-class="math inline">\(0\)</span> 与 <span
-class="math inline">\(2\)</span> 个 <span
-class="math inline">\(1\)</span>。因此，<span
-class="math inline">\(9\)</span> 是一个「圆数」。</p>
-<p>请你计算，区间 <span class="math inline">\([l,r]\)</span>
-中有多少个「圆数」。</p>
-<p>数据范围：<span class="math inline">\(1\le l,r\le 2\times
-10^9\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/luogu-6218/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
