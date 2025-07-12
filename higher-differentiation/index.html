@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="实际上是上数分课时老师提的一嘴, 补充了一下写出的文章（） 在数学分析 &#x2F; 高等数学的学习中, 我们已经学会了多元函数的微分, 偏导, 高阶偏导和 \(C^{r}\) 类. 但大多数教材并没有介绍高阶全微分, 即 \(f^{(r)}(\boldsymbol{x})\) (也可记作 \(D^{r}f(\boldsymbol{x})\)). 在本文, 我将介绍多元函数的高阶全微分, 以及为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「数学分析」浅谈多元函数的高阶全微分">
+<meta property="og:url" content="https://xenonwzh.github.io/higher-differentiation/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="实际上是上数分课时老师提的一嘴, 补充了一下写出的文章（） 在数学分析 &#x2F; 高等数学的学习中, 我们已经学会了多元函数的微分, 偏导, 高阶偏导和 \(C^{r}\) 类. 但大多数教材并没有介绍高阶全微分, 即 \(f^{(r)}(\boldsymbol{x})\) (也可记作 \(D^{r}f(\boldsymbol{x})\)). 在本文, 我将介绍多元函数的高阶全微分, 以及为">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-11T15:41:38.000Z">
+<meta property="article:modified_time" content="2025-07-12T04:18:43.954Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="数学分析">
+<meta property="article:tag" content="导数与微分">
+<meta property="article:tag" content="多元函数的微分">
+<meta property="article:tag" content="双线性函数">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/higher-differentiation/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/higher-differentiation/","path":"higher-differentiation/","title":"「数学分析」浅谈多元函数的高阶全微分"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「数学分析」浅谈多元函数的高阶全微分 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞？</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E5%BE%AE%E5%88%86%E7%9A%84%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">高阶微分的形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">双线性映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E-c2-%E7%B1%BB%E7%AD%89%E4%BB%B7"><span class="nav-number">3.</span> <span class="nav-text">与 \(C^{2}\)
+类等价</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">136</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/higher-differentiation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「数学分析」浅谈多元函数的高阶全微分 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「数学分析」浅谈多元函数的高阶全微分
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-11 23:41:38" itemprop="dateCreated datePublished" datetime="2025-07-11T23:41:38+08:00">2025-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-07-12 12:18:43" itemprop="dateModified" datetime="2025-07-12T12:18:43+08:00">2025-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">一些想法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><del>实际上是上数分课时老师提的一嘴,
+补充了一下写出的文章（）</del></p>
+<p>在数学分析 / 高等数学的学习中, 我们已经学会了多元函数的微分, 偏导,
+高阶偏导和 <span class="math inline">\(C^{r}\)</span> 类.
+但大多数教材并没有介绍高阶全微分, 即 <span
+class="math inline">\(f^{(r)}(\boldsymbol{x})\)</span> (也可记作 <span
+class="math inline">\(D^{r}f(\boldsymbol{x})\)</span>). 在本文,
+我将介绍多元函数的高阶全微分,
+以及为什么大多数教材都不介绍多元函数的高阶全微分.</p>
+<span id="more"></span>
+<h2 id="高阶微分的形式">高阶微分的形式</h2>
+<p>设 <span class="math inline">\(E \in \mathbb{R}^{n}\)</span>, 映射
+<span class="math inline">\(f \colon E \to \mathbb{R}^{m}\)</span> 可微,
+则有导映射 <span class="math inline">\(f&#39; \colon E \to
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m})\)</span> (其中 <span
+class="math inline">\(\mathscr{L}(\mathbb{R}^{n},
+\mathbb{R}^{m})\)</span> 表示 <span
+class="math inline">\(\mathbb{R}^{n}\)</span> 到 <span
+class="math inline">\(\mathbb{R}^{m}\)</span> 的线性映射所成之集,
+也可记作 <span class="math inline">\(\operatorname{Hom}(\mathbb{R}^{n},
+\mathbb{R}^{n})\)</span>). 同理, 二阶导映射的形式为:</p>
+<p><span class="math display">\[f&#39;&#39; \colon E \to
+\mathscr{L}(\mathbb{R}^{n}, \mathscr{L}(\mathbb{R}^{n},
+\mathbb{R}^{m})).\]</span></p>
+<p>三阶导映射的形式为:</p>
+<p><span class="math display">\[f&#39;&#39;&#39; \colon E \to
+\mathscr{L}(\mathbb{R}^{n}, \mathscr{L}(\mathbb{R}^{n},
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m}))).\]</span></p>
+<p>可见该映射形态较为复杂, 在高等代数的视角下, 可以考虑利用同构进行简化.
+下文以二阶微分为例, 说明与 <span
+class="math inline">\(\mathscr{L}(\mathbb{R}^{n},
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m}))\)</span> 同构的空间.</p>
+<h2 id="双线性映射">双线性映射</h2>
+<p>考虑如下定义.</p>
+<blockquote>
+<p><strong>定义</strong> 设 <span class="math inline">\(E, F, G\)</span>
+是三个线性空间, 用 <span class="math inline">\(\mathscr{L}(E, F;
+G)\)</span> 表示全体定义在 <span class="math inline">\(E \times
+F\)</span> 上, 取值于 <span class="math inline">\(G\)</span>
+上的双线性映射所组成的集合.</p>
+</blockquote>
+<blockquote>
+<p><strong>定义</strong> (双线性映射) 设 <span class="math inline">\(u
+\colon E \times F \to G\)</span>, 如果</p>
+<ol type="1">
+<li>对任意的 <span class="math inline">\(x \in E, \ y_{1}, y_{2} \in F,
+\ \alpha, \beta \in \mathbb{R}\)</span>, 均有 <span
+class="math display">\[u(x, \alpha y_{1} + \beta y_{2}) = \alpha u(x,
+y_{1}) + \beta u(x, y_{2});\]</span></li>
+<li>对任意的 <span class="math inline">\(x_{1}, x_{2} \in E, \ y \in F,
+\ \alpha, \beta \in \mathbb{R}\)</span>, 均有 <span
+class="math display">\[u(\alpha x_{1} + \beta x_{2}, y) = \alpha
+u(x_{1}, y) + \beta u(x_{2}, y);\]</span> 则称 <span
+class="math inline">\(u\)</span> 是双线性的.</li>
+</ol>
+</blockquote>
+<p>双线性映射的一个经典例子是内积.</p>
+<p>不难看出 <span class="math inline">\(\mathscr{L}(\mathbb{R}^{n},
+\mathbb{R}^{n}; \mathbb{R}^{m})\)</span> 是线性空间.
+于是我们可得如下同构关系.</p>
+<blockquote>
+<p><strong>命题</strong> <span
+class="math display">\[\mathscr{L}(\mathbb{R}^{n},
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m})) \cong
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{n};
+\mathbb{R}^{m}).\]</span></p>
+</blockquote>
+<p>证明: 设 <span class="math inline">\(\forall u \in
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{n}; \mathbb{R}^{m})\)</span>,
+考虑构造同构映射.</p>
+<p>对于 <span class="math inline">\(\forall \boldsymbol{x} \in
+\mathbb{R}^{n}\)</span>, 令 <span
+class="math inline">\(u_{\boldsymbol{x}} \colon \boldsymbol{y} \mapsto
+u(\boldsymbol{x}, \boldsymbol{y})\)</span>, 则 <span
+class="math inline">\(u_{\boldsymbol{x}} \in \mathscr{L}(\mathbb{R}^{n},
+\mathbb{R}^{m})\)</span>.</p>
+<p>再令 <span class="math inline">\(\widetilde{u} \colon \boldsymbol{x}
+\mapsto u_{\boldsymbol{x}}\)</span>, 只需说明 <span
+class="math inline">\(\widetilde{u} \in \mathscr{L}(\mathbb{R}^{n},
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m}))\)</span>.</p>
+<p>要证对于 <span class="math inline">\(\forall \boldsymbol{x}_{1},
+\boldsymbol{x}_{2} \in \mathbb{R}^{n}, \ \alpha, \beta \in
+\mathbb{R}\)</span>, 有 <span class="math inline">\(\widetilde{u}(\alpha
+\boldsymbol{x}_{1} + \beta \boldsymbol{x}_{2}) =
+\alpha\widetilde{u}(\boldsymbol{x}_{1}) +
+\beta\widetilde{u}(\boldsymbol{x}_{2})\)</span>, 即 <span
+class="math inline">\(u_{\alpha \boldsymbol{x}_{1} + \beta
+\boldsymbol{x}_{2}} = \alpha u_{\boldsymbol{x}_{1}} + \beta
+u_{\boldsymbol{x}_{2}}\)</span>.</p>
+<p>故只需证对于 <span class="math inline">\(\forall \boldsymbol{y} \in
+\mathbb{R}^{n}\)</span>, 有 <span class="math inline">\(u_{\alpha
+\boldsymbol{x}_{1} + \beta \boldsymbol{x}_{2}}(\boldsymbol{y}) = \alpha
+u_{\boldsymbol{x}_{1}}(\boldsymbol{y}) + \beta
+u_{\boldsymbol{x}_{2}}(\boldsymbol{y})\)</span>, 即 <span
+class="math inline">\(u(\alpha \boldsymbol{x}_{1} + \beta
+\boldsymbol{x}_{2}, \boldsymbol{y}) = \alpha u(\boldsymbol{x}_{1},
+\boldsymbol{y}) + \beta u(\boldsymbol{x}_{2},
+\boldsymbol{y})\)</span>.</p>
+<p>由 <span class="math inline">\(u\)</span>
+的双线性性得上述等式成立.</p>
+<p>令 <span class="math inline">\(g \colon u \mapsto
+\widetilde{u}\)</span>, 不难验证 <span class="math inline">\(g\)</span>
+是同构映射, 故有 <span class="math inline">\(\mathscr{L}(\mathbb{R}^{n},
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m})) \cong
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{n};
+\mathbb{R}^{m})\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<p>于是研究 <span class="math inline">\(\mathscr{L}(\mathbb{R}^{n},
+\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{m}))\)</span> 可转化为研究 <span
+class="math inline">\(\mathscr{L}(\mathbb{R}^{n}, \mathbb{R}^{n};
+\mathbb{R}^{m})\)</span>. 但由于有连续这个概念, 需要定义合适的距离,
+使得该同构是保持距离不变的同构. 在此需要定义范数.</p>
+<blockquote>
+<p><strong>定义</strong> (线性映射的范数) 设 <span
+class="math inline">\(L \in \mathscr{L}(\mathbb{R}^{n},
+\mathbb{R}^{m})\)</span>, 我们称 <span class="math display">\[\|L\| =
+\sup_{|\boldsymbol{h}| = 1} |L\boldsymbol{h}|\]</span> 为 <span
+class="math inline">\(L\)</span> 的范数.</p>
+</blockquote>
+<blockquote>
+<p><strong>定义</strong> (双线性映射的范数) 设 <span
+class="math inline">\(u\)</span> 是双线性映射, 我们称 <span
+class="math display">\[\|u\| = \sup_{|\boldsymbol{x}| = 1,
+|\boldsymbol{y}| = 1} |u(\boldsymbol{x}, \boldsymbol{y})|\]</span> 为
+<span class="math inline">\(u\)</span> 的范数.</p>
+</blockquote>
+<p>利用范数可定义 <span class="math inline">\(u, v\)</span> 之间的距离为
+<span class="math inline">\(\|u - v\|\)</span>.
+于是通过下列推导可得该同构保持距离.</p>
+<blockquote>
+<p><strong>命题</strong> (范数相等) 对于上述定义的同构映射 <span
+class="math inline">\(g \colon u \mapsto \widetilde{u}\)</span>, 有
+<span class="math display">\[\|u\| = \|\widetilde{u}\|.\]</span></p>
+</blockquote>
+<p>证明: 由上述定义可得</p>
+<p><span class="math display">\[
+\begin{align*}
+\|u\| &amp;= \sup_{|\boldsymbol{x}| = 1, |\boldsymbol{y}| = 1}
+|u(\boldsymbol{x}, \boldsymbol{y})|. \\
+\|\widetilde{u}\| &amp;= \sup_{|\boldsymbol{x}| = 1}
+\|\widetilde{u}(\boldsymbol{x})\| \\
+&amp;= \sup_{|\boldsymbol{x}| = 1} \|u_{\boldsymbol{x}}\| \\
+&amp;= \sup_{|\boldsymbol{x}| = 1} \sup_{|\boldsymbol{y}| = 1}
+|u_{\boldsymbol{x}}(\boldsymbol{y})| \\
+&amp;= \sup_{|\boldsymbol{x}| = 1} \sup_{|\boldsymbol{y}| = 1}
+|u(\boldsymbol{x}, \boldsymbol{y})|.
+\end{align*}
+\]</span></p>
+<p>不难看出 <span class="math inline">\(\|u\| \geq
+\|\widetilde{u}\|\)</span>, 下证 <span class="math inline">\(\|u\| \leq
+\|\widetilde{u}\|\)</span>. 对 <span
+class="math inline">\(\forall|\boldsymbol{x}| = 1, \boldsymbol{x} \in
+\mathbb{R}^{n}\)</span>, 有</p>
+<p><span class="math display">\[\|\widetilde{u}\| \geq
+\sup_{|\boldsymbol{y}| = 1} |u(\boldsymbol{x},
+\boldsymbol{y})|.\]</span></p>
+<p>则对 <span class="math inline">\(\forall|\boldsymbol{y}| = 1,
+\boldsymbol{y} \in \mathbb{R}^{n}\)</span>, 有</p>
+<p><span class="math display">\[\|\widetilde{u}\| \geq
+|u(\boldsymbol{x}, \boldsymbol{y})|.\]</span></p>
+<p>即对 <span class="math inline">\(\forall |\boldsymbol{x}| = 1,
+|\boldsymbol{y}| = 1, \ \boldsymbol{x}, \boldsymbol{y} \in
+\mathbb{R}^{n}\)</span>, 均有 <span
+class="math inline">\(\|\widetilde{u}\| \geq |u(\boldsymbol{x},
+\boldsymbol{y})|\)</span>.</p>
+<p>又对 <span class="math inline">\(\forall \varepsilon &gt; 0\)</span>,
+均 <span class="math inline">\(\exists |\boldsymbol{x}&#39;| = 1,
+|\boldsymbol{y}&#39;| = 1, \ \boldsymbol{x}&#39;, \boldsymbol{y}&#39;
+\in \mathbb{R}^{n}\)</span>, 使得</p>
+<p><span class="math display">\[\|u\| &lt; |u(\boldsymbol{x}&#39;,
+\boldsymbol{y}&#39;)| + \varepsilon \leq \|\widetilde{u}\| +
+\varepsilon.\]</span></p>
+<p>故由 <span class="math inline">\(\varepsilon\)</span> 的任意性知
+<span class="math inline">\(\|u\| \leq \|\widetilde{u}\|\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<p>于是该同构是保持距离的同构, 该问题转化为了讨论双线性型的性质.</p>
+<h2 id="与-c2-类等价">与 <span class="math inline">\(C^{2}\)</span>
+类等价</h2>
+<p><span class="math inline">\(C^{r}(E)\)</span> 定义如下.</p>
+<blockquote>
+<p><strong>定义</strong> (<span class="math inline">\(C^{r}\)</span> 类)
+如果 <span class="math inline">\(n\)</span> 元函数 <span
+class="math inline">\(f\)</span> 的每个阶数不大于 <span
+class="math inline">\(r\)</span> 的偏导均在 <span
+class="math inline">\(E\)</span> 上存在且连续, 我们就称 <span
+class="math inline">\(f\)</span> 在 <span
+class="math inline">\(E\)</span> 上是 <span
+class="math inline">\(C^{r}\)</span> 类的, 记作 <span
+class="math inline">\(f \in C^{r}(E)\)</span>.</p>
+</blockquote>
+<p>我们先讨论 <span class="math inline">\(f&#39;\)</span> 的情况.</p>
+<blockquote>
+<p><strong>命题</strong> 设 <span class="math inline">\(E\)</span> 是
+<span class="math inline">\(\mathbb{R}^{n}\)</span> 的开集, <span
+class="math inline">\(f \colon E \to \mathbb{R}^{m}\)</span> 在 <span
+class="math inline">\(E\)</span> 上可微. 则 <span
+class="math inline">\(f \in C^{1}(E)\)</span> 的充要条件是: 对 <span
+class="math inline">\(\forall \boldsymbol{a} \in E, \ \varepsilon &gt;
+0\)</span>, 均 <span class="math inline">\(\exists \delta &gt;
+0\)</span>, 使得对于满足 <span class="math inline">\(|\boldsymbol{x} -
+\boldsymbol{a}| &lt; \delta\)</span> 的任意的 <span
+class="math inline">\(\boldsymbol{x} \in E\)</span> 均有 <span
+class="math display">\[\|f&#39;(\boldsymbol{x}) -
+f&#39;(\boldsymbol{a})\| &lt; \varepsilon.\]</span></p>
+</blockquote>
+<p>证明:</p>
+<p>必要性: 设 <span class="math inline">\(f = (f_{1}, f_{2}, \cdots,
+f_{m})^{\text{T}}\)</span>, 有</p>
+<p><span class="math display">\[
+f&#39;(\boldsymbol{a}) =
+\begin{bmatrix}
+\frac{ \partial f_{1} }{ \partial x_{1} }(\boldsymbol{a}) &amp; \frac{
+\partial f_{1} }{ \partial x_{2} }(\boldsymbol{a}) &amp; \cdots &amp;
+\frac{ \partial f_{1} }{ \partial x_{n} }(\boldsymbol{a}) \\
+\frac{ \partial f_{2} }{ \partial x_{1} }(\boldsymbol{a}) &amp; \frac{
+\partial f_{2} }{ \partial x_{2} }(\boldsymbol{a}) &amp; \cdots &amp;
+\frac{ \partial f_{2} }{ \partial x_{n} }(\boldsymbol{a}) \\
+\vdots &amp; \vdots &amp;&amp; \vdots \\
+\frac{ \partial f_{m} }{ \partial x_{1} }(\boldsymbol{a}) &amp; \frac{
+\partial f_{m} }{ \partial x_{2} }(\boldsymbol{a}) &amp; \cdots &amp;
+\frac{ \partial f_{m} }{ \partial x_{n} }(\boldsymbol{a})
+\end{bmatrix}.
+\]</span></p>
+<p>故有</p>
+<p><span class="math display">\[
+f&#39;(\boldsymbol{x}) - f&#39;(\boldsymbol{a}) =
+\begin{bmatrix}
+\frac{ \partial f_{1} }{ \partial x_{1} }(\boldsymbol{x}) - \frac{
+\partial f_{1} }{ \partial x_{1} }(\boldsymbol{a}) &amp; \frac{ \partial
+f_{1} }{ \partial x_{2} }(\boldsymbol{x}) - \frac{ \partial f_{1} }{
+\partial x_{2} }(\boldsymbol{a}) &amp; \cdots &amp; \frac{ \partial
+f_{1} }{ \partial x_{n} }(\boldsymbol{x}) - \frac{ \partial f_{1} }{
+\partial x_{n} }(\boldsymbol{a}) \\
+\frac{ \partial f_{2} }{ \partial x_{1} }(\boldsymbol{x}) - \frac{
+\partial f_{2} }{ \partial x_{1} }(\boldsymbol{a}) &amp; \frac{ \partial
+f_{2} }{ \partial x_{2} }(\boldsymbol{x}) - \frac{ \partial f_{2} }{
+\partial x_{2} }(\boldsymbol{a}) &amp; \cdots &amp; \frac{ \partial
+f_{2} }{ \partial x_{n} }(\boldsymbol{x}) - \frac{ \partial f_{2} }{
+\partial x_{n} }(\boldsymbol{a}) \\
+\vdots &amp; \vdots &amp;&amp; \vdots \\
+\frac{ \partial f_{m} }{ \partial x_{1} }(\boldsymbol{x}) - \frac{
+\partial f_{m} }{ \partial x_{1} }(\boldsymbol{a}) &amp; \frac{ \partial
+f_{m} }{ \partial x_{2} }(\boldsymbol{x}) - \frac{ \partial f_{m} }{
+\partial x_{2} }(\boldsymbol{a}) &amp; \cdots &amp; \frac{ \partial
+f_{m} }{ \partial x_{n} }(\boldsymbol{x}) - \frac{ \partial f_{m} }{
+\partial x_{n} }(\boldsymbol{a})
+\end{bmatrix}.
+\]</span></p>
+<p>又有</p>
+<p><span class="math display">\[
+\|f&#39;(\boldsymbol{x}) - f&#39;(\boldsymbol{a})\| =
+\sup_{|\boldsymbol{y}| = 1} |(f&#39;(\boldsymbol{x}) -
+f&#39;(\boldsymbol{a}))\boldsymbol{y}|.
+\]</span></p>
+<p>且 <span class="math inline">\(|(f&#39;(\boldsymbol{x}) -
+f&#39;(\boldsymbol{a}))\boldsymbol{y}| \leq M\sqrt{ mn } \cdot
+|\boldsymbol{y}| = M\sqrt{ mn }\)</span>, 其中</p>
+<p><span class="math display">\[
+M = \max\left\{ \left| \frac{ \partial f_{i} }{ \partial x_{j}
+}(\boldsymbol{x}) - \frac{ \partial f_{i} }{ \partial x_{j}
+}(\boldsymbol{a}) \right| : 1 \leq i \leq m, 1 \leq j \leq n \right\}.
+\]</span></p>
+<p>又 <span class="math inline">\(f \in C^{1}(E)\)</span>, 则对 <span
+class="math inline">\(\forall \varepsilon &gt; 0, \ 1 \leq i \leq m, 1
+\leq j \leq n\)</span>, 均 <span class="math inline">\(\exists \delta
+&gt; 0\)</span>, 使得对于满足 <span
+class="math inline">\(|\boldsymbol{x} - \boldsymbol{a}| &lt;
+\delta\)</span> 的任意的 <span class="math inline">\(\boldsymbol{x} \in
+E\)</span> 均有</p>
+<p><span class="math display">\[\left| \frac{ \partial f_{i} }{ \partial
+x_{j} }(\boldsymbol{x}) - \frac{ \partial f_{i} }{ \partial x_{j}
+}(\boldsymbol{a}) \right| &lt; \frac{\varepsilon}{\sqrt{ mn
+}}.\]</span></p>
+<p>故有</p>
+<p><span class="math display">\[\|f&#39;(\boldsymbol{x}) -
+f&#39;(\boldsymbol{a})\| = \sup_{|\boldsymbol{y}| = 1}
+|(f&#39;(\boldsymbol{x}) - f&#39;(\boldsymbol{a}))\boldsymbol{y}| \leq
+M\sqrt{ mn } &lt; \frac{\varepsilon}{\sqrt{ mn }} \cdot \sqrt{ mn } =
+\varepsilon.\]</span></p>
+<p>充分性: 若对 <span class="math inline">\(\forall \boldsymbol{a} \in
+E, \ \varepsilon &gt; 0\)</span>, 均 <span class="math inline">\(\exists
+\delta &gt; 0\)</span>, 使得对于满足 <span
+class="math inline">\(|\boldsymbol{x} - \boldsymbol{a}| &lt;
+\delta\)</span> 的任意的 <span class="math inline">\(\boldsymbol{x} \in
+E\)</span> 均有 <span class="math inline">\(\|f&#39;(\boldsymbol{x}) -
+f&#39;(\boldsymbol{a})\| &lt; \varepsilon\)</span>, 则对任意的 <span
+class="math inline">\(1 \leq i \leq m, 1 \leq j \leq n\)</span>, 有</p>
+<p><span class="math display">\[
+\begin{align*}
+\left| \frac{ \partial f_{i} }{ \partial x_{j} }(\boldsymbol{x}) -
+\frac{ \partial f_{i} }{ \partial x_{j} }(\boldsymbol{a}) \right|
+&amp;\leq \sqrt{ \sum_{k=1}^{m} \left( \frac{ \partial f_{k} }{ \partial
+x_{j} }(\boldsymbol{x}) - \frac{ \partial f_{k} }{ \partial x_{j}
+}(\boldsymbol{a}) \right)^2 } \\
+&amp;= |(f&#39;(\boldsymbol{x}) -
+f&#39;(\boldsymbol{a}))\boldsymbol{e}_{j}| \\
+&amp;\leq \|f&#39;(\boldsymbol{x}) - f&#39;(\boldsymbol{a})\| \\
+&amp;&lt; \varepsilon.
+\end{align*}
+\]</span></p>
+<p>其中 <span class="math inline">\(\boldsymbol{e}_i\)</span>
+为坐标向量. 则对 <span class="math inline">\(\forall \boldsymbol{a} \in
+E, \ 1 \leq i \leq m, 1 \leq j \leq n\)</span>, 均有 <span
+class="math inline">\(\frac{ \partial f_{i} }{ \partial x_{j}
+}(\boldsymbol{a})\)</span> 连续, 即 <span class="math inline">\(f \in
+C^{1}(E)\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<p>接下来讨论 <span class="math inline">\(f&#39;&#39;\)</span>
+的情况.</p>
+<blockquote>
+<p><strong>命题</strong> 设 <span class="math inline">\(E\)</span> 是
+<span class="math inline">\(\mathbb{R}^{n}\)</span> 的开集, <span
+class="math inline">\(f \colon E \to \mathbb{R}^{m}\)</span> 在 <span
+class="math inline">\(E\)</span> 上二次可微. 则 <span
+class="math inline">\(f \in C^{2}(E)\)</span> 的充要条件是: 对 <span
+class="math inline">\(\forall \boldsymbol{a} \in E, \ \varepsilon &gt;
+0\)</span>, 均 <span class="math inline">\(\exists \delta &gt;
+0\)</span>, 使得对于满足 <span class="math inline">\(|\boldsymbol{x} -
+\boldsymbol{a}| &lt; \delta\)</span> 的任意的 <span
+class="math inline">\(\boldsymbol{x} \in E\)</span> 均有 <span
+class="math display">\[\|f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a})\| &lt; \varepsilon.\]</span></p>
+</blockquote>
+<p>证明:</p>
+<p>必要性: 有</p>
+<p><span class="math display">\[\|f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a})\| = \sup_{|\boldsymbol{h}| = 1,
+|\boldsymbol{k}| = 1} |(f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a}))(\boldsymbol{h},
+\boldsymbol{k})|.\]</span></p>
+<p>又有</p>
+<p><span
+class="math display">\[f&#39;&#39;(\boldsymbol{a})\boldsymbol{e}_{i} =
+\lim_{ t \to 0 } \frac{f&#39;(\boldsymbol{a} + t\boldsymbol{e}_{i}) -
+f&#39;(\boldsymbol{a})}{t}.\]</span></p>
+<p>故</p>
+<p><span class="math display">\[
+\begin{align*}
+f&#39;&#39;(\boldsymbol{a})(\boldsymbol{e}_{i}, \boldsymbol{e}_{j})
+&amp;= (f&#39;&#39;(\boldsymbol{a})\boldsymbol{e}_{i})\boldsymbol{e}_{j}
+\\
+&amp;= \lim_{ t \to 0 } \frac{f&#39;(\boldsymbol{a} +
+t\boldsymbol{e}_{i})\boldsymbol{e}_{j} -
+f&#39;(\boldsymbol{a})\boldsymbol{e}_{j}}{t} \\
+&amp;= \lim_{ t \to 0 } \frac{\frac{ \partial f }{ \partial x_{j}
+}(\boldsymbol{a} + t\boldsymbol{e}_{i}) - \frac{ \partial f }{ \partial
+x_{j} }(\boldsymbol{a})}{t} \\
+&amp;= \frac{ \partial f }{ \partial x_{i} \partial x_{j}
+}(\boldsymbol{a}).
+\end{align*}
+\]</span></p>
+<p>则对 <span class="math inline">\(\forall \boldsymbol{h} = (h_{1},
+\cdots, h_{n})^{\text{T}}, \boldsymbol{k} = (k_{1}, \cdots,
+k_{n})^{\text{T}}\)</span>, 由 <span
+class="math inline">\(f&#39;&#39;(\boldsymbol{a})\)</span>
+的双线性性得</p>
+<p><span
+class="math display">\[f&#39;&#39;(\boldsymbol{a})(\boldsymbol{h},
+\boldsymbol{k}) = \sum_{i=1}^{n} \sum_{j=1}^{n}
+h_{i}k_{j}f&#39;&#39;(\boldsymbol{a})(\boldsymbol{e}_{i},
+\boldsymbol{e}_{j}) = \sum_{i=1}^{n} \sum_{j=1}^{n} h_{i}k_{j}\frac{
+\partial f }{ \partial x_{i} \partial x_{j}
+}(\boldsymbol{a}).\]</span></p>
+<p>故有</p>
+<p><span class="math display">\[(f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a}))(\boldsymbol{h}, \boldsymbol{k}) =
+\sum_{i=1}^{n} \sum_{j=1}^{n} h_{i}k_{j}\left( \frac{ \partial f }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{x}) - \frac{ \partial f }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{a}) \right).\]</span></p>
+<p>则当 <span class="math inline">\(|\boldsymbol{h}| = |\boldsymbol{k}|
+= 1\)</span> 时, 有 <span class="math inline">\(|h_{i}|, |k_{j}| \leq 1,
+\  1 \leq i, j \leq n\)</span>, 故 <span
+class="math inline">\(|h_{i}k_{j}| \leq 1\)</span>, 有</p>
+<p><span class="math display">\[
+\begin{align*}
+(f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a}))(\boldsymbol{h}, \boldsymbol{k}) &amp;\leq
+\sum_{i=1}^{n} \sum_{j=1}^{n} \left| h_{i}k_{j}\left( \frac{ \partial f
+}{ \partial x_{i} \partial x_{j} }(\boldsymbol{x}) - \frac{ \partial f
+}{ \partial x_{i} \partial x_{j} }(\boldsymbol{a}) \right) \right| \\
+&amp;\leq \sum_{i=1}^{n} \sum_{j=1}^{n} \left| \frac{ \partial f }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{x}) - \frac{ \partial f }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{a}) \right|.
+\end{align*}
+\]</span></p>
+<p>又 <span class="math inline">\(f \in C^{2}(E)\)</span>, 则对 <span
+class="math inline">\(\forall \varepsilon &gt; 0, \ 1 \leq k \leq m, \ 1
+\leq i, j \leq n\)</span>, 均 <span class="math inline">\(\exists \delta
+&gt; 0\)</span>, 使得对于满足 <span
+class="math inline">\(|\boldsymbol{x} - \boldsymbol{a}| &lt;
+\delta\)</span> 的任意的 <span class="math inline">\(\boldsymbol{x} \in
+E\)</span> 均有</p>
+<p><span class="math display">\[\left| \frac{ \partial f_{k} }{ \partial
+x_{i} \partial x_{j} }(\boldsymbol{x}) - \frac{ \partial f_{k} }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{a}) \right| &lt;
+\frac{\varepsilon}{n^{2}\sqrt{ m }}.\]</span></p>
+<p>故有</p>
+<p><span class="math display">\[\left| \frac{ \partial f }{ \partial
+x_{i} \partial x_{j} }(\boldsymbol{x}) - \frac{ \partial f }{ \partial
+x_{i} \partial x_{j} }(\boldsymbol{a}) \right| = \sqrt{ \sum_{k=1}^{m}
+\left( \frac{ \partial f_{k} }{ \partial x_{i} \partial x_{j}
+}(\boldsymbol{x}) - \frac{ \partial f_{k} }{ \partial x_{i} \partial
+x_{j} }(\boldsymbol{a}) \right)^2 } &lt;
+\frac{\varepsilon}{n^{2}}.\]</span></p>
+<p>故有</p>
+<p><span class="math display">\[
+\begin{align*}
+\|f&#39;&#39;(\boldsymbol{x}) - f&#39;&#39;(\boldsymbol{a})\| &amp;=
+\sup_{|\boldsymbol{h}| = 1, |\boldsymbol{k}| = 1}
+|(f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a}))(\boldsymbol{h}, \boldsymbol{k})| \\
+&amp;\leq \sum_{i=1}^{n} \sum_{j=1}^{n} \left| \frac{ \partial f }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{x}) - \frac{ \partial f }{
+\partial x_{i} \partial x_{j} }(\boldsymbol{a}) \right| \\
+&amp;&lt; \varepsilon.
+\end{align*}
+\]</span></p>
+<p>充分性: 若对 <span class="math inline">\(\forall \boldsymbol{a} \in
+E, \ \varepsilon &gt; 0\)</span>, 均 <span class="math inline">\(\exists
+\delta &gt; 0\)</span>, 使得对于满足 <span
+class="math inline">\(|\boldsymbol{x} - \boldsymbol{a}| &lt;
+\delta\)</span> 的任意的 <span class="math inline">\(\boldsymbol{x} \in
+E\)</span> 均有 <span
+class="math inline">\(\|f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a})\| &lt; \varepsilon\)</span>, 则对任意的
+<span class="math inline">\(1 \leq k \leq m, \ 1 \leq i, j \leq
+n\)</span>, 有</p>
+<p><span class="math display">\[
+\begin{align*}
+\left| \frac{ \partial f_{k} }{ \partial x_{i} \partial x_{j}
+}(\boldsymbol{x}) - \frac{ \partial f_{k} }{ \partial x_{i} \partial
+x_{j} }(\boldsymbol{a}) \right| &amp;\leq \sqrt{ \sum_{t=1}^{m} \left(
+\frac{ \partial f_{t} }{ \partial x_{i} \partial x_{j} }(\boldsymbol{x})
+- \frac{ \partial f_{t} }{ \partial x_{i} \partial x_{j}
+}(\boldsymbol{a}) \right)^2 } \\
+&amp;= |(f&#39;&#39;(\boldsymbol{x}) -
+f&#39;&#39;(\boldsymbol{a}))(\boldsymbol{e}_{i}, \boldsymbol{e}_{j})| \\
+&amp;\leq \|f&#39;&#39;(\boldsymbol{x}) - f&#39;&#39;(\boldsymbol{a})\|
+\\
+&amp;&lt; \varepsilon.
+\end{align*}
+\]</span></p>
+<p>则对 <span class="math inline">\(\forall \boldsymbol{a} \in E, \ 1
+\leq k \leq m, \ 1 \leq i, j \leq n\)</span>, 均有 <span
+class="math inline">\(\frac{ \partial f_{k} }{ \partial x_{i} \partial
+x_{j} }(\boldsymbol{a})\)</span> 连续, 即 <span class="math inline">\(f
+\in C^{2}(E)\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<p>于是我们证明了二阶微分连续等价于 <span
+class="math inline">\(C^{2}\)</span> 类. 由于高阶微分过于复杂且使用繁琐,
+我们可用 <span class="math inline">\(C^{2}\)</span> 类替代这种复杂定义.
+这也是大多数教材不介绍高阶微分的原因.</p>
+<p>这种做法可拓展至 <span class="math inline">\(r\)</span> 阶微分,
+替换成 <span class="math inline">\(r\)</span> 重线性映射即可
+(多重线性映射的一个经典例子是行列式, 其按行 /
+列展开体现了其多重线性性).</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" rel="tag"># 数学分析</a>
+              <a href="/tags/%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%BE%AE%E5%88%86/" rel="tag"># 导数与微分</a>
+              <a href="/tags/%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E5%BE%AE%E5%88%86/" rel="tag"># 多元函数的微分</a>
+              <a href="/tags/%E5%8F%8C%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0/" rel="tag"># 双线性函数</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/gamma-function/" rel="prev" title="「数学分析」$\Gamma$ 函数的定义与性质探究">
+                  <i class="fa fa-chevron-left"></i> 「数学分析」$\Gamma$ 函数的定义与性质探究
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css" integrity="sha256-GxdCIOyfxQ1OBfS99qAIJDoGK1ADuBsxhMTqXG82fAY=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js","integrity":"sha256-LVaMHPQ2zLqOc5rXSAfr4d1PIkEGNLyyUTDNPZmTtUw="}}</script>
+<script src="/js/third-party/comments/disqusjs.js"></script>
+
+</body>
+</html>
