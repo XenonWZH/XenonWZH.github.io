@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="实际上是把往年题中一些不太会的题提取出来, 外加了一道几乎必考的题. 抽代学的实在是太烂了, 作业好难, 只能过拟合往年题了 QAQ 论如何在 Markdown 环境中打出右对齐的 \(\square\) 证毕符号?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「抽象代数」抽代期末复习习题集">
+<meta property="og:url" content="https://xenonwzh.github.io/abstract-algebra-review/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="实际上是把往年题中一些不太会的题提取出来, 外加了一道几乎必考的题. 抽代学的实在是太烂了, 作业好难, 只能过拟合往年题了 QAQ 论如何在 Markdown 环境中打出右对齐的 \(\square\) 证毕符号?">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-19T13:56:37.000Z">
+<meta property="article:modified_time" content="2025-12-20T13:31:09.014Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="抽象代数">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/abstract-algebra-review/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/abstract-algebra-review/","path":"abstract-algebra-review/","title":"「抽象代数」抽代期末复习习题集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「抽象代数」抽代期末复习习题集 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">137</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/abstract-algebra-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「抽象代数」抽代期末复习习题集 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「抽象代数」抽代期末复习习题集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-19 21:56:37" itemprop="dateCreated datePublished" datetime="2025-12-19T21:56:37+08:00">2025-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-20 21:31:09" itemprop="dateModified" datetime="2025-12-20T21:31:09+08:00">2025-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">一些想法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>实际上是把往年题中一些不太会的题提取出来, 外加了一道几乎必考的题.</p>
+<p><del>抽代学的实在是太烂了, 作业好难, 只能过拟合往年题了 QAQ</del></p>
+<p><del>论如何在 Markdown 环境中打出右对齐的 <span
+class="math inline">\(\square\)</span> 证毕符号?</del></p>
+<span id="more"></span>
+<hr />
+<blockquote>
+<p><strong>例 1</strong></p>
+<p><span class="math inline">\(S_{n}, A_{n} \ (n \geq 5)\)</span> 分别是
+<span class="math inline">\(n\)</span> 元对称群和 <span
+class="math inline">\(n\)</span> 元交错群, 证明: <span
+class="math inline">\(S_{n}&#39; = A_{n}, \ A_{n}&#39; = A_{n}\)</span>,
+<span class="math inline">\(S_{n}\)</span> 是否可解?</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>设 <span class="math inline">\(\forall x \in S_{n}&#39;\)</span>, 则
+<span class="math inline">\(\exists a, b \in S_{n}\)</span>, s.t. <span
+class="math inline">\(x = aba^{-1}b^{-1}\)</span>. 又有 <span
+class="math inline">\(a, a^{-1}\)</span> 奇偶性相同, <span
+class="math inline">\(b, b^{-1}\)</span> 奇偶性相同, 则 <span
+class="math inline">\(x\)</span> 为偶置换, 有 <span
+class="math inline">\(x \in A_{n}\)</span>, 即 <span
+class="math inline">\(S_{n}&#39; \subseteq A_{n}\)</span>.</p>
+<p>又设 <span class="math inline">\(\forall x \in A_{n}\)</span>, 有
+<span class="math inline">\(x = x_{1}x_{2} \cdots x_{m}\)</span>, 其中
+<span class="math inline">\(x_{i} = (i_{i} \ j_{i} \ k_{i})\)</span>.
+故取 <span class="math inline">\(a_{i} = (i_{i} \ k_{i}), \ b_{i} =
+(i_{i} \ j_{i})\)</span>, 有 <span class="math inline">\(x_{i} =
+aba^{-1}b^{-1}\)</span>, 故有 <span class="math inline">\(x_{i} \in
+S_{n}&#39;\)</span>, 则 <span class="math inline">\(x \in
+S_{n}&#39;\)</span>, 即 <span class="math inline">\(A_{n}&#39; \subseteq
+S_{n}\)</span>. 综上, 有 <span class="math inline">\(S_{n}&#39; =
+A_{n}\)</span>.</p>
+<p>对于 <span class="math inline">\(A_{n}\)</span>, 有 <span
+class="math inline">\(A_{n}\)</span> 为单群, 故只存在正规子群 <span
+class="math inline">\(A_{n}\)</span> 和 <span class="math inline">\(\{ e
+\}\)</span>. 又 <span class="math inline">\(A_{n}\)</span> 非交换, 则
+<span class="math inline">\(A_{n}&#39; \neq \{ e \}\)</span>, 故 <span
+class="math inline">\(A_{n}&#39; = A_{n}\)</span>.</p>
+<p>对于 <span class="math inline">\(S_{n}\)</span>, 有 <span
+class="math inline">\(S_{n}&#39; = A_{n}\)</span>, 故有 <span
+class="math inline">\(S_{n} \unrhd A_{n} \unrhd \{ e \}\)</span>. 又有
+<span class="math inline">\(A_{n}\)</span> 为单群, <span
+class="math inline">\(A_{n} / \{ e \} \cong A_{n}\)</span> 非交换, 故
+<span class="math inline">\(S_{n}\)</span> 不可解.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 2</strong></p>
+<p>设 <span class="math inline">\(p, q\)</span> 是不同的素数, 证明 <span
+class="math inline">\(p^{2}q\)</span> 阶群有正规 Sylow 子群.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>设该群为 <span class="math inline">\(G\)</span>. 若 <span
+class="math inline">\(p &gt; q\)</span>, 由 Sylow 定理知存在 <span
+class="math inline">\(p^{2}\)</span> 阶 Sylow <span
+class="math inline">\(p\)</span>-子群 <span
+class="math inline">\(P\)</span>, 且设 Sylow <span
+class="math inline">\(p\)</span>-子群的个数为 <span
+class="math inline">\(m\)</span>, 有 <span class="math inline">\(m
+\equiv 1 \pmod p\)</span>, 且 <span class="math inline">\(m \mid
+q\)</span>, 即 <span class="math inline">\(m = 1\)</span>. 故有 <span
+class="math inline">\(P \unlhd G\)</span>, 满足条件.</p>
+<p>若 <span class="math inline">\(p &lt; q\)</span>, 由 Sylow 定理知存在
+<span class="math inline">\(q\)</span> 阶 Sylow <span
+class="math inline">\(q\)</span>-子群 <span
+class="math inline">\(Q\)</span>, 且设 Sylow <span
+class="math inline">\(q\)</span>-子群的个数为 <span
+class="math inline">\(m\)</span>, 有 <span class="math inline">\(m
+\equiv 1 \pmod q\)</span>, 且 <span class="math inline">\(m \mid
+p^{2}\)</span>.</p>
+<p>若 <span class="math inline">\(m = 1\)</span>, 则 <span
+class="math inline">\(Q \unlhd G\)</span>, 满足条件.</p>
+<p>若 <span class="math inline">\(m = p^{2}\)</span>, 则有 <span
+class="math inline">\(p^{2} \equiv 1 \pmod q\)</span>. 可知 <span
+class="math inline">\(p = 2\)</span> (若 <span class="math inline">\(q =
+2\)</span>, 无法满足 <span class="math inline">\(p &lt; q\)</span>), 故
+<span class="math inline">\(q = 3, \ m = 4, \ |G| = 12\)</span>. 又
+<span class="math inline">\(Q\)</span> 是素数阶循环群, 则 <span
+class="math inline">\(G\)</span> 中有 <span
+class="math inline">\(1\)</span> 个 <span
+class="math inline">\(1\)</span> 阶元, 有 <span
+class="math inline">\(8\)</span> 个 <span
+class="math inline">\(3\)</span> 阶元, 故剩下 <span
+class="math inline">\(3\)</span> 个元素. 又由 Sylow 定理知存在 <span
+class="math inline">\(4\)</span> 阶 Sylow <span
+class="math inline">\(2\)</span>-子群 <span
+class="math inline">\(P\)</span>. 故对 <span
+class="math inline">\(\forall x \in P\)</span>, 有 <span
+class="math inline">\(|x| = 1, 2, 4\)</span>. 故剩下的 <span
+class="math inline">\(3\)</span> 个元素和单位元 <span
+class="math inline">\(e\)</span> 构成唯一的 Sylow <span
+class="math inline">\(2\)</span>-子群 <span
+class="math inline">\(P\)</span>. 有 <span class="math inline">\(P
+\unlhd G\)</span>, 满足条件.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 3</strong></p>
+<p>设 <span class="math inline">\(G\)</span> 作用在集合 <span
+class="math inline">\(\Omega\)</span> 上, 且 <span
+class="math inline">\(G\)</span> 包含一个子群 <span
+class="math inline">\(N\)</span>, 它在 <span
+class="math inline">\(\Omega\)</span> 上的作用传递. 证明: <span
+class="math inline">\(G = G_{\alpha}N, \ \forall \alpha \in
+\Omega\)</span>, 其中 <span class="math inline">\(G_{\alpha}\)</span> 是
+<span class="math inline">\(\alpha\)</span> 的稳定子群.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>显然有 <span class="math inline">\(G_{\alpha}N \subseteq G\)</span>,
+故只需证 <span class="math inline">\(G \subseteq
+G_{\alpha}N\)</span>.</p>
+<p>对 <span class="math inline">\(\forall g \in G\)</span>, 令 <span
+class="math inline">\(\beta = g^{-1}\alpha \in \Omega\)</span>. 由 <span
+class="math inline">\(N\)</span> 的传递性知 <span
+class="math inline">\(\exists n \in N\)</span>, s.t. <span
+class="math inline">\(n\beta = \alpha\)</span>, 故有 <span
+class="math inline">\(ng^{-1}\alpha = \alpha\)</span>, 即 <span
+class="math inline">\(ng^{-1} \in G_{\alpha}\)</span>. 故 <span
+class="math inline">\(\exists g_{\alpha} \in G_{\alpha}\)</span>, s.t.
+<span class="math inline">\(ng^{-1} = g_{\alpha} \implies g =
+g_{\alpha}^{-1}n\)</span>. 又有 <span
+class="math inline">\(G_{\alpha}\)</span> 为稳定子群, 故 <span
+class="math inline">\(g_{\alpha}^{-1} \in G_{\alpha}\)</span>, 有 <span
+class="math inline">\(g \in G_{\alpha}N\)</span>, 即 <span
+class="math inline">\(G \subseteq G_{\alpha}N\)</span>.</p>
+<p>综上, 有 <span class="math inline">\(G = G_{\alpha}N\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 4</strong></p>
+<p>设 <span class="math inline">\(G\)</span> 为一个有限群, <span
+class="math inline">\(p\)</span> 为 <span
+class="math inline">\(|G|\)</span> 的最小素因子. 证明: 指数为 <span
+class="math inline">\(p\)</span> 的子群必为正规子群.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>设指数为 <span class="math inline">\(p\)</span> 的子群为 <span
+class="math inline">\(H\)</span>. 对于 <span class="math inline">\((G /
+H)_{l} = \{ x_{1}H, \cdots, x_{p}H \}\)</span>, 取群的左平移作用 <span
+class="math inline">\(g(xH) = (gx)H, \ (\forall g \in H, xH \in (G /
+H)_{l})\)</span>, 有 <span class="math inline">\(g_{1}(g_{2}(xH)) =
+(g_{1}g_{2})(xH), \ e(xH) = xH\)</span>, 故其为群作用.</p>
+<p>该群作用引导出一个群同态 <span class="math inline">\(\varphi \colon G
+\to S_{p}\)</span>, 其中 <span class="math inline">\(\varphi(g)(xH) =
+g(xH)\)</span>. 考虑 <span class="math inline">\(\operatorname{Ker}
+\varphi\)</span>. 对 <span class="math inline">\(\forall g \in
+\operatorname{Ker} \varphi\)</span>, 有 <span
+class="math inline">\(\varphi(g) = (1)\)</span>, 即 <span
+class="math inline">\(g(xH) = xH, \ \forall x \implies gH = H \implies g
+\in H\)</span>. 则有 <span class="math inline">\(\operatorname{Ker}
+\varphi \subseteq H\)</span>.</p>
+<p>由群同态基本定理知 <span class="math inline">\(G / \operatorname{Ker}
+\varphi \cong \operatorname{Im} \varphi\)</span>, 故 <span
+class="math inline">\(\frac{|G|}{|\operatorname{Ker} \varphi|} \mid p!
+\implies \frac{p|H|}{|\operatorname{Ker} \varphi|} \mid p! \implies
+\frac{|H|}{|\operatorname{Ker} \varphi|} \mid (p - 1)!\)</span>.</p>
+<p>又 <span class="math inline">\(|H|\)</span> 不含有比 <span
+class="math inline">\(p\)</span> 小的因子, 故 <span
+class="math inline">\(|\operatorname{Ker} \varphi| = |H|\)</span>, 即
+<span class="math inline">\(\operatorname{Ker} \varphi = H\)</span>.
+故有 <span class="math inline">\(H \unlhd G\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 5</strong></p>
+<p>设 <span class="math inline">\(G\)</span> 为 <span
+class="math inline">\(2024\)</span> 阶群. 证明: <span
+class="math inline">\(G\)</span> 是可解群.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有 <span class="math inline">\(2024 = 2^{3} \times 11 \times
+23\)</span>. 故由 Sylow 定理知存在 <span
+class="math inline">\(23\)</span> 阶子群 <span
+class="math inline">\(P\)</span>, 其个数为 <span
+class="math inline">\(m\)</span>, 满足 <span class="math inline">\(m
+\equiv 1 \pmod{23}\)</span>, 且 <span class="math inline">\(m \mid 2^{3}
+\times 11\)</span>. 故 <span class="math inline">\(m = 1\)</span>, 有
+<span class="math inline">\(P \unlhd G\)</span>. 又 <span
+class="math inline">\(P\)</span> 为素数阶循环群, 故 <span
+class="math inline">\(P \unrhd \{ e \}\)</span>, 且 <span
+class="math inline">\(P / \{ e \} \cong P\)</span> 交换.</p>
+<p>考虑 <span class="math inline">\(G / P\)</span>, 为 <span
+class="math inline">\(2^{3} \times 11\)</span> 阶群, 由 Sylow 定理知存在
+<span class="math inline">\(11\)</span> 阶子群 <span
+class="math inline">\(Q\)</span>, 其个数为 <span
+class="math inline">\(n\)</span>, 满足 <span class="math inline">\(n
+\equiv 1 \pmod{11}\)</span>, 且 <span class="math inline">\(n \mid
+2^{3}\)</span>, 故 <span class="math inline">\(n = 1\)</span>. 有 <span
+class="math inline">\(Q \unlhd (G / P)\)</span>. 又 <span
+class="math inline">\(Q\)</span> 为素数阶循环群, 故 <span
+class="math inline">\(Q \unrhd \{ e \}\)</span>, 且 <span
+class="math inline">\(Q / \{ e \} \cong Q\)</span> 交换.</p>
+<p>考虑 <span class="math inline">\(R = (G / P) / Q\)</span>, 为 <span
+class="math inline">\(2^{3}\)</span> 阶群. 其中心 <span
+class="math inline">\(Z(R)\)</span> 非平凡, 故 <span
+class="math inline">\(|Z(R)| = 2, 4, 8\)</span>. 有 <span
+class="math inline">\(Z(R) \unlhd R\)</span>.</p>
+<p>若 <span class="math inline">\(|Z(R)| = 8\)</span>, 则 <span
+class="math inline">\(Z(R) = R\)</span>, 有 <span
+class="math inline">\(R\)</span> 交换, 故 <span
+class="math inline">\(Z(R) \unrhd \{ e \}\)</span>, 且 <span
+class="math inline">\(Z(R) / \{ e \} \cong Z(R)\)</span> 交换.</p>
+<p>若 <span class="math inline">\(|Z(R)| = 4\)</span>, 有 <span
+class="math inline">\(R / Z(R)\)</span> 为 <span
+class="math inline">\(2\)</span> 阶群, 为素数阶循环群, 其交换. 且 <span
+class="math inline">\(Z(R)\)</span> 为 <span
+class="math inline">\(4\)</span> 阶群, 有 <span
+class="math inline">\(Z(R) \cong \mathbb{Z}_{4}\)</span> 或 <span
+class="math inline">\(Z(R) \cong \mathbb{Z}_{2} \oplus
+\mathbb{Z}_{2}\)</span>, 即 <span class="math inline">\(Z(R)\)</span>
+交换. 故 <span class="math inline">\(Z(R) \unrhd \{ e \}\)</span>, 且
+<span class="math inline">\(Z(R) / \{ e \} \cong Z(R)\)</span> 交换.</p>
+<p>若 <span class="math inline">\(|Z(R)| = 2\)</span>, 有 <span
+class="math inline">\(R / Z(R)\)</span> 为 <span
+class="math inline">\(4\)</span> 阶群, 其交换. 且 <span
+class="math inline">\(Z(R)\)</span> 为 <span
+class="math inline">\(2\)</span> 阶群, 为素数阶循环群, 即 <span
+class="math inline">\(Z(R)\)</span> 交换. 故 <span
+class="math inline">\(Z(R) \unrhd \{ e \}\)</span>, 且 <span
+class="math inline">\(Z(R) / \{ e \} \cong Z(R)\)</span> 交换. 综上,
+总存在次正规子群列满足条件. 故 <span class="math inline">\(G\)</span>
+可解.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 6</strong></p>
+<p>证明 <span class="math inline">\(6\)</span> 阶非交换群只有对称群
+<span class="math inline">\(S_{3}\)</span> (同构意义下).</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>设该群为 <span class="math inline">\(G\)</span>. 由 Sylow
+定理知其存在 <span class="math inline">\(3\)</span> 阶子群 <span
+class="math inline">\(P\)</span>, 其个数为 <span
+class="math inline">\(m\)</span>, 满足 <span class="math inline">\(m
+\equiv 1 \pmod{3}\)</span>, 且 <span class="math inline">\(m \mid
+2\)</span>. 即 <span class="math inline">\(m = 1\)</span>, 有 <span
+class="math inline">\(P \unlhd G\)</span>. 其为素数阶循环群, 记 <span
+class="math inline">\(P = \langle a \rangle\)</span>.</p>
+<p>又由 Sylow 定理知其存在 <span class="math inline">\(2\)</span> 阶子群
+<span class="math inline">\(Q\)</span>, 其个数为 <span
+class="math inline">\(n\)</span>, 满足 <span class="math inline">\(n
+\equiv 1 \pmod{2}\)</span>, 且 <span class="math inline">\(n \mid
+3\)</span>. 即 <span class="math inline">\(n = 1, 3\)</span>. 且 <span
+class="math inline">\(Q\)</span> 为素数阶循环群, 记 <span
+class="math inline">\(Q = \langle b \rangle\)</span>.</p>
+<p>若 <span class="math inline">\(n = 1\)</span>, 则有 <span
+class="math inline">\(Q \unlhd G\)</span>. 又 <span
+class="math inline">\(2, 3\)</span> 互素, 故 <span
+class="math inline">\(P \cap Q = \{ e \}\)</span>. 有 <span
+class="math inline">\(|PQ| = \frac{|P| \cdot |Q|}{|P \cap Q|} = 6 =
+|G|\)</span>. 又有 <span class="math inline">\(PQ \subseteq G\)</span>,
+则有 <span class="math inline">\(PQ = G\)</span>. 综上, 有 <span
+class="math inline">\(G \cong P \times Q \cong \mathbb{Z}_{3} \times
+\mathbb{Z}_{2} \cong \mathbb{Z}_{6}\)</span>, 为循环群, 则为交换群,
+舍去.</p>
+<p>若 <span class="math inline">\(n = 3\)</span>, 有 <span
+class="math inline">\(G / P\)</span> 为 <span
+class="math inline">\(2\)</span> 阶群. 又有 <span
+class="math inline">\(b \in G \setminus P\)</span>, 有 <span
+class="math inline">\(G / P = \{ P, cP \}\)</span>, 故 <span
+class="math inline">\(G\)</span> 可表示为</p>
+<p><span class="math display">\[ G = \{ e, a, a^{2}, b, ba, ba^{2} \}.
+\]</span></p>
+<p>又由 <span class="math inline">\(P \unlhd G\)</span> 得对 <span
+class="math inline">\(\forall g \in G, p \in P\)</span>, 有 <span
+class="math inline">\(gpg^{-1} \in P\)</span>, 故取 <span
+class="math inline">\(g = c, \ p = a\)</span>, 则 <span
+class="math inline">\(\exists s \ (0 \leq s &lt; 3)\)</span>, s.t. <span
+class="math inline">\(bab^{-1} = a^{s}\)</span>. 又有 <span
+class="math inline">\(|b| = 2\)</span>, 故 <span class="math inline">\(a
+= ba^{s}b = (bab^{-1})^{s}\)</span>, 则有 <span class="math inline">\(a
+= (a^{s})^{s} = a^{s^{2}} \implies a^{s^{2} - 1} = e\)</span>.</p>
+<p>故有 <span class="math inline">\(3 \mid (s^{2} - 1)\)</span>, 有
+<span class="math inline">\(s = 1, 2\)</span>. 若 <span
+class="math inline">\(s = 1\)</span>, 则有 <span
+class="math inline">\(ba = ab\)</span>, 故 <span
+class="math inline">\(G\)</span> 交换, 有 <span class="math inline">\(Q
+\unlhd G\)</span>, 与 <span class="math inline">\(n = 3\)</span>
+矛盾.</p>
+<p>故 <span class="math inline">\(s = 2\)</span>, 故有 <span
+class="math inline">\(bab = a^{2} = a^{-1}\)</span>. 故 <span
+class="math inline">\(G \cong D_{3}\)</span>. 取 <span
+class="math inline">\(a = (1 \ 2), \ b = (1 \ 2 \ 3)\)</span>, 验证有
+<span class="math inline">\(|a| = 2, \ |b| = 3, \ bab = a^{-1}\)</span>,
+故 <span class="math inline">\(S_{3} \cong D_{3} \cong G\)</span>,
+是唯一的非交换群.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 7</strong></p>
+<p>设 <span class="math inline">\(R\)</span> 是一个环, 且满足任意 <span
+class="math inline">\(a \in R\)</span>, 均有 <span
+class="math inline">\(a^{2} = a\)</span> (布尔环). 证明: <span
+class="math inline">\(R\)</span> 必为交换环, 且 <span
+class="math inline">\(\forall a \in R, \ a + a = 0\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>由题, 对 <span class="math inline">\(\forall a \in R\)</span>, 有
+<span class="math inline">\((a + a)^{2} = a + a\)</span>, 即</p>
+<p><span class="math display">\[2 (a + a)^{2} = a^{2} + a^{2} + a^{2} +
+a^{2} = a + a + a + a = a + a. \]</span></p>
+<p>则有 <span class="math inline">\(a + a = 0\)</span>. 又对 <span
+class="math inline">\(\forall a, b \in R\)</span>, 有 <span
+class="math inline">\((a + b)^{2} = a + b\)</span>, 即</p>
+<p><span class="math display">\[ (a + b)^{2} = (a + b)(a + b) = a^{2} +
+ba + ab + b^{2} = a + ba + ab + b = a + b. \]</span></p>
+<p>则有 <span class="math inline">\(ba + ab = 0\)</span>. 由 <span
+class="math inline">\(ba + ba = 0\)</span> 知 <span
+class="math inline">\(ba = ab\)</span>. 故 <span
+class="math inline">\(R\)</span> 为交换环.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 8</strong></p>
+<p>设 <span class="math inline">\(G\)</span> 是一个有限非交换单群, <span
+class="math inline">\(p\)</span> 是一个素数, 且 <span
+class="math inline">\(p\)</span> 整除 <span
+class="math inline">\(|G|\)</span>. 证明: <span
+class="math inline">\(G\)</span> 的 Sylow <span
+class="math inline">\(p\)</span>-子群不止一个.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>设 <span class="math inline">\(|G| = p^{t}s, \ (p, s) = 1\)</span>,
+则 Sylow <span class="math inline">\(p\)</span>-子群 <span
+class="math inline">\(P\)</span> 的阶为 <span class="math inline">\(|P|
+= p^{t}\)</span>. 若 <span class="math inline">\(P \neq G\)</span>, 则由
+<span class="math inline">\(G\)</span> 为单群知 <span
+class="math inline">\(P\)</span> 不是 <span
+class="math inline">\(G\)</span> 的正规子群. 故由 Sylow 定理知 <span
+class="math inline">\(G\)</span> 的 Sylow <span
+class="math inline">\(p\)</span>-子群不止一个.</p>
+<p>若 <span class="math inline">\(P = G\)</span>, 即 <span
+class="math inline">\(|G| = p^{t}\)</span>, 则 <span
+class="math inline">\(G\)</span> 为 <span
+class="math inline">\(p\)</span>-群, 其中心 <span
+class="math inline">\(Z(G)\)</span> 非平凡. 又有 <span
+class="math inline">\(Z(G) \unlhd G\)</span>, 且 <span
+class="math inline">\(G\)</span> 为单群, 故 <span
+class="math inline">\(Z(G) = G\)</span>, 故 <span
+class="math inline">\(G\)</span> 交换, 矛盾.</p>
+<p>综上, <span class="math inline">\(G\)</span> 的 Sylow <span
+class="math inline">\(p\)</span>-子群不止一个.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p>TODO: 继续刷!</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 9</strong></p>
+<p><span class="math inline">\(385\)</span> 阶 <span
+class="math inline">\(G\)</span> 群有一个指数为 <span
+class="math inline">\(5\)</span> 的子群 <span
+class="math inline">\(H\)</span>, 证明 <span class="math inline">\(H
+\unlhd G\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有 <span class="math inline">\(385 = 5 \times 7 \times 11\)</span>,
+故 <span class="math inline">\(|H| = 77\)</span>. 考虑 <span
+class="math inline">\((G / H)_{l} = \{ x_{1}H, \cdots, x_{5}H
+\}\)</span>, 共有 <span class="math inline">\(5\)</span> 个元素.</p>
+<p>考虑左平移作用 <span class="math inline">\(g(xH) = (gx)H \ (\forall g
+\in G, xH \in (G / H)_{l})\)</span>, 有 <span
+class="math inline">\(g_{1}(g_{2}(xH)) = (g_{1}g_{2})(xH), \ e(xH) =
+xH\)</span>, 故其为群作用.</p>
+<p>该群作用引导出一个群同态 <span class="math inline">\(\varphi \colon G
+\to S_{5}\)</span>, 其中 <span class="math inline">\(\varphi(g)(xH) =
+g(xH)\)</span>. 考虑 <span class="math inline">\(\operatorname{Ker}
+\varphi\)</span>. 对 <span class="math inline">\(\forall g \in
+\operatorname{Ker} \varphi\)</span>, 有 <span
+class="math inline">\(\varphi(g) = (1)\)</span>, 即 <span
+class="math inline">\(g(xH) = xH, \ \forall x \implies gH = H \implies g
+\in H\)</span>. 则有 <span class="math inline">\(\operatorname{Ker}
+\varphi \subseteq H\)</span>.</p>
+<p>由群同态定理知 <span class="math inline">\(G / \operatorname{Ker}
+\varphi \cong \operatorname{Im} \varphi\)</span>, 故有 <span
+class="math inline">\(\frac{385}{|\operatorname{Ker} \varphi|} \mid
+120\)</span>, 有 <span class="math inline">\(|\operatorname{Ker}
+\varphi| = 77, 120\)</span>. 又有 <span
+class="math inline">\(\operatorname{Ker} \varphi \subseteq H\)</span>,
+故有 <span class="math inline">\(|\operatorname{Ker} \varphi| =
+77\)</span>, 即 <span class="math inline">\(\operatorname{Ker} \varphi =
+H\)</span>, 故有 <span class="math inline">\(H \unlhd G\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 10 (每年都考这一块)</strong></p>
+<p>设 <span class="math inline">\(G\)</span> 为 <span
+class="math inline">\(2026\)</span> 阶群. 1. <span
+class="math inline">\(G\)</span> 是单群吗? 2. <span
+class="math inline">\(G\)</span> 是可解群吗? 3. 如果 <span
+class="math inline">\(G\)</span> 可交换, 求其所有同构类型.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<ol type="1">
+<li>有 <span class="math inline">\(2026 = 2 \times 1013\)</span>, 由
+Sylow 定理知其存在 <span class="math inline">\(1013\)</span> 阶子群
+<span class="math inline">\(P\)</span>, 有 <span
+class="math inline">\([G : P] = 2\)</span>, 故 <span
+class="math inline">\(P \unlhd G\)</span>, 且 <span
+class="math inline">\(P \neq G, \ P \neq \{ e \}\)</span>. 故 <span
+class="math inline">\(G\)</span> 不是单群;</li>
+<li>有 <span class="math inline">\(G \unrhd P\)</span>, 又 <span
+class="math inline">\(P\)</span> 为素数阶循环群, 故 <span
+class="math inline">\(P \unrhd \{ e \}\)</span>. 且有 <span
+class="math inline">\([G : P] = 2, |P| = 1013\)</span>, 均为素数, 故
+<span class="math inline">\(G / P, \ P / \{ e \} \cong P\)</span>
+均交换, 故 <span class="math inline">\(G\)</span> 可解;</li>
+<li>有 <span class="math inline">\(G \cong \mathbb{Z}_{2} \oplus
+\mathbb{Z}_{1013} \cong \mathbb{Z}_{2026}\)</span>.</li>
+</ol>
+<p><em>Q.E.D.</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0/" rel="tag"># 抽象代数</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/higher-differentiation/" rel="prev" title="「数学分析」浅谈多元函数的高阶全微分">
+                  <i class="fa fa-chevron-left"></i> 「数学分析」浅谈多元函数的高阶全微分
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css" integrity="sha256-GxdCIOyfxQ1OBfS99qAIJDoGK1ADuBsxhMTqXG82fAY=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js","integrity":"sha256-LVaMHPQ2zLqOc5rXSAfr4d1PIkEGNLyyUTDNPZmTtUw="}}</script>
+<script src="/js/third-party/comments/disqusjs.js"></script>
+
+</body>
+</html>
