@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">135</span>
+        <span class="site-state-item-count">136</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,6 +210,133 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp2022-galaxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/csp2022-galaxy/" class="post-title-link" itemprop="url">「CSP-S 2022」星战 - 图论 + Hash</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-04 21:26:41" itemprop="dateCreated datePublished" datetime="2022-11-04T21:26:41+08:00">2022-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8819">洛谷链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/p/3891">LibreOJ 链接</a></p>
+<p>在这一轮的星际战争中，我方在宇宙中建立了 <span
+class="math inline">\(n\)</span> 个据点，以 <span
+class="math inline">\(m\)</span> 个单向虫洞连接。我们把终点为据点 <span
+class="math inline">\(u\)</span> 的所有虫洞归为据点 <span
+class="math inline">\(u\)</span> 的虫洞。</p>
+<p>战火纷飞之中这些虫洞很难长久存在，敌人的打击随时可能到来。这些打击中的有效打击可以分为两类：</p>
+<ol type="1">
+<li>敌人会摧毁某个虫洞，这会使它连接的两个据点无法再通过这个虫洞直接到达，但这样的打击无法摧毁它连接的两个据点。</li>
+<li>敌人会摧毁某个据点，由于虫洞的主要技术集中在出口处，这会导致该据点的所有还未被摧毁的虫洞被一同摧毁。而从这个据点出发的虫洞则<strong>不会摧毁</strong>。</li>
+</ol>
+<p>注意：摧毁只会导致虫洞不可用，而不会消除它的存在。</p>
+<p>为了抗击敌人并维护各部队和各据点之间的联系，我方发展出了两种特种部队负责修复虫洞：</p>
+<ul>
+<li>A 型特种部队则可以将某个特定的虫洞修复。</li>
+<li>B 型特种部队可以将某据点的所有损坏的虫洞修复。</li>
+</ul>
+<p>考虑到敌人打击的特点，我方并未在据点上储备过多的战略物资。因此只要这个据点的某一条虫洞被修复，处于可用状态，那么这个据点也是可用的。</p>
+<p>我方掌握了一种苛刻的空间特性，利用这一特性我方战舰可以沿着虫洞瞬移到敌方阵营，实现精确打击。</p>
+<p>为了把握发动反攻的最佳时机，指挥部必须关注战场上的所有变化，为了寻找一个能够进行反攻的时刻。总指挥认为：</p>
+<ul>
+<li>如果从我方的任何据点出发，在选择了合适的路线的前提下，可以进行无限次的虫洞穿梭（可以多次经过同一据点或同一虫洞），那么这个据点就可以<strong>实现反击</strong>。</li>
+<li>为了使虫洞穿梭的过程连续，尽量减少战舰在据点切换虫洞时的质能损耗，当且仅当<strong>只有一个从该据点出发的虫洞可用</strong>时，这个据点可以<strong>实现连续穿梭</strong>。</li>
+<li>如果我方所有据点都可以<strong>实现反击</strong>，也都可以<strong>实现连续穿梭</strong>，那么这个时刻就是一个绝佳的<strong>反攻</strong>时刻。</li>
+</ul>
+<p>总司令为你下达命令，要求你根据战场上实时反馈的信息，迅速告诉他当前的时刻是否能够进行一次<strong>反攻</strong>。</p>
+<p>对于所有数据保证：<span class="math inline">\(1 \le n \le 5 \times
+{10}^5\)</span>，<span class="math inline">\(1 \le m \le 5 \times
+{10}^5\)</span>，<span class="math inline">\(1 \le q \le 5 \times
+{10}^5\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/csp2022-galaxy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1281,119 +1408,6 @@ class="math inline">\(1500\)</span>。</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1738d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/cf-1738d/" class="post-title-link" itemprop="url">「Codeforces 1738D」Permutation Addicts - 图论 + DFS</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-10-07 21:50:30 / 修改时间：22:22:03" itemprop="dateCreated datePublished" datetime="2022-10-07T21:50:30+08:00">2022-10-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1738/problem/D">Codeforces
-链接</a></p>
-<p>有一个 <span class="math inline">\(n\)</span> 个数的排列 <span
-class="math inline">\(a\)</span> 和一个数 <span class="math inline">\(k
-(0 \le k \le n)\)</span>，你计算出了一个有 <span
-class="math inline">\(n\)</span> 个数的序列 <span
-class="math inline">\(b\)</span>，计算方法如下：</p>
-<ul>
-<li>当 <span class="math inline">\(a_i \le k\)</span> 时，若存在 <span
-class="math inline">\(a_j &gt; k (1 \le j &lt; i)\)</span> 且 <span
-class="math inline">\(i - j\)</span> 最小，则 <span
-class="math inline">\(b_{a_i} = a_j\)</span>，否则 <span
-class="math inline">\(b_{a_i} = n + 1\)</span>；</li>
-<li>当 <span class="math inline">\(a_i &gt; k\)</span> 时，若存在 <span
-class="math inline">\(a_j \le k (1 \le j &lt; i)\)</span> 且 <span
-class="math inline">\(i - j\)</span> 最小，则 <span
-class="math inline">\(b_{a_i} = a_j\)</span>，否则 <span
-class="math inline">\(b_{a_i} = 0\)</span>。</li>
-</ul>
-<p>目前你知道 <span class="math inline">\(b\)</span> 与 <span
-class="math inline">\(n\)</span>，请求出任意一种 <span
-class="math inline">\(a\)</span> 及对应的 <span
-class="math inline">\(k\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/cf-1738d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1407,7 +1421,7 @@ class="math inline">\(k\)</span>。</p>
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.ong" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="复习一下作业题 QWQ 若有错欢迎指出.  PS: 为统一, 无论是证明题还是计算题, 均使用 &quot;证明&quot; 开头.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「常微分方程」ODE 期末复习习题集">
+<meta property="og:url" content="https://xenonwzh.github.io/ode-review/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="复习一下作业题 QWQ 若有错欢迎指出.  PS: 为统一, 无论是证明题还是计算题, 均使用 &quot;证明&quot; 开头.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-02T16:29:27.000Z">
+<meta property="article:modified_time" content="2026-01-05T16:43:15.105Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="常微分方程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/ode-review/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/ode-review/","path":"ode-review/","title":"「常微分方程」ODE 期末复习习题集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「常微分方程」ODE 期末复习习题集 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">136</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/ode-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「常微分方程」ODE 期末复习习题集 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「常微分方程」ODE 期末复习习题集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-03 00:29:27" itemprop="dateCreated datePublished" datetime="2026-01-03T00:29:27+08:00">2026-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-01-06 00:43:15" itemprop="dateModified" datetime="2026-01-06T00:43:15+08:00">2026-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>复习一下作业题 QWQ 若有错欢迎指出.</p>
+<blockquote>
+<p>PS: 为统一, 无论是证明题还是计算题, 均使用 "证明" 开头.</p>
+</blockquote>
+<span id="more"></span>
+<hr />
+<blockquote>
+<p><strong>例 1</strong></p>
+<p>下列方程的解在什么区域存在唯一:</p>
+<p><span class="math display">\[ y&#39; = \sqrt[3]{ y }. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>令 <span class="math inline">\(f(x, y) = \sqrt[3]{ y }\)</span>, 显然
+<span class="math inline">\(f(x, y)\)</span> 在 <span
+class="math inline">\(\mathbb{R}^{2}\)</span> 连续. 又有</p>
+<p><span class="math display">\[ \frac{ \partial f }{ \partial y } =
+\frac{1}{3}y^{-\frac{2}{3}}. \]</span></p>
+<p>故其在 <span class="math inline">\(y \neq 0\)</span> 时连续, 满足
+Lipschitz 条件, 故解唯一. 而当 <span class="math inline">\(y =
+0\)</span> 时, 至少存在 <span class="math inline">\(y \equiv 0\)</span>
+和 <span class="math inline">\(y = \frac{2\sqrt{ 6
+}}{3}x^{\frac{3}{2}}\)</span> 两种解, 不满足.</p>
+<p>综上, 区域为 <span class="math inline">\(\{ (x, y) : y \neq 0
+\}\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 2</strong></p>
+<p>设函数 <span class="math inline">\(f(x, y)\)</span> 在 <span
+class="math inline">\((x_{0}, y_{0})\)</span> 的邻域内是 <span
+class="math inline">\(y\)</span> 的非增函数, 试证初始值问题</p>
+<p><span class="math display">\[ y&#39; = f(x, y), \quad y(x_{0}) =
+y_{0} \]</span></p>
+<p>的解在此邻域内 <span class="math inline">\(x \geq x_{0}\)</span>
+一侧最多只有一个.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>若存在两个解, 设其为 <span class="math inline">\(y_{1},
+y_{2}\)</span>, 令 <span class="math inline">\(F(x) = (y_{1}(x) -
+y_{2}(x))^{2}\)</span>, 则有 <span class="math inline">\(F(x_{0}) =
+0\)</span>. 有</p>
+<p><span class="math display">\[ F&#39;(x) = 2(y_{1}(x) -
+y_{2}(x))(y_{1}&#39;(x) - y_{2}&#39;(x)) = 2(y_{1}(x) - y_{2}(x))(f(x,
+y_{1}(x)) - f(x, y_{2}(x))). \]</span></p>
+<p>又有 <span class="math inline">\(f(x, y)\)</span> 对 <span
+class="math inline">\(y\)</span> 非增, 则若对某个 <span
+class="math inline">\(x\)</span>, 有 <span
+class="math inline">\(y_{1}(x) &lt; y_{2}(x)\)</span>, 则有 <span
+class="math inline">\(f(x, y_{1}(x)) - f(x, y_{2}(x)) \geq 0\)</span>.
+同理, 有 <span class="math inline">\(y_{1}(x) - y_{2}(x)\)</span> 和
+<span class="math inline">\(f(x, y_{1}(x)) - f(x, y_{2}(x))\)</span>
+总是异号, 则 <span class="math inline">\(F&#39;(x) \leq 0, \ \forall x
+\geq x_{0}\)</span>.</p>
+<p>又有 <span class="math inline">\(F(x_{0}) = 0, \ F(x) \geq
+0\)</span>, 故 <span class="math inline">\(F(x) = 0, \ \forall x \geq
+x_{0}\)</span>, 即 <span class="math inline">\(y_{1} = y_{2}\)</span>.
+故最多只有一个解.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 3</strong></p>
+<p>求下列方程的通解:</p>
+<p><span class="math display">\[ \frac{\mathrm{d}y}{\mathrm{d}x} =
+\frac{x^{4} + y^{3}}{xy^{2}}. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>此为 Bernoulli 方程. 变形得</p>
+<p><span class="math display">\[ \frac{\mathrm{d}y}{\mathrm{d}x} -
+\frac{1}{x}y = x^{3}y^{-2}. \]</span></p>
+<p>令 <span class="math inline">\(z = y^{1 - (-2)} = y^{3}\)</span>,
+有</p>
+<p><span class="math display">\[
+\begin{align*}
+\frac{\mathrm{d}z^{\frac{1}{3}}}{\mathrm{d}x} -
+\frac{1}{x}z^{\frac{1}{3}} &amp;= x^{3}z^{-\frac{2}{3}} \\
+\frac{1}{3}z^{-\frac{2}{3}}\frac{\mathrm{d}z}{\mathrm{d}x} -
+\frac{1}{x}z^{\frac{1}{3}} &amp;= x^{3}z^{-\frac{2}{3}} \\
+\frac{\mathrm{d}z}{\mathrm{d}x} - 3x^{-1}z &amp;= 3x^{3} \\
+x^{-3}\frac{\mathrm{d}z}{\mathrm{d}x} - 3x^{-4}z &amp;= 3 \\
+\frac{\mathrm{d}}{\mathrm{d}x} zx^{-3} &amp;= 3 \\
+zx^{-3} &amp;= 3x + C \\
+z &amp;= 3x^{4} + Cx^{3}, &amp; C \in \mathbb{R}.
+\end{align*}
+\]</span></p>
+<p>故解为 <span class="math inline">\(y = \sqrt[3]{ 3x^{4} + Cx^{3} }, \
+C \in \mathbb{R}\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 4</strong></p>
+<p>求下列方程的通解:</p>
+<p><span class="math display">\[ \frac{\mathrm{d}y}{\mathrm{d}x} =
+\frac{x + 3y - 5}{x - y - 1}. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>解方程组 <span class="math inline">\(\begin{cases} x + 3y - 5 = 0 \\
+x - y - 1 = 0 \end{cases}\)</span>, 得 <span class="math inline">\((x,
+y) = (2, 1)\)</span>. 故令 <span class="math inline">\(X = x - 2, \ Y =
+y - 1\)</span>, 有</p>
+<p><span class="math display">\[
+\begin{align*}
+\frac{\mathrm{d}Y}{\mathrm{d}X} &amp;= \frac{X + 3Y}{X - Y} \\
+\frac{\mathrm{d}Y}{\mathrm{d}X} &amp;= \frac{1 + 3\frac{Y}{X}}{1 -
+\frac{Y}{X}}
+\end{align*}
+\]</span></p>
+<p>令 <span class="math inline">\(Z = \frac{Y}{X}\)</span>, 有</p>
+<p><span class="math display">\[
+\begin{align*}
+Z + X\frac{\mathrm{d}Z}{\mathrm{d}X} &amp;= \frac{1 + 3Z}{1 - Z} \\
+\frac{1}{X} \, \mathrm{d}X &amp;= \frac{1 - Z}{Z^{2} + 2Z + 1} \,
+\mathrm{d}Z \\
+\log|X| &amp;= \int \frac{1 - Z}{Z^{2} + 2Z + 1} \, \mathrm{d}Z \\
+\log|X| &amp;= \int \left( \frac{2}{(Z + 1)^{2}} - \frac{1}{Z + 1}
+\right) \, \mathrm{d}(Z + 1) \\
+\log|X| &amp;= -\frac{2}{Z + 1} - \log|Z + 1| + C \\
+\log|X| &amp;= -\frac{2X}{X + Y} - \log\left| \frac{X + Y}{X} \right| +
+C \\
+\log|X + Y| + \frac{2X}{X + Y} &amp;= C, &amp; C \in \mathbb{R}.
+\end{align*}
+\]</span></p>
+<p>故解为 <span class="math inline">\(\log|x + y - 3| + \frac{2x - 4}{x
++ y - 3} = C, \ C \in \mathbb{R}\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 5</strong></p>
+<p>验证下列方程是否为全微分方程, 并且对全微分方程求解:</p>
+<p><span class="math display">\[ xf(x^{2} + y^{2}) \, \mathrm{d}x +
+yf(x^{2} + y^{2}) \, \mathrm{d}y = 0. \]</span></p>
+<p>其中, <span class="math inline">\(f(u)\)</span> 是连续可微函数.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有 <span class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}y}
+xf(x^{2} + y^{2}) = \frac{\mathrm{d}}{\mathrm{d}x} yf(x^{2} + y^{2}) =
+2xy \frac{\mathrm{d} f(x^{2} + y^{2})}{\mathrm{d} (x^{2} +
+y^{2})}\)</span>, 故该方程为全微分方程.</p>
+<p>令 <span class="math inline">\(u = x^{2} + y^{2}\)</span>, 故 <span
+class="math inline">\(\mathrm{d}u = 2x \, \mathrm{d}x + 2y \,
+\mathrm{d}y\)</span>, 故</p>
+<p><span class="math display">\[ xf(x^{2} + y^{2}) \, \mathrm{d}x +
+yf(x^{2} + y^{2}) \, \mathrm{d}y = \frac{1}{2}f(u) \, \mathrm{d}u = 0
+\implies f(u) \, \mathrm{d}u = 0. \]</span></p>
+<p>令 <span class="math inline">\(F(u)\)</span> 满足 <span
+class="math inline">\(F&#39;(u) = f(u)\)</span>, 则有 <span
+class="math inline">\(F(u) = C, \ C \in \mathbb{R}\)</span>.</p>
+<p>代入, 得通解为 <span class="math inline">\(F(x^{2} + y^{2}) = C, \ C
+\in \mathbb{R}\)</span>, 其中 <span class="math inline">\(F&#39;(u) =
+f(u)\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 6</strong></p>
+<p>求下列方程的通解:</p>
+<p><span class="math display">\[ x(4y \, \mathrm{d}x + 2x \,
+\mathrm{d}y) + y^{3}(3y \, \mathrm{d}x + 5x \, \mathrm{d}y) = 0.
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>整理得 <span class="math inline">\((4xy + 3y^{4}) \, \mathrm{d}x +
+(2x^{2} + 5xy^{3}) \, \mathrm{d}y = 0\)</span>.
+易验证该方程不是全微分方程, 需寻找积分因子.</p>
+<p>令积分因子为 <span class="math inline">\(x^{m}y^{n}\)</span>, 则有
+<span class="math inline">\((4x^{m + 1}y^{n + 1} + 3x^{m}y^{n + 4}) \,
+\mathrm{d}x + (2x^{m + 2}y^{n} + 5x^{m + 1}y^{n + 3}) = 0\)</span>.</p>
+<p>故有 <span class="math inline">\(\frac{ \partial }{ \partial y }
+(4x^{m + 1}y^{n + 1} + 3x^{m}y^{n + 4}) = 4(n + 1)x^{m + 1}y^{n} + 3(n +
+4)x^{m}y^{n + 3}\)</span>, <span class="math inline">\(\frac{ \partial
+}{ \partial x } (2x^{m + 2}y^{n} + 5x^{m + 1}y^{n + 3}) = 2(m + 2)x^{m +
+1}y^{n} + 5(m + 1)x^{m}y^{n + 3}\)</span>.</p>
+<p>故有</p>
+<p><span class="math display">\[
+\begin{align*}
+4(n + 1)x^{m + 1}y^{n} + 3(n + 4)x^{m}y^{n + 3} &amp;= 2(m + 2)x^{m +
+1}y^{n} + 5(m + 1)x^{m}y^{n + 3} \\
+\implies &amp;
+\begin{cases}
+4(n + 1) = 2(m + 2) \\
+3(n + 4) = 5(m + 1)
+\end{cases}
+\end{align*}
+\]</span></p>
+<p>解得 <span class="math inline">\(m = 2, n = 1\)</span>. 故积分因子为
+<span class="math inline">\(x^{2}y\)</span>, 原方程为 <span
+class="math inline">\((4x^{3}y^{2} + 3x^{2}y^{5}) \, \mathrm{d}x +
+(2x^{4}y + 5x^{3}y^{4}) \, \mathrm{d}y = 0\)</span>. 则有</p>
+<p><span class="math display">\[
+M(x, y) = \int (4x^{3}y^{2} + 3x^{2}y^{5}) \, \mathrm{d}x + \varphi(y) =
+x^{4}y^{2} + x^{3}y^{5} + \varphi(y).
+\]</span></p>
+<p>故</p>
+<p><span class="math display">\[ \frac{ \partial M(x, y) }{ \partial y }
+= 2x^{4}y + 5x^{3}y^{4} + \varphi&#39;(y) = 2x^{4}y + 5x^{3}y^{4}
+\implies \varphi&#39;(y) = 0 \implies \varphi(y) = C. \]</span></p>
+<p>故有</p>
+<p><span class="math display">\[ \mathrm{d}M(x, y) = 0 \iff x^{4}y^{2} +
+x^{3}y^{5} = C, \ C \in \mathbb{R}. \]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 7</strong></p>
+<p>求下列微分方程的通解:</p>
+<p><span class="math display">\[ y(1 + xy) \, \mathrm{d}x + x(xy - 1) \,
+\mathrm{d}y = 0. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>该方程满足 <span class="math inline">\(yf(xy) \, \mathrm{d}x + xg(xy)
+\, \mathrm{d}y = 0\)</span> 的形式. 考虑变量替换 <span
+class="math inline">\(z = xy\)</span>, 有 <span class="math inline">\(y
+= \frac{z}{x}\)</span>, 故</p>
+<p><span class="math display">\[
+\begin{align*}
+\frac{z}{x}(1 + z) \, \mathrm{d}x + x(z - 1) \frac{x \, \mathrm{d}z - z
+\, \mathrm{d}x}{x^{2}} &amp;= 0 \\
+2z \, \mathrm{d}x + (z - 1)x \, \mathrm{d}z &amp;= 0 \\
+\frac{2}{x} \, \mathrm{d}x &amp;= \frac{1 - z}{z} \, \mathrm{d}z \\
+2\log|x| &amp;= \log|z| - z + C \\
+\log|x^{2}| &amp;= \log|xy| - xy + C \\
+\log\left| \frac{x}{y} \right| + xy &amp;= C, &amp; C \in \mathbb{R}.
+\end{align*}
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 8</strong></p>
+<p>求下列微分方程的通解 (<span class="math inline">\(p =
+\frac{\mathrm{d}y}{\mathrm{d}x}\)</span>):</p>
+<p><span class="math display">\[ 2y = p^{2} + 4px + 2x^{2}.
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>两边求导, 得</p>
+<p><span class="math display">\[
+\begin{align*}
+2p &amp;= 2pp&#39; + 4p + 4xp&#39; + 4x \\
+(2x + p)p&#39; + 2x + p &amp;= 0 \\
+(2x + p)(p&#39; + 1) &amp;= 0.
+\end{align*}
+\]</span></p>
+<p>故有 <span class="math inline">\(2x + p = 0\)</span> 或 <span
+class="math inline">\(p&#39; + 1 = 0\)</span>.</p>
+<p>若 <span class="math inline">\(2x + p = 0\)</span>, 有 <span
+class="math inline">\(p = -2x\)</span>, 带回, 有 <span
+class="math inline">\(y = -x^{2}\)</span>. 其为奇解.</p>
+<p>若 <span class="math inline">\(p&#39; + 1 = 0\)</span>, 有 <span
+class="math inline">\(p = -x + C\)</span>, 带入有 <span
+class="math inline">\(y = -\frac{x^{2}}{2} + Cx + \frac{C^{2}}{2}, \ C
+\in \mathbb{R}\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 9</strong></p>
+<p>用参数法求解下列微分方程 (<span class="math inline">\(p =
+\frac{\mathrm{d}y}{\mathrm{d}x}\)</span>):</p>
+<p><span class="math display">\[ p(x - \log p) = 1. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有 <span class="math inline">\(x = \frac{1}{p} + \log p\)</span>,
+故有 <span class="math inline">\(\mathrm{d}x = \mathrm{d}\left(
+\frac{1}{p} + \log p \right) = \frac{p - 1}{p^{2}} \,
+\mathrm{d}p\)</span>. 带入 <span class="math inline">\(\mathrm{d}y = p
+\, \mathrm{d}x\)</span>, 有</p>
+<p><span class="math display">\[ \mathrm{d}y = \left( 1 - \frac{1}{p}
+\right) \, \mathrm{d}p \iff y = p - \log p + C. \]</span></p>
+<p>故通解为 <span class="math inline">\(\begin{cases} x = \frac{1}{p} +
+\log p \\ y = p - \log p + C \end{cases}, \ p &gt; 0, C \in
+\mathbb{R}\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 10</strong></p>
+<p>用逐次迭代法求下列初始值问题的近似解:</p>
+<p><span class="math display">\[ \frac{\mathrm{d}y}{\mathrm{d}x} = x +
+y^{2}, \quad y(0) = 0. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有公式</p>
+<p><span class="math display">\[ y_{n + 1}(x) = y_{0} + \int_{x_{0}}^{x}
+f(t, y_{n}(t)) \, \mathrm{d}t. \]</span></p>
+<p>又有 <span class="math inline">\(x_{0} = y_{0} = 0\)</span>, 故有</p>
+<p><span class="math display">\[
+\begin{align*}
+y_{1}(x) &amp;= \int_{0}^{x} (t + 0^{2}) \, \mathrm{d}t =
+\frac{1}{2}x^2; \\
+y_{2}(x) &amp;= \int_{0}^{x} \left( t + \left( \frac{1}{2}t^{2}
+\right)^{2} \right) \, \mathrm{d}t = \frac{1}{2}x^{2} +
+\frac{1}{20}x^{5}; \\
+y_{3}(x) &amp;= \int_{0}^{x} \left( t + \left( \frac{1}{2}t^{2} +
+\frac{1}{20}t^{5} \right)^{2} \right) \, \mathrm{d}t = \frac{1}{2}x^{2}
++ \frac{1}{20}x^{5} + \frac{1}{160}x^{8} + \frac{1}{4400}x^{11}.
+\end{align*}
+\]</span></p>
+<p>故近似解为 <span class="math inline">\(y(x) \approx \frac{1}{2}x^{2}
++ \frac{1}{20}x^{5} + \frac{1}{160}x^{8} +
+\frac{1}{4400}x^{11}\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 11</strong></p>
+<p>给定方程</p>
+<p><span class="math display">\[ y&#39;&#39; + 8y&#39; + 7y = q(x),
+\]</span></p>
+<p>其中, <span class="math inline">\(q(x)\)</span> 在 <span
+class="math inline">\(0 \leq x \leq +\infty\)</span> 上连续,
+试利用常数变易公式证明:</p>
+<ol type="1">
+<li>若 <span class="math inline">\(q(x)\)</span> 在 <span
+class="math inline">\(0 \leq x \leq + \infty\)</span> 上有界,
+则此方程的每一个解在 <span class="math inline">\(0 \leq x &lt;
++\infty\)</span> 上有界;</li>
+<li>若 <span class="math inline">\(\lim\limits_{ x \to +\infty } q(x) =
+0\)</span>, 则此方程的每一个解 <span class="math inline">\(y(x)\)</span>
+都有 <span class="math inline">\(\lim\limits_{ x \to +\infty } y(x) =
+0\)</span>.</li>
+</ol>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>对于 <span class="math inline">\(y&#39;&#39; + 8y&#39; + 7y =
+0\)</span>, 设 <span class="math inline">\(\lambda^{2} + 8\lambda + 7 =
+0\)</span>, 解得 <span class="math inline">\(\lambda_{1} = -7, \
+\lambda_{2} = -1\)</span>. 故有通解 <span class="math inline">\(y =
+C_{1}e^{-7x} + C_{2}e^{-x}\)</span>.</p>
+<p>对于原方程, 设特解为 <span class="math inline">\(y^{*} =
+c_{1}(x)e^{-7x} + c_{2}(x)e^{-x}\)</span>, 则有</p>
+<p><span class="math display">\[
+\begin{cases}
+c_{1}&#39;(x)e^{-7x} + c_{2}&#39;(x)e^{-x} = 0 \\
+c_{1}&#39;(x)(e^{-7x})&#39; + c_{2}&#39;(x)(e^{-x})&#39; = q(x)
+\end{cases}
+\implies
+\begin{cases}
+c_{1}&#39;(x)e^{-7x} + c_{2}&#39;(x)e^{-x} = 0 \\
+-7c_{1}&#39;(x)e^{-7x} - c_{2}&#39;(x)e^{-x} = q(x)
+\end{cases}
+\]</span></p>
+<p>解得 <span class="math inline">\(c_{1}&#39;(x) =
+-\frac{e^{7x}}{6}q(x), \ c_{2}&#39;(x) = \frac{e^{x}}{6}q(x)\)</span>,
+则有特解</p>
+<p><span class="math display">\[ y^{*} = \frac{1}{6}\left( -e^{-7x}\int
+e^{7x}q(x) \, \mathrm{d}x + e^{-x}\int e^{x}q(x) \, \mathrm{d}x \right).
+\]</span></p>
+<p>故该方程有通解</p>
+<p><span class="math display">\[ y = C_{1}e^{-7x} + C_{2}e^{-x} +
+\frac{1}{6}\left( -e^{-7x}\int e^{7x}q(x) \, \mathrm{d}x + e^{-x}\int
+e^{x}q(x) \, \mathrm{d}x \right), \quad C_{1}, C_{2} \in \mathbb{R}.
+\]</span></p>
+<p>接下来解答问题:</p>
+<ol type="1">
+<li><p>若 <span class="math inline">\(q(x) = O(1)\)</span>, 则有</p>
+<p><span class="math display">\[
+\begin{align*}
+y &amp;= C_{1}e^{-7x} + C_{2}e^{-x} + \frac{1}{6}\left( -e^{-7x}\int
+e^{7x}q(x) \, \mathrm{d}x + e^{-x}\int e^{x}q(x) \, \mathrm{d}x \right)
+\\
+&amp;= C_{1}e^{-7x} + C_{2}e^{-x} + \frac{1}{6}\left(
+-e^{-7x}\int_{0}^{x} e^{7t}q(t) \, \mathrm{d}t + e^{-x}\int_{0}^{x}
+e^{t}q(t) \, \mathrm{d}t + O(1) \right) \\
+&amp;= C_{1}e^{-7x} + C_{2}e^{-x} + \frac{1}{6}\left( \int_{0}^{x}
+q(t)(-e^{-7x}e^{7t} + e^{-x}e^{t}) \, \mathrm{d}t + O(1) \right) \\
+&amp;= C_{1}e^{-7x} + C_{2}e^{-x} + \frac{1}{6}\left( O(1) \int_{0}^{x}
+(-e^{-7x}e^{7t} + e^{-x}e^{t}) \, \mathrm{d}t + O(1) \right) \\
+&amp;= C_{1}e^{-7x} + C_{2}e^{-x} + \frac{1}{6}\left( O(1) \left(
+-e^{-7x}\frac{e^{7x} - 1}{7} + e^{-x}(e^{x} - 1) \right) + O(1) \right)
+\\
+&amp;= C_{1}e^{-7x} + C_{2}e^{-x} + \frac{1}{6}\left( O(1) \left(
+\frac{e^{-7x}}{7} - e^{-x} + \frac{6}{7} \right) + O(1) \right).
+\end{align*}
+\]</span></p>
+<p>故此时 <span class="math inline">\(y\)</span> 在 <span
+class="math inline">\(0 \leq x &lt; +\infty\)</span> 有界;</p></li>
+<li><p>此时有 <span class="math inline">\(C_{1}e^{-7x} + C_{2}e^{-x} \to
+0 \ (x \to +\infty)\)</span>, 故只需考虑 <span
+class="math inline">\(e^{-7x}\int e^{7x}q(x) \, \mathrm{d}x\)</span> 和
+<span class="math inline">\(e^{-x}\int e^{x}q(x) \,
+\mathrm{d}x\)</span>.</p>
+<p>对于 <span class="math inline">\(e^{-7x}\int e^{7x}q(x) \,
+\mathrm{d}x\)</span>, 有</p>
+<p><span class="math display">\[ \lim\limits_{ x \to +\infty }
+\frac{\int e^{7x}q(x) \, \mathrm{d}x}{e^{7x}} = \lim\limits_{ x \to
++\infty } \frac{\left( \int e^{7x}q(x) \, \mathrm{d}x
+\right)&#39;}{(e^{7x})&#39;} = \lim\limits_{ x \to +\infty }
+\frac{e^{7x}q(x)}{7e^{7x}} = 0. \]</span></p>
+<p>对于 <span class="math inline">\(e^{-x}\int e^{x}q(x) \,
+\mathrm{d}x\)</span>, 有</p>
+<p><span class="math display">\[ \lim\limits_{ x \to +\infty }
+\frac{\int e^{x}q(x) \, \mathrm{d}x}{e^{x}} = \lim\limits_{ x \to
++\infty } \frac{\left( \int e^{x}q(x) \, \mathrm{d}x
+\right)&#39;}{(e^{x})&#39;} = \lim\limits_{ x \to +\infty }
+\frac{e^{x}q(x)}{e^{x}} = 0. \]</span></p>
+<p>故有 <span class="math inline">\(y \to 0 \ (x \to
++\infty)\)</span>.</p></li>
+</ol>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 12</strong></p>
+<p>利用消元法求解下列方程组的解:</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{\mathrm{d}x}{\mathrm{d}t} = y \\
+\frac{\mathrm{d}y}{\mathrm{d}t} = x
+\end{cases}
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有</p>
+<p><span class="math display">\[ \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}}
+= \frac{\mathrm{d}y}{\mathrm{d}t} = x \implies x&#39;&#39; - x = 0
+\]</span></p>
+<p>对 <span class="math inline">\(\lambda^{2} - 1 = 0\)</span>, 解得
+<span class="math inline">\(\lambda_{1} = -1, \lambda_{2} = 1\)</span>,
+故有通解 <span class="math inline">\(x = C_{1}e^{-t} +
+C_{2}e^{t}\)</span>. 带入原式, 有通解</p>
+<p><span class="math display">\[
+\begin{cases}
+x = C_{1}e^{-t} + C_{2}e^{t} \\
+y = -C_{1}e^{-t} + C_{2}e^{t}
+\end{cases}, \quad C_{1}, C_{2} \in \mathbb{R}.
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 13</strong></p>
+<p>利用首次积分法求下列方程组的通解:</p>
+<p><span class="math display">\[
+\begin{cases}
+x&#39; = \frac{y}{x - y} \\
+y&#39; = \frac{x}{x - y}
+\end{cases}
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{\frac{x}{x - y}}{\frac{y}{x -
+y}} = \frac{x}{y} \implies y \, \mathrm{d}y = x \, \mathrm{d}x \implies
+y^{2} - x^{2} = C_{1}.
+\]</span></p>
+<p>另外, 有</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}x}{\mathrm{d}t} - \frac{\mathrm{d}y}{\mathrm{d}t} =
+\frac{y - x}{x - y} = -1 \implies (\mathrm{d}x - \mathrm{d}y) =
+-\mathrm{d}t \implies x - y + t = C_{2}.
+\]</span></p>
+<p>两式联立, 得通解</p>
+<p><span class="math display">\[
+\begin{cases}
+x = \frac{1}{2}\left( \frac{C_{1}}{t - C_{2}} - t + C_{2} \right) \\
+y = \frac{1}{2}\left( \frac{C_{1}}{t - C_{2}} + t - C_{2} \right)
+\end{cases}, \quad C_{1}, C_{2} \in \mathbb{R}.
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 14</strong></p>
+<p>利用微分算子求方程</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t} = \begin{bmatrix} -2 &amp;
+1 \\ -3 &amp; 2 \end{bmatrix}\boldsymbol{x} + \begin{bmatrix} -e^{2t} \\
+6e^{2t} \end{bmatrix}. \]</span></p>
+<p>的通解.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>该方程即为</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{\mathrm{d}x}{\mathrm{d}t} = -2x + y - e^{2t} \\
+\frac{\mathrm{d}y}{\mathrm{d}t} = -3x + 2y + 6e^{2t}
+\end{cases}
+\]</span></p>
+<p>令 <span class="math inline">\(D =
+\frac{\mathrm{d}}{\mathrm{d}t}\)</span>, 有</p>
+<p><span class="math display">\[
+\begin{cases}
+Dx = -2x + y - e^{2t} \\
+Dy = -3x + 2y + 6e^{2t}
+\end{cases}
+\implies
+\begin{cases}
+(D + 2)x - y = e^{2t} \\
+3x + (D - 2)y = 6e^{2t}
+\end{cases}
+\implies
+(D^{2} - 1)x = 6e^{2t}.
+\]</span></p>
+<p>即 <span class="math inline">\(x&#39;&#39; - x = 6e^{2t}\)</span>. 有
+<span class="math inline">\(\lambda^{2} - 1 = 0\)</span> 的解为 <span
+class="math inline">\(\lambda_{1} = -1, \ \lambda_{2} = 1\)</span>, 故
+<span class="math inline">\(x&#39;&#39; - x = 0\)</span> 的通解为 <span
+class="math inline">\(x = C_{1}e^{-t} + C_{2}e^{t}\)</span>.</p>
+<p>对于特解, 有 <span class="math inline">\(x^{*} = Ae^{2t}\)</span>,
+带入得 <span class="math inline">\(A = 2\)</span>. 故原方程的通解为
+<span class="math inline">\(x = C_{1}e^{-t} + C_{2}e^{t} +
+2e^{2t}\)</span>. 带入原方程, 有通解</p>
+<p><span class="math display">\[
+\begin{cases}
+x = C_{1}e^{-t} + C_{2}e^{t} + 2e^{2t} \\
+y = C_{1}e^{-t} + 3C_{2}e^{t} + 9e^{2t}
+\end{cases}
+\implies
+\boldsymbol{x} = C_{1}e^{-t}\begin{bmatrix} 1 \\ 1 \end{bmatrix} +
+C_{2}e^{t}\begin{bmatrix} 1 \\ 3 \end{bmatrix} + e^{2t}\begin{bmatrix} 2
+\\ 9 \end{bmatrix}, \quad C_{1}, C_{2} \in \mathbb{R}.
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 15</strong></p>
+<p>设方程组为 <span
+class="math inline">\(\frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t} =
+A(t)\boldsymbol{x}\)</span>, 其中, <span class="math inline">\(A(t) =
+(a_{ij}(t))_{n \times n}\)</span>, <span
+class="math inline">\(a_{ij}(t)\)</span> 均在 <span
+class="math inline">\((-\infty, +\infty)\)</span> 连续. 若 <span
+class="math inline">\(\int_{t_{0}}^{+\infty} \sum \limits_{i=1}^{n}
+a_{ii}(t) \, \mathrm{d}t = +\infty\)</span>, 则该方程组中至少有一个解在
+<span class="math inline">\([t_{0}, +\infty)\)</span> 无界.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>取基解矩阵 <span class="math inline">\(\Phi(t)\)</span>, 有 <span
+class="math inline">\(|\Phi(t)| = W(t)\)</span>. 由 Liouville 公式知</p>
+<p><span class="math display">\[ W(t) = W(t_{0})\exp\left(
+\int_{t_{0}}^{t} \sum \limits_{i=1}^{n} a_{ii}(\tau) \, \mathrm{d}\tau
+\right). \]</span></p>
+<p>故有 <span class="math display">\[ \lim\limits_{ t \to +\infty }
+|W(t)| = |W(t_{0})| \lim_{ t \to +\infty } \exp\left( \int_{t_{0}}^{t}
+\sum \limits_{i=1}^{n} a_{ii}(\tau) \, \mathrm{d}\tau \right) =
+|W(t_{0})| \exp\left( \int_{t_{0}}^{+\infty} \sum \limits_{i=1}^{n}
+a_{ii}(\tau) \, \mathrm{d}\tau \right) = +\infty. \]</span></p>
+<p>反设所有解有界, 则 <span class="math inline">\(\Phi(t)\)</span>
+的每个元素有界, 故</p>
+<p><span class="math display">\[ W(t) = \sum\limits_{(i_{1} i_{2} \cdots
+i_{n})} (-1)^{\tau(i_{1} i_{2} \cdots i_{n})} \prod_{k=1}^{n} O(1) =
+n!(O(1))^{n} = O(1). \]</span></p>
+<p>即 <span class="math inline">\(W(t)\)</span> 有界, 矛盾.
+故至少有一解无界.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 16</strong></p>
+<p>用常数变易法求下列非齐次线性方程组的通解:</p>
+<p><span class="math display">\[
+\boldsymbol{x}&#39; = \begin{bmatrix} 0 &amp; -2 \\ 2 &amp; 0
+\end{bmatrix}\boldsymbol{x} + \begin{bmatrix} 3 \\ -2t \end{bmatrix}.
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>对于齐次方程 <span class="math inline">\(\boldsymbol{x}&#39; =
+\begin{bmatrix} 0 &amp; -2 \\ 2 &amp; 0
+\end{bmatrix}\boldsymbol{x}\)</span>, 令 <span class="math inline">\(A =
+\begin{bmatrix} 0 &amp; -2 \\ 2 &amp; 0 \end{bmatrix}\)</span>, 有 <span
+class="math inline">\(|A - \lambda I| = \lambda^{2} + 4 = 0\)</span>, 故
+<span class="math inline">\(\lambda = \pm 2i\)</span>.</p>
+<p>取 <span class="math inline">\(\lambda = 2i\)</span>, 有 <span
+class="math inline">\(A - \lambda I = \begin{bmatrix} -2i &amp; -2 \\ 2
+&amp; -2i \end{bmatrix} \to \begin{bmatrix} 1 &amp; -i \\ 0 &amp; 0
+\end{bmatrix}\)</span>, 故有特征向量 <span
+class="math inline">\(\boldsymbol{\alpha} = \begin{bmatrix} 1 \\ -i
+\end{bmatrix}\)</span>. 故有解</p>
+<p><span class="math display">\[
+\boldsymbol{\alpha}e^{\lambda t} = \begin{bmatrix} 1 \\ -i
+\end{bmatrix}(\cos 2t + i\sin 2t) = \begin{bmatrix} \cos 2t \\ \sin 2t
+\end{bmatrix} + i\begin{bmatrix} \sin 2t \\ -\cos 2t \end{bmatrix}.
+\]</span></p>
+<p>故有基解矩阵 <span class="math inline">\(\Phi(t) = \begin{bmatrix}
+\cos 2t &amp; \sin 2t \\ \sin 2t &amp; -\cos 2t
+\end{bmatrix}\)</span>.</p>
+<p>有 <span class="math inline">\(|\Phi(t)| = -1\)</span>, 故 <span
+class="math inline">\(\Phi^{-1}(t) = \frac{1}{-1}\begin{bmatrix} -\cos
+2t &amp; -\sin 2t \\ -\sin 2t &amp; \cos 2t \end{bmatrix} =
+\begin{bmatrix} \cos 2t &amp; \sin 2t \\ \sin 2t &amp; -\cos 2t
+\end{bmatrix}\)</span>.</p>
+<p>令特解为 <span class="math inline">\(\boldsymbol{x}^{*} =
+\Phi(t)\boldsymbol{u}(t)\)</span>, 故由常数变易公式得</p>
+<p><span class="math display">\[
+\boldsymbol{u}&#39;(t) = \Phi^{-1}(t)\boldsymbol{f}(t) = \begin{bmatrix}
+3\cos 2t - 2t\sin 2t \\ 3\sin 2t + 2t\cos 2t \end{bmatrix}.
+\]</span></p>
+<p>故</p>
+<p><span class="math display">\[
+\boldsymbol{u}(t) = \int \begin{bmatrix} 3\cos 2t - 2t\sin 2t \\ 3\sin
+2t + 2t\cos 2t \end{bmatrix} \, \mathrm{d}t = \begin{bmatrix} \sin 2t +
+t\cos 2t \\ t\sin 2t - \cos 2t \end{bmatrix}.
+\]</span></p>
+<p>故特解 <span class="math inline">\(\boldsymbol{x}^{*} =
+\Phi(t)\boldsymbol{u}(t) = \begin{bmatrix} t \\ 1
+\end{bmatrix}\)</span>. 故通解为</p>
+<p><span class="math display">\[
+\boldsymbol{x} = C_{1}\begin{bmatrix} \cos 2t \\ \sin 2t \end{bmatrix} +
+C_{2}\begin{bmatrix} \sin 2t \\ -\cos 2t \end{bmatrix} + \begin{bmatrix}
+t \\ 1 \end{bmatrix}, \quad C_{1}, C_{2} \in \mathbb{R}.
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 17</strong></p>
+<p>给定极坐标系下的微分方程</p>
+<p><span class="math display">\[ \frac{\mathrm{d}\theta}{\mathrm{d}t} =
+1, \quad \frac{\mathrm{d}r}{\mathrm{d}t} = \begin{cases} r^{2}\sin
+\frac{1}{r} &amp; r &gt; 0 \\ 0 &amp; r = 0 \end{cases} \]</span></p>
+<p>证明平衡点 <span class="math inline">\((0, 0)\)</span> 是稳定的,
+但不是渐近稳定的.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>对 <span class="math inline">\(\forall \varepsilon &gt; 0\)</span>,
+取足够大的 <span class="math inline">\(N\)</span>, s.t. <span
+class="math inline">\(r_{N} = \frac{1}{N\pi} &lt; \varepsilon\)</span>,
+取 <span class="math inline">\(\delta = r_{N} =
+\frac{1}{N\pi}\)</span>.</p>
+<p>若初始值 <span class="math inline">\(r(0) &lt; \delta\)</span>,
+则初始点位于 <span class="math inline">\(r = r_{N}\)</span> 一圆的内部,
+该圆为该系统的一条轨迹, 故从该圆内部出发的点无法超出该圆, 即达到 <span
+class="math inline">\(r = r_{N}\)</span> 外部. 故对 <span
+class="math inline">\(\forall t \geq 0\)</span>, 有 <span
+class="math inline">\(r &lt; r_{N} = \varepsilon\)</span>, 故稳定.</p>
+<p>而 <span class="math inline">\(N\)</span> 可足够大,
+故有无穷个足够小的圆, 即对每个轨迹, 总夹在两圆之间, 即 <span
+class="math inline">\(0 &lt; r_{M} &lt; r &lt; r_{N}, \ \forall t \geq
+0\)</span>. 故有 <span class="math inline">\(\lim\limits_{ t \to +\infty
+} r(t) \geq r_{M} &gt; 0\)</span>, 故不渐近稳定.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 18</strong></p>
+<p>试给出一阶微分方程</p>
+<p><span class="math display">\[ \frac{\mathrm{d}x}{\mathrm{d}t} = a(t)x
+\]</span></p>
+<p>的零解稳定或渐近稳定的充要条件.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>有</p>
+<p><span class="math display">\[ \frac{\mathrm{d}x}{x} = a(t) \,
+\mathrm{d}t \implies \log|x| - \log|x_{0}| = \int_{t_{0}}^{t} a(\tau) \,
+\mathrm{d}\tau \implies x = x_{0}\exp\left( \int_{t_{0}}^{t} a(\tau) \,
+\mathrm{d}\tau \right). \]</span></p>
+<p>对于零解稳定, 即对 <span class="math inline">\(\forall \varepsilon
+&gt; 0\)</span>, 均 <span class="math inline">\(\exists \delta &gt;
+0\)</span>, s.t. <span class="math inline">\(|x_{0}| &lt;
+\delta\)</span>, 则有</p>
+<p><span class="math display">\[ |x| = \left| x_{0}\exp\left(
+\int_{t_{0}}^{t} a(\tau) \, \mathrm{d}\tau \right) \right| &lt;
+\varepsilon. \]</span></p>
+<p>故当且仅当 <span class="math inline">\(\int_{t_{0}}^{t} a(\tau) \,
+\mathrm{d}\tau\)</span> 有上界时, 有 <span class="math inline">\(|x| =
+|x_{0}\exp(O(1))| = |x_{0}|O(1) &lt; \delta O(1)\)</span>. 此时取 <span
+class="math inline">\(\delta = \varepsilon\)</span> 即可.</p>
+<p>而当其无界时, <span class="math inline">\(\delta\)</span> 与 <span
+class="math inline">\(t\)</span> 无关, 故无法满足. 综上,
+零解稳定的充要条件是 <span class="math inline">\(\int_{t_{0}}^{t}
+a(\tau) \, \mathrm{d}\tau\)</span> 有上界.</p>
+<p>对于渐近稳定, 即 <span class="math inline">\(\exists \delta &gt;
+0\)</span>, s.t. <span class="math inline">\(|x_{0}| &lt;
+\delta\)</span>, 有</p>
+<p><span class="math display">\[ \lim\limits_{ t \to +\infty } |x| =
+\lim\limits_{ t \to +\infty } \left| x_{0}\exp\left( \int_{t_{0}}^{t}
+a(\tau) \, \mathrm{d}\tau \right) \right| = 0. \]</span></p>
+<p>故充要条件为 <span class="math inline">\(\lim\limits_{ t \to +\infty
+}\exp(\int_{t_{0}}^{t} a(\tau) \, \mathrm{d}\tau) = 0\)</span>, 即 <span
+class="math inline">\(\int_{t_{0}}^{+\infty} a(\tau) \, \mathrm{d}\tau =
+-\infty\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 19</strong></p>
+<p>确定下列方程组的周期解, 极限环及其稳定性:</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{\mathrm{d}x}{\mathrm{d}t} = y - \frac{x}{\sqrt{ x^{2} + y^{2}
+}}(x^{2} + y^{2} - 1) &amp; x^{2} + y^{2} \neq 0 \\
+\frac{\mathrm{d}y}{\mathrm{d}t} = -x - \frac{y}{\sqrt{ x^{2} + y^{2}
+}}(x^{2} + y^{2} - 1) \\
+\frac{\mathrm{d}x}{\mathrm{d}t} = 0, \ \frac{\mathrm{d}y}{\mathrm{d}t} =
+0 &amp; x^{2} + y^{2} = 0
+\end{cases}
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>令 <span class="math inline">\(x = r\cos\theta, y =
+r\sin\theta\)</span>, 有 <span class="math inline">\(x^{2} + y^{2} =
+r^{2}\)</span>, 则有</p>
+<p><span class="math display">\[
+\begin{align*}
+r\frac{\mathrm{d}r}{\mathrm{d}t} &amp;= x\frac{\mathrm{d}x}{\mathrm{d}t}
++ y\frac{\mathrm{d}y}{\mathrm{d}t} \\
+&amp;= x\left( y - \frac{x}{r}(r^{2} - 1) \right) + y\left( -x -
+\frac{y}{r}(r^{2} - 1) \right) \\
+&amp;= -r(r^{2} - 1).
+\end{align*}
+\]</span></p>
+<p>则有 <span class="math inline">\(\frac{\mathrm{d}r}{\mathrm{d}t} = 1
+- r^{2}\)</span>. 对于 <span class="math inline">\(\theta\)</span>,
+有</p>
+<p><span class="math display">\[
+\begin{align*}
+r^{2}\frac{\mathrm{d}\theta}{\mathrm{d}t} &amp;=
+x\frac{\mathrm{d}y}{\mathrm{d}t} - y\frac{\mathrm{d}x}{\mathrm{d}t} \\
+&amp;= x\left( -x - \frac{y}{r}(r^{2} - 1) \right) - y\left( y -
+\frac{x}{r}(r^{2} - 1) \right) \\
+&amp;= -r^{2}.
+\end{align*}
+\]</span></p>
+<p>故有 <span class="math inline">\(\frac{\mathrm{d}\theta}{\mathrm{d}t}
+= -1\)</span>.</p>
+<p>而对于周期解, 需 <span
+class="math inline">\(\frac{\mathrm{d}r}{\mathrm{d}t} = 0\)</span>, 故有
+<span class="math inline">\(r = 1\)</span>, 即有极限环 <span
+class="math inline">\(x^{2} + y^{2} = 1\)</span>.</p>
+<p>对于稳定性, 考察 <span
+class="math inline">\(\frac{\mathrm{d}r}{\mathrm{d}t}\)</span> 在 <span
+class="math inline">\(r = 1\)</span> 附近的符号:</p>
+<ul>
+<li>当 <span class="math inline">\(0 &lt; r &lt; 1\)</span> 时, <span
+class="math inline">\(1 - r^{2} &gt; 0\)</span>, 故 <span
+class="math inline">\(\frac{\mathrm{d}r}{\mathrm{d}t} &gt; 0\)</span>,
+<span class="math inline">\(r\)</span> 增大趋近于 <span
+class="math inline">\(1\)</span>;</li>
+<li>当 <span class="math inline">\(r &gt; 1\)</span> 时, <span
+class="math inline">\(1 - r^{2} &lt; 0\)</span>, 故 <span
+class="math inline">\(\frac{\mathrm{d}r}{\mathrm{d}t} &lt; 0\)</span>,
+<span class="math inline">\(r\)</span> 减小趋近于 <span
+class="math inline">\(1\)</span>;</li>
+</ul>
+<p>故无论 <span class="math inline">\(r\)</span> 的取值, 均趋向于 <span
+class="math inline">\(r = 1\)</span>, 故为稳定的极限环.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 20</strong></p>
+<p>证明下列系统不存在非零周期解:</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{\mathrm{d}x}{\mathrm{d}t} = x + y + x^{3} - y^{3} \\
+\frac{\mathrm{d}y}{\mathrm{d}t} = -x + 2y + x^{2}y + \frac{1}{3}y^{3}
+\end{cases}
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>取 <span class="math inline">\(P(x, y) = x + y + x^{3} - y^{3}, \
+Q(x, y) = -x + 2y + x^{2}y + \frac{1}{3}y^{3}\)</span>. 则有</p>
+<p><span class="math display">\[ \frac{ \partial P }{ \partial x } +
+\frac{ \partial Q }{ \partial y } = 1 + 3x^{2} + 2 + x^{2} + y^{2} =
+4x^{2} + y^{2} + 3. \]</span></p>
+<p>故散度正定. 由 Bendixson 判据得不存在非零周期解.</p>
+<p><em>Q.E.D.</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" rel="tag"># 常微分方程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/course-evaluation/" rel="prev" title="一句话评价本科专业课">
+                  <i class="fa fa-chevron-left"></i> 一句话评价本科专业课
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css" integrity="sha256-GxdCIOyfxQ1OBfS99qAIJDoGK1ADuBsxhMTqXG82fAY=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js","integrity":"sha256-LVaMHPQ2zLqOc5rXSAfr4d1PIkEGNLyyUTDNPZmTtUw="}}</script>
+<script src="/js/third-party/comments/disqusjs.js"></script>
+
+</body>
+</html>
