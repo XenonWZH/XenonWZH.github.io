@@ -237,8 +237,8 @@ a_1^{n - 1} &amp; a_2^{n - 1} &amp; \cdots &amp; a_n^{n - 1}
     <category term="题解" scheme="https://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
-    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     <category term="省选" scheme="https://xenonwzh.github.io/tags/%E7%9C%81%E9%80%89/"/>
+    <category term="图论" scheme="https://xenonwzh.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     <category term="Tarjan" scheme="https://xenonwzh.github.io/tags/Tarjan/"/>
     <category term="点双连通分量" scheme="https://xenonwzh.github.io/tags/%E7%82%B9%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/"/>
     <category term="割点" scheme="https://xenonwzh.github.io/tags/%E5%89%B2%E7%82%B9/"/>
@@ -558,8 +558,8 @@ n &lt; 10^{10^6}, 1 \leq c \leq 10^9\)</span></p>]]>
     <category term="OI" scheme="https://xenonwzh.github.io/categories/OI/"/>
     <category term="题解" scheme="https://xenonwzh.github.io/categories/OI/%E9%A2%98%E8%A7%A3/"/>
     <category term="OI" scheme="https://xenonwzh.github.io/tags/OI/"/>
-    <category term="数据结构" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     <category term="题解" scheme="https://xenonwzh.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
+    <category term="数据结构" scheme="https://xenonwzh.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     <category term="贪心" scheme="https://xenonwzh.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
     <category term="2010" scheme="https://xenonwzh.github.io/tags/2010/"/>
     <category term="NOI" scheme="https://xenonwzh.github.io/tags/NOI/"/>
