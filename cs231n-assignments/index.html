@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Assignments。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故不再进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">
+<meta property="og:url" content="https://xenonwzh.github.io/cs231n-assignments/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Assignments。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故不再进行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-30T08:20:03.000Z">
+<meta property="article:modified_time" content="2026-05-30T09:35:52.730Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="CS231n">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/cs231n-assignments/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/cs231n-assignments/","path":"cs231n-assignments/","title":"「CS231n：计算机视觉与深度学习」学习笔记（Assignments）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「CS231n：计算机视觉与深度学习」学习笔记（Assignments） | XenonWZH's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="XenonWZH's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#assignment-1"><span class="nav-number">1.</span> <span class="nav-text">Assignment 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#q4-higher-level-representations-image-features"><span class="nav-number">1.1.</span> <span class="nav-text">Q4: Higher Level
+Representations: Image Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#q5-training-a-fully-connected-network"><span class="nav-number">1.2.</span> <span class="nav-text">Q5: Training a fully
+connected network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#assignment-2"><span class="nav-number">2.</span> <span class="nav-text">Assignment 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#q1-batch-normalization"><span class="nav-number">2.1.</span> <span class="nav-text">Q1: Batch Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#q3-convolutional-neural-networks"><span class="nav-number">2.2.</span> <span class="nav-text">Q3: Convolutional Neural
+Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#q4-pytorch-on-cifar-10"><span class="nav-number">2.3.</span> <span class="nav-text">Q4: PyTorch on CIFAR-10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#q5-image-captioning-with-vanilla-rnns"><span class="nav-number">2.4.</span> <span class="nav-text">Q5: Image Captioning with
+Vanilla RNNs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#assignment-3"><span class="nav-number">3.</span> <span class="nav-text">Assignment 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#q4-clip-and-dino"><span class="nav-number">3.1.</span> <span class="nav-text">Q4: CLIP and Dino</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dino"><span class="nav-number">3.1.1.</span> <span class="nav-text">DINO</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">140</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener me" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cs231n-assignments/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「CS231n：计算机视觉与深度学习」学习笔记（Assignments） | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「CS231n：计算机视觉与深度学习」学习笔记（Assignments）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-05-30 16:20:03 / 修改时间：17:35:52" itemprop="dateCreated datePublished" datetime="2026-05-30T16:20:03+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本篇为《CS231n: Deep Learning for Computer
+Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了
+Assignments。</p>
+<p>主要参考了 <a
+target="_blank" rel="noopener" href="https://cs231n.stanford.edu/2025/index.html">CS231n 官网</a> 和 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1b1agz5ERC/">B
+站课程视频</a>，相关代码和作业实现可以参考 <a
+target="_blank" rel="noopener" href="https://github.com/XenonWZH/learn-dl/tree/main/CS231n">个人完成记录</a>。</p>
+<blockquote>
+<p><strong>前置说明</strong>：基础知识可参考 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411d7Ys/">《PyTorch深度学习实践》</a>。本文默认读者已掌握该课程的基础常识，故不再进行赘述。</p>
+</blockquote>
+<p>这一系列笔记为个人随手记录，<del>且是直接从 Obsidian
+强行复制过来的，不保证排版和可读性（）</del>。</p>
+<span id="more"></span>
+<hr />
+<p>导航链接：</p>
+<ul>
+<li><a href="/cs231n-1/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）">Lec 02 - Lec 04：线性分类器进行图像分类，正则化与优化，神经网络与反向传播</a></li>
+<li><a href="/cs231n-2/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">Lec 05 - Lec 11：基于 CNN 的图像分类，CNN 架构，循环神经网络，注意力机制与 Transformer，目标检测、图像分割与可视化，视频理解，大规模分布式训练</a></li>
+<li><a href="/cs231n-3/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">Lec 12 - Lec 17：自监督学习，生成模型（一），生成模型（二），三维视觉，视觉与语言，机器人学习</a></li>
+<li><strong><a href="/cs231n-assignments/" title="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">Assignments：作业合集</a></strong></li>
+</ul>
+<hr />
+<h1 id="assignment-1">Assignment 1</h1>
+<h2 id="q4-higher-level-representations-image-features">Q4: Higher Level
+Representations: Image Features</h2>
+<p>对图像进行处理，使用图像特征（例如使用方向梯度直方图（HOG）捕捉图像纹理
+/ 轮廓而忽略颜色，在 HSV
+颜色空间中使用色相通道捕捉图像的颜色信息（如颜色比例等））这些图像特征可量化成向量，代替原始像素，可有效地提升识别准确度。</p>
+<p>不过使用图像特征也会导致另外的问题，例如对于 CIFAR-10
+使用线性分类器，并用 HOG 和 Color Histogram
+优化时，两者可能独立地提取出了轮廓特征和颜色特征，并与分类进行对比，但实际上轮廓和颜色并不相互独立，故可能在轮廓和颜色均独立地符合某一分类时，该分类不一定是正确的分类，此时则会出现分类错误。</p>
+<h2 id="q5-training-a-fully-connected-network">Q5: Training a fully
+connected network</h2>
+<p>对于 loss
+和梯度的合理性检验，可采用小批量数据进行过拟合，观察是否可调参达到 100%
+training accuracy。</p>
+<p>一般来说，更复杂的网络对权重初始化尺度（initialization
+scale）更敏感（即梯度消失 / 爆炸）。</p>
+<p>且一般来说，若 loss 长时间不动，则说明梯度消失了，增大
+<code>weight_scale</code>
+可防止信号传回时过度衰减，从而避免梯度消失；但此时可能由于
+<code>weight_scale</code>
+增大导致原本的梯度传回时更大，导致梯度爆炸，此时则需减小
+<code>learing_rate</code>。</p>
+<hr />
+<h1 id="assignment-2">Assignment 2</h1>
+<h2 id="q1-batch-normalization">Q1: Batch Normalization</h2>
+<p>Batch Norm 在 batch
+较大时表现较好，但这也导致了当网络较为复杂时，由于硬件限制，batch
+大小有限，其应用效果较差。此时可用 Layer Norm 等其他归一化方法替代。</p>
+<p>与 Batch Norm 同理，Layer Norm 在特征维数很小时表现较差。</p>
+<h2 id="q3-convolutional-neural-networks">Q3: Convolutional Neural
+Networks</h2>
+<p>搭建一个新网络后，首要做的事情之一为对 loss 进行合理性检查。例如使用
+softmax 时，若未加入正则化，由于初始化权重的随机性，<span
+class="math inline">\(C\)</span> 分类的 loss 应为 <span
+class="math inline">\(\log C\)</span> 左右；加入正则化后，loss
+应略有上升。</p>
+<p>在 CNN
+中，若特征图是通过卷积得到的，由于每个通道由同一个卷积核生成，所以可以认为每个特征通道的统计量（例如均值、标准差）在不同图像之间、以及同一图像的不同位置上均是相对一致的，所以在此，Batch
+Norm 可修改为 <strong>空间批量归一化（Spatial Batch
+Normalization）</strong>，即对输入 <code>(N, C, H, W)</code>，对
+<code>C</code> 个通道分别计算均值和标准差（即遍历
+<code>N</code>、<code>H</code>、<code>W</code>）（相较于 Batch Norm
+在全连接网络中则对输入 <code>(N, D)</code>，在批次维度 <code>N</code>
+上进行归一化）。</p>
+<p>由文献 [1] 可知，当与卷积层一起使用时，Layer Norm 的表现不如 Batch
+Norm： &gt;
+对于全连接层，同一层中的所有隐藏单元往往对最终预测做出相似的贡献，因此对该层的输入总和进行重新中心化和重新缩放效果很好。然而，这种相似贡献的假设在卷积神经网络中不再成立。大量感受野位于图像边界附近的隐藏单元很少被激活，因此它们与同一层内的其余隐藏单元具有截然不同的统计特性。</p>
+<p>然而 Batch Norm 也有自身的依赖于 batch 大小的劣势，于是来自于文献
+[2]，可采用折中的方案：将每个样本的特征固定分为 <span
+class="math inline">\(G\)</span>
+组，然后对每个样本的每个组内的特征进行归一化。其被称为
+<strong>组归一化（Group Normalization）</strong>。</p>
+<p>该文献指出，即使每个组内假设特征的贡献是均等的，也不会带来太大的问题（在视觉分类任务中，特征本身天然地有分组结构（例如在传统机器学习中，方向梯度直方图（HOG）在每个局部空间块上计算出直方图后，每个块的直方图会先进行归一化，再拼接成最终的特征向量））。</p>
+<p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1607.06450">Ba, Jimmy Lei, Jamie
+Ryan Kiros, and Geoffrey E. Hinton. "Layer Normalization." stat 1050
+(2016): 21.</a> [2] <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1803.08494">Wu,
+Yuxin, and Kaiming He. "Group Normalization." arXiv preprint
+arXiv:1803.08494 (2018).</a></p>
+<h2 id="q4-pytorch-on-cifar-10">Q4: PyTorch on CIFAR-10</h2>
+<p>可使用 <code>nn.init</code>
+对层的权重进行初始化，例如下列代码实现了线性层的 Kaiming 初始化：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.fc1 = nn.Linear(input_size, hidden_size)</span><br><span class="line">nn.init.kaiming_normal_(<span class="variable language_">self</span>.fc1.weight)</span><br></pre></td></tr></table></figure></p>
+<p>可使用 <code>nn.Sequential</code>
+进行更为方便地进行模型的定义，其尤其适合简单模型，但灵活性不如
+<code>nn.Module</code>（<code>nn.Sequential</code>
+只可定义线性堆叠的前馈结构），例如如下为一个两层 MLP 的实现：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Flatten</span>(nn.Module):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">		<span class="keyword">return</span> flatten(x)</span><br><span class="line"></span><br><span class="line">model = nn.Sequential(</span><br><span class="line">	Flatten(),</span><br><span class="line">	nn.Linear(<span class="number">3</span> * <span class="number">32</span> * <span class="number">32</span>, hidden_layer_size),</span><br><span class="line">	nn.ReLU(),</span><br><span class="line">	nn.Linear(hidden_layer_size, <span class="number">10</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h2 id="q5-image-captioning-with-vanilla-rnns">Q5: Image Captioning with
+Vanilla RNNs</h2>
+<p>在 RNN 中，对于每个隐藏状态通过时序仿射层（Temporal Affine
+Layer）而得到的对词汇表的每个单词的预测分数，可通过 softmax 计算
+loss，并取平均。
+而由于每次输入的序列长度可能不一，且我们不希望让序列末尾填充的
+<code>&lt;NULL&gt;</code>（在序列末尾添加 <code>&lt;NULL&gt;</code>
+以使每个序列长度相等）影响 loss 和梯度，故可对 softmax
+上加入掩码（mask）（使末尾的 <code>&lt;NULL&gt;</code>
+不参与计算），形成时序 Softmax 损失（Temporal Softmax Loss）。</p>
+<p>对于图像描述的模型：</p>
+<ul>
+<li>训练：已有真实描述的文本，所以每个时间步都会把真实的单词传入
+RNN；</li>
+<li>测试：对于每个时间步，会在模型输出的词汇表概率分布中采样一个词，再将该词作为下一个时间步的输入。</li>
+</ul>
+<hr />
+<h1 id="assignment-3">Assignment 3</h1>
+<h2 id="q4-clip-and-dino">Q4: CLIP and Dino</h2>
+<h3 id="dino">DINO</h3>
+<p>DINO
+也是一种自监督学习方法，其通过引用了师生框架，避免了对大量负样本的需求，从而降低了类似于
+SimCLR 和 CLIP 对批次大小的高度依赖。</p>
+<p>其与 SimCLR
+类似，需最大化从同一图像变换出的两张图像的相似度，但其采用了两个不同的编码器，这两个编码器会以不同的方式进行训练。
+其中，<strong>学生网络</strong>（student
+network）通过反向传播进行更新，以匹配 <strong>教师网络</strong>（teacher
+network）的输出；而教师网络不会采用反向传播，而采用学生权重的
+<strong>指数移动平均</strong>（EMA）进行更新。
+这意味着教师网络更新更慢，为学生提供了稳定的学习目标。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+              <a href="/tags/CS231n/" rel="tag"># CS231n</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cs231n-3/" rel="prev" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">
+                  <i class="fa fa-angle-left"></i> 「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments disqusjs-container">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/styles/disqusjs.css" integrity="sha256-E4RzceSomICFY1PT/yDQrN8DsLSwdScDEiQAevHabp0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/disqusjs.es2015.umd.min.js","integrity":"sha256-gdbBT62HLzqWTnXQED3WQL/ItFCuWsA5gd6dM/wgdiE="}}</script>
+<script src="/js/third-party/comments/disqusjs.js" defer></script>
+
+</body>
+</html>

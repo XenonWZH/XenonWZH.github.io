@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 05 - Lec 11。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">
+<meta property="og:url" content="https://xenonwzh.github.io/cs231n-2/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 05 - Lec 11。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-30T08:13:55.000Z">
+<meta property="article:modified_time" content="2026-05-30T09:35:43.532Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="CS231n">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/cs231n-2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/cs231n-2/","path":"cs231n-2/","title":"「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11） | XenonWZH's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="XenonWZH's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-5-image-classification-with-cnns"><span class="nav-number">1.</span> <span class="nav-text">Lecture 5: Image
+Classification with CNNs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">线性分类器的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81"><span class="nav-number">1.2.</span> <span class="nav-text">图像特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.4.</span> <span class="nav-text">卷积神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%A0%E5%8C%96%E5%B1%82"><span class="nav-number">1.5.</span> <span class="nav-text">池化层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E7%A7%BB%E7%AD%89%E5%8F%98%E6%80%A7translation-equivariance"><span class="nav-number">1.6.</span> <span class="nav-text">平移等变性（translation
+equivariance）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-6-cnn-architectures"><span class="nav-number">2.</span> <span class="nav-text">Lecture 6: CNN Architectures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA-cnn"><span class="nav-number">2.1.</span> <span class="nav-text">构建 CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E5%B1%82normalization-layers"><span class="nav-number">2.1.1.</span> <span class="nav-text">归一化层（Normalization
+Layers）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout"><span class="nav-number">2.1.2.</span> <span class="nav-text">Dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.3.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vggnet"><span class="nav-number">2.1.4.</span> <span class="nav-text">VGGNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resnet"><span class="nav-number">2.1.5.</span> <span class="nav-text">ResNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.6.</span> <span class="nav-text">权重初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-cnn"><span class="nav-number">2.2.</span> <span class="nav-text">训练 CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">2.2.1.</span> <span class="nav-text">数据预处理：图像归一化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">2.2.2.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BAdata-augmentation"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">数据增强（Data Augmentation）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0transfer-learning"><span class="nav-number">2.2.3.</span> <span class="nav-text">迁移学习（Transfer Learning）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.4.</span> <span class="nav-text">超参数选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#step-1"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">Step 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#step-2"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">Step 2</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-7-recurrent-neural-networks"><span class="nav-number">3.</span> <span class="nav-text">Lecture 7: Recurrent Neural
+Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vanilla-rnn"><span class="nav-number">3.1.</span> <span class="nav-text">(Vanilla) RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rnn-%E7%9A%84%E8%AE%A1%E7%AE%97%E5%9B%BE"><span class="nav-number">3.2.</span> <span class="nav-text">RNN 的计算图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B5%8C%E5%85%A5%E5%B1%82embedding"><span class="nav-number">3.3.</span> <span class="nav-text">嵌入层（Embedding）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">3.4.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E5%85%83%E7%9A%84%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7"><span class="nav-number">3.5.</span> <span class="nav-text">神经元的可解释性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rnn-%E7%9A%84%E4%BC%98%E5%8A%A3"><span class="nav-number">3.6.</span> <span class="nav-text">RNN 的优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rnn-%E5%9C%A8-cv-%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">3.7.</span> <span class="nav-text">RNN 在 CV 中的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%B1%82-rnn"><span class="nav-number">3.8.</span> <span class="nav-text">多层 RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lstm"><span class="nav-number">3.9.</span> <span class="nav-text">LSTM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3-rnn"><span class="nav-number">3.10.</span> <span class="nav-text">现代 RNN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-8-attention-and-transformers"><span class="nav-number">4.</span> <span class="nav-text">Lecture 8: Attention and
+Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sequence-to-sequence-with-rnns-encoder---decoder"><span class="nav-number">4.1.</span> <span class="nav-text">Sequence to
+Sequence with RNNs: Encoder - Decoder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sequence-to-sequence-with-rnns-and-attention"><span class="nav-number">4.2.</span> <span class="nav-text">Sequence to
+Sequence with RNNs and Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%B1%82attention-layer"><span class="nav-number">4.3.</span> <span class="nav-text">注意力层（Attention Layer）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E5%B1%82self-attention-layer"><span class="nav-number">4.4.</span> <span class="nav-text">自注意层（Self-Attention
+Layer）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A9%E7%A0%81%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%B1%82masked-self-attention-layer"><span class="nav-number">4.5.</span> <span class="nav-text">掩码自注意力层（Masked
+Self-Attention Layer）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%A4%B4%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9Bmultiheaded-self-attention-layer"><span class="nav-number">4.6.</span> <span class="nav-text">多头自注意力（Multiheaded
+Self-Attention Layer）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">4.7.</span> <span class="nav-text">处理序列的三种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer"><span class="nav-number">4.8.</span> <span class="nav-text">Transformer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#transformer-block"><span class="nav-number">4.8.1.</span> <span class="nav-text">Transformer Block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transformer-1"><span class="nav-number">4.8.2.</span> <span class="nav-text">Transformer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vision-transformervit"><span class="nav-number">4.9.</span> <span class="nav-text">Vision Transformer（ViT）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer-%E7%9A%84%E5%BE%AE%E8%B0%83"><span class="nav-number">4.10.</span> <span class="nav-text">Transformer 的微调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-norm-transformer"><span class="nav-number">4.10.1.</span> <span class="nav-text">Pre-Norm Transformer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rmsnorm"><span class="nav-number">4.10.2.</span> <span class="nav-text">RMSNorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swiglu-mlp"><span class="nav-number">4.10.3.</span> <span class="nav-text">SwiGLU MLP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8Bmoe"><span class="nav-number">4.10.4.</span> <span class="nav-text">混合专家模型（MoE）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-9-object-detection-image-segmentation-visualizing-and-understanding"><span class="nav-number">5.</span> <span class="nav-text">Lecture
+9: Object Detection, Image Segmentation, Visualizing and
+Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E4%BB%BB%E5%8A%A1"><span class="nav-number">5.1.</span> <span class="nav-text">计算机视觉任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BBclassification"><span class="nav-number">5.1.1.</span> <span class="nav-text">分类（Classification）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2semantic-segmentation"><span class="nav-number">5.1.2.</span> <span class="nav-text">语义分割（Semantic
+Segmentation）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9Cfully-convolutional"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">完全卷积神经网络（Fully
+Convolutional）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E6%B1%A0unpooling"><span class="nav-number">5.1.2.1.1.</span> <span class="nav-text">解池（Unpooling）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#max-unpooling"><span class="nav-number">5.1.2.1.2.</span> <span class="nav-text">Max Unpooling</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E5%AD%A6%E4%B9%A0%E4%B8%8A%E9%87%87%E6%A0%B7learnable-upsampling"><span class="nav-number">5.1.2.1.3.</span> <span class="nav-text">可学习上采样（Learnable
+Upsampling）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u-net"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">U-Net</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%A3%80%E6%B5%8Bobject-detection"><span class="nav-number">5.1.3.</span> <span class="nav-text">对象检测（Object Detection）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#r-cnn"><span class="nav-number">5.1.3.1.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fast-r-cnn"><span class="nav-number">5.1.3.2.</span> <span class="nav-text">Fast R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BA%E5%9F%9F%E5%80%99%E9%80%89%E7%BD%91%E7%BB%9Cregion-proposal-network"><span class="nav-number">5.1.3.3.</span> <span class="nav-text">区域候选网络（Region
+Proposal Network）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E9%98%B6%E6%AE%B5%E5%AF%B9%E8%B1%A1%E6%A3%80%E6%B5%8B%E5%99%A8ssdyolo"><span class="nav-number">5.1.3.4.</span> <span class="nav-text">单阶段对象检测器（SSD、YOLO）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#detrobject-detection-with-transformers"><span class="nav-number">5.1.3.5.</span> <span class="nav-text">DETR（Object Detection
+with Transformers）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2instance-segmentation"><span class="nav-number">5.1.4.</span> <span class="nav-text">实例分割（Instance
+Segmentation）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mask-r-cnn"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">Mask R-CNN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E4%B8%8E%E7%90%86%E8%A7%A3"><span class="nav-number">5.2.</span> <span class="nav-text">可视化与理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E8%91%97%E6%80%A7saliency"><span class="nav-number">5.2.1.</span> <span class="nav-text">显著性（Saliency）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E6%BF%80%E6%B4%BB%E5%9B%BEclass-activation-mappingcam"><span class="nav-number">5.2.2.</span> <span class="nav-text">类激活图（Class Activation
+Mapping，CAM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E5%8A%A0%E6%9D%83%E7%B1%BBgradient-weighted-class-activation-mappinggrad-cam"><span class="nav-number">5.2.3.</span> <span class="nav-text">梯度加权类（Gradient-Weighted
+Class Activation Mapping，Grad-CAM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96-vit-%E6%9D%83%E9%87%8D"><span class="nav-number">5.2.4.</span> <span class="nav-text">可视化 ViT 权重</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-10-video-understanding"><span class="nav-number">6.</span> <span class="nav-text">Lecture 10: Video
+Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E5%88%86%E7%B1%BB"><span class="nav-number">6.1.</span> <span class="nav-text">视频分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%B8%A7%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9Csingle-frame-cnn"><span class="nav-number">6.1.1.</span> <span class="nav-text">单帧卷积神经网络（Single-Frame
+CNN）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%9A%E6%9C%9F%E8%9E%8D%E5%90%88late-fusion"><span class="nav-number">6.1.2.</span> <span class="nav-text">晚期融合（Late Fusion）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A9%E6%9C%9F%E8%9E%8D%E5%90%88early-fusion"><span class="nav-number">6.1.3.</span> <span class="nav-text">早期融合（Early Fusion）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-cnn"><span class="nav-number">6.1.4.</span> <span class="nav-text">3D CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">6.1.5.</span> <span class="nav-text">示例视频数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c3d"><span class="nav-number">6.1.6.</span> <span class="nav-text">C3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E6%B5%81optical-flow"><span class="nav-number">6.1.7.</span> <span class="nav-text">光流（Optical Flow）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%B5%81%E7%BD%91%E7%BB%9Ctwo-stream-networks"><span class="nav-number">6.1.8.</span> <span class="nav-text">双流网络（Two-Stream
+Networks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E6%A8%A1%E9%95%BF%E6%9C%9F%E6%97%B6%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-number">6.1.9.</span> <span class="nav-text">建模长期时序结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9Crecurrent-convolutional-network"><span class="nav-number">6.1.10.</span> <span class="nav-text">循环卷积神经网络（Recurrent
+Convolutional Network）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E7%A9%BA%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9Bspatio-temporal-self-attention%E9%9D%9E%E5%B1%80%E9%83%A8%E5%9D%97nonlocal-block"><span class="nav-number">6.1.11.</span> <span class="nav-text">时空自注意力（Spatio-Temporal
+Self-Attention，非局部块（Nonlocal Block））</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#i3d"><span class="nav-number">6.1.12.</span> <span class="nav-text">I3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vision-transformers-for-video"><span class="nav-number">6.1.13.</span> <span class="nav-text">Vision Transformers for
+Video</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">6.1.14.</span> <span class="nav-text">可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8Dtemporal-action-localization"><span class="nav-number">6.2.</span> <span class="nav-text">时序动作定位（Temporal
+Action Localization）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E7%A9%BA%E6%A3%80%E6%B5%8B%E4%BB%BB%E5%8A%A1spatio-temporal-detection"><span class="nav-number">6.3.</span> <span class="nav-text">时空检测任务（Spatio-Temporal
+Detection）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E9%9F%B3"><span class="nav-number">6.4.</span> <span class="nav-text">声音</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-11-large-scale-distributed-training"><span class="nav-number">7.</span> <span class="nav-text">Lecture 11: Large
+Scale Distributed Training</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gpu"><span class="nav-number">7.1.</span> <span class="nav-text">GPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gpu-%E9%9B%86%E7%BE%A4"><span class="nav-number">7.1.1.</span> <span class="nav-text">GPU 集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tpu"><span class="nav-number">7.1.2.</span> <span class="nav-text">TPU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-gpu-%E9%9B%86%E7%BE%A4%E4%B8%8A%E8%AE%AD%E7%BB%83"><span class="nav-number">7.2.</span> <span class="nav-text">在 GPU 集群上训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Cdp"><span class="nav-number">7.2.1.</span> <span class="nav-text">数据并行（DP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%88%86%E7%89%87%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Cfully-sharded-data-parallelismfsdp"><span class="nav-number">7.2.2.</span> <span class="nav-text">完全分片数据并行（Fully
+Sharded Data Parallelism，FSDP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E5%88%86%E7%89%87%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Chybrid-shared-data-parallelhsdp"><span class="nav-number">7.2.3.</span> <span class="nav-text">混合分片数据并行（Hybrid
+Shared Data Parallel，HSDP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E6%A3%80%E6%9F%A5%E7%82%B9activation-checkpointing"><span class="nav-number">7.2.4.</span> <span class="nav-text">激活检查点（Activation
+Checkpointing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-gpu-%E8%AE%AD%E7%BB%83"><span class="nav-number">7.2.5.</span> <span class="nav-text">多 GPU 训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6-flops-%E5%88%A9%E7%94%A8%E7%8E%87hardware-flpos-utilizationhfu"><span class="nav-number">7.2.6.</span> <span class="nav-text">硬件 FLOPs
+利用率（Hardware FLPOs Utilization，HFU）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B-flops-%E5%88%A9%E7%94%A8%E7%8E%87model-flops-utilizationmfu"><span class="nav-number">7.2.7.</span> <span class="nav-text">模型 FLOPs
+利用率（Model FLOPs Utilization，MFU）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B9%B6%E8%A1%8Ccp"><span class="nav-number">7.2.8.</span> <span class="nav-text">上下文并行（CP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%B9%B6%E8%A1%8Cpp"><span class="nav-number">7.2.9.</span> <span class="nav-text">流水线并行（PP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E5%B9%B6%E8%A1%8Ctp"><span class="nav-number">7.2.10.</span> <span class="nav-text">张量并行（TP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nd-%E5%B9%B6%E8%A1%8Cnd-parallelism"><span class="nav-number">7.2.11.</span> <span class="nav-text">ND 并行（ND Parallelism）</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">140</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener me" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cs231n-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11） | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-05-30 16:13:55 / 修改时间：17:35:43" itemprop="dateCreated datePublished" datetime="2026-05-30T16:13:55+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本篇为《CS231n: Deep Learning for Computer
+Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 05 -
+Lec 11。</p>
+<p>主要参考了 <a
+target="_blank" rel="noopener" href="https://cs231n.stanford.edu/2025/index.html">CS231n 官网</a> 和 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1b1agz5ERC/">B
+站课程视频</a>，相关代码和作业实现可以参考 <a
+target="_blank" rel="noopener" href="https://github.com/XenonWZH/learn-dl/tree/main/CS231n">个人完成记录</a>。</p>
+<blockquote>
+<p><strong>前置说明</strong>：基础知识可参考 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411d7Ys/">《PyTorch深度学习实践》</a>。本文默认读者已掌握该课程的基础常识，故不再进行赘述。</p>
+</blockquote>
+<p>这一系列笔记为个人随手记录，<del>且是直接从 Obsidian
+强行复制过来的，不保证排版和可读性（）</del>。</p>
+<span id="more"></span>
+<hr />
+<p>导航链接：</p>
+<ul>
+<li><a href="/cs231n-1/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）">Lec 02 - Lec 04：线性分类器进行图像分类，正则化与优化，神经网络与反向传播</a></li>
+<li><strong><a href="/cs231n-2/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">Lec 05 - Lec 11：基于 CNN 的图像分类，CNN 架构，循环神经网络，注意力机制与 Transformer，目标检测、图像分割与可视化，视频理解，大规模分布式训练</a></strong></li>
+<li><a href="/cs231n-3/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">Lec 12 - Lec 17：自监督学习，生成模型（一），生成模型（二），三维视觉，视觉与语言，机器人学习</a></li>
+<li><a href="/cs231n-assignments/" title="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">Assignments：作业合集</a></li>
+</ul>
+<hr />
+<h1 id="lecture-5-image-classification-with-cnns">Lecture 5: Image
+Classification with CNNs</h1>
+<h2 id="线性分类器的问题">线性分类器的问题</h2>
+<p>从视觉视角上，权重矩阵实则对应着图像模板，即每一行对应一个固定的模板。
+从几何视角上看，即为超平面划分空间。</p>
+<h2 id="图像特征">图像特征</h2>
+<p>见 Assignment 1。 不过该方法大多已过时，已经是十多年前的成就了。</p>
+<ul>
+<li>颜色直方图（Color
+Histogram）：关注图像的颜色分布，即统计每种颜色在像素中出现的次数；但该方法破坏了图像所有的空间结构；</li>
+<li>方向梯度直方图（HoG）：忽略颜色信息，只关注图像的结构信息，关注图中每个点的方向，以及该局部区域周围图像中边缘的局部方向。</li>
+</ul>
+<p>通常对一张图，会提取多种图像特征，并组合在一起使用（即将其连接为一个大的表示特征的向量）。</p>
+<p>图像特征由人为规定，很难说出哪些特征重要，哪些特征不重要，且很难写出完美的特征提取器，这就体现出了深度学习从数据中自主学习的优势。</p>
+<p>相较于设计特征提取器关注图像特征，设计神经网络则需关注网络架构。</p>
+<h2 id="神经网络">神经网络</h2>
+<p>如 2
+层神经网络的一个问题在于其破坏了图像的空间结构（即纯粹地展平为一维向量）。
+以此衍生，设计神经网络架构时如何进行网络以及计算原语（computational
+primitive）的设计以更好地尊重原本数据的原有特征（如图像的二维结构等等）。</p>
+<h2 id="卷积神经网络">卷积神经网络</h2>
+<p>即包含多个卷积层堆叠起来的神经网络。</p>
+<p>需要注意，<strong>卷积层是线性的（卷积层同样可以看作是点积）</strong>，所以在卷积层后加入激活函数是必要的。</p>
+<p>类似于线性分类器的学习结果可以可视化为图像模板，卷积层的学习结果则可视化为对于图像的小子块的空间结构特征提取模板（例如若用第一层卷积层举例，则可能包含识别对立颜色，识别轮廓等）。</p>
+<p>显而易见地，使用多个堆叠的卷积层时，会放大有效感受野（effective
+reception
+field，即多少个原始图像的像素会影响下游网络的一个元素）（感受野（reception
+field）则说的是上一层对下一层的影响），从而达到更好的效果。</p>
+<p>有时为了扩大有效感受野，可引入步幅（stride），即让卷积核每次移动步幅个像素，而不是每次移动一个像素，此时卷积层得到的结果维度会变小（除以步幅），此时有效感受野可指数型增长。</p>
+<h2 id="池化层">池化层</h2>
+<p>卷积层核池化层都是神经网络有效的进行内部下采样（downsample，即压低数据或特征空间的分辨率或采样率）的方法。
+下采样十分有用，是能在网络中更快地建立感受野的方法。</p>
+<p>相比于卷积层需要大量计算，池化层则所需的计算量很小。</p>
+<p>池化层所用的下采样机制有多种选择，最常用的为最大池化层。</p>
+<p>相交于卷积层可选用填充（padding），池化层通常不会使用填充（例如你在最大池化层后加了
+ReLU，那填充完全多余）。
+步幅为超参数，但通常不对其进行过多的调整（做池化是为了下采样，最常见就是
+<span class="math inline">\(2 \times 2\)</span> 步幅 <span
+class="math inline">\(2\)</span>，有时也会有 <span
+class="math inline">\(4 \times 4\)</span> 步幅 <span
+class="math inline">\(2\)</span>；不过绝大多数情况都是为了将采样率降低
+<span class="math inline">\(2\)</span> 倍）。</p>
+<p>通常不会接受不同尺寸图像的输入，若有则会事先进行图像调整（例如进行填充），或针对不同长宽比的图像独立地运行神经网络（即做纵横比分组，即同一批次的图像纵横比相同，但对整个训练可能会有不同纵横比的图像；该方法可见于一些更大型的系统）。</p>
+<p>池化层可能是非线性的，例如最大池化层是非线性的，所以在一些使用了最大池化层的
+CNN 中就不会在卷积周围使用 ReLU，但平均池就是线性的。</p>
+<h2 id="平移等变性translation-equivariance">平移等变性（translation
+equivariance）</h2>
+<p>卷积层核池化层都满足平移等变性，即若先对图像进行操作再进行平移，和先对图像进行平移再进行操作所得到的结果相同。</p>
+<p>平移等变性反映了其尊重图像的二维空间结构，同时也说明了关于图像的一个重要直觉：从图像提取的特征应只取决于图像的内容，而不是图像中的绝对位置。</p>
+<hr />
+<h1 id="lecture-6-cnn-architectures">Lecture 6: CNN Architectures</h1>
+<h2 id="构建-cnn">构建 CNN</h2>
+<h3 id="归一化层normalization-layers">归一化层（Normalization
+Layers）</h3>
+<p>例如 LayerNorm 层，其学习可用于对输入数据进行缩放 /
+平移的参数，并进行如下操作：</p>
+<ol type="1">
+<li>对输入数据进行归一化（均值位 <span
+class="math inline">\(0\)</span>，标准差为 <span
+class="math inline">\(1\)</span>）；</li>
+<li>使用学习到的参数对数据进行缩放 / 平移。</li>
+</ol>
+<p>所有的归一化层都会采用相同的方法，区别在于如何计算统计量（例如均值和方差）。其中，LayerNorm
+最常用（尤其在 Transformer 当中）。</p>
+<p>LayerNorm 对于数据 <span class="math inline">\(x \in \mathbb{R}^{N
+\times D}\)</span>，对每个样本分别计算均值和标准差 <span
+class="math inline">\(\mu, \sigma \in \mathbb{R}^{N \times
+1}\)</span>，我们同时有已学习的均值和标准差的参数 <span
+class="math inline">\(\gamma, \beta \in \mathbb{R}^{1 \times
+D}\)</span>，则会有该公式： <span class="math display">\[ y =
+\frac{\gamma (x - \mu)}{\sigma} + \beta. \]</span></p>
+<p>归一化也有其他方法，例如：</p>
+<ul>
+<li>Batch
+Norm：对每个通道分别计算均值和标准差，对批次中的所有数据取平均；</li>
+<li>Layer Norm：对每个样本的所有特征计算均值和标准差；</li>
+<li>Instance Norm：每个样本、每个通道单独计算均值和标准差；</li>
+<li>Group Norm：把通道分成 <span class="math inline">\(G\)</span>
+组，然后对于每个样本，在每组内计算均值和标准差。</li>
+</ul>
+<h3 id="dropout">Dropout</h3>
+<p>Dropout 是一种在 CNN
+中的正则化层，其旨在训练时添加随机性，而在测试时移除，从而让模型难以过拟合训练数据，增强模型的泛化能力。故其为有效的正则化方法。</p>
+<p>具体地，Dropout
+会在正向传播时以固定地概率随机地将该层地某些输出或激活值归零。 Dropout
+只有一个超参数，即为值被归零的概率。其中 <span
+class="math inline">\(0.5\)</span> 最为常用，<span
+class="math inline">\(0.25\)</span> 也比较常见。</p>
+<p>对于归零的神经元，其不需要参与计算，故可用掩码进行处理或利用掩码置零。</p>
+<p>Dropout
+更多的是一种经验性的结论。从直觉来讲，由于某些值会被随机丢弃，Dropout
+会迫使网络学习冗余的表征，使得模型不会过度依赖某些特征的存在或特征的共适应关系（例如如果看到爪子和耳朵就认为必定是猫），而需要学习更广泛的特征与输出的对应关系。</p>
+<p>在测试阶段，Dropout 则不会丢弃任何值，所以模型会在测试阶段表现更好。
+此外，如果设置了 <span class="math inline">\(50\%\)</span>
+的丢失率，换句话来说在测试阶段则会较训练阶段多 <span
+class="math inline">\(50\%\)</span>
+的值，则需要在测试阶段对数据进行缩放，即若 Dropout 概率为 <span
+class="math inline">\(p\)</span>，则需对数据乘上 <span
+class="math inline">\(1 -
+p\)</span>，从而保证训练阶段和测试阶段中各层输入的幅度不变。</p>
+<h3 id="激活函数">激活函数</h3>
+<p>对于 Sigmoid 函数 <span class="math inline">\(\sigma(x) = \frac{1}{1
++ e^{-x}}\)</span>，其有问题，导致在现在该函数不常作为激活函数：由于在
+<span class="math inline">\(x\)</span> 极大或极小时，Sigmoid
+变化极其平缓，导致在经过多层 Sigmoid
+后，反向传播的梯度会越来越小（可能会导致梯度消失问题）。</p>
+<p>而对 ReLU，其在正区域则没有该问题，且计算速度比 Sigmoid
+快，使其成为了现在最常用的激活函数。但对于任意的负输入，其梯度为零，这导致了
+ReLU 神经元死亡（Dead ReLUs）问题。</p>
+<p>为解决 ReLU 神经元死亡问题，产生了例如 GELU 和 SILU
+等新的激活函数，其均使图像在 <span class="math inline">\(x = 0\)</span>
+时仍保持平滑可导，有非零梯度，但在无穷远点仍收敛于 ReLU。</p>
+<p>在 CNN 中，对于几乎所有的线性操作（前馈层 /
+全连接层、卷积层）的后面，均会加上激活函数。</p>
+<h3 id="vggnet">VGGNet</h3>
+<p>一种相当经典的 CNN 结构，不过其就是为 AlexNet
+多添加了几层卷积层。其只涉及卷积层、最大池化层和全连接层。</p>
+<p>在其中使用了连续三层的 <span class="math inline">\(3 \times
+3\)</span> conv，其有效感受野等效于一个 <span class="math inline">\(7
+\times 7\)</span>
+conv，但其参数量更小，且是一个更加“非线性”的更复杂的模型，故其比直接使用更大的
+conv（例如 <span class="math inline">\(7 \times 7\)</span>
+conv）更好。</p>
+<h3 id="resnet">ResNet</h3>
+<p>其包含一个直觉，就是深层网络包含浅层网络，所以说深层网络的 acc
+比浅层网络低意味着深层网络更难优化，而不是深层网络比浅层网络差。
+所以需要设计结构，使得深层网络至少有表达出浅层网络的能力，即需要构造能够较为轻松地模拟浅层网络的模型。于是可得到残差连接。</p>
+<p>残差连接可以帮助建模更复杂的结构，从而同时使其能使用更多数据，故例如
+Transformer
+等大量模型均会使用该方法。而不加残差连接时，复杂模型容易陷入局部最小值困境，故而使其就算增加
+epoch 也无法很好地收敛。</p>
+<p>使用残差连接后，增加层数确实会提升训练效果，不过当层数达到一定程度后也会趋于收敛。</p>
+<p>在具体实现中，ResNet 结构如下：</p>
+<ul>
+<li>其为若干个残差块的堆叠；</li>
+<li>每个残差块包含 <span class="math inline">\(2\)</span> 个 <span
+class="math inline">\(3 \times 3\)</span> conv；</li>
+<li>周期性地，在若干模块后，将滤波器（卷积核）数量翻倍，并将空间维度减半（使用步长为
+<span class="math inline">\(2\)</span> 的卷积进行下采样）；</li>
+<li>在网络开头加一个较大的卷积层（<span class="math inline">\(7 \times
+7\)</span> conv）（起始层，stem），这更多是一个经验性的发现。</li>
+</ul>
+<h3 id="权重初始化">权重初始化</h3>
+<p>在开始训练前，需要设置合适的初始值（例如
+<code>W = std * np.random.randn(Din, Dout)</code>）。当初始值过小时（如
+<code>std = 0.01</code>），随着层数增加，数据的均值和标准差会越来越小；相应地，当初始值过大时（如
+<code>std = 0.05</code>），随着层数增加，数据的均值和标准差会越来越大（而理想状态下，均值和方差需保持基本相同，以使其更易被优化）。</p>
+<p>为解决该问题，在使用 ReLU 激活函数的情况下，可采用 <strong>Kaiming
+初始化</strong>，其与维度有关，初始化为
+<code>W = np.random.randn(Din, Dout) * np.sqrt(2/Din)</code>，即 <span
+class="math inline">\(\text{std} = \sqrt{ \frac{2}{\text{Din}}
+}\)</span>。 对于 CNN，初始化的 <code>Din</code>
+即为卷积核乘通道的大小。</p>
+<p>使用 LayerNorm
+确实可以解决权重初始化问题（就算使用较差的初始化权重，也能有较为可观的效果），但若想得到最好的性能，仍需
+Kaiming 初始化等良好的权重初始化。
+此外，层归一化是否有用也取决于具体问题（例如需要精确坐标的数学题，层归一化可能反而会影响性能（其丢失了输入空间位置的精确信息））。</p>
+<h2 id="训练-cnn">训练 CNN</h2>
+<h3 id="数据预处理图像归一化">数据预处理：图像归一化</h3>
+<ul>
+<li>减去每个通道的均值，并除以每个通道的标准差；</li>
+<li>需提前基于你的数据集计算每个通道的均值和标准差（例如直接用 ImageNet
+的均值和标准差预处理你的数据集，不过该操作依赖于你的数据集）。</li>
+</ul>
+<h3 id="正则化">正则化</h3>
+<p>可加入噪声从而协助正则化。</p>
+<ul>
+<li>训练阶段：引入随机性 <span class="math display">\[ y = f_{W}(x, z);
+\]</span></li>
+<li>测试阶段：对随机性取平均（有时采用近似计算） <span
+class="math display">\[ y = f(x) = E_{z}[f(x, z)] = \int p(z)f(x, z) \,
+\mathrm{d}z. \]</span></li>
+</ul>
+<p>Dropout 就是一个很典型的例子。</p>
+<h4 id="数据增强data-augmentation">数据增强（Data Augmentation）</h4>
+<p>在将图像输入模型前，会先进行数据增强，即对图像进行变换，使其与原图不同但仍可被类别识别。</p>
+<p>由于一张图经过变换后可得到多张不一样的图，该方法可有效地扩大数据集，从而提升泛化能力；但由于不会看到重复的样本，模型更难进行死记硬背，即增加模型的记忆难度，故会提高
+loss。</p>
+<p>数据增强可采用以下方法（针对图像分类）：</p>
+<ul>
+<li>水平翻转；</li>
+<li>调整大小和裁剪（例如进行随机裁剪后调整至目标尺寸，甚至进行二次裁剪）；
+<ul>
+<li>例如在 ResNet 中，先随机选择 <span class="math inline">\(L \in [256,
+480]\)</span>，然后以 <span class="math inline">\(L\)</span>
+为短边对图像进行大小调整，再随机选择 <span class="math inline">\(224
+\times 224\)</span> patch 进行裁剪。该方法成为
+<strong>随机大小裁剪</strong>（由于其效果很好，且保留了图像的相对分辨率，该方法应用广泛）；</li>
+<li>另一种方法为 <strong>测试时增强（Test Time
+Augmentation）</strong>：如果要追求最佳表现，可采取多个不同裁剪（不同的
+<span
+class="math inline">\(L\)</span>、不同的裁剪位置、翻转等），调整大小后运行模型，最后取预测结果的平均。通常来说，收益会逐渐递减，但通过该方法，可得到
+<span class="math inline">\(1\% \sim 2\%\)</span>
+左右的不错的性能提升。故若需要极致的性能追求，这是对计算机视觉问题的通用且有效的方法。</li>
+</ul></li>
+<li>颜色抖动（Color Jitter）：随机调整图像对比度和亮度；</li>
+<li>Cutout：直接对图像中的一部分区域覆盖黑色或灰色框（或者直接设为 <span
+class="math inline">\(0\)</span>）（从直觉上讲类似于摄像头被部分遮挡），该方法并不算特别常用，不过是一种能让程序在遮挡情况下更鲁棒的技巧，<strong>所以说对特定场景下也需选择合适的数据增强方法</strong>。</li>
+</ul>
+<p>对于数据增强方法，可尝试不同参数，并观察哪些对图像的分类分布仍保持一致，或从人类来看比较正常，那这就是个好参数。
+对于一个项目，可尝试多种不同的数据增强方法，观察哪些可让数据与原始数据不同，但仍可被人类较为容易地识别，那这就是一套较好地增强方法。</p>
+<h3 id="迁移学习transfer-learning">迁移学习（Transfer Learning）</h3>
+<p>对于 CNN
+的最后一层（即最后的线性分类层）之前，当将执行得到的向量与数据中的其他该分类的图像比较，应发现这些图像对应的向量较为接近，故可视为对于
+CNN 末端的向量的最邻近算法，故可以用 L2
+距离进行处理。换句话来说，在此不仅可用线性层进行分类，也可用 kNN
+进行分类。</p>
+<p>当数据量较小时（且数据仅有 <span class="math inline">\(C\)</span>
+种类别），可拉取一个在大数据集上已经训练好的模型（例如在 ImageNet
+上训练好的模型），并
+<strong>冻结最后一层之前的所有层，替换最后一层为你的数据集的类别数量
+<span
+class="math inline">\(C\)</span>。在训练模型时，只训练最后一层</strong>。
+从直觉上讲，冻结的层某种意义上可理解为“特征提取器”。</p>
+<p>当拥有更大的数据集时，从经验来说，效果最好的通常是
+<strong>训练整个模型，但初始化时使用超大规模数据集（如
+ImageNet）预训练的参数</strong>。</p>
+<p>这种操作可称为在较小的数据集上 <strong>微调</strong>
+模型，效果会比从头开始训练更好。 显而易见地，该种方法在原本数据集（如
+ImageNet）相似的数据集上表现最佳，而对于差异较大的数据集上表现会大幅下降。</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 41%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>与原数据集高度相似</th>
+<th>与原数据集差异很大</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>数据量极少</td>
+<td>在模型的最后一层为使用线性分类器</td>
+<td>尝试另外的模型，或收集更多数据</td>
+</tr>
+<tr class="even">
+<td>数据量充足</td>
+<td>微调模型的所有层</td>
+<td>微调模型的所有层，或直接从头开始训练</td>
+</tr>
+</tbody>
+</table>
+<p>深度学习框架会提供一些包含已经预训练的模型的“模型库”（Model
+Zoo），以下为链接：</p>
+<ul>
+<li>PyTorch: https://github.com/pytorch/vision</li>
+<li>Huggingface:
+https://github.com/huggingface/pytorch-image-models</li>
+</ul>
+<h3 id="超参数选择">超参数选择</h3>
+<h4 id="step-1">Step 1</h4>
+<ol type="1">
+<li>检查初始损失值；</li>
+<li>在少量样本上过拟合模型；</li>
+<li>找到能让损失下降的学习率。</li>
+</ol>
+<p>若模型训练困难，或初期无法正常运行，最好的方法（同时也是深度学习的默认调试策略）是
+<strong>过拟合小样本</strong>。
+此时只需要一个数据点，然后观察训练损失基本趋于零，此时模型应能记住单个训练样本。若无法做到该点，说明代码中存在错误，或没有选择适合该问题的模型类型。</p>
+<p>该方法同样可以寻找合适的学习率。</p>
+<h4 id="step-2">Step 2</h4>
+<ol start="4" type="1">
+<li>粗粒度超参网格搜索，训练约 <span class="math inline">\(1 \sim
+5\)</span> 个 epoch；</li>
+<li>细化超参网格，延长训练时间；</li>
+<li>观察损失与准确率曲线；</li>
+<li>回到第 5 步。</li>
+</ol>
+<p>接下来可尝试粗略的超参数网格，首先尝试并寻找能使 loss
+持续下降的学习率，然后进一步调整其他的超参数。</p>
+<p>对于学习率，沿用前一步验证过的模型结构，使用全部训练数据，开启小权重衰减，并找到一个能让
+loss 在约 100 次迭代内显著下降的学习率即可。 常用于尝试的学习率：<span
+class="math inline">\(10^{-1}, 10^{-2}, 10^{-3}, 10^{-4},
+10^{-5}\)</span>。</p>
+<p>除了 loss，也须注意 acc 曲线（包含 train acc 和 val acc）：</p>
+<ul>
+<li>若两者均上升时，说明需要继续训练；</li>
+<li>若 train acc 上升，val acc
+下降，说明发生了过拟合，故需要加入正则化或加入更多数据；</li>
+<li>若两者差距很小，说明欠拟合，故需要继续训练直到 train acc 开始偏离
+val acc，以达到 val acc 的最高点。</li>
+</ul>
+<p>从经验来说，<strong>在超参数空间种进行随机搜索的效果比在网格中使用预定的超参数集进行搜索好</strong>。
+对于原因，可理解为对于重要的超参数，随机搜索可进行更充分的搜索，而在固定搜索中，时间浪费在了反复检查不重要的超参数的几个值。故应当定义要尝试的范围，然后随机搜索该范围内的超参数，直至得到最佳模型。</p>
+<p>对于超参数选择，可以使用工具 Weights &amp; Biases、TensorBoard
+等等。</p>
+<hr />
+<h1 id="lecture-7-recurrent-neural-networks">Lecture 7: Recurrent Neural
+Networks</h1>
+<h2 id="vanilla-rnn">(Vanilla) RNN</h2>
+<p><span class="math display">\[
+\begin{cases}
+h_{t} = \tanh(W_{hh}h_{t - 1} + W_{xh}x_{t}) \\
+y_{t} = W_{hy}h_{t}
+\end{cases}
+\]</span> 其使用 <span class="math inline">\(\tanh\)</span>
+作为激活函数，其值位于 <span class="math inline">\([-1,
+1]\)</span>，且为零中心化的，可以表示正副值。</p>
+<p>对于 <span
+class="math inline">\(h_{0}\)</span>，可根据问题采用不同的策略进行初始化，也可以让模型学习它。</p>
+<h2 id="rnn-的计算图">RNN 的计算图</h2>
+<ul>
+<li>对于多对多（例如视频字幕生成），只需计算每个 <span
+class="math inline">\(y_{t}\)</span> 的 loss 然后相加；</li>
+<li>对于多对一（例如视频分类），只需计算最后的 <span
+class="math inline">\(y\)</span> 的 loss；</li>
+<li>对于一对多（例如生成图像的描述），只有 <span
+class="math inline">\(x_{1} = x\)</span>，需要填充 <span
+class="math inline">\(x_{t}\)</span>，根据情况可填入 <span
+class="math inline">\(0\)</span> 或者 <span class="math inline">\(y_{t -
+1}\)</span>。</li>
+</ul>
+<p>直接处理梯度需要存下整张计算图的激活值和梯度，可能会导致 GPU
+内存不足的问题。 在此可使用 <strong>截断时间反向传播</strong>（Truncated
+Backpropagation through time）：从开头开始，每次只选择 RNN
+中的一段进行处理，然后将最后得到的 <span
+class="math inline">\(h_{t}\)</span> 当成下一段的 <span
+class="math inline">\(h_{0}\)</span>（梯度不会向前一段传播），再进行同样的处理，以此类推。
+对于多对一，由于只需要看隐层，且当前隐层只看前一个隐层和当前输入，所以从输出从后往前依次求梯度即可。同样地，可以从结尾开始，每次选择一段进行处理，然后将该段的开头的隐藏状态设为前一段的结束的后一个隐藏状态，此时前一段的最后一个隐藏状态只需查询这一段开头的一个隐藏状态的梯度（故可仅储存该隐藏状态的梯度），以此类推即可。
+用该种方法，进行梯度计算则需要独立地分多次计算（取决于分的段数），而不是一次性全部计算。该技巧在分布式学习中也较为常见。</p>
+<h2 id="嵌入层embedding">嵌入层（Embedding）</h2>
+<p>嵌入层是可学习的。我们一般倾向于分散权重，故通过将其初始化为非常小的接近零的值（例如使用类似于
+Kaiming 初始化的方法），可使处理后的输入对优化更有利。</p>
+<h2 id="应用">应用</h2>
+<p>对于语言生成模型，若每次都使用贪心解码（即采用最大概率的输出），则可能只会不断生成相同的内容，故一般会基于分布进行采样（即由
+softmax 输出的概率分布来决定输出的概率）。
+也可采用其他方式，例如束搜索（尝试不同选项，并选择序列整体概率最高的）。</p>
+<h2 id="神经元的可解释性">神经元的可解释性</h2>
+<p>可通过查看 RNN
+中的单个激活值，并简单地与输入进行对应，从而分析模型跟踪的内容。部分神经元的激活值的意义可能难以解释，但部分神经元也有明确的可追踪的特征且高度可解释（例如引号检测器、行长度追踪单元、条件语句单元、注释检测器、代码深度单元等等）。</p>
+<h2 id="rnn-的优劣">RNN 的优劣</h2>
+<p>优势：</p>
+<ul>
+<li>可处理任意长度输入，无上下文长度限制；</li>
+<li>理论上可调用来自很早之前的时间步的信息；</li>
+<li>模型参数量不会随着序列增长而增加；</li>
+<li>所有时间步复用同一套权重，因此输入的处理逻辑具备权重对称性，</li>
+</ul>
+<p>劣势：</p>
+<ul>
+<li>需要递归计算，故计算速度慢（尤其在训练阶段）；</li>
+<li>实际上，由于隐藏状态大小固定，很难获取许久时间步之前的信息。</li>
+</ul>
+<h2 id="rnn-在-cv-中的应用">RNN 在 CV 中的应用</h2>
+<p>例如图像描述，先使用 CNN
+或其他编码器对图片进行编码，并将其和之前生成的文本传入
+RNN，只需输入一个起始字符 <code>&lt;START&gt;</code>
+以开始序列，知道结束字符 <code>&lt;END&gt;</code> 出现时终止即可。</p>
+<p>具体来说，类似于迁移学习，去除掉 CNN
+最后的线性分类层，然后将其作为隐藏状态的输入 <span
+class="math inline">\(v\)</span>。 在此，则需修改公式 <span
+class="math display">\[ h = \tanh(W_{xh}x + W_{hh}h) \]</span> 为 <span
+class="math display">\[ h = \tanh(W_{xh}x + W_{hh}h + W_{ih}v).
+\]</span> 以加入视觉成分。</p>
+<p>该种图像描述在部分场景下表现较好，但在一些物体分布情况下表现不佳（比如表现为认为场景中存在某个训练集中常见的物品的幻觉，而在实际图像中并不存在），这些大多由数据集偏差导致。</p>
+<p>另一个应用为视觉问答任务。一种方案为给问题说回答，然后看回答得怎么样；另一种方案为生成文本，然后看选项中每个词出现的概率，再将概率相乘得到整体答案的概率。
+更为常见的方案则是将问题和答案都输入模型，然后输出每个选项的概率，即做分类问题。</p>
+<p>另外的应用有：视觉对话任务、视觉导航任务等等。</p>
+<h2 id="多层-rnn">多层 RNN</h2>
+<p>类似于 CNN 或者全连接层，RNN
+也可对隐层进行深度的堆叠，此时隐藏状态则会形成一个网格。
+此时计算最终隐藏状态则需计算整个网格的值，可见在训练中该模型过程非常复杂，且效率不高。</p>
+<h2 id="lstm">LSTM</h2>
+<p>对 Vanilla RNN 进行变换： <span class="math display">\[ h_{t} =
+\tanh(W_{hh}h_{t - 1} + W_{xh}x_{t}) = \tanh\left( \begin{pmatrix}
+W_{hh} &amp; W_{hx} \end{pmatrix} \begin{pmatrix} h_{t - 1} \\ x_{t}
+\end{pmatrix} \right) = \tanh\left( W \begin{pmatrix} h_{t - 1} \\ x_{t}
+\end{pmatrix} \right). \]</span> 则有： <span class="math display">\[
+\frac{ \partial h_{t} }{ \partial h_{t - 1} } = \tanh&#39;(W_{hh}h_{t -
+1} + W_{xh}x_{t})W_{hh}. \]</span></p>
+<p>若对每个时间步均计算损失，则有： <span class="math display">\[ \frac{
+\partial L }{ \partial W } = \sum\limits_{t=1}^{T} \frac{ \partial L_{t}
+}{ \partial W }. \]</span> 且有： <span class="math display">\[ \frac{
+\partial L_{T} }{ \partial W } = \frac{ \partial L_{T} }{ \partial h_{T}
+} \frac{ \partial h_{T} }{ \partial h_{T - 1} } \cdots \frac{ \partial
+h_{1} }{ \partial W } = \frac{ \partial L_{T} }{ \partial h_{T} } \left(
+\prod\limits_{t=2}^{T} \frac{ \partial h_{t} }{ \partial h_{t - 1}
+}  \right) \frac{ \partial h_{1} }{ \partial W }. \]</span> 即： <span
+class="math display">\[ \frac{ \partial L_{T} }{ \partial W } = \frac{
+\partial L_{T} }{ \partial h_{T} } \left( \prod\limits_{t=2}^{T}
+\tanh&#39;(W_{hh}h_{t - 1} + W_{xh}x_{t}) \right) W_{hh}^{T - 1} \frac{
+\partial h_{1} }{ \partial W }. \]</span> 而对于 <span
+class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}x}
+\tanh(x)\)</span>，其值始终位于 <span class="math inline">\([0,
+1]\)</span>，且只有 <span class="math inline">\(x = 0\)</span> 时取
+<span class="math inline">\(1\)</span>，故可能导致梯度消失。</p>
+<p>但就算不采用激活函数（或采用不会发生梯度消失的激活函数），有： <span
+class="math display">\[ \frac{ \partial L_{T} }{ \partial W } = \frac{
+\partial L_{T} }{ \partial h_{T} } W_{hh}^{T - 1} \frac{ \partial h_{1}
+}{ \partial W }. \]</span> 其中有项 <span
+class="math inline">\(W_{hh}^{T - 1}\)</span>，故考虑 <span
+class="math inline">\(W_{hh}\)</span>，若其最大奇异值大于 <span
+class="math inline">\(1\)</span> 则可能导致梯度爆炸，若其最大奇异值小于
+<span class="math inline">\(1\)</span> 则可能导致梯度消失。
+对于梯度爆炸，可对梯度进行缩放而缓解（例如设上限为 <span
+class="math inline">\(M\)</span>，若梯度 <span
+class="math inline">\(\text{grad}\)</span> 有 <span
+class="math inline">\(\|\text{grad}\|_{2}^{2} &gt; M\)</span>，则只需
+<span class="math inline">\(\text{grad} \gets \text{grad} \cdot
+\frac{M}{\|\text{grad}\|_{2}^{2}}\)</span>
+即可），而对于梯度消失则需要修改 RNN 的结构了（这也是 Vanilla RNN
+不常用的原因）。</p>
+<p>使用 LSTM 可解决该问题，其公式为： <span class="math display">\[
+\begin{align*}
+\begin{pmatrix}
+i \\ f \\ o \\ g
+\end{pmatrix} &amp;= \begin{pmatrix}
+\sigma \\ \sigma \\ \sigma \\ \tanh
+\end{pmatrix} W \begin{pmatrix}
+h_{t - 1} \\ x_{t}
+\end{pmatrix} \\
+c_{t} &amp;= f \odot c_{t - 1} + i \odot g \\
+h_{t} &amp;= o \odot \tanh(c_{t})
+\end{align*}
+\]</span>
+其使用了四种门控来追踪不同值，而不是单一的隐藏状态，并使用这些值来调整隐藏状态，并确定通过不同路径传递的信息（有
+hidden state（<span class="math inline">\(h_{t}\)</span>）和 cell
+state（<span class="math inline">\(c_{t}\)</span>））。</p>
+<ul>
+<li><span class="math inline">\(i\)</span>：输入门（Input
+gate），决定是否向 cell 写入信息；</li>
+<li><span class="math inline">\(f\)</span>：遗忘门（Forget
+gate），决定遗忘多少先前时间步的信息；</li>
+<li><span class="math inline">\(o\)</span>：输出门（Output
+gate），决定输出到隐藏状态的比例；</li>
+<li><span class="math inline">\(g\)</span>：候选门（Gate gate），决定向
+cell 写入的隐藏状态。</li>
+</ul>
+<p>其中 <span class="math inline">\(h_{t}\)</span> 是正常的隐藏状态，而
+<span class="math inline">\(c_{t}\)</span>
+则像是一条高速公路，其可避免激活函数，故避免了梯度消失，且反向传播至
+<span class="math inline">\(c_{t - 1}\)</span> 时只与 <span
+class="math inline">\(f\)</span> 进行了 Hadamard
+积运算，故可更容易地传递更长期的信息。该方法在实践中效果显著。</p>
+<p>LSTM 相比 RNN 更容易保留跨多个时间步的信息（例如若 <span
+class="math inline">\(f = 1, i = 0\)</span>，则 cell
+中的信息会永久保存，但 Vanilla RNN 很难学到能保留长时间信息的 <span
+class="math inline">\(W_{h}\)</span>）。 LSTM
+并不保证完全解决梯度消失或梯度爆炸的问题，不过其也提供了一种更加简便的学习长距离依赖关系的方式。</p>
+<p>此外，LSTM 添加的新的输出 <span class="math inline">\(c_{t}\)</span>
+跳过了一些激活函数和层，这与 ResNet
+有些许类似（序列的长度与模型的深度相对比）。</p>
+<h2 id="现代-rnn">现代 RNN</h2>
+<p>相比于 Transformer，RNN
+优势在于其有无限的上下文长度。且在训练和推理时，计算量随序列长度线性增长（例如
+RWKV 和 Mamba 均在强调线性时间建模序列），而 Transformer 为平方级。</p>
+<hr />
+<h1 id="lecture-8-attention-and-transformers">Lecture 8: Attention and
+Transformers</h1>
+<h2 id="sequence-to-sequence-with-rnns-encoder---decoder">Sequence to
+Sequence with RNNs: Encoder - Decoder</h2>
+<p>例如在翻译问题（例如英语翻译为意大利语）中，其处理较为复杂（英语和意大利语的单词没有直接的关系，且输入序列和输出序列可能不等长等），可考虑使用编码器（encoder）解码器（decoder）进行处理。</p>
+<p>先将待翻译的内容输入编码器。编码器可用 RNN，其输入为英语文本 <span
+class="math inline">\(x_{t}\)</span> 和隐藏状态 <span
+class="math inline">\(h_{t - 1}\)</span>，得到新的隐藏状态 <span
+class="math inline">\(h_{t}\)</span>，以此处理可变长序列。计算完成后，编码器会汇总结果，并生成一个总结输入句子内容的向量
+<span class="math inline">\(c\)</span>，称为
+<strong>上下文向量</strong>（context
+vector）（有多种生成方法，例如可直接取最后一个隐藏状态 <span
+class="math inline">\(h_{T}\)</span>）。</p>
+<p>接下来需要将 <span class="math inline">\(c\)</span>
+翻译成目标语言的序列，故需要解码器。解码器也可用 RNN
+实现（通常有相同的的架构，但权重矩阵和参数不同），每个单元的输入有前一时间步的输出
+<span class="math inline">\(y_{t - 1}\)</span>、前一个隐藏状态 <span
+class="math inline">\(s_{t - 1}\)</span> 和上下文向量 <span
+class="math inline">\(c\)</span>，处理并输出当前的隐藏状态 <span
+class="math inline">\(s_{t}\)</span> 并生成输出 <span
+class="math inline">\(y_{t}\)</span>。最后只需整合输出 <span
+class="math inline">\(y_{t}\)</span> 即为结果。</p>
+<p>可见编码器和解码器只可用 <span class="math inline">\(c\)</span>
+这一固定长度的向量进行通信。故当翻译序列过长时，其存储的信息则完全不够。
+故需要修改网络架构，使其不限制于一个固定长度的向量。我们希望能在处理输出序列时，能回看整个输入序列。</p>
+<h2 id="sequence-to-sequence-with-rnns-and-attention">Sequence to
+Sequence with RNNs and Attention</h2>
+<p>设编码器仍为 RNN，且解码器的初始隐藏状态为 <span
+class="math inline">\(s_{0}\)</span>。得到解码器的隐藏状态后，需回看输入序列，计算
+<strong>对齐分数</strong>（alignment scores）（其为标量）： <span
+class="math display">\[ e_{t, i} = f_{\text{att}}(s_{t - 1}, h_{i}).
+\]</span> 其中 <span class="math inline">\(f_{\text{att}}\)</span>
+是一个线性层，表示该解码器状态与输入序列每个词的匹配程度。</p>
+<p>接下来，对 <span class="math inline">\(e_{t, i}\)</span> 进行 softmax
+计算，得到 <strong>注意力权重</strong>（attention weights） <span
+class="math inline">\(a_{t, i}\)</span>（有 <span
+class="math inline">\(0 &lt; a_{t, i} &lt; 1, \ \sum_{i} a_{t, i} =
+1\)</span>），其在给定解码器的隐藏状态下预测了输入单词的概率分布，于是可计算总结了编码器信息的上下文向量：
+<span class="math display">\[ c_{t} = \sum_{i} a_{t, i}h_{i}.
+\]</span></p>
+<p>最后则与无注意力的 RNN 相同，计算下一个编码器的隐藏状态： <span
+class="math display">\[ s_{t} = g_{U}(y_{t - 1}, s_{t - 1}, c_{t}).
+\]</span></p>
+<p>对于 <span class="math inline">\(s_{0}\)</span>
+的初始化，其有多种方法：可直接使用 <span
+class="math inline">\(h_{T}\)</span>
+或对其做一定的线性变换，也可直接设为零等等。</p>
+<p>其提供了一个直觉：通过上下文向量 <span
+class="math inline">\(c_{t}\)</span> 的调节，解码器 RNN
+可关注输入序列中其想要的不同部分。此被称为
+<strong>注意力机制</strong>（Attention）。
+且该过程全程可微，故不需对该网络进行监督，可直接用梯度下降进行端到端的学习。</p>
+<p>另外，可尝试对注意力权重进行可视化。其反映了网络在解决问题时关注的内容，从而可协助我们理解网路的处理过程。</p>
+<h2 id="注意力层attention-layer">注意力层（Attention Layer）</h2>
+<p>从上述步骤中进行抽象，Attention 实则为对于一系列的 data vectors（对应
+<span
+class="math inline">\(h\)</span>），对其我们需要生成多种输出，每个输出有一个
+query vector（对应 <span
+class="math inline">\(s\)</span>），我们需对其进行回溯，汇总 data vector
+为一个输出向量（对应 <span class="math inline">\(c\)</span>，在上述 RNN
+中为上下文向量）。</p>
+<p>即有：</p>
+<ul>
+<li>Query vector：<span class="math inline">\(q \in
+\mathbb{R}^{D_{Q}}\)</span>；</li>
+<li>Data vectors：<span class="math inline">\(X \in \mathbb{R}^{N_{X}
+\times D_{Q}}\)</span>。</li>
+</ul>
+<p>进行计算：</p>
+<ul>
+<li>相似度：<span class="math inline">\(e \in
+\mathbb{R}^{N_{X}}\)</span>，<span class="math inline">\(e_{i} =
+f_{\text{att}}(q, X_{i})\)</span>；</li>
+<li>注意力权重（Attention weights）：<span class="math inline">\(a =
+\operatorname{softmax}(e) \in \mathbb{R}^{N_{X}}\)</span>；</li>
+<li>Output vectors：<span class="math inline">\(y = \sum_{i} a_{i}X_{i}
+\in \mathbb{R}^{D_{X}}\)</span>。</li>
+</ul>
+<p>对于相似度的计算，为使 <span
+class="math inline">\(f_{\text{att}}\)</span>
+尽量简单且进行泛化，可使用点积。其作为相似度计算方式效果较好。
+但单纯使用点积会出问题。当向量维度较高时，点积的值更大（若设 <span
+class="math inline">\(\mathbf{E}q = \mathbf{E}X_{i} = 0\)</span>， <span
+class="math inline">\(\mathbf{Var}q = \mathbf{Var}X_{i} =
+1\)</span>，则有 <span class="math inline">\(\mathbf{Var}(q \cdot X_{i})
+= D_{Q}\)</span>，故 <span class="math inline">\(q \cdot X_{i} \sim
+\mathcal{O}(\sqrt{ D_{Q}
+})\)</span>），则指数函数处理后的值会更极端，使用 softmax
+计算会饱和，得到的概率分布过于尖锐，从而导致梯度消失。则需对点积进行缩放。
+则有： <span class="math display">\[ e_{i} = \frac{q \cdot X_{i}}{\sqrt{
+D_{Q} }}. \]</span></p>
+<p>进一步，对于更多的 query vectors <span class="math inline">\(Q \in
+\mathbb{R}^{N_{Q} \times D_{Q}}\)</span>，有： <span
+class="math display">\[
+\begin{align*}
+E &amp;= \frac{QX^{\top}}{\sqrt{ D_{Q} }} &amp;\in \mathbb{R}^{N_{Q}
+\times N_{X}}; \\
+A &amp;= \operatorname{softmax}(E, \text{dim} = 1) &amp;\in
+\mathbb{R}^{N_{Q} \times N_{X}}; \\
+Y &amp;= AX &amp;\in \mathbb{R}^{N_{Q} \times D_{X}}.
+\end{align*}
+\]</span></p>
+<p>上述公式中两次使用 <span class="math inline">\(X\)</span>
+的用途不同。进一步，可分开两次使用 <span
+class="math inline">\(X\)</span> 的用途，利用可学习的权重：</p>
+<ul>
+<li><span class="math inline">\(X \in \mathbb{R}^{N_{X} \times
+D_{X}}\)</span>；</li>
+<li>Key matrix：<span class="math inline">\(W_{K} \in \mathbb{R}^{D_{X}
+\times D_{Q}}\)</span>；</li>
+<li>Value matrix：<span class="math inline">\(W_{V} \in
+\mathbb{R}^{D_{X} \times D_{V}}\)</span>；</li>
+</ul>
+<p>将 <span class="math inline">\(X\)</span> 投影为：</p>
+<ul>
+<li>Keys：<span class="math inline">\(K = XW_{K} \in \mathbb{R}^{N_{X}
+\times D_{Q}}\)</span>；</li>
+<li>Values：<span class="math inline">\(V = XW_{V} \in \mathbb{R}^{N_{X}
+\times D_{V}}\)</span>。</li>
+</ul>
+<p>其中 keys 将与 query vectors 进行比较，以计算对齐分数；而 values
+则是进行线性组合，以生成该层输出的对象。其直觉为：输入（对 data vectors
+进行匹配）和输出（从 data vectors 进行获取输出）不一定相同。</p>
+<p>于是则有： <span class="math display">\[
+\begin{align*}
+E &amp;= \frac{QK^{\top}}{\sqrt{ D_{Q} }} &amp;\in \mathbb{R}^{N_{Q}
+\times N_{X}}; \\
+A &amp;= \operatorname{softmax}(E, \text{dim} = 1) &amp;\in
+\mathbb{R}^{N_{Q} \times N_{X}}; \\
+Y &amp;= AV &amp;\in \mathbb{R}^{N_{Q} \times D_{V}}.
+\end{align*}
+\]</span></p>
+<p>故该层有两个输入 <span class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Q\)</span>，两个可学习权重 <span
+class="math inline">\(W_{K}\)</span> 和 <span
+class="math inline">\(W_{V}\)</span>，一个输出 <span
+class="math inline">\(Y\)</span>。该层也可称为
+<strong>交叉注意力层</strong>（Cross-Attention Layer）。</p>
+<h2 id="自注意层self-attention-layer">自注意层（Self-Attention
+Layer）</h2>
+<p>对于自注意力层，只有一个输入 <span class="math inline">\(X \in
+\mathbb{R}^{N \times
+D_{\text{in}}}\)</span>，即只需处理一个输入向量集合。此时则需将 <span
+class="math inline">\(X\)</span> 分别投影至 query、key 和 value：</p>
+<ul>
+<li>Input vectors：<span class="math inline">\(X \in \mathbb{R}^{N
+\times D_{\text{in}}}\)</span>；</li>
+<li>Key matrix：<span class="math inline">\(W_{K} \in
+\mathbb{R}^{D_{\text{in}} \times D_{\text{out}}}\)</span>；</li>
+<li>Value matrix：<span class="math inline">\(W_{V} \in
+\mathbb{R}^{D_{\text{in}} \times D_{\text{out}}}\)</span>；</li>
+<li>Query matrix：<span class="math inline">\(W_{Q} \in
+\mathbb{R}^{D_{\text{in}} \times D_{\text{out}}}\)</span>。</li>
+</ul>
+<p>进行计算：</p>
+<ul>
+<li>Queries：<span class="math inline">\(Q = XW_{Q} \in \mathbb{R}^{N
+\times D_{\text{out}}}\)</span>；</li>
+<li>Keys：<span class="math inline">\(K = XW_{K} \in \mathbb{R}^{N
+\times D_{\text{out}}}\)</span>；</li>
+<li>Values：<span class="math inline">\(V = XW_{V} \in \mathbb{R}^{N
+\times D_{\text{out}}}\)</span>；</li>
+<li>Similarities：<span class="math inline">\(E =
+\frac{QK^{\top}}{\sqrt{ D_{\text{out}} }} \in \mathbb{R}^{N \times
+N}\)</span>；</li>
+<li>Attention weights：<span class="math inline">\(A =
+\operatorname{softmax}(E, \text{dim} = 1) \in \mathbb{R}^{N \times
+N}\)</span>；</li>
+<li>Output vector：<span class="math inline">\(Y = AV \in \mathbb{R}^{N
+\times D_{out}}\)</span>。</li>
+</ul>
+<p>实际上，对于 <span class="math inline">\(Q, K, V\)</span>
+的计算，可通过一个矩阵乘法直接计算（相交于多次小矩阵乘法，较少的大矩阵乘法计算更高效）：
+<span class="math display">\[ \begin{bmatrix} Q &amp; K &amp; V
+\end{bmatrix} = X \begin{bmatrix} W_{Q} &amp; W_{K} &amp; W_{V}
+\end{bmatrix}. \]</span></p>
+<p>对于一些有两种不同类型的数据的问题可用交叉注意力层，例如翻译、图像字幕生成等等；而对于只有一个数据源的问题，则用自注意层，例如图像分类（其只需比较图像自身部分）。</p>
+<p>显然，自注意力层具有 <strong>置换等变性</strong>（permutation
+equivariant）：<span class="math inline">\(F(\sigma(X)) =
+\sigma(F(X))\)</span>，即当打乱输入顺序，则输出顺序也会以相同的顺序打乱，其反映了自注意力不关心输入顺序。
+故为加入输入顺序，可在输入向量中加入额外的数据片段，称为
+<strong>位置嵌入</strong>（positional encoding）。</p>
+<h2
+id="掩码自注意力层masked-self-attention-layer">掩码自注意力层（Masked
+Self-Attention Layer）</h2>
+<p>有时，我们不希望在计算时，所有的输入都可以互相看见，这是可添加掩码进行实现：在计算对齐分数后，在需要阻断注意力的地方赋值为
+<span class="math inline">\(-\infty\)</span>，此时在 softmax
+处理后，该点的概率则为 <span class="math inline">\(0\)</span>，即输出
+<span class="math inline">\(Y\)</span> 不会依赖于该索引处的 value。</p>
+<p>使用此机制，可控制哪些输入可相互作用。例如在语言问题中，其递归输出，在输出第
+<span class="math inline">\(t\)</span> 个词时，只能看到前 <span
+class="math inline">\(t - 1\)</span>
+个词，为使在训练时让模型不可“偷看答案”，则可使用掩码进行处理。</p>
+<h2
+id="多头自注意力multiheaded-self-attention-layer">多头自注意力（Multiheaded
+Self-Attention Layer）</h2>
+<p>即对一个 <span class="math inline">\(X\)</span> 同时运行 <span
+class="math inline">\(H\)</span> 个独立的自注意力，得到 <span
+class="math inline">\(H\)</span> 个输出 <span
+class="math inline">\(Y\)</span>，然后对 <span
+class="math inline">\(Y\)</span>
+进行线性投影，融合来自各独立自注意层的输出数据，得到 <span
+class="math inline">\(O\)</span>。</p>
+<p>其可用矩阵乘法进行计算，即有：</p>
+<ul>
+<li>Input vectors：<span class="math inline">\(X \in \mathbb{R}^{N
+\times D}\)</span>；</li>
+<li>Key matrix：<span class="math inline">\(W_{K} \in \mathbb{R}^{D
+\times HD_{H}}\)</span>；</li>
+<li>Value matrix：<span class="math inline">\(W_{V} \in \mathbb{R}^{D
+\times HD_{H}}\)</span>；</li>
+<li>Query matrix：<span class="math inline">\(W_{Q} \in \mathbb{R}^{D
+\times HD_{H}}\)</span>；</li>
+<li>Output matrix：<span class="math inline">\(W_{O} \in
+\mathbb{R}^{HD_{H} \times D}\)</span>；</li>
+</ul>
+<p>其中有 <span class="math inline">\(H\)</span>
+个并行的层（也被称为注意力头），每个层都使用维度 <span
+class="math inline">\(D_{H}\)</span> 作为 qkv
+的维度，其被称为头维度（head dim），通常设置 <span
+class="math inline">\(D_{H} =
+\frac{D}{H}\)</span>，以使输入和输出维度保持一致。</p>
+<p>进行计算：</p>
+<ul>
+<li>Queries：<span class="math inline">\(Q = XW_{Q} \in \mathbb{R}^{H
+\times N \times D_{H}}\)</span>；</li>
+<li>Keys：<span class="math inline">\(K = XW_{K} \in \mathbb{R}^{H
+\times N \times D_{H}}\)</span>；</li>
+<li>Values：<span class="math inline">\(V = XW_{V} \in \mathbb{R}^{H
+\times N \times D_{H}}\)</span>；</li>
+<li>Similarities：<span class="math inline">\(E =
+\frac{QK^{\top}}{\sqrt{ D_{H} }} \in \mathbb{R}^{H \times N \times
+N}\)</span>；</li>
+<li>Attention weights：<span class="math inline">\(A =
+\operatorname{softmax}(E, \text{dim} = 1) \in \mathbb{R}^{H \times N
+\times N}\)</span>；</li>
+<li>Head outputs：<span class="math inline">\(Y = AV \in \mathbb{R}^{H
+\times N \times D_{H}} \cong \mathbb{R}^{N \times
+HD_{H}}\)</span>；</li>
+<li>Outputs：<span class="math inline">\(O = YW_{O} \in \mathbb{R}^{N
+\times D}\)</span></li>
+</ul>
+<p>其可使计算量和参数增大，并增大该层的容量和复杂度，从而具有更强的能力。</p>
+<h2 id="处理序列的三种方法">处理序列的三种方法</h2>
+<table>
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>RNN</th>
+<th>卷积</th>
+<th>自注意力</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>优势</td>
+<td>理论上对长序列友好，时间复杂度和空间复杂度均为 <span
+class="math inline">\(O(n)\)</span></td>
+<td>可并行计算</td>
+<td>可处理长序列，任意向量可互相查看，故一层即有可观的效果；且其高度并行化</td>
+</tr>
+<tr class="even">
+<td>劣势</td>
+<td>无法并行计算</td>
+<td>难以构建大的感受野，对于非常长的序列则需非常大的卷积核，或堆叠多个卷积核</td>
+<td>计算成本高，其时间复杂度和空间复杂度均为 <span
+class="math inline">\(O(n^{2})\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>对于自注意力的计算成本，可通过使用更多的 GPU 解决。且 <span
+class="math inline">\(O(n^{2})\)</span>
+意味着更大的计算量，从而具备更强的推理及处理能力，故其不一定是劣势。</p>
+<p>事实证明，仅用注意力就可解决大部分问题。</p>
+<h2 id="transformer">Transformer</h2>
+<h3 id="transformer-block">Transformer Block</h3>
+<p>Transformer Block 具有如下结构：</p>
+<ol type="1">
+<li>输入向量组 <span class="math inline">\(x\)</span>；</li>
+<li>对所有向量执行多头自注意力；</li>
+<li>从 1 末尾进行残差连接；</li>
+<li>层归一化；</li>
+<li>对每个向量独立地执行 MLP（也被称为 FFN，其为 2 层神经网络）；</li>
+<li>从 4 末尾进行残差连接；</li>
+<li>层归一化；</li>
+<li>输出向量组 <span class="math inline">\(y\)</span>。</li>
+</ol>
+<p>其中，MLP 赋予了对向量独立处理的能力。</p>
+<h3 id="transformer-1">Transformer</h3>
+<p>Transformer 即由多个 Transformer Block 堆叠实现。</p>
+<p>对于编码器，即为多个 Transformer Block 的堆叠（在堆叠前先对输入 <span
+class="math inline">\(x\)</span>
+进行位置嵌入），其可将序列进行编码。</p>
+<p>对于解码器，则为另一种 Transformer Block 的堆叠（同样在堆叠前先对输入
+<span class="math inline">\(x\)</span>
+进行位置嵌入，且在最后会接入全连接层以生成输出），其可进行解码并生成输出：</p>
+<ol type="1">
+<li>输入向量组 <span class="math inline">\(x\)</span>；</li>
+<li>对所有向量执行 <strong>掩码</strong> 多头自注意力；</li>
+<li>从 1 末尾进行残差连接；</li>
+<li>层归一化；</li>
+<li>执行 <strong>多头注意力</strong>（<span
+class="math inline">\(q\)</span> 取前一层的输出，<strong><span
+class="math inline">\(k\)</span> 和 <span
+class="math inline">\(v\)</span> 取编码器生成的结果</strong>）；</li>
+<li>从 4 末尾进行残差连接；</li>
+<li>层归一化；</li>
+<li>对每个向量独立地执行 MLP；</li>
+<li>从 7 末尾进行残差连接；</li>
+<li>层归一化；</li>
+<li>输出向量组 <span class="math inline">\(y\)</span>。</li>
+</ol>
+<h2 id="vision-transformervit">Vision Transformer（ViT）</h2>
+<p>即为 Transformer 在图像中的应用。给定一张图像，将图像分割成 <span
+class="math inline">\(N\)</span> 个 patches，并将每个 patch 投射为
+tokens（线性投射至 <span class="math inline">\(D\)</span>
+维向量），对其进行坐标嵌入（对每个位置创建一个 <span
+class="math inline">\(D\)</span> 维向量表示位置，并相加至
+tokens），随后将向量传入 Transformer（无需使用掩码），得到输出 <span
+class="math inline">\(N \times D\)</span>。</p>
+<p>对于 <span class="math inline">\(C\)</span>
+分类问题，则对输出向量进行池化操作，得到 <span class="math inline">\(1
+\times D\)</span>，并使用线性层预测类别分数即可。</p>
+<p>另一种方法（实则为使用 ViT
+进行图像分类的基本和最标准的做法之一）则可在 Transformer
+之前再加一个可学习的 token 作为特殊的额外输入，经过 Transformer
+处理后得到额外的输出，将其线性投射为 <span
+class="math inline">\(C\)</span>
+维向量，即可处理为类别的概率分布。其被称为
+<strong>分类词元</strong>（class token）。</p>
+<h2 id="transformer-的微调">Transformer 的微调</h2>
+<h3 id="pre-norm-transformer">Pre-Norm Transformer</h3>
+<p>在 Transformer 中，Layer Norm 在残差连接之外，这使得 Transformer
+Block 无法习得恒等映射。</p>
+<p>为解决该问题，可修改 Transformer Block，使 Layer Norm 前置：</p>
+<ol type="1">
+<li>输入向量组 <span class="math inline">\(x\)</span>；</li>
+<li>层归一化；</li>
+<li>对所有向量执行多头自注意力；</li>
+<li>从 1 末尾进行残差连接；</li>
+<li>层归一化</li>
+<li>对每个向量独立地执行 MLP（也被称为 FFN，其为 2 层神经网络）；</li>
+<li>从 4 末尾进行残差连接；</li>
+<li>输出向量组 <span class="math inline">\(y\)</span>。</li>
+</ol>
+<h3 id="rmsnorm">RMSNorm</h3>
+<p>即在 Pre-Norm Transformer 的基础上，替换 Layer Norm 为
+RMSNorm（均方根归一化）：输入 <span class="math inline">\(x \in
+\mathbb{R}^{D}\)</span>，输出 <span class="math inline">\(y \in
+\mathbb{R}^{D}\)</span>，权重 <span class="math inline">\(\gamma \in
+\mathbb{R}^{D}\)</span>，有： <span class="math display">\[ y_{i} =
+\frac{x_{i}}{\operatorname{RMS}(x)} \times \gamma_{i}. \]</span> 其中：
+<span class="math display">\[ \operatorname{RMS}(x) = \sqrt{ \varepsilon
++ \frac{1}{N} \sum\limits_{i=1}^{N} x_{i}^{2} }. \]</span></p>
+<p>其可使训练更加稳定。</p>
+<h3 id="swiglu-mlp">SwiGLU MLP</h3>
+<p>在 RMSNorm 基础上，使用 SwiGLU MLP 替换 MLP，其引用了门控非线性。</p>
+<p>对于 MLP，输入 <span class="math inline">\(X \in \mathbb{R}^{N \times
+D}\)</span>，权重 <span class="math inline">\(W_{1} \in \mathbb{R}^{D
+\times 4D}, \ W_{2} \in \mathbb{R}^{4D \times D}\)</span>，有输出：
+<span class="math display">\[ Y = \sigma(XW_{1})W_{2}. \]</span></p>
+<p>对于 SwiGLU MLP，输入 <span class="math inline">\(X \in \mathbb{R}^{N
+\times D}\)</span>，权重 <span class="math inline">\(W_{1}, W_{2} \in
+\mathbb{R}^{D \times H}, \ W_{3} \in \mathbb{R}^{H \times
+D}\)</span>，有输出： <span class="math display">\[ Y = (\sigma(XW_{1})
+\odot XW_{2})W_{3}. \]</span></p>
+<p>其引入了更好的非线性性。取 <span class="math inline">\(H =
+\frac{8D}{3}\)</span> 时，则与之前的 MLP 的总参数量相同。</p>
+<h3 id="混合专家模型moe">混合专家模型（MoE）</h3>
+<p>在 RMSNorm 基础上，使用多组 MLP 代替原本的一组 MLP，即有 <span
+class="math inline">\(W_{1} \in \mathbb{R}^{E \times D \times 4D}, \
+W_{2} \in \mathbb{R}^{E \times 4D \times D}\)</span>。这些 MLP
+可并行计算。</p>
+<p>其中每个 MLP 均为一个 <strong>专家</strong>（expert）。在该层接收
+token 时，每个 token 只会路由到 <span class="math inline">\(A \ (&lt;
+E)\)</span> 个专家，这些被选中的称为 <strong>激活专家</strong>（active
+experts）。</p>
+<p>于是对于该模型，参数量扩大 <span class="math inline">\(E\)</span>
+倍，但计算量只会扩大到 <span class="math inline">\(A\)</span>
+倍。其有助于习得更强大的模型，而不会增加太多的计算量。</p>
+<p>如今所有的顶级大语言模型几乎都采用了 MoE 架构。</p>
+<hr />
+<h1
+id="lecture-9-object-detection-image-segmentation-visualizing-and-understanding">Lecture
+9: Object Detection, Image Segmentation, Visualizing and
+Understanding</h1>
+<h2 id="计算机视觉任务">计算机视觉任务</h2>
+<h3 id="分类classification">分类（Classification）</h3>
+<p>详见前几个 Lecture。</p>
+<h3 id="语义分割semantic-segmentation">语义分割（Semantic
+Segmentation）</h3>
+<p>其旨在给图上的每个像素分配一个标签来指代是什么事物（例如对于一张图片，指出哪些区域是猫、是树、是草原、是天空等等）。其只关注像素所属的类别，故若同一类别有两个实例，其无法将这两个实例分开。</p>
+<p>对于每个像素，我们取包含它的图片的一个
+patch（以获取该像素周围环境的信息），然后将其输入 CNN
+或其他用于分类的架构进行训练。 显然，该方法
+<strong>极其耗时</strong>。</p>
+<p>从另一种角度，考虑训练一个网络，输入图片，直接输出分割图（即对每个像素的标签矩阵）。</p>
+<h4 id="完全卷积神经网络fully-convolutional">完全卷积神经网络（Fully
+Convolutional）</h4>
+<p>为实现该网络，可只使用卷积层进行实现，即
+<strong>完全卷积神经网络</strong>（FCN）。对于输入 <span
+class="math inline">\(3 \times H \times
+W\)</span>，堆叠若干个卷积层，每个卷积层处理后
+<strong>图像大小不变</strong>（为 <span class="math inline">\(D \times H
+\times W\)</span>）；对于输出，为生成图像，也只使用卷积层，处理为 <span
+class="math inline">\(C \times H \times W\)</span>，进行 argmax 计算为
+<span class="math inline">\(H \times W\)</span> 即为分割结果。</p>
+<p>对于该方法，若输入图像较大，则每一层的输出规模均较大，计算卷积的的成本极高（其为瓶颈）。</p>
+<p>为解决该问题，考虑将图像进行 <strong>下采样</strong>，再进行
+<strong>上采样</strong>。每层的维度有例如如下的变化：</p>
+<ol type="1">
+<li>Input：<span class="math inline">\(3 \times H \times
+W\)</span>；</li>
+<li>High-res：<span class="math inline">\(D_{1} \times \frac{H}{2}
+\times \frac{W}{2}\)</span>；</li>
+<li>Med-res：<span class="math inline">\(D_{2} \times \frac{H}{4} \times
+\frac{W}{4}\)</span>；</li>
+<li>Low-res：<span class="math inline">\(D_{3} \times \frac{H}{4} \times
+\frac{W}{4}\)</span>；</li>
+<li>Med-res：<span class="math inline">\(D_{2} \times \frac{H}{4} \times
+\frac{W}{4}\)</span>；</li>
+<li>High-res：<span class="math inline">\(D_{1} \times \frac{H}{2}
+\times \frac{W}{2}\)</span>；</li>
+<li><span class="math inline">\(C \times H \times W\)</span>；</li>
+<li>Predictions：<span class="math inline">\(H \times W\)</span>。</li>
+</ol>
+<p>其为最基本最广泛的语义分割算法。</p>
+<p>显然，对于训练该模型，loss 定义为每个像素的 softmax
+的平均值即可。</p>
+<p>对于下采样，可采用池化操作或带步幅的卷积等，而对于上采样，采用
+<strong>解池</strong>（Unpooling）操作。</p>
+<h5 id="解池unpooling">解池（Unpooling）</h5>
+<p>有多种操作方法（均为 <span class="math inline">\(H \times W \to 2H
+\times 2W\)</span>，将 <span class="math inline">\(H \times W\)</span>
+中的每个点扩展成 <span class="math inline">\(2 \times 2\)</span>
+的区域）： - 最近邻（Nearest Neighbor）：直接将一个点扩展成 <span
+class="math inline">\(2 \times 2\)</span> 个与其相同的点； - 钉床（Bed
+of Nails）：将该点扩展成 <span class="math inline">\(2 \times 2\)</span>
+的区域，左上角与其相同，其他位置均为零。</p>
+<h5 id="max-unpooling">Max Unpooling</h5>
+<p>若在下采样时使用了 Max
+Pooling，则可保存最大值出现的位置，在对应的上采样时，复制信息至对应的原先最大值出现的位置，其他位置补零。</p>
+<h5 id="可学习上采样learnable-upsampling">可学习上采样（Learnable
+Upsampling）</h5>
+<p>即卷积核的逆操作（转置矩阵（Transposed Convolution），即 <span
+class="math inline">\(1 \times 1 \to HH \times WW\)</span>，同样有
+stride 和 padding 等），对于过滤器处理到重叠的部分，求和即可。</p>
+<h4 id="u-net">U-Net</h4>
+<p>即对于 FCN 中的先下采样后上采样的操作，将其网络结构画出来呈 U
+形，称为 U-Net。</p>
+<p>对于下采样过程，其会扩大感受野，并丢失一些空间信息，而上采样过程会恢复图像分辨率。</p>
+<p>与 FCN
+不同的是，<strong>上采样的每一维度在开头会对相应下采样层的结果进行拼接</strong>，以此保留原有的结构信息，得到更清晰的输出。</p>
+<p>迄今为止，医疗相关的分割任务仍会采用 U-Net 或其变体。</p>
+<h3 id="对象检测object-detection">对象检测（Object Detection）</h3>
+<p>即需要进行分类并标定坐标。对每一个对象计算标签类别分数，并获取边界框的坐标
+<span class="math inline">\((x, y, w, h)\)</span>。 其中，可对类别可使用
+softmax loss，对框的坐标使用 L2 loss，将其相加得到该问题的 loss。
+显然，在图像中的对象数量较多时，其生成的坐标较多，该方法执行困难，即不具有可扩展性。</p>
+<p>另一种方法为，不考虑将整张图像作为输入，而考虑查看边界框。对于每个边界框，其只有一个标签，故可进行分类。于是可考虑将边界框做为滑动窗口，即考虑任意的
+<span class="math inline">\((x, y, w, h)\)</span>
+是否可检测到物体，以此可找到每个物体的最大概率边界框。
+同样的，边界框组合的数量巨大，且该算法不可扩展。</p>
+<p>可以考虑寻找有高概率包含物体的区域，即
+<strong>候选区域</strong>（region
+proposal）。若能高效地找到候选区域，则该问题解决较易。</p>
+<h4 id="r-cnn">R-CNN</h4>
+<p>对于候选区域，将其提取，并在这块区域运行
+CNN，进行分类，且可优化边界框（稍微改变坐标）。
+但该算法运行速度慢，其对每个候选区域都会运行一次
+CNN，而候选区域的数量就很大（约 2K，且为预先定义的）。</p>
+<h4 id="fast-r-cnn">Fast R-CNN</h4>
+<p>由于 CNN
+保留空间信息，考虑直接在整个图像上运行大卷积网络。在生成的特征图（feature
+map）中，可找到候选区域对应的区域，在这些区域上再运行小的
+CNN，并生成输出（盒子偏移（box offset）和对象类别）。</p>
+<h4 id="区域候选网络region-proposal-network">区域候选网络（Region
+Proposal Network）</h4>
+<p>先进行
+CNN，然后在特征图的每个位置都放置预定大小的锚框（anchor），通过卷积层，得到判断是否有物体和位置修正，可细化可能包含物体的区域，以此对框进行细化，使得该框有高概率包含物体。</p>
+<p>在完成后，通常会按照“是否含有物体”的概率进行排序，并取前 <span
+class="math inline">\(K\)</span> 个作为候选区域。</p>
+<p>尽管如此，完成该任务仍需 RPN 和 Fast R-CNN
+两个网络，检测两次物体，且运算量大。</p>
+<h4 id="单阶段对象检测器ssdyolo">单阶段对象检测器（SSD、YOLO）</h4>
+<p>就算在如今的工业界，YOLO
+仍被作为物体检测的基础被广泛应用，其可快速地进行物体检测，且表现优秀。其只需在图像上看一次即可生成所有的边界框。</p>
+<p>其将图片分割成 <span class="math inline">\(S \times S\)</span>
+的网格，并创建了一个 FCN，对网格中的每一个小框，均会输出如下内容：</p>
+<ul>
+<li><span class="math inline">\(P\)</span>
+(object)：边界框包含物体的概率；</li>
+<li><span class="math inline">\(B\)</span> 个边界框 <span
+class="math inline">\((x, y, h,
+w)\)</span>，对该框中存在的对象的细化（可能会比这个小框更大）；</li>
+<li><span class="math inline">\(P\)</span>
+(class)：该框内的物体属于某个类别的概率。</li>
+</ul>
+<p>其可对不同的对象生成多个边界框，且每个边界框均有一个存在物体的概率。对这些不同的边界框和对象可进行阈值处理，即
+<strong>非最大抑制</strong>（non-maximum
+suppression）及其他一些算法（具体看 YOLO 论文）。</p>
+<h4 id="detrobject-detection-with-transformers">DETR（Object Detection
+with Transformers）</h4>
+<p>与 ViT 一样，其会把图像分为 patches，然后将 patch 输入 CNN 得到
+token，并加入位置编码，传入 Transformer Encoder。 再将 Transformer
+Encoder 的输出传入 Transformer Decoder，但对于 Decoder，我们定义 queries
+为可学习的参数（其表示“我希望对此 query
+输出一个物体”），其传入个数表示在图像中最多寻找多少个要检测的对象，最终分别对每个
+query 生成输出。 对于生成的输出，传入 FFN
+以生成类别标签和边界框，或说明未检测到物体。</p>
+<p>若 queries
+的个数小于图像中对象的个数，则大概会输出置信度最高的几个框。</p>
+<h3 id="实例分割instance-segmentation">实例分割（Instance
+Segmentation）</h3>
+<p>其即为语义分割和对象检测的结合。</p>
+<h4 id="mask-r-cnn">Mask R-CNN</h4>
+<p>结构与 Fast R-CNN 类似，只需在进行 CNN 后（在该 CNN
+之后会生成类别和盒子偏移），另外再加一层卷积层（多为
+FCN），其对每种物体类别生成该对象像素级别的
+masks，其与输入图像对应位置的大小相同，且基于FCN得到的特征图本身。</p>
+<p>实践说明，Mask R-CNN 可取得很好的效果，且可应用与识别动作等。</p>
+<h2 id="可视化与理解">可视化与理解</h2>
+<p>在线性分类器中，对权重可视化，不难发现其表现出了该类别的模板。该种方法同样可用于神经网络。</p>
+<p>而可视化过滤器（例如对于 CNN
+的第一层，其具有较少的通道），可发现其学习了基本形状、方向等信息。总而言之，其在学习
+<strong>模式</strong>（patterns），且在后期阶段，学习到的模式会更全面且强大。</p>
+<h3 id="显著性saliency">显著性（Saliency）</h3>
+<p>其反映了哪个像素 / 哪一块非常重要。</p>
+<p>为实现该点，对于图像分类任务，先进行前向传播生成标签，而现在，我们需要考察每个像素，查看改变像素点的值会对标签的得分产生多大的影响，不难发现其即为梯度。
+于是考虑对标签得分进行求导，但求导的对象是像素值，而不是网络的权重。
+于是对求到的梯度进行可视化，可找到重要的像素点。</p>
+<h3 id="类激活图class-activation-mappingcam">类激活图（Class Activation
+Mapping，CAM）</h3>
+<p>对于查看每种类别是如何激活的，则需要
+<strong>类激活图</strong>（CAM）。其为 CNN
+中最广泛应用的算法之一，也可应用于其他结构（不过 Transformer
+会有更好的方法）。</p>
+<p>例如最后几层为 CNN -&gt; Global Average Pooling -&gt; FC
+得到每个类别的分数的结构：</p>
+<ul>
+<li>CNN：<span class="math inline">\(f \in \mathbb{R}^{H \times W \times
+K}\)</span>；</li>
+<li>Global Average Pooling：<span class="math inline">\(F_{k} =
+\frac{1}{HW}\sum_{h, w} f_{h, w, k} \in \mathbb{R}^{K}\)</span>；</li>
+<li>FC：<span class="math inline">\(S_{c} = \sum_{k} w_{k,
+c}F_{k}\)</span>。</li>
+</ul>
+<p>不难推得： <span class="math display">\[ S_{c} = \frac{1}{HW}
+\sum_{h, w} \sum_{k} w_{k, c}f_{h, w, k}. \]</span></p>
+<p>即每个分数即为 CNN
+特征图的加权和，于是每个分数可回溯至特征图在空间中的特定位置。且由于 CNN
+的空间一致性，可从特征图再追溯至原图的图像空间。</p>
+<p>于是我们可在特征图上查看这些类别是如何被激活的，以及每个类别如何影响特征图的位置，可得到类激活图
+<span class="math inline">\(M \in \mathbb{R}^{C \times H \times
+W}\)</span>： <span class="math display">\[ M_{c, h, w} = \sum_{k} w_{k,
+c}f_{h, w, k}. \]</span></p>
+<p>自此，通过特征图，可将类激活图回溯至原图，并进行可视化，反映图中的区域对类别激活的影响。
+不过该种方法只能应用于 <strong>最后一个卷积层</strong>。</p>
+<h3
+id="梯度加权类gradient-weighted-class-activation-mappinggrad-cam">梯度加权类（Gradient-Weighted
+Class Activation Mapping，Grad-CAM）</h3>
+<p>该种方法则可对任意层进行操作。只需以下操作：</p>
+<ol type="1">
+<li>提取该层的激活值 <span class="math inline">\(A \in \mathbb{R}^{H
+\times W \times K}\)</span>；</li>
+<li>计算梯度： <span class="math display">\[ \frac{ \partial S_{c} }{
+\partial A } \in \mathbb{R}^{H \times W \times C}. \]</span></li>
+<li>对梯度进行全局平均池化，得到权重 <span class="math inline">\(\alpha
+\in \mathbb{R}^{K}\)</span>： <span class="math display">\[ \alpha_{k} =
+\frac{1}{HW} \sum_{h, w} \frac{ \partial S_{c} }{ \partial A_{h, w, k}
+}.  \]</span></li>
+<li>计算激活图 <span class="math inline">\(M^{c} \in \mathbb{R}^{H
+\times W}\)</span>： <span class="math display">\[ M^{c}_{h, w} =
+\operatorname{ReLU}\left( \sum_{k} \alpha_{k}A_{h, w, k} \right).
+\]</span></li>
+</ol>
+<h3 id="可视化-vit-权重">可视化 ViT 权重</h3>
+<p>Transformer
+本身就自带激活图（例如输入和输出的权重热力图），故对每个类别分数，只需在像素空间中画出激活图即可，其即为
+ViT 的特征的可视化。</p>
+<hr />
+<h1 id="lecture-10-video-understanding">Lecture 10: Video
+Understanding</h1>
+<p>即在图像上加了一个维度：<span class="math inline">\(T \times 3 \times
+H \times W\)</span> 或 <span class="math inline">\(3 \times T \times H
+\times W\)</span>。</p>
+<h2 id="视频分类">视频分类</h2>
+<p>在图像分类中，我们常常关注物体本身的种类，相应地，在视频分类中，我们常常关注动作的种类（例如跑步等等）。</p>
+<p>此外，与图像分类不同的一点是，视频文件
+<strong>很大</strong>，这导致了我们无法直接将这类数据传入 GPU。
+为解决该问题，常常对视频进行压缩（例如压缩帧率、压缩分辨率等等）。</p>
+<p>对于长视频，采用的策略是在视频片段（clips）上进行训练，即对于高帧率长时间的原始视频，有：</p>
+<ul>
+<li>训练：采用低帧率，并裁剪为 clip 进行训练；</li>
+<li>测试：采样不同 clip 并进行预测，并取预测分数的平均值。</li>
+</ul>
+<h3 id="单帧卷积神经网络single-frame-cnn">单帧卷积神经网络（Single-Frame
+CNN）</h3>
+<p>考虑视频为一系列的图片，可对考虑选取部分帧运行 CNN，即
+<strong>单帧卷积神经网络</strong>，然后可以考虑对预测结果取平均即为最终结果。当视频的不同帧变化不大时，其为非常强大的基线方法（baseline）。
+选取帧的采样方法有多种，较为简单的为随机采样。</p>
+<h3 id="晚期融合late-fusion">晚期融合（Late Fusion）</h3>
+<p>在单帧 CNN 的基础上，可考虑对每一帧的特征进行融合，即
+<strong>晚期融合</strong>。即选取部分帧运行 CNN
+提取特征，然后将这些特征图展平为向量并进行拼接，得到一个包含该视频所有信息的巨型向量，并输入
+MLP 进行处理并分类。</p>
+<p>该方法有个明显的缺点：MLP 的参数量过大。故考虑改进，
+可考虑不对特征图展平的向量进行拼接，而是使用池化操作（如平均池化 <span
+class="math inline">\(T \times D \times H&#39; \times W&#39; \to
+D\)</span>），然后输入
+MLP。比较明显的，该方法相交于拼接，会有丢失信息的缺点。</p>
+<h3 id="早期融合early-fusion">早期融合（Early Fusion）</h3>
+<p>晚期融合可能在 CNN 就已经丢失部分有用的信息（例如在跑步视频中，CNN
+可能会丢失双脚交替运动的时间上的特征信息）。
+考虑在靠近原始视频帧的早期层提取特征，更有可能保留低层次信息，进行拼接或提取即可分析时间上的运动。而在大量
+CNN 后保留的高层信息，即可能丢失这些信息。</p>
+<p>于是可采用早期融合，即先将 <span class="math inline">\(3 \times T
+\times H \times W\)</span> 整合为 <span class="math inline">\(3T \times
+H \times W\)</span>，接着使用第一个卷积，转化为 <span
+class="math inline">\(D \times H \times W\)</span>
+以处理时序信息和所有的视频帧的信息，接下来的操作则为标准流程。</p>
+<p>尽管考虑了时序，使用单层卷积进行时序信息的整合，达到理想效果仍较为困难。</p>
+<h3 id="d-cnn">3D CNN</h3>
+<p>即使用 3D CNN 和 3D pooling
+在网络中逐步提取信息，逐步压缩时序维度，将时空维度压缩成三维特征图。</p>
+<p>对于早期融合，由于在开头直接融合所有时序，其无
+<strong>时间平移不变性</strong>，例如当我们想要学习不同时间点的同一种转变，则需要多个独立的滤波器分别进行学习。
+与之对应地，显然 3D CNN 就具有时间平移不变性。</p>
+<p>同样地，可对 3D CNN 进行可视化，其与 CNN
+可视化类似，且可观测到一些运动模式。</p>
+<h3 id="示例视频数据集">示例视频数据集</h3>
+<p>与 ImageNet
+类似，视频也有示例数据集：Sports-1M，其为体育运动分类的数据集。</p>
+<p>在该数据集上，单帧 CNN 的效果已经较好，且 3D CNN
+的效果在不断改进。</p>
+<h3 id="c3d">C3D</h3>
+<p>即 VGG 的 3D CNN 版本。其已训练的版本曾较常被用于微调。</p>
+<p>其有明显的缺陷：直接使用了 <span class="math inline">\(3 \times 3
+\times 3\)</span> conv 等结构，使得计算成本高。</p>
+<h3 id="光流optical-flow">光流（Optical Flow）</h3>
+<p>另外一种思路，考虑将时空信息分开，即考虑显式建模存在的时序特征（动作）。</p>
+<p>考虑使用双流网络分别处理外观和运动信息。显示测量运动信息使用
+<strong>光流</strong>，其通过测量相邻帧中像素运动的变化测量了动作的变化，即计算帧内每个点的运动速度，并给出下一帧中点的位置估计：
+<span class="math display">\[
+\begin{align*}
+F(x) &amp;= (\mathrm{d}x, \mathrm{d}y) \\
+I_{t + 1}(x + \mathrm{d}x, y + \mathrm{d}y) &amp;= I_{t}(x, y)
+\end{align*}
+\]</span></p>
+<p>同样地，可对其可视化，可分别可视化水平运动 <span
+class="math inline">\(\mathrm{d}x\)</span> 和垂直运动 <span
+class="math inline">\(\mathrm{d}y\)</span>。</p>
+<h3 id="双流网络two-stream-networks">双流网络（Two-Stream
+Networks）</h3>
+<p>有了光流，可考虑进行
+<strong>双流网络</strong>，分别用单帧模型进行外观分类，用时间流卷积处理多帧光流（对相邻的两帧均计算光流），并进行预测，最后将两种预测结果汇总得到最终预测。</p>
+<p>其效果显著，且仅使用运动信息就能达到显著高于仅使用外观流的较好的效果（有一种猜测是运动流更不容易过拟合）。</p>
+<h3 id="建模长期时序结构">建模长期时序结构</h3>
+<p>以上方法只能处理一个小的
+clip，于是需要考虑如何建模长期时序结构，以识别更远时间的关联。</p>
+<p>与处理序列类似，考虑使用 RNN 实现。先使用 CNN 得到 clip
+的特征，然后将这些局部特征输入 RNN
+进行处理，并根据问题进行隐藏状态的输出映射。</p>
+<p>通常，在训练中会使用预训练的 CNN 提取特征，只训练
+RNN，否则网络会十分庞大，难以训练。</p>
+<h3
+id="循环卷积神经网络recurrent-convolutional-network">循环卷积神经网络（Recurrent
+Convolutional Network）</h3>
+<p>考虑结合 CNN 和 RNN，其与多层 RNN 较为类似。</p>
+<p>在该网络中，每个特征图均使用维度 <span class="math inline">\(C \times
+H \times W\)</span>，且第一层为 CNN 分别处理 clip，从第二层开始即为
+RNN，并将 RNN 中的所有矩阵乘法替换为二维卷积。</p>
+<p>其可实现空间和时间的融合，但其处理速度很慢（无法并行化），故应用较少。</p>
+<h3
+id="时空自注意力spatio-temporal-self-attention非局部块nonlocal-block">时空自注意力（Spatio-Temporal
+Self-Attention，非局部块（Nonlocal Block））</h3>
+<p>可将自注意力改为三维形式。将 clip 输入 3D CNN，处理为 <span
+class="math inline">\(C \times T \times H \times W\)</span>
+特征图后，可使用 <span class="math inline">\(1 \times 1 \times
+1\)</span> conv 改变通道维度，处理为 <span class="math inline">\(C&#39;
+\times T \times H \times W\)</span> queries、keys 和 values，并得到
+<span class="math inline">\(THW \times THW\)</span> attention
+weights，从而得到输出的 <span class="math inline">\(C&#39; \times T
+\times H \times W\)</span> 输出特征图，最后用 <span
+class="math inline">\(1 \times 1 \times 1\)</span> conv 映射回 <span
+class="math inline">\(C \times T \times H \times
+W\)</span>，并进行残差连接。此为一个三维的自注意力块。</p>
+<p>可将该块加入视频处理，例如采用 3D CNN -&gt; Nonlocal Block -&gt; 3D
+CNN -&gt; Nonlocal Block -&gt; 3D CNN
+的架构，更有效地融合时空信息，最终进行分类。</p>
+<h3 id="i3d">I3D</h3>
+<p>即考虑将一个原有的 2D CNN 架构膨胀成 3D CNN 架构。 将每个 2D <span
+class="math inline">\(K_{h} \times K_{w}\)</span> conv / pool 都替换为
+3D <span class="math inline">\(K_{t} \times K_{h} \times K_{w}\)</span>
+conv / pool 即可.</p>
+<p>更进一步，可考虑迁移已训练的权重，以获得一些较好的先验信息。即初始化膨胀的
+3D CNN 权重为原本的 2D CNN 在图像上训练得到的权重（将核复制 <span
+class="math inline">\(K_{t}\)</span> 次，并除以 <span
+class="math inline">\(K_{t}\)</span>）。</p>
+<p>实践表明其效果很好，且也可用于膨胀运动流，以得到更好效果。</p>
+<h3 id="vision-transformers-for-video">Vision Transformers for
+Video</h3>
+<p>即 ViT 的视频版本，其在视频上做了一些算法优化，表现很好。</p>
+<h3 id="可视化">可视化</h3>
+<p>与之前图像分类模型的可视化类似，可用相同的方法对视频模型进行可视化。</p>
+<h2 id="时序动作定位temporal-action-localization">时序动作定位（Temporal
+Action Localization）</h2>
+<p>即定位动作在视频中发生的时间位置，可使用类似 Fast R-CNN
+的架构并生成时间提议进行解决。</p>
+<h2
+id="时空检测任务spatio-temporal-detection">时空检测任务（Spatio-Temporal
+Detection）</h2>
+<p>即不仅定位动作在视频中发生的时间位置，也定位发生的空间位置。</p>
+<h2 id="声音">声音</h2>
+<p>声音是之前未讨论，但对视频十分重要的维度。</p>
+<p>其衍生出了一系列任务，如：</p>
+<ul>
+<li>视频信息引导声源分离（Visually-guided audio source
+separation）；</li>
+<li>乐器声源分离（Musical instruments source separation）；</li>
+<li>音视频理解（Audio-Visual Video Understanding）；</li>
+<li>高效视频理解（Efficient Video Understanding）；</li>
+<li>多模态第一视角视频理解（Multimodal Egocentric Video
+Understanding）；</li>
+<li>视频理解 + LLM。</li>
+</ul>
+<hr />
+<h1 id="lecture-11-large-scale-distributed-training">Lecture 11: Large
+Scale Distributed Training</h1>
+<h2 id="gpu">GPU</h2>
+<p>GPU <strong>极其擅长并行运算</strong>。且 GPU
+在近些年运算速度增长极快（尤其是张量核心），多 GPU
+训练也称为了主流。</p>
+<p>以 H100 举例，其有计算核心（Compute Cores）和 80 GB 显存（HBM
+Memory，高带宽内存），这两个是分开的，需要通过总线进行通信，且在计算核心中，有
+50MB 的 L2 缓存（L2 Cache），可与计算核心进行更快速地通信，且有很多
+SMs（流多处理器）。</p>
+<p>对于每个 SM，有 256KB L1 缓存（L1 cache）和 256 KB
+寄存器（registers），并有 128 个 FP32 核心（FP32
+Cores，其执行广义浮点运算）和 4 个 <strong>张量核心</strong>（Tensor
+Cores，其经过优化，执行矩阵乘法，且以混合精度运行（16-bit /
+32-bit））。</p>
+<p>张量核心为主要吞吐量来源，且为 GPU 程序的最大限度利用目标。其输入为
+16-bit，输出为 32-bit。故记得在 PyTorch 层中将模型转为
+16-bit，否则其会在浮点核心上运行（运行效率慢 20 倍）。</p>
+<h3 id="gpu-集群">GPU 集群</h3>
+<p>GPU 之间的通信速度显著慢于 GPU
+内部的通信速度（更一般地，通常来说“越远越慢”）。 例如从 H100 GPU -&gt;
+Server（8x GPU）-&gt; Rack（2 Servers）-&gt; Pod（192 Raks）-&gt;
+Cluster（8 Pods），不同位置的 GPU 的通信效率显著降低。</p>
+<p>通常来说，对于模型最长训练通常为数月（这一点更多地指的是类似于 GPT
+的超大型模型，且更多地取决于人而不是技术）。</p>
+<h3 id="tpu">TPU</h3>
+<p>现在也有除了 GPU
+的其他计算硬件，例如张量处理单元（TPU），且已有一定应用（如 Gemini）。
+其余也有 AMD、AWS 的类似产品，但用的最广的仍然是 NVIDIA，随后是
+TPU。</p>
+<h2 id="在-gpu-集群上训练">在 GPU 集群上训练</h2>
+<p>计算机主要进行计算和通信，需考虑如何利用集群中的内存层级，实现通信与计算的重叠执行；且将计算拆分并并行化，以在训练过程中充分利用所有
+GPU 资源。</p>
+<p>其有几个层级的并行化（其中很多为针对 Transformer 的，其为 <span
+class="math inline">\(L\)</span>
+个层的堆叠，且每一层均对三维张量（批次大小、序列长度、特征维度）进行操作）：</p>
+<ol type="1">
+<li>数据并行（Data Parallelism，DP）；</li>
+<li>上下文并行（Context Parallelism，CP）；</li>
+<li>流水线并行（Pipeline Parallelism，PP）；</li>
+<li>张量并行（Tensor Parallelism，TP）。</li>
+</ol>
+<h3 id="数据并行dp">数据并行（DP）</h3>
+<p>有一个想法：对于 minibatch 的每个元素，计算 loss
+和梯度相互独立，故可进行并行化。</p>
+<p>故若有 <span class="math inline">\(M\)</span> 个 GPU，则使用 <span
+class="math inline">\(MN\)</span> 个元素的 minibatch，并给每个 GPU
+加载单独的模型与优化器副本，并分划不同的 <span
+class="math inline">\(N\)</span> 个元素形成小的 minibatch，分别计算 loss
+和反向传播计算梯度。 计算完梯度后，则每个 GPU 需将梯度广播到所有
+GPU，且每个 GPU 需从所有参与训练的 GPU 收集梯度，即 allreduce
+操作（其执行效率为 <span class="math inline">\(O(\log
+M)\)</span>），即可求平均即为真实梯度，并在对自己的模型副本上进行权重更新。
+其中，<strong>计算梯度和跨 GPU 传播梯度可并行化</strong>（例如 <span
+class="math inline">\(L + 1\)</span> 层的通信和 <span
+class="math inline">\(L\)</span>
+层的反向传播即可并行化），其可在进行计算的同时
+<strong>隐藏通信的成本</strong>（不过这种计算与通信的并行需要手动编写代码，但大多数情况
+PyTorch 已提供了可用的方案）。</p>
+<p>梯度是线性的，故显然该方法在数学上成立。</p>
+<p>对于单 GPU，编写 CUDA
+时硬件会自动处理异步传输，但在集群中则不会发生此情况，这导致了单 GPU
+和集群的不对称性。</p>
+<h3
+id="完全分片数据并行fully-sharded-data-parallelismfsdp">完全分片数据并行（Fully
+Sharded Data Parallelism，FSDP）</h3>
+<p>DP 需要每个 GPU
+都保存一份模型的副本（需要模型权重，模型的梯度，和优化器状态），但当模型规模较大时，显然是不现实的。
+为解决该问题，可考虑将模型权重分配到不同的 GPU 中。</p>
+<p>即每个权重 <span class="math inline">\(W_{i}\)</span> 只会归属至一个
+GPU（通常按层划分），且该 GPU 也会掌管该权重的全局梯度和优化器状态。
+在进行每一层的前向传播前，需将 <span
+class="math inline">\(W_{i}\)</span> 的权重广播至所有
+GPU，然后进行前向传播，且删除 <span class="math inline">\(W_{i}\)</span>
+的副本。 该操作的计算与通信同样可以并行化（例如获取 <span
+class="math inline">\(W_{i + 1}\)</span> 的权重和计算 <span
+class="math inline">\(W_{i}\)</span> 的前向传播的并行）。</p>
+<p>对每一层的反向传播，广播 <span class="math inline">\(W_{i}\)</span>
+至所有的 GPU，进行反向传播，然后将梯度传回该层归属的 GPU，并在该 GPU
+上计算总梯度，进行权重更新。 该操作同样可并行化（计算 <span
+class="math inline">\(W_{i}\)</span> 的反向传播、聚合 <span
+class="math inline">\(W_{i + 1}\)</span> 的梯度并进行权重更新、获取
+<span class="math inline">\(W_{i - 1}\)</span>
+的权重，这三者可并行化）。</p>
+<p>可优化的一点，在前向传播时，所有 GPU
+需保存最后一层的权重，这样在反向传播时就可直接用。</p>
+<h3
+id="混合分片数据并行hybrid-shared-data-parallelhsdp">混合分片数据并行（Hybrid
+Shared Data Parallel，HSDP）</h3>
+<p>即 DP 和 FSDP 的结合。将 <span class="math inline">\(N = MK\)</span>
+张 GPU 分成 <span class="math inline">\(M\)</span> 个组，每个组 <span
+class="math inline">\(K\)</span> 张 GPU。每个组执行 FSDP，并在 <span
+class="math inline">\(M\)</span> 个组之间执行 DP。</p>
+<p>此被称为 <strong>多维并行</strong>（Multidimensional
+parallelism），即在两个不同的维度，用两个不同的策略进行并行化。在此视角下
+GPU 组成一个二维网格。 这两种并行化需要不同量的通信：在 FSDP
+中会传输三倍网络权重的完整副本量（前向传播权重、反向传播权重、梯度），而在
+DP 中只需传输一倍网络权重的完整副本量（梯度），这符合 GPU
+集群内部的多层次结构，较好地利用了网络拓扑。</p>
+<h3 id="激活检查点activation-checkpointing">激活检查点（Activation
+Checkpointing）</h3>
+<p>但对于超大型模型，就算只存一层的激活值，可能也远超单个 GPU
+的显存。</p>
+<p>对网络中的每一层，可抽象为：</p>
+<ul>
+<li>正向传播：<span class="math inline">\(A_{i + 1} =
+F_{i}^{\rightarrow}(A_{i})\)</span>；</li>
+<li>反向传播：<span class="math inline">\(G_{i} =
+F_{i}^{\leftarrow}(A_{i}, G_{i + 1})\)</span>。 假设 <span
+class="math inline">\(F_{i}^{\rightarrow}\)</span> 和 <span
+class="math inline">\(F_{i}^{\leftarrow}\)</span> 的复杂度均为 <span
+class="math inline">\(O(1)\)</span>，显然计算前向和反向传播的时间和空间复杂度均为
+<span class="math inline">\(O(N)\)</span>。</li>
+</ul>
+<p>为解决该问题，考虑不把激活值 <span
+class="math inline">\(A_{i}\)</span>
+存至内存，而在反向传播时进行重新计算 <span
+class="math inline">\(A_{i}\)</span>。 显然该方法时间复杂度为 <span
+class="math inline">\(O(N^{2})\)</span>，空间复杂度 <span
+class="math inline">\(O(N)\)</span>。可见时间复杂度过高。</p>
+<p>于是考虑对层进行分块，即每 <span class="math inline">\(C\)</span>
+层建立一个 <strong>激活检查点</strong>，则只需在每个小块内进行计算。
+此时有时间复杂度 <span class="math inline">\(O\left( \frac{N^{2}}{C}
+\right)\)</span>，空间复杂度 <span class="math inline">\(O(C)\)</span>。
+显然分块可取 <span class="math inline">\(C = \sqrt{ N
+}\)</span>，则有时间复杂度 <span class="math inline">\(O(N\sqrt{ N
+})\)</span>，空间复杂度 <span class="math inline">\(O(\sqrt{ N
+})\)</span>。</p>
+<h3 id="多-gpu-训练">多 GPU 训练</h3>
+<p>可采用此扩展流程：</p>
+<ol type="1">
+<li>对于参数量约 1B 的模型，GPU 数量不超过约 128 张时，使用 DP
+即可；</li>
+<li>始终将单卡批次大小设置为能占满 GPU 显存的最大值；</li>
+<li>若模型参数量超过 1B，考虑使用 FSDP；</li>
+<li>使用激活检查点，以支持更大的单卡批次大小；</li>
+<li>若 GPU 超过 256 张，考虑使用 HSDP；</li>
+<li>若 GPU 超过 1000 张、模型参数量超过 50B，或序列长度超过 16K
+时，需使用更高级的并行策略（CP、PP、TP）。</li>
+</ol>
+<p>对于参数调节，目的为最大化 <strong>模型 FLOPs 利用率</strong>。</p>
+<h3 id="硬件-flops-利用率hardware-flpos-utilizationhfu">硬件 FLOPs
+利用率（Hardware FLPOs Utilization，HFU）</h3>
+<p>HFU 即在设备上进行计算，实际能达到理论最大计算性能的比例。</p>
+<p>使用几行 PyTorch 代码即可进行对其进行基准测试（benchmark）。</p>
+<p>不过 HFU
+并没有考虑到模型需要做的其他事情（例如激活检查点、运行其他模型、数据加载、数据增强等等）。</p>
+<h3 id="模型-flops-利用率model-flops-utilizationmfu">模型 FLOPs
+利用率（Model FLOPs Utilization，MFU）</h3>
+<p>MFU 即在模型中，前向和反向传播实际使用的算力，占 GPU
+理论峰值浮点算力的比例：</p>
+<ol type="1">
+<li>计算 <span
+class="math inline">\(\text{FLOP}_{\text{theoretical}}\)</span>（理论模型
+FLOPs）= 前向与反向传播中。所有矩阵乘法的总浮点运算次数；</li>
+<li>查询 <span class="math inline">\(\text{FLOP} /
+\text{sec}_{\text{theoretical}}\)</span>（硬件理论峰值算力）=
+设备的理论最大浮点运算吞吐量；</li>
+<li>计算理论耗时 <span class="math inline">\(t_{\text{theoretical}} =
+\frac{\text{FLOP}_{\text{theoretical}}}{\text{FLOP} /
+\text{sec}_{\text{theoretical}}}\)</span>；</li>
+<li>测量实际耗时 <span class="math inline">\(t_{\text{actual}}\)</span>
+=
+完成一次完整迭代的真实时间（包括数据加载、前向与反向传播、优化器更新等等）;</li>
+<li><span class="math inline">\(\text{MFU} =
+\frac{t_{\text{theoretical}}}{t_{\text{actual}}}\)</span>。</li>
+</ol>
+<p>对于分布式训练，我们则需要通过调整参数最大化 MFU。 一般来说，大于
+<span class="math inline">\(30\%\)</span> 的 MFU 已经较好，大于 <span
+class="math inline">\(40\%\)</span> 的 MFU 则可称为优秀（基本接近
+SOTA）。</p>
+<p>不过实际上，由于 GPU
+的计算速度增长明显快于通信速度的增长，较新的设备有时会得到更差的
+MFU。</p>
+<h3 id="上下文并行cp">上下文并行（CP）</h3>
+<p><em>由于以下算法均针对含有大量 GPU 的集群（例如超过一万个
+GPU），故可能不太会用到（数百个 GPU 使用 DP
+以及衍生算法即可解决）。</em></p>
+<p>CP 即在序列维度上进行拆分，即使用不同的 GPU
+处理长序列的不同部分。</p>
+<p>其中 LayerNorm、残差连接和 MLP 较为简单，其中 MLP 包含权重，需与 DP
+一样进行梯度同步。 Attention 则比较麻烦：其中 QKV 映射较为简单，但
+Attention 矩阵计算则较难进行并行化。</p>
+<p>可考虑 <strong>环形注意力</strong>（Ring Attention），即将完整的
+Attention 矩阵分成多个块，然后让 GPU
+按照正确的顺序独立地并行处理这些块。</p>
+<p>另一种方法为 <strong>Ulysses
+注意力</strong>，即对多头注意力，对每个头进行并行处理。</p>
+<h3 id="流水线并行pp">流水线并行（PP）</h3>
+<p>PP 即在层数上进行拆分。即对多层网络，将层划分给不同的 GPU。</p>
+<p>显然这存在顺序依赖关系，朴素算法则会闲置很多 GPU，且对 <span
+class="math inline">\(N\)</span>-way PP 的最大 MFU 仅为 <span
+class="math inline">\(\frac{1}{N}\)</span>。其种空闲的位置则称为气泡（Bubble），如下表：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GPU 1</td>
+<td><span class="math inline">\(\rightarrow\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\leftarrow\)</span></td>
+</tr>
+<tr class="even">
+<td>GPU 2</td>
+<td></td>
+<td><span class="math inline">\(\rightarrow\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\leftarrow\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>GPU 3</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\rightarrow\)</span></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\leftarrow\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>GPU 4</td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\rightarrow\)</span></td>
+<td><span class="math inline">\(\leftarrow\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>为解决该问题，即缩小气泡，考虑同时运行多个
+<strong>微批次</strong>（microbatches），如下表示例：</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GPU 1</td>
+<td><span class="math inline">\(\rightarrow_1\)</span></td>
+<td><span class="math inline">\(\rightarrow_2\)</span></td>
+<td><span class="math inline">\(\rightarrow_3\)</span></td>
+<td><span class="math inline">\(\rightarrow_4\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\leftarrow_4\)</span></td>
+<td><span class="math inline">\(\leftarrow_3\)</span></td>
+<td><span class="math inline">\(\leftarrow_2\)</span></td>
+<td><span class="math inline">\(\leftarrow_1\)</span></td>
+</tr>
+<tr class="even">
+<td>GPU 2</td>
+<td></td>
+<td><span class="math inline">\(\rightarrow_1\)</span></td>
+<td><span class="math inline">\(\rightarrow_2\)</span></td>
+<td><span class="math inline">\(\rightarrow_3\)</span></td>
+<td><span class="math inline">\(\rightarrow_4\)</span></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\leftarrow_4\)</span></td>
+<td><span class="math inline">\(\leftarrow_3\)</span></td>
+<td><span class="math inline">\(\leftarrow_2\)</span></td>
+<td><span class="math inline">\(\leftarrow_1\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>GPU 3</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\rightarrow_1\)</span></td>
+<td><span class="math inline">\(\rightarrow_2\)</span></td>
+<td><span class="math inline">\(\rightarrow_3\)</span></td>
+<td><span class="math inline">\(\rightarrow_4\)</span></td>
+<td></td>
+<td><span class="math inline">\(\leftarrow_4\)</span></td>
+<td><span class="math inline">\(\leftarrow_3\)</span></td>
+<td><span class="math inline">\(\leftarrow_2\)</span></td>
+<td><span class="math inline">\(\leftarrow_1\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>GPU 4</td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\rightarrow_1\)</span></td>
+<td><span class="math inline">\(\rightarrow_2\)</span></td>
+<td><span class="math inline">\(\rightarrow_3\)</span></td>
+<td><span class="math inline">\(\rightarrow_4\)</span></td>
+<td><span class="math inline">\(\leftarrow_4\)</span></td>
+<td><span class="math inline">\(\leftarrow_3\)</span></td>
+<td><span class="math inline">\(\leftarrow_2\)</span></td>
+<td><span class="math inline">\(\leftarrow_1\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>显然，其可显著提高 MFU。 更多的 microbatches 会提高
+MFU，但也意味着需要存储更多的激活值，可能需要进行激活检查点。这是需要进行权衡的。</p>
+<h3 id="张量并行tp">张量并行（TP）</h3>
+<p>TP 即对模型的维度进行拆分。 在模型中，有大量的矩阵乘法 <span
+class="math inline">\(XW = Y\)</span>，则需将每个矩阵分拆至多个
+GPU，例如拆至 <span class="math inline">\(4\)</span> 个 GPU： <span
+class="math display">\[
+\begin{align*}
+W &amp;= \begin{bmatrix} W_{1} &amp; W_{2} &amp; W_{3} &amp; W_{4}
+\end{bmatrix} \\
+XW_{i} &amp;= Y_{i}
+\end{align*}
+\]</span></p>
+<p>但在进行计算后，需将激活值 <span class="math inline">\(Y\)</span>
+进行聚集。则需用以下技巧以减少通信。 例如对于两个连续的这种层（<span
+class="math inline">\(XW = Y, YU = Z\)</span>），对于 <span
+class="math inline">\(4\)</span>-way TP，可用该法避免两层之间的聚集：
+<span class="math display">\[
+X \begin{bmatrix} W_{1} &amp; W_{2} &amp; W_{3} &amp; W_{4}
+\end{bmatrix} =
+\begin{bmatrix} Y_{1} &amp; Y_{2} &amp; Y_{3} &amp; Y_{4} \end{bmatrix}
+\begin{bmatrix} U_{1} \\ U_{2} \\ U_{3} \\ U_{4} \end{bmatrix} = Z.
+\]</span> 则有： <span class="math display">\[ Z = Y_{1}U_{1} +
+Y_{2}U_{2} + Y_{3}U_{3} + Y_{4}U_{4}. \]</span> 故对第 <span
+class="math inline">\(i\)</span> 个 GPU，只需计算 <span
+class="math inline">\(XW_{i} = Y_{i}\)</span> 和 <span
+class="math inline">\(Y_{i}U_{i} =
+Z_{i}\)</span>，并在每两层的末尾进行通信。</p>
+<p>由于 Transformer 会使用双层 MLP，该技巧效果较好。</p>
+<h3 id="nd-并行nd-parallelism">ND 并行（ND Parallelism）</h3>
+<p>对于 SOTA，其使用 <strong>ND 并行</strong>，即进行四维并行（同时使用
+TP、CP、PP 和 DP）。
+对不同的并行机制，会有不同的通信要求，故需利用集群中不同的通信速度，在集群中安排这些不同的并行维度。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+              <a href="/tags/CS231n/" rel="tag"># CS231n</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cs231n-1/" rel="prev" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）">
+                  <i class="fa fa-angle-left"></i> 「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/cs231n-3/" rel="next" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">
+                  「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments disqusjs-container">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/styles/disqusjs.css" integrity="sha256-E4RzceSomICFY1PT/yDQrN8DsLSwdScDEiQAevHabp0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/disqusjs.es2015.umd.min.js","integrity":"sha256-gdbBT62HLzqWTnXQED3WQL/ItFCuWsA5gd6dM/wgdiE="}}</script>
+<script src="/js/third-party/comments/disqusjs.js" defer></script>
+
+</body>
+</html>

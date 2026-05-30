@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 12 - Lec 17。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">
+<meta property="og:url" content="https://xenonwzh.github.io/cs231n-3/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 12 - Lec 17。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-30T08:17:16.000Z">
+<meta property="article:modified_time" content="2026-05-30T09:35:48.495Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="CS231n">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/cs231n-3/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/cs231n-3/","path":"cs231n-3/","title":"「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17） | XenonWZH's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="XenonWZH's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-12-self-supervised-learning"><span class="nav-number">1.</span> <span class="nav-text">Lecture 12: Self-supervised
+Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%A1%A8%E5%BE%81learned-representations"><span class="nav-number">1.1.</span> <span class="nav-text">学习表征（Learned
+Representations）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.</span> <span class="nav-text">自监督学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%BE%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">自监督预设任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%97%8B%E8%BD%AC"><span class="nav-number">1.3.1.</span> <span class="nav-text">图像旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E7%9B%B8%E5%AF%B9%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.3.2.</span> <span class="nav-text">预测相对位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%BC%E5%9B%BE"><span class="nav-number">1.3.3.</span> <span class="nav-text">拼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%A1%A5%E5%85%A8"><span class="nav-number">1.3.4.</span> <span class="nav-text">图像补全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E4%B8%8A%E8%89%B2"><span class="nav-number">1.3.5.</span> <span class="nav-text">图像上色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E8%A3%82%E8%84%91%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8split-brain-autoencoder"><span class="nav-number">1.3.6.</span> <span class="nav-text">分裂脑自编码器（Split-brain
+Autoencoder）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E4%B8%8A%E8%89%B2"><span class="nav-number">1.3.7.</span> <span class="nav-text">视频上色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A9%E7%A0%81%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8masked-auto-encodermae"><span class="nav-number">1.4.</span> <span class="nav-text">掩码自编码器（Masked Auto
+Encoder，MAE）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0contrastive-representation-learning"><span class="nav-number">1.5.</span> <span class="nav-text">对比表征学习（Contrastive
+representation learning）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#simclr"><span class="nav-number">1.5.1.</span> <span class="nav-text">SimCLR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E9%87%8F%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0momentum-contrastive-learingmoco"><span class="nav-number">1.5.2.</span> <span class="nav-text">动量对比学习（Momentum
+Contrastive Learing，MoCo）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dino"><span class="nav-number">1.5.3.</span> <span class="nav-text">DINO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-13-generative-models-1"><span class="nav-number">2.</span> <span class="nav-text">Lecture 13: Generative Models
+1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">机器学习任务分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">生成模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.2.1.</span> <span class="nav-text">生成模型的分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8Bautogressive-models"><span class="nav-number">2.3.</span> <span class="nav-text">自回归模型（Autogressive
+Models）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1mle"><span class="nav-number">2.3.1.</span> <span class="nav-text">最大似然估计（MLE）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.2.</span> <span class="nav-text">自回归模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E4%B8%8A%E7%9A%84%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.3.</span> <span class="nav-text">图像上的自回归模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E8%87%AA%E5%8A%A8%E7%BC%96%E7%A0%81%E5%99%A8variational-autoencodersvaes"><span class="nav-number">2.4.</span> <span class="nav-text">变分自动编码器（Variational
+Autoencoders，VAEs）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E7%BC%96%E7%A0%81%E5%99%A8autoencodersaes"><span class="nav-number">2.4.1.</span> <span class="nav-text">自动编码器（Autoencoders，AEs）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E8%87%AA%E5%8A%A8%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">2.4.2.</span> <span class="nav-text">变分自动编码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#elbo"><span class="nav-number">2.4.3.</span> <span class="nav-text">ELBO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E6%A0%B7"><span class="nav-number">2.4.5.</span> <span class="nav-text">采样</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-14-generative-models-2"><span class="nav-number">3.</span> <span class="nav-text">Lecture 14: Generative Models
+2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9Cgenerative-adversarial-networksgans"><span class="nav-number">3.1.</span> <span class="nav-text">生成对抗网络（Generative
+Adversarial Networks，GANs）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dc-gan"><span class="nav-number">3.1.1.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stylegan"><span class="nav-number">3.1.2.</span> <span class="nav-text">StyleGAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8Bdiffusion-models"><span class="nav-number">3.2.</span> <span class="nav-text">扩散模型（Diffusion Models）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E8%A7%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%B5%81%E6%B5%81rectified-flow"><span class="nav-number">3.2.2.</span> <span class="nav-text">整流流（Rectified Flow）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">推理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%95%B4%E6%B5%81%E6%B5%81conditional-rectified-flow"><span class="nav-number">3.2.3.</span> <span class="nav-text">条件整流流（Conditional
+Rectified Flow）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cfgclassifier-free-guidance"><span class="nav-number">3.2.4.</span> <span class="nav-text">CFG（Classifier-Free
+Guidance）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E9%A2%84%E6%B5%8B"><span class="nav-number">3.2.5.</span> <span class="nav-text">最优预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#latent-diffusion-modelsldms"><span class="nav-number">3.2.6.</span> <span class="nav-text">Latent Diffusion
+Models（LDMs）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diffusion-transformerdit"><span class="nav-number">3.2.7.</span> <span class="nav-text">Diffusion Transformer（DiT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#text-to-image"><span class="nav-number">3.2.8.</span> <span class="nav-text">Text-to-Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#text-to-video"><span class="nav-number">3.2.9.</span> <span class="nav-text">Text-to-Video</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%92%B8%E9%A6%8Fdistillation"><span class="nav-number">3.2.10.</span> <span class="nav-text">蒸馏（Distillation）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8Bgeneralized-diffusion"><span class="nav-number">3.3.</span> <span class="nav-text">广义扩散模型（Generalized
+Diffusion）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E4%BF%9D%E6%8C%81variance-preservingvp"><span class="nav-number">3.3.1.</span> <span class="nav-text">方差保持（Variance
+Preserving，VP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E7%88%86%E7%82%B8variance-explodingve"><span class="nav-number">3.3.2.</span> <span class="nav-text">方差爆炸（Variance
+Exploding，VE）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.3.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%BD%A2%E5%BC%8F%E5%8C%96%E6%A1%86%E6%9E%B6"><span class="nav-number">3.3.4.</span> <span class="nav-text">数学形式化框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">3.4.</span> <span class="nav-text">自回归模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-15-3d-vision"><span class="nav-number">4.</span> <span class="nav-text">Lecture 15: 3D Vision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#d-%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">3D 表示方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E4%BA%91point-clouds"><span class="nav-number">4.1.1.</span> <span class="nav-text">点云（Point Clouds）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%BE%B9%E5%BD%A2%E7%BD%91%E6%A0%BCpolygonal-meshes"><span class="nav-number">4.1.2.</span> <span class="nav-text">多边形网格（Polygonal Meshes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96%E8%A1%A8%E7%A4%BAparametric-representation"><span class="nav-number">4.1.3.</span> <span class="nav-text">参数化表示（Parametric
+Representation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E5%BC%8F%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.1.4.</span> <span class="nav-text">显式表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.1.5.</span> <span class="nav-text">隐式表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.5.1.</span> <span class="nav-text">距离函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B4%E5%B9%B3%E9%9B%86%E6%96%B9%E6%B3%95level-set-methods"><span class="nav-number">4.1.6.</span> <span class="nav-text">水平集方法（Level Set
+Methods）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%93%E7%B4%A0voxels"><span class="nav-number">4.1.6.1.</span> <span class="nav-text">体素（Voxels）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">4.2.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.3.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-view-cnn"><span class="nav-number">4.4.</span> <span class="nav-text">Multi-View CNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d-%E5%8D%B7%E7%A7%AF%E6%B7%B1%E5%BA%A6%E4%BF%A1%E5%BF%B5%E7%BD%91%E7%BB%9C3d-conv-deep-belief-networkscdbn"><span class="nav-number">4.5.</span> <span class="nav-text">3D
+卷积深度信念网络（3D Conv Deep Belief Networks，CDBN）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d-gans"><span class="nav-number">4.6.</span> <span class="nav-text">3D-GANs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E5%8F%89%E6%A0%91octree"><span class="nav-number">4.7.</span> <span class="nav-text">八叉树（Octree）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pointnet"><span class="nav-number">4.8.</span> <span class="nav-text">PointNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#graph-nns"><span class="nav-number">4.9.</span> <span class="nav-text">Graph NNs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E4%BA%91%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F"><span class="nav-number">4.10.</span> <span class="nav-text">点云的距离度量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atlasnet"><span class="nav-number">4.11.</span> <span class="nav-text">AtlasNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E9%9A%90%E5%BC%8F%E5%87%BD%E6%95%B0deep-implicit-functions"><span class="nav-number">4.12.</span> <span class="nav-text">深度隐式函数（Deep Implicit
+Functions）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E8%BE%90%E5%B0%84%E5%9C%BAnerf"><span class="nav-number">4.13.</span> <span class="nav-text">神经辐射场（NeRF）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">4.13.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E6%BA%85%E5%B0%84gaussian-splatting"><span class="nav-number">4.13.2.</span> <span class="nav-text">高斯溅射（Gaussian Splatting）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E7%BB%93%E6%9E%84"><span class="nav-number">4.14.</span> <span class="nav-text">元素结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-16-vision-and-language"><span class="nav-number">5.</span> <span class="nav-text">Lecture 16: Vision and
+Language</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8Bfoundation-models"><span class="nav-number">5.1.</span> <span class="nav-text">基础模型（Foundation Models）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clip"><span class="nav-number">5.2.</span> <span class="nav-text">CLIP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#coca"><span class="nav-number">5.2.1.</span> <span class="nav-text">CoCa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clip-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">5.2.2.</span> <span class="nav-text">CLIP 的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clip-%E7%9A%84%E5%8A%A3%E5%8A%BF"><span class="nav-number">5.2.3.</span> <span class="nav-text">CLIP 的劣势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llava"><span class="nav-number">5.3.</span> <span class="nav-text">LLaVA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flamingo"><span class="nav-number">5.3.1.</span> <span class="nav-text">Flamingo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#segment-anything-modelsam"><span class="nav-number">5.4.</span> <span class="nav-text">Segment Anything Model（SAM）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cuplcustomized-prompts-via-language-models"><span class="nav-number">5.5.</span> <span class="nav-text">CuPL（CUstomized
+Prompts via Language models）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#visprogvisual-programming"><span class="nav-number">5.5.1.</span> <span class="nav-text">VisProg（visual programming）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-17-robot-learning"><span class="nav-number">6.</span> <span class="nav-text">Lecture 17: Robot Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="nav-number">6.1.</span> <span class="nav-text">问题建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%84%9F%E7%9F%A5"><span class="nav-number">6.2.</span> <span class="nav-text">机器人感知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0reinforcement-learning"><span class="nav-number">6.3.</span> <span class="nav-text">强化学习（Reinforcement
+learning）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A7%84%E5%88%92model-learning-model-based-planning"><span class="nav-number">6.4.</span> <span class="nav-text">模型学习与基于模型的规划（Model
+learning &amp; model-based planning）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0imitation-learning"><span class="nav-number">6.5.</span> <span class="nav-text">模仿学习（Imitation learning）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86behavior-cloningbc"><span class="nav-number">6.5.1.</span> <span class="nav-text">行为克隆（Behavior
+Cloning，BC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E5%AE%B6%E7%A4%BA%E8%8C%83%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%BC%8F%E9%87%87%E9%9B%86"><span class="nav-number">6.5.2.</span> <span class="nav-text">专家示范数据的迭代式采集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0inverse-reinforcement-learningirl"><span class="nav-number">6.5.3.</span> <span class="nav-text">逆强化学习（Inverse
+Reinforcement Learning，IRL）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86implicit-behavior-cloningibc"><span class="nav-number">6.5.4.</span> <span class="nav-text">隐式行为克隆（Implicit
+Behavior Cloning，IBC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E6%95%A3%E7%AD%96%E7%95%A5diffusion-policies"><span class="nav-number">6.5.5.</span> <span class="nav-text">扩散策略（Diffusion Policies）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8Brobotic-foundation-models"><span class="nav-number">6.6.</span> <span class="nav-text">机器人基础模型（Robotic
+foundation models）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pi-zero-by-physical-intelligence"><span class="nav-number">6.6.1.</span> <span class="nav-text">Pi-Zero by Physical
+Intelligence</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%9A%E5%AD%98%E6%8C%91%E6%88%98"><span class="nav-number">6.7.</span> <span class="nav-text">尚存挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0"><span class="nav-number">6.7.1.</span> <span class="nav-text">机器人学习模型的评估</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8Bfoundation-world-models"><span class="nav-number">6.8.</span> <span class="nav-text">基础世界模型（Foundation
+World Models）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">140</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener me" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cs231n-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17） | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-05-30 16:17:16 / 修改时间：17:35:48" itemprop="dateCreated datePublished" datetime="2026-05-30T16:17:16+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本篇为《CS231n: Deep Learning for Computer
+Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 12 -
+Lec 17。</p>
+<p>主要参考了 <a
+target="_blank" rel="noopener" href="https://cs231n.stanford.edu/2025/index.html">CS231n 官网</a> 和 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1b1agz5ERC/">B
+站课程视频</a>，相关代码和作业实现可以参考 <a
+target="_blank" rel="noopener" href="https://github.com/XenonWZH/learn-dl/tree/main/CS231n">个人完成记录</a>。</p>
+<blockquote>
+<p><strong>前置说明</strong>：基础知识可参考 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411d7Ys/">《PyTorch深度学习实践》</a>。本文默认读者已掌握该课程的基础常识，故不再进行赘述。</p>
+</blockquote>
+<p>这一系列笔记为个人随手记录，<del>且是直接从 Obsidian
+强行复制过来的，不保证排版和可读性（）</del>。</p>
+<span id="more"></span>
+<hr />
+<p>导航链接：</p>
+<ul>
+<li><a href="/cs231n-1/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）">Lec 02 - Lec 04：线性分类器进行图像分类，正则化与优化，神经网络与反向传播</a></li>
+<li><a href="/cs231n-2/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">Lec 05 - Lec 11：基于 CNN 的图像分类，CNN 架构，循环神经网络，注意力机制与 Transformer，目标检测、图像分割与可视化，视频理解，大规模分布式训练</a></li>
+<li><strong><a href="/cs231n-3/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">Lec 12 - Lec 17：自监督学习，生成模型（一），生成模型（二），三维视觉，视觉与语言，机器人学习</a></strong></li>
+<li><a href="/cs231n-assignments/" title="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">Assignments：作业合集</a></li>
+</ul>
+<hr />
+<h1 id="lecture-12-self-supervised-learning">Lecture 12: Self-supervised
+Learning</h1>
+<h2 id="学习表征learned-representations">学习表征（Learned
+Representations）</h2>
+<p>对于一个神经网络（以图像分类为例），<strong>学习表征</strong>
+即为线性分类层（最后一层）之前的数据表示，其能很好地代表图像，且可通过简单的线性映射即可从其中提取特征获取类别。</p>
+<p>但对于训练，其硬性要求数据必须经过手动标记标签。</p>
+<h2 id="自监督学习">自监督学习</h2>
+<p>考虑是否有方法可不依赖大量人工标注数据集进行训练，即为
+<strong>自监督学习</strong>（Self-Supervised Learning）。</p>
+<p>在无标记的数据集上，考虑可通过 <strong>预设任务</strong>（pretext
+task）的目标函数来训练神经网络，以获得图像的良好特征。而当需要在小规模已标注的数据集上进行特定任务的训练时，我们只需转移这个训练好的编码器，并用于下游任务特征提取。</p>
+<p>在此，我们需定义预设任务为一个足够通用的任务以从图像中学习特征（称之为编码器），并用该编码器解决实际场景下的下游任务。</p>
+<p>自监督学习即为：数据集（无标签）-&gt; 编码器 -&gt; 学习表征 -&gt;
+解码器 / 分类器 / 回归器（其通过学习表征生成输出）。
+在完成训练后，则将其应用至有标签的小数据集（例如图像分类），则有：数据集（有标签）-&gt;
+编码器 -&gt; 学习表征 -&gt; 全连接网络 -&gt; 标签。
+此时则只需训练最后的浅层的全连接网络，若特征足够好，则无需大量的训练。</p>
+<p>以下角度可评估自监督学习：</p>
+<ul>
+<li>预设任务的表现（Pretext Task Performance）；</li>
+<li>表征质量（Representation Quality）；
+<ul>
+<li>线性评估协议（Linear Evaluation
+Protocol）：在学习到的表征上训练一个线性分类器；</li>
+<li>聚类（Clustering）：衡量聚类性能；</li>
+<li>t-SNE：降低表征的维度，并可视化表征以评估其可分性；</li>
+</ul></li>
+<li>鲁棒性与泛化能力（Robustness and Generalization）；</li>
+<li>计算效率（Computational Efficiency）；</li>
+<li>迁移学习与下游任务性能（Transfer Learning and Downstream Task
+Performance）。</li>
+</ul>
+<p>其中，评估下游任务性能最为重要。</p>
+<h2 id="自监督预设任务">自监督预设任务</h2>
+<p>定义预设任务主要需遵循：能让我们获得良好的特征，且可通过预设任务自动生成标签。
+故一些例子为：图像补全（盖住一部分图像，要求预测盖住的部分）、图像旋转（给出旋转过的图像，要求预测旋转的角度）、拼图（将图像拆成若干块，要求按照顺序拼回去）、图像上色（给出黑白图像，要求上色）等等。</p>
+<p>这些任务通常都围绕视觉常识的概念进行设计。</p>
+<p>而预设任务也会有问题：</p>
+<ul>
+<li>设计单独的预设任务较为繁琐；</li>
+<li>得到的学习表征与预设任务有关，不一定是通用的（即可能对预设任务有效，但对通常的任务不那么有效）。</li>
+</ul>
+<h3 id="图像旋转">图像旋转</h3>
+<p>其基于假设：模型只有在具备“物体未受扰动时的正确形态”这类常识的前提下，才能识别出物体的正确旋转角度。</p>
+<p>例如，将图片旋转四种角度（<span class="math inline">\(0^{\circ},
+90^{\circ}, 180^{\circ}, 270^{\circ}\)</span>），输入
+CNN，并预测旋转的是哪种角度以进行预训练。然后将习得的表征，通过微调编码器和分类器（例如冻结
+conv1 和 conv2，微调 conv3 和 linear
+layers）运用至图像分类，其可达到较好的效果，且在预训练时就达到了较高的准确率。</p>
+<p>当下游任务较简单时（例如
+CIFAR-10），完全监督模型和该方法得到的模型准确率通常会收敛至同一值。但当下游任务很复杂时，不经过预训练通常得不到理想的效果，且使用自监督学习非常有效（甚至可能接近在
+ImageNet 预训练的效果）。</p>
+<p>尝试进行权重可视化，可发现由于只解决单一问题，监督模型通常有更集中的区域；而自监督模型需全面理解图像，故会观察更多特征，覆盖更多区域。</p>
+<h3 id="预测相对位置">预测相对位置</h3>
+<p>在图像中截取一块，创建 <span class="math inline">\(3 \times
+3\)</span>
+网格，给定中心块和其他任意一个块，预测该块的位置，其为八分类。</p>
+<h3 id="拼图">拼图</h3>
+<p>在图像中截取一块，创建 <span class="math inline">\(3 \times
+3\)</span>
+网格，将其中的块打乱，预测这些块原本的顺序（不过一般只会取其中 <span
+class="math inline">\(64\)</span> 种顺序进行打乱），其为 <span
+class="math inline">\(64\)</span> 分类。</p>
+<h3 id="图像补全">图像补全</h3>
+<p>即遮挡部分图像，然后让模型绘制被遮挡的部分。</p>
+<p>对于图像，会先进行掩码，然后输入编码器得到编码器特征（Encoder
+Features），其经过全连接层后转为解码器特征（Decoder
+Features），然后输入解码器进行解码，得到的输出与遮挡的部分进行比较即为
+loss。 其为学习重建缺失像素的过程，且为某种形式的
+<strong>自编码器</strong>（Auto
+Encoder），即将输入编码为所需的表示以进行解码。</p>
+<p>一般来说，基于重建的框架会产生大量模糊且平滑的输出（类似于高斯模糊的视觉效果），所以需要加上额外的对抗性目标函数，以改善该情况。</p>
+<p>该方法是目前用于预训练最常见预设任务之一。</p>
+<h3 id="图像上色">图像上色</h3>
+<p>即对于有颜色的图像，分离出其亮度和颜色（使用 Lab 颜色空间）。
+则为给定 L，预测 ab。即给定 <span class="math inline">\(X \in
+\mathbb{R}^{H \times W \times 1}\)</span>，预测 <span
+class="math inline">\(\hat{Y} \in \mathbb{R}^{H \times W \times
+2}\)</span>，且拼接 <span class="math inline">\((X, \hat{Y})\)</span>
+即为彩色图像。</p>
+<p>显然，该方法不仅可用于预训练，其本身也有相当的应用价值。且其表现出良好的理解能力（例如生成水中倒影的颜色与原物体相同）。</p>
+<h3
+id="分裂脑自编码器split-brain-autoencoder">分裂脑自编码器（Split-brain
+Autoencoder）</h3>
+<p>即将图像分为亮度通道和颜色通道，然后训练两个神经网络，一个通过亮度预测颜色，另一个通过颜色预测亮度，最后将两者结合，生成新的图像，然后与实际图像相比较，得到
+L2 loss 或其他举例函数计算 loss。</p>
+<p>可提取
+idea：通道分为两组，训练两个神经网络，给定其中一组，预测另一组，最后合并输出得到结果。这样可较为容易地计算
+loss。</p>
+<p>此可应用与其他情况。例如 RGB-HHA 图像，则可分为 RGB 通道和 HHA
+深度通道。</p>
+<p>该种方法在多种下游任务种表现较好。</p>
+<h3 id="视频上色">视频上色</h3>
+<p>即给出一个带有颜色的一帧，然后给后续帧上色。在该过程中，实际上我们在尝试追踪视频中的像素和物体，使其可隐式学习这些追踪模式。</p>
+<p>若有参考帧，对于输入帧则许找到特定物体的对应位置，然后根据位置确定颜色，并复制颜色作为输出目标的颜色。</p>
+<p>该方法的实现与注意力机制比较类似。对参考帧和目标帧，先将其输入 CNN
+得到特征图（参考帧 <span class="math inline">\(f_{i}\)</span>，目标帧
+<span
+class="math inline">\(f_{j}\)</span>），然后对目标帧中的像素，计算其与参考帧的每个像素的注意力：
+<span class="math display">\[ A_{ij} =
+\frac{\exp(f_{i}^{\top}f_{j})}{\sum_{k} \exp(f_{k}^{\top}f_{j})}.
+\]</span> 之后即可得到预测颜色： <span class="math display">\[ y_{j} =
+\sum_{i} A_{ij}c_{i}. \]</span> 最后只需最小化 loss 即可： <span
+class="math display">\[ \min_{\theta} \sum_{j} \mathcal{L}(y_{j},
+c_{j}). \]</span></p>
+<p>利用该技术，不仅可视频上色，也可通过上色实现追踪物体，甚至识别视频中的关键点。</p>
+<h2 id="掩码自编码器masked-auto-encodermae">掩码自编码器（Masked Auto
+Encoder，MAE）</h2>
+<p>其会设置一个采样率，然后对图片划分成网格，对其中采样率比例个 patches
+设置掩码，然后进行类似于图像补全的重建，以提取图像特征。其通过定义良好的编码器和解码器实现。</p>
+<p>其先将图片拆为 patches，然后均匀采样（采样率通常较高，如 <span
+class="math inline">\(75\%\)</span>），对采样部分设置掩码。
+使用高遮罩比例会增加预测任务难度，从而增强预设任务的效果。且由于高遮罩比例，可大幅扩充数据量（每次遮住同一张图的不同部分）。</p>
+<p>对于编码器，其只可看到未被遮挡的数据。这些数据先进行
+embedding，接着添加位置嵌入，输入编码器。编码器由 Transformer
+组成，且由于输入数据量较小，编码器可设计得很大。</p>
+<p>对于解码器，对于被掩码覆盖的 patches，使用 <strong>共享掩码
+token</strong>（shared mask
+tokens，其为可训练的参数，可视为对缺失部分提供的平均表示）进行替代，将其与编码器输出进行合并，添加位置编码，输入解码器。解码器（采用
+Transformer，后接一个线性层进行输出）则将输入转为完整的
+patches，得到最终图像的输出。</p>
+<p>使用 MSE（mean squared error loss）计算原始图像和重建图像的差异，且该
+loss 只计算被遮住的 patches。</p>
+<p>完成训练后，可在编码器后接线性层完成下游任务。此时可采用线性探测（linear
+probing），也可采用微调：</p>
+<ul>
+<li>对于线性探测，会冻结编码器，只训练线性层，<strong>其可反映学习表征的质量</strong>；</li>
+<li>对于微调，编码器和线性层均会经过微调，<strong>其更有潜力去适配新任务</strong>。</li>
+</ul>
+<h2
+id="对比表征学习contrastive-representation-learning">对比表征学习（Contrastive
+representation learning）</h2>
+<p>对于之前的预设任务，都是在同一种图像上进行变换。而当数据集中存在完全不同种类的图像时，我们可以考虑以下任务：对于同一种类对象的变换，在空间中吸引（attract），而不同种类对象在空间中则排斥（repel），即为
+<strong>对比表征学习</strong>。</p>
+<p>其定义吸引与排斥函数，若参考源图片为 <span
+class="math inline">\(x\)</span>，则经过变换（例如遮挡、旋转、拼图、上色等等）的均为正样本
+<span class="math inline">\(x^{+}\)</span>，数据集中的其他对象则为负样本
+<span class="math inline">\(x^{-}\)</span>。</p>
+<p>对于评分函数 <span
+class="math inline">\(\operatorname{score}\)</span>，我们希望有： <span
+class="math display">\[ \operatorname{score}(f(x), f(x^{+})) \gg
+\operatorname{score}(f(x), f(x^{-})). \]</span> 定义评分函数后，即可定义
+loss 以训练评分函数 <span class="math inline">\(s\)</span>： <span
+class="math display">\[ L = -\mathbb{E}_{X}\left( \log
+\frac{\exp(s(f(x), f(x^{+})))}{\exp(s(f(x), f(x^{+}))) + \sum_{j=1}^{N -
+1} \exp(s(f(x), f(x_{j}^{-})))} \right). \]</span>
+该损失函数形式与交叉熵损失较为类似，称为
+<strong>信息噪声对比估计损失</strong>（InfoNCE loss）。</p>
+<p>InfoNCE loss 为 <span class="math inline">\(f(x)\)</span> 与 <span
+class="math inline">\(f(x^{+})\)</span> 之间
+<strong>互信息</strong>（mutual
+Information，其衡量两张图象之前的依赖或共享信息）的下界： <span
+class="math display">\[ MI(f(x), f(x^{+})) - \log(N) \geq -L. \]</span>
+故最小化 <span class="math inline">\(L\)</span> 意味着使 <span
+class="math inline">\(MI(f(x), f(x^{+}))\)</span> 更可能增大。
+且负样本（<span
+class="math inline">\(N\)</span>）数量越大，下界越紧。故对于该种神经网络，通常要求批次较大。</p>
+<h3 id="simclr">SimCLR</h3>
+<p>SimCLR 为一个用于对比学习的简单框架，其将同一张图片分别经过两种变换
+<span class="math inline">\(t \sim \mathcal{T}\)</span> 和 <span
+class="math inline">\(t&#39; \sim \mathcal{T}\)</span>，得到 <span
+class="math inline">\(\tilde{x}_{i}\)</span> 和 <span
+class="math inline">\(\tilde{x}_{j}\)</span>，然后得到学习表征 <span
+class="math inline">\(h_{i} = f(\tilde{x}_{i}), \ h_{j} =
+f(\tilde{x}_{j})\)</span>，并映射至空间，有 <span
+class="math inline">\(z_{i} = g(h_{i}), \ z_{j} =
+g(h_{j})\)</span>。</p>
+<p>其有余弦相似度： <span class="math display">\[ s(u, v) =
+\frac{u^{\top}v}{\|u\| \|v\|} \]</span> 使用该函数对 <span
+class="math inline">\(z_{i}, z_{j}\)</span>
+进行打分，目标为最大化打分值。</p>
+<p>对于 <span class="math inline">\(g\)</span>
+的设计，其基于假设：使用对比学习时，可能会丢失对对比学习无关紧要，但对下游任务有利的信息。故会使用
+<span class="math inline">\(g\)</span> 处理后再进行对比学习，以在 <span
+class="math inline">\(h\)</span> 中保留更多信息。</p>
+<p>使用训练后的特征，例如在图像分类的下游任务中，加入线性分类器，即可得到较好的效果。</p>
+<p>该方法在大批次下的表现更好，但由于硬件限制，大多数时候并不能做到这一点。</p>
+<h3
+id="动量对比学习momentum-contrastive-learingmoco">动量对比学习（Momentum
+Contrastive Learing，MoCo）</h3>
+<p>其提出了使用动量对比学习，即使用队列存储了 <span
+class="math inline">\(q\)</span>
+个之前批次的样本（在当前视角即为负样本），故其不完全依赖批次中的负样本。</p>
+<p>其存储了一定数量的负样本，并随时间更新，以计算
+loss。但显然这里由于样本可能不在队列中，无法反向传播，故需分开：编码器（encoder）处理正样本，称为
+query；动量编码器（momentum encoder）处理负样本，称为
+key。此时训练只会影响编码器。
+而对于动量编码器，则使用动量规则进行更新（使用了 encoder 的权重）：
+<span class="math display">\[ \theta_{k} \gets m\theta_{k} + (1 -
+m)\theta_{q}. \]</span></p>
+<p>使用该方法，则可避免对比学习对批次大小的依赖，不需大批次以增强效果。</p>
+<h3 id="dino">DINO</h3>
+<p>其与 MoCo 类似，但其使用 KL 散度 loss 而不是 softmax。</p>
+<p>此外，进化而来的有 DINOv2，其为
+<strong>非常强大的自监督特征模型</strong>，如今应用十分广泛。其大幅扩大了训练数据（甚至远大于
+ImageNet）。</p>
+<hr />
+<h1 id="lecture-13-generative-models-1">Lecture 13: Generative Models
+1</h1>
+<h2 id="机器学习任务分类">机器学习任务分类</h2>
+<p>机器学习任务可进行二分类：</p>
+<ul>
+<li>监督学习（Supervised Learning）：有数据集 <span
+class="math inline">\((x, y)\)</span>，其中 <span
+class="math inline">\(x\)</span> 为数据，<span
+class="math inline">\(y\)</span> 为标签，需学习映射 <span
+class="math inline">\(x \mapsto y\)</span>；</li>
+<li>无监督学习（Unsupervised Learning）：有数据集 <span
+class="math inline">\(x\)</span>，无标签，需学习数据的隐藏结构，不一定需要针对特定的任务（例如
+K-means 聚类、PCA 降维、密度估计等）。</li>
+</ul>
+<h2 id="生成模型">生成模型</h2>
+<p>从另一种角度，有（该角度中，总可认为数据中有一定的概率结构，且我们可发现或学习；且这里
+<span class="math inline">\(x\)</span> 为数据，<span
+class="math inline">\(y\)</span> 为标签）：</p>
+<ul>
+<li>判别模型（Discriminative Model）：学习条件概率分布 <span
+class="math inline">\(p(y \mid x)\)</span>；</li>
+<li>生成模型（Generative Model）：学习数据本身的概率分布 <span
+class="math inline">\(p(x)\)</span>；</li>
+<li>条件生成模型（Conditional Generative Model）：学习条件概率分布 <span
+class="math inline">\(p(x \mid y)\)</span>。</li>
+</ul>
+<p>对于判别模型，其没有办法拒绝不合理的输入。
+其可用于对数据分配标签、特征学习等。</p>
+<p>对于生成模型，所有可能的图像都在相互竞争概率质量，而此时为了生成内容的合理性，必须仔细考虑合理数据中存在的结构（例如三条腿的狗生成的概率远高于三个胳膊的猴子生成的概率）。
+由于该种性质，生成模型可以通过基于某图像很低的概率，以表达某图像是不合理的输入。
+不过从实际上，生成模型用处不大，其可用于检测异常值、特征学习（但实际上效果远差于对比学习）、采样并生成数据（但由于无法控制输出，意义不大）。</p>
+<p>对于条件生成模型，每一个标签，都会独立地在所有图像之间引发概率质量竞争。
+且当 <span class="math inline">\(y\)</span>
+较为复杂时（例如为文字描述，甚至为图像 +
+文字描述），则该模型则涉及的为非常复杂且定义不明确的问题，需要对涉及对象的深入推理。
+条件生成模型应用则十分广泛，其可用于分配标签且拒绝异常值（不过实际上用得不多）、采样并根据标签生成数据（我们可控制输出，故其应用十分广泛）等。</p>
+<p>在文献中，“生成模型”可能指的是生成模型，也可能指的条件生成模型（甚至有时对于条件生成模型，会省略
+<span class="math inline">\(y\)</span>）。</p>
+<p>对于条件生成模型，可尝试使用 Bayes 公式（尽管该方法极不常用）： <span
+class="math display">\[ P(x \mid y) = \frac{P(y \mid x)}{P(y)} P(x).
+\]</span></p>
+<p>当尝试建模的任务中存在一些模糊性时（可能存在不止一种输出），则需使用生成模型，其根据输入对整个输出分布进行建模。</p>
+<h3 id="生成模型的分类">生成模型的分类</h3>
+<pre>
+<code class="mermaid">
+graph TD
+%% 核心节点定义
+Root[生成模型 &lt;br&#x2F;&gt;&lt;b&gt;Generative models&lt;&#x2F;b&gt;]
+
+%% 显式密度分支
+Explicit[&quot;显式密度 &lt;br&#x2F;&gt;&lt;b&gt;Explicit density&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;small&gt;模型可以计算 $P(x)$&lt;&#x2F;small&gt;&quot;]
+Tractable[&quot;可解密度 &lt;br&#x2F;&gt;&lt;b&gt;Tractable density&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;small&gt;真正计算 $P(x)$&lt;&#x2F;small&gt;&quot;]
+Approx[&quot;近似密度 &lt;br&#x2F;&gt;&lt;b&gt;Approximate density&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;small&gt;近似 $P(x)$&lt;&#x2F;small&gt;&quot;]
+AR[&lt;b&gt;自回归模型&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;Autoregressive]
+VAE[&lt;b&gt;变分自编码器&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;VAE]
+
+%% 隐式密度分支
+Implicit[&quot;隐式密度 &lt;br&#x2F;&gt;&lt;b&gt;Implicit density&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;small&gt;无法计算 $P(x)$，但可以从中采样&lt;&#x2F;small&gt;&quot;]
+Direct[&quot;直接采样 &lt;br&#x2F;&gt;&lt;b&gt;Direct&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;small&gt;可以直接从 $P(x)$ 中采样&lt;&#x2F;small&gt;&quot;]
+Indirect[&quot;间接采样 &lt;br&#x2F;&gt;&lt;b&gt;Indirect&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;&lt;small&gt;通过迭代过程来近似采样&lt;&#x2F;small&gt;&quot;]
+GAN[&lt;b&gt;生成对抗网络&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;GAN]
+Diffusion[&lt;b&gt;扩散模型&lt;&#x2F;b&gt;&lt;br&#x2F;&gt;Diffusion Models]
+
+%% 建立连接
+Root --&gt; Explicit
+Root --&gt; Implicit
+
+Explicit --&gt; Tractable
+Explicit --&gt; Approx
+Tractable --&gt; AR
+Approx --&gt; VAE
+
+Implicit --&gt; Direct
+Implicit --&gt; Indirect
+Direct --&gt; GAN
+Indirect --&gt; Diffusion
+
+%% 样式美化
+style Root fill:#d4e6f1,stroke:#2e4053,stroke-width:2px
+style Explicit fill:#eaeded,stroke:#7f8c8d,stroke-width:1px
+style Implicit fill:#eaeded,stroke:#7f8c8d,stroke-width:1px
+</code>
+</pre>
+<p>对于间接采样，可将采样过程视作黑盒，然后当成直接采样处理，但由于间接采样需要进行近似（需要迭代无限步收敛，在模型中采取有限步进行近似计算），通常不会这么做。</p>
+<h2 id="自回归模型autogressive-models">自回归模型（Autogressive
+Models）</h2>
+<h3 id="最大似然估计mle">最大似然估计（MLE）</h3>
+<p>设对概率分布有显式函数 <span class="math inline">\(p(x) = f(x,
+W)\)</span>。给定数据集 <span class="math inline">\(x^{(1)}, x^{(2)},
+\cdots, x^{(N)}\)</span>（需假设 <span class="math inline">\(x\)</span>
+是 IID（独立同分布）的），我们希望训练模型得到： <span
+class="math display">\[ W^{*} = \arg\max_{W} \prod_{i} p(x^{(i)}).
+\]</span> 即最大化该数据出现的概率，称为
+<strong>最大似然估计</strong>（Maximum Likelihood Estimation）。</p>
+<p>则有： <span class="math display">\[
+\begin{align*}
+W^{*} &amp;= \arg\max_{W} \sum_{i} \log p(x^{(i)}) \\
+&amp;= \arg\max_{W} \sum_{i} \log f(x^{(i)}, W).
+\end{align*}
+\]</span> 于是可得到用于训练神经网络的目标函数，即可变换为 loss
+进行训练。</p>
+<h3 id="自回归模型">自回归模型</h3>
+<p>自回归模型假设 <span class="math inline">\(x\)</span>
+是一个一列子部分的序列，即： <span class="math display">\[ x = (x_{1},
+x_{2}, \cdots, x_{T}). \]</span> 则有： <span class="math display">\[
+\begin{align*}
+p(x) &amp;= p(x_{1}x_{2} \cdots x_{n}) \\
+&amp;= p(x_{1})p(x_{2} \mid x_{1})p(x_{3} | x_{1}x_{2}) \cdots \\
+&amp;= \prod_{t=1}^{T} p(x_{t} \mid x_{1} \cdots x_{t - 1}).
+\end{align*}
+\]</span></p>
+<p>考虑训练一个神经网络，其输入序列 <span
+class="math inline">\(x\)</span>
+的前一部分，预测序列下一部分的概率分布。显然 RNN、Masked Transformer
+等结构可解决。</p>
+<p>自回归模型需要 <span class="math inline">\(x\)</span>
+是一个序列，显然文本数据是适配的，而图像则有点棘手（其不是天然地一维的，且不是天然地离散的）。</p>
+<h3 id="图像上的自回归模型">图像上的自回归模型</h3>
+<p>即将图像视为像素序列，且每个像素为三个 <span
+class="math inline">\(8\)</span> 位数字。
+则考虑将图像转化为一个一维长序列，其中每个元素为图像的子像素值即可。
+显然，使用该方法时，序列长度过长。</p>
+<p>另一种方法为考虑利用某种模型，将图片分解为一维序列。</p>
+<h2
+id="变分自动编码器variational-autoencodersvaes">变分自动编码器（Variational
+Autoencoders，VAEs）</h2>
+<p>在 VAE
+中，我们放弃对概率密度的精确计算（也可能是难以计算），改为近似计算（实际是真实密度下限的近似密度）。这样反而能得到计算能表达数据的隐向量的能力。</p>
+<h3 id="自动编码器autoencodersaes">自动编码器（Autoencoders，AEs）</h3>
+<p>这是一种无监督学习，用于从无标签的输入 <span
+class="math inline">\(x\)</span> ，通过编码器，提取特征 <span
+class="math inline">\(z\)</span>。其中编码器可为任意网络。
+需要解决如何学习 <span
+class="math inline">\(z\)</span>，考虑建立解码器并输入 <span
+class="math inline">\(z\)</span>，我们希望其能重建输入，即输出 <span
+class="math inline">\(\hat{x}\)</span>，并有loss： <span
+class="math display">\[ \| \hat{x} - x \|_{2}^{2}. \]</span></p>
+<p>而为了使其学习的不是恒等映射，需要限制 <span
+class="math inline">\(z\)</span>，这里让 <span
+class="math inline">\(z\)</span> 远小于 <span
+class="math inline">\(x\)</span> 即可。</p>
+<p>学习 <span class="math inline">\(z\)</span>
+之后，则与自监督学习一样，将解码器替换成所需的网络，然后进行有标签的下游训练即可。</p>
+<p>从另一种角度，对于生成模型，则考虑丢掉
+<strong>编码器</strong>，以某种方法采样匹配模型数据的 <span
+class="math inline">\(z\)</span>，然后通过解码器用 <span
+class="math inline">\(z\)</span> 生成新的样本 <span
+class="math inline">\(\hat{x}\)</span>。此方法无需对概率密度进行建模。</p>
+<p>但实际上，生成新的 <span class="math inline">\(z\)</span>
+并不比生成新的 <span class="math inline">\(x\)</span> 容易。</p>
+<h3 id="变分自动编码器">变分自动编码器</h3>
+<p>其在上述思路上，考虑对 <span class="math inline">\(z\)</span>
+强制加上一些结构，例如符合高斯分布，以此可强制 AEs
+具有概率性，并再潜在空间上强制规制在某个概率结构。</p>
+<p>其有步骤：</p>
+<ol type="1">
+<li>从原始数据学习隐特征 <span class="math inline">\(z\)</span>，其中
+<span class="math inline">\(z\)</span> 被规制在某种特定结构中；</li>
+<li>采样并生成新数据。</li>
+</ol>
+<p>假设 <span class="math inline">\(x^{(i)}\)</span> 可由 <span
+class="math inline">\(z\)</span> 生成。则在训练后，可在先验分布 <span
+class="math inline">\(p_{\theta^{*}}(z)\)</span>（多规定为高斯分布）中找一个
+<span class="math inline">\(z\)</span>，经过解码器，从条件分布 <span
+class="math inline">\(p_{\theta^{*}}(x \mid z^{(i)})\)</span>
+采样得到新样本 <span class="math inline">\(x\)</span>。</p>
+<p>对于训练，考虑使用最大似然，即若能有数据集 <span
+class="math inline">\((x, z)\)</span>，则可训练条件生成模型 <span
+class="math inline">\(p(x \mid z)\)</span>。</p>
+<p>由于不知道 <span class="math inline">\(z\)</span>，尝试将其边缘化：
+<span class="math display">\[ p_{\theta}(x) = \int p_{\theta}(xz) \,
+\mathrm{d}z = \int p_{\theta}(x \mid z)p_{\theta}(z) \, \mathrm{d}z.
+\]</span> 其中，<span class="math inline">\(p_{\theta}(x \mid
+z)\)</span> 可通过解码器进行计算，且 <span
+class="math inline">\(p_{\theta}(z)\)</span>
+已假设为高斯分布，但该积分难以计算。</p>
+<p>另一种思路，考虑 Bayes 公式，有： <span class="math display">\[
+p_{\theta}(x) = \frac{p_{\theta}(x \mid z)p_{\theta}(z)}{p_{\theta}(z
+\mid x)}. \]</span> 其中，<span class="math inline">\(p_{\theta}(x \mid
+z)\)</span> 可通过解码器进行计算，且 <span
+class="math inline">\(p_{\theta}(z)\)</span> 已假设为高斯分布，但 <span
+class="math inline">\(p_{\theta}(z \mid x)\)</span> 难以计算。
+这里则需要考虑使用另一个网络，学习 <span
+class="math inline">\(q_{\phi}(z \mid x) \approx p_{\theta}(z |
+x)\)</span>。</p>
+<p>于是对于 VAE，需要联合学习两个神经网络，一个为解码器 <span
+class="math inline">\(z \mapsto p_{\theta}(x \mid
+z)\)</span>，另一个是编码器 <span class="math inline">\(x \mapsto
+q_{\phi}(z \mid x)\)</span>，并使用各自独立的权重进行单独训练。</p>
+<p>这里则需强加结构：<span class="math inline">\(p_{\theta}(x \mid z) =
+\mathcal{N}(\mu_{x \mid z}, \sigma^{2}), \ q_{\phi}(z \mid x) =
+\mathcal{N}(\mu_{z \mid x}, \Sigma_{z \mid x})\)</span>。
+解码器的输出为对角高斯分布，其中对角线元素对应像素，则解码器输出的则为对角高斯分布的均值
+<span class="math inline">\(\mu_{x \mid
+z}\)</span>（其会固定方差）；同理，编码器输出 <span
+class="math inline">\(\mu_{z \mid x}\)</span> 和 <span
+class="math inline">\(\Sigma_{z \mid x}\)</span>。
+这里均使用对角高斯分布，避免了协方差矩阵过大（例如 <span
+class="math inline">\(H^{2}W^{2}\)</span> 而不是 <span
+class="math inline">\(HW\)</span>）的情况。</p>
+<p>解码器固定方差后，取对数，则有： <span class="math display">\[ \log
+p_{\theta}(x \mid z) = -\frac{1}{2\sigma^{2}} \| x - \mu \|_{2}^{2} +
+C_{2}. \]</span> 则对其最大化即为最小化 <span
+class="math inline">\(x\)</span> 与网络输出的 L2 距离。
+另外，若不固定方差，即对每个像素分配独立的方差，解码器则倾向于“作弊”，即输出的始终为均值则可达到“完美效果”。</p>
+<h3 id="elbo">ELBO</h3>
+<p>我们需要最大化 <span class="math inline">\(\log
+p_{\theta}(x)\)</span>，有： <span class="math display">\[
+\begin{align*}
+\log p_{\theta}(x) &amp;= \log \frac{p_{\theta}(x \mid
+z)p(z)}{p_{\theta}(z \mid x)} \\
+&amp;= \log \frac{p_{\theta}(x \mid z)p(z)q_{\phi}(z \mid
+x)}{p_{\theta}(z \mid x)q_{\phi}(z \mid x)} \\
+&amp;= \log p_{\theta}(x \mid z) - \log \frac{q_{\phi}(z \mid x)}{p(z)}
++ \log \frac{q_{\phi}(z \mid x)}{p_{\theta}(z \mid x)}.
+\end{align*}
+\]</span> 另外，由于 <span class="math inline">\(p_{\theta}(x)\)</span>
+与 <span class="math inline">\(z\)</span> 无关，有： <span
+class="math display">\[ \log p_{\theta}(x) = \mathbb{E}_{z \sim
+q_{\phi}(z \mid x)} (\log p_{\theta}(x)). \]</span> 则有： <span
+class="math display">\[
+\begin{align*}
+\log p_{\theta}(x) &amp;= \mathbb{E}_{z}(\log p_{\theta}(x \mid z)) -
+\mathbb{E}_{z}\left( \log \frac{q_{\phi}(z \mid x)}{p(z)} \right) +
+\mathbb{E}_{z}\left( \log \frac{q_{\phi}(z \mid x)}{p_{\theta}(z \mid
+x)} \right) \\
+&amp;= \mathbb{E}_{z \sim q_{\phi}(z \mid x)}(\log p_{\theta}(x \mid z))
+- D_{KL}(q_{\phi}(z \mid x), p(z)) + D_{KL}(q_{\phi}(z \mid x),
+p_{\theta}(z \mid x)).
+\end{align*}
+\]</span> 其中后两项为 KL 散度，其为概率分布之间差异 /
+不相似性的度量。</p>
+<p>对于该公式，每一项可有解释：</p>
+<ul>
+<li><span class="math inline">\(\mathbb{E}_{z \sim q_{\phi}(z \mid
+x)}(\log p_{\theta}(x \mid z))\)</span>：其为数据重建，即将 <span
+class="math inline">\(x\)</span> 输入编码器以获得 <span
+class="math inline">\(z\)</span>
+的分布，然后将该概率分布中的任意样本传入解码器，以恢复 <span
+class="math inline">\(x\)</span>；</li>
+<li><span class="math inline">\(D_{KL}(q_{\phi}(z \mid x),
+p(z))\)</span>：其为先验约束，即编码器输入 <span
+class="math inline">\(x\)</span> 之后对 <span
+class="math inline">\(z\)</span> 的预测分布应与 <span
+class="math inline">\(z\)</span>
+的先验分布（通常为对角高斯分布）相匹配，这里即测量了匹配程度；</li>
+<li><span class="math inline">\(D_{KL}(q_{\phi}(z \mid x), p_{\theta}(z
+\mid x))\)</span>：由于有 <span class="math inline">\(p_{\theta}(z \mid
+x)\)</span>，该项难以计算，但 KL 散度大于等于 <span
+class="math inline">\(0\)</span>。</li>
+</ul>
+<p>于是考虑缩放，有： <span class="math display">\[ \log p_{\theta}(x)
+\geq \mathbb{E}_{z \sim q_{\phi}(z \mid x)}(\log p_{\theta}(x \mid z)) -
+D_{KL}(q_{\phi}(z \mid x), p(z)). \]</span>
+于是最大化下限（即不等式右侧）即更可能最大化 <span
+class="math inline">\(\log p_{\theta}(x)\)</span>，即该下限可为 VAE
+的训练目标。</p>
+<p>于是我们需要联合训练编码器 <span class="math inline">\(q\)</span>
+和解码器 <span
+class="math inline">\(p\)</span>，以最大化数据似然的变分下界。
+该下界也被称为 <strong>证据下界</strong>（Evidence Lower
+Bound，ELBo）。</p>
+<h3 id="训练">训练</h3>
+<p>即需要最大化 ELBO： <span class="math display">\[ \mathbb{E}_{z \sim
+q_{\phi}(z \mid x)}(\log p_{\theta}(x \mid z)) - D_{KL}(q_{\phi}(z \mid
+x), p(z)). \]</span></p>
+<p>对于训练，有：</p>
+<ol type="1">
+<li>输入数据 <span class="math inline">\(x\)</span> 至编码器，得到 <span
+class="math inline">\(z\)</span> 的概率分布 <span
+class="math inline">\(q_{\phi}(z \mid x) = \mathcal{N}(\mu_{z \mid x},
+\Sigma_{z \mid x})\)</span>；</li>
+<li>计算 <strong>先验损失</strong>（Prior loss）：<span
+class="math inline">\(z\)</span> 的概率分布应为标准高斯分布（均值为全
+<span class="math inline">\(0\)</span>，标准差为全 <span
+class="math inline">\(1\)</span>）；</li>
+<li>从 <span class="math inline">\(q_{\phi}(z \mid x)\)</span> 使用
+<strong>重参化</strong>（Reparamenterization trick，该技巧能对 <span
+class="math inline">\(z\)</span> 进行反向传播）采样 <span
+class="math inline">\(z\)</span>： <span class="math display">\[
+\begin{align*}
+\epsilon &amp;\sim \mathcal{N}(0, I) \\
+z &amp;= \epsilon \odot \Sigma_{z \mid x} + \mu_{z \mid x}
+\end{align*}
+\]</span></li>
+<li>将 <span class="math inline">\(z\)</span>
+输入解码器，得到预测数据的高斯分布的均值；</li>
+<li>计算 <strong>重构损失</strong>（Reconstruction
+loss）：输出的均值应与 <span class="math inline">\(x\)</span> 在 L2
+距离下接近。</li>
+</ol>
+<p>实际上，这两种损失是相互对抗的：</p>
+<ul>
+<li>重构损失倾向于 <span class="math inline">\(\Sigma_{z \mid x} =
+0\)</span>，且 <span class="math inline">\(\mu_{z \mid x}\)</span>
+对应的 <span class="math inline">\(x\)</span>
+是唯一的，以此完美重建每个数据集中的点；</li>
+<li>先验损失倾向于 <span class="math inline">\(\Sigma_{z \mid x} = I, \
+\mu_{z \mid x} = 0\)</span>，以此使编码器输出为标准高斯分布。
+故在此基础上训练即为在重建数据与强制潜在空间接近先验分布之间找到平衡。</li>
+</ul>
+<h3 id="采样">采样</h3>
+<p>训练完成后，可进行采样。</p>
+<p>只需在先验分布（标准高斯分布）中采样 <span
+class="math inline">\(z\)</span>，输入解码器，即可得到一个样本。</p>
+<p>由于潜在空间 <span class="math inline">\(z\)</span>
+的先验为标准高斯分布，故其每个元素可视为相互独立。
+故可分别调整它们，且这些独立的维度往往能编码出数据中一些有用、可解释或正交的信息。
+例如在手写数字数据集上进行训练，则在改变潜在空间的两个维度时，数字会平滑地从一个类别变到另一个类别。</p>
+<hr />
+<h1 id="lecture-14-generative-models-2">Lecture 14: Generative Models
+2</h1>
+<h2
+id="生成对抗网络generative-adversarial-networksgans">生成对抗网络（Generative
+Adversarial Networks，GANs）</h2>
+<p>对于无法计算 <span class="math inline">\(p(x)\)</span> 的情况，可使用
+GAN，其放弃直接建模 <span
+class="math inline">\(p(x)\)</span>，但可从模型拟合的隐含分布中采样。</p>
+<p>开始时，我们有有限个从数据分布 <span
+class="math inline">\(p_{\text{data}}(x)\)</span> 抽取的数据 <span
+class="math inline">\(x_{i}\)</span>，并希望从 <span
+class="math inline">\(p_{\text{data}}\)</span> 中采样。</p>
+<p>考虑引用遵循先验分布 <span
+class="math inline">\(p(z)\)</span>（多为单位高斯分布）的隐变量 <span
+class="math inline">\(z\)</span>。
+于是考虑使用模型建模数据生成过程，即采样 <span class="math inline">\(z
+\sim p(z)\)</span>，输入 <strong>生成网络</strong>（Generative
+Network），得到 <span class="math inline">\(x = G(z)\)</span>。此时
+<span class="math inline">\(x\)</span> 即为
+<strong>生成分布</strong>（Generative distribution）<span
+class="math inline">\(p_{G}\)</span> 的一个采样。我们希望有 <span
+class="math inline">\(p_{G} = p_{\text{data}}\)</span>。</p>
+<p>则只需从 <span class="math inline">\(p(z)\)</span> 中采样 <span
+class="math inline">\(z\)</span>，输入生成网络 <span
+class="math inline">\(G\)</span>，即可转化为数据分布中采样的 <span
+class="math inline">\(x\)</span>，即为生成的图像。</p>
+<p>而为了训练 <span class="math inline">\(p_{G} =
+p_{\text{data}}\)</span>，考虑训练另一个网络，称为判别器 <span
+class="math inline">\(D\)</span>，其被输入图片（可能为真图片、可能为假图片），并判断该图片是否为真的图片。
+于是需要网络 <span class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span> 相互对抗，即希望 <span
+class="math inline">\(G\)</span> 能欺骗 <span
+class="math inline">\(D\)</span>，且希望 <span
+class="math inline">\(D\)</span> 能正确区分真假数据。 理想状态下，<span
+class="math inline">\(D\)</span> 的分类能力应越来越好，从而迫使 <span
+class="math inline">\(G\)</span> 生成更能接近真实的数据。</p>
+<p>具体地，会通过极小极大博弈（minimax game）联合训练 <span
+class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span>： <span class="math display">\[
+\min_{G}\max_{D}\left( \mathbb{E}_{x \sim p_{\text{data}}}\left( \log
+D(x) \right) + \mathbb{E}_{z \sim p(z)}\left( \log(1 - D(G(z))) \right)
+\right). \]</span> 其中，<span class="math inline">\(D(x)\)</span> 输出
+<span class="math inline">\(x\)</span> 是否为真数据的概率，即 <span
+class="math inline">\(D(x) = 0\)</span> 为假，<span
+class="math inline">\(D(x) = 1\)</span> 为真。 故显然当固定 <span
+class="math inline">\(G\)</span> 时，<span
+class="math inline">\(D\)</span> 希望对真数据有 <span
+class="math inline">\(D(x) = 1\)</span>，即最大化 <span
+class="math inline">\(\mathbb{E}_{x \sim p_{\text{data}}}\left( \log
+D(x) \right)\)</span>；且希望对假数据有 <span class="math inline">\(D(x)
+= 0\)</span>，即最大化 <span class="math inline">\(\mathbb{E}_{z \sim
+p(z)}\left( \log(1 - D(G(z))) \right)\)</span>。 而固定 <span
+class="math inline">\(D\)</span> 时，<span
+class="math inline">\(\mathbb{E}_{x \sim p_{\text{data}}}\left( \log
+D(x) \right)\)</span> 与 <span class="math inline">\(G\)</span> 无关，且
+<span class="math inline">\(G\)</span> 希望对假数据有 <span
+class="math inline">\(D(x) = 1\)</span>，即最小化 <span
+class="math inline">\(\mathbb{E}_{z \sim p(z)}\left( \log(1 - D(G(z)))
+\right)\)</span>。</p>
+<p>在数学上，可将其抽象为： <span class="math display">\[
+\min_{G}\max_{D} V(G, D). \]</span> 故可进行梯度下降： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	grad_D = compute_gradient(V, D)</span><br><span class="line">	D = D + alpha_D * grad_D</span><br><span class="line">	</span><br><span class="line">	grad_G = compute_gradient(V, G)</span><br><span class="line">	G = G - alpha_G * grad_G</span><br></pre></td></tr></table></figure></p>
+<p>需要注意，<span class="math inline">\(V\)</span> 并不是 loss，且
+<span class="math inline">\(V\)</span> 的大小不反映 <span
+class="math inline">\(G\)</span>、<span class="math inline">\(D\)</span>
+以及 GAN 的效果。故 GAN 通常难以训练，甚至难以判断训练是否成功（<span
+class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span> 的 loss 都意义不大）。</p>
+<p>在训练 GAN 时，有一个技巧：在开始训练时，生成器 <span
+class="math inline">\(G\)</span>
+输出为完全随机的噪声，其与真实图像相差巨大，故此时判别器 <span
+class="math inline">\(D\)</span>
+的任务极其简单，故仅在几次迭代后即可分辨。 故在训练初期，<span
+class="math inline">\(D(G(z))\)</span> 十分接近于 <span
+class="math inline">\(0\)</span>，而 <span class="math inline">\(\log(1
+- D(G(Z)))\)</span> 在接近 <span class="math inline">\(0\)</span>
+处图像极其平缓，故 <span class="math inline">\(G\)</span> 的梯度接近于
+<span class="math inline">\(0\)</span>，在初期难以训练。
+为解决该问题，考虑最小化 <span
+class="math inline">\(-\log(D(G(z)))\)</span> 以替代最大化 <span
+class="math inline">\(\log(1 - D(G(Z)))\)</span>（此时 <span
+class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span> 使用的 <span
+class="math inline">\(V\)</span> 则不同），以避免 <span
+class="math inline">\(0\)</span> 附近的梯度消失，以在初期更好训练。</p>
+<p>经过数学推导，可得最优的判别器为： <span class="math display">\[
+D_{G}^{*}(x) = \frac{p_{\text{data}}(x)}{p_{\text{data}}(x) + p_{G}(x)}.
+\]</span> 即取 <span class="math inline">\(D_{G}^{*}(x)\)</span>
+时最大化内层目标函数。且可推导得，当且仅当满足以下等式时最小化外层目标函数：
+<span class="math display">\[ p_{G}(x) = p_{\text{data}}(x). \]</span>
+故从理论上，该方法是自洽的。 但达到该种自洽需要假设：网络 <span
+class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span>
+理论上可拟合任意函数，不过由于神经网络固定大小和容量，该假设不可达成，故该理论无法说明在有限数据情况下，<span
+class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span> 能否收敛至最优解。</p>
+<p>GAN 的隐空间是平滑的。具体来说，若有两个隐向量 <span
+class="math inline">\(z_{0}\)</span> 和 <span
+class="math inline">\(z_{1}\)</span>，然后进行插值： <span
+class="math display">\[
+\begin{align*}
+z_{t} &amp;= tz_{0} + (1 - t)z_{1} \\
+x_{t} &amp;= G(z_{t})
+\end{align*}
+\]</span> 得到的图像 <span class="math inline">\(x_{t}\)</span>
+在两个原始样本之间是平滑过渡的。这意味着模型可能确实发现了有用的结构，并嵌入了隐空间。</p>
+<p>综上，GAN 优缺点有：</p>
+<ul>
+<li>优点：
+<ul>
+<li>公式简单；</li>
+<li>调整得当时，可生成高质量图像（相较于 VAE 通常生成较为模糊的图像，GAN
+可生成很清晰干净的好图像）。</li>
+</ul></li>
+<li>缺点：
+<ul>
+<li>没有 loss 曲线进行参考；</li>
+<li>训练过程不稳定，稍有不慎就会爆炸（称为
+<strong>模式崩溃</strong>（mode collapse），即出现 <code>NaN</code> 或
+<code>inf</code>
+或网络生成内容崩溃等等），故调参、归一化、采样等过程需十分谨慎；</li>
+<li>难以拓展至大规模模型，处理海量数据。</li>
+</ul></li>
+</ul>
+<h3 id="dc-gan">DC-GAN</h3>
+<p>显然，GAN 中的 <span class="math inline">\(G\)</span> 和 <span
+class="math inline">\(D\)</span> 均为神经网络。</p>
+<p>早期 GAN 采用 CNN，并不流行，但在 ViT 出现后，GAN 效果显著提升。</p>
+<p>其中，DC-GAN 是第一个取得显著结果的 GAN，其采用了五层卷积网络。</p>
+<h3 id="stylegan">StyleGAN</h3>
+<p>其采用了更复杂的架构，但效果很好。 该架构为理解 GAN
+的很好的例子。</p>
+<h2 id="扩散模型diffusion-models">扩散模型（Diffusion Models）</h2>
+<p>这里只会涉及 <strong>整流流</strong>（Rectified Flow）。</p>
+<h3 id="直觉">直觉</h3>
+<p>有 <strong>噪声分布</strong>（noise distribution）<span
+class="math inline">\(z \sim
+p_{\text{noise}}\)</span>（其与数据形状一致，且通常为标准高斯分布）。
+考虑原始数据 <span class="math inline">\(x\)</span> 在不同
+<strong>噪声水平</strong>（noise levels）<span
+class="math inline">\(t\)</span>（<span class="math inline">\(0 \leq t
+\leq 1\)</span>）下被噪声侵蚀，得到 <span
+class="math inline">\(x_{t}\)</span>。其中 <span class="math inline">\(t
+= 0\)</span> 时则为无噪声（即完全干净的数据样本），<span
+class="math inline">\(t = 1\)</span>
+则为完全噪声（即该样本直接来自噪声分布），且 <span
+class="math inline">\(t\)</span>
+会平滑地在数据分布于噪声分布之间插值。</p>
+<p>我们希望能训练一个神经网络，其可
+<strong>少量渐进式去噪</strong>：<span
+class="math inline">\(f_{\theta}(x_{t},
+t)\)</span>，即对一张被某种程度侵蚀的图片，其会去除少量噪声，以略微清理该图。</p>
+<p>于是在推理时，需采样 <span class="math inline">\(x \sim
+p_{\text{noise}}\)</span>，然后逐步应用 <span
+class="math inline">\(f_{\theta}\)</span> 以去除噪声，以得到无噪声的图片
+<span class="math inline">\(x_{0}\)</span>。</p>
+<h3 id="整流流rectified-flow">整流流（Rectified Flow）</h3>
+<p>假设我们有确定的 <span
+class="math inline">\(p_{\text{noise}}\)</span>（其较为简单，如高斯分布）和
+<span class="math inline">\(p_{\text{data}}\)</span>。
+在每次训练迭代中，采样 <span class="math inline">\(z \sim
+p_{\text{noise}}, \ x \sim p_{\text{data}}, \ t \sim \mathcal{U}(0,
+1)\)</span>，于是可取 <span class="math inline">\(x_{t} = (1 - t)x + tz,
+\ v = z - x\)</span>. 于是考虑训练一个神经网络以预测 <span
+class="math inline">\(v\)</span>： <span class="math display">\[ L = \|
+f_{\theta}(x_{t}, t) - v \|_{2}^{2}. \]</span></p>
+<p>使用几行代码即可实现： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> dataset:</span><br><span class="line">	z = torch.randn_like(x)</span><br><span class="line">	t = random.uniform(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">	xt = (<span class="number">1</span> - t) * x + t * z</span><br><span class="line">	v = model(xt, t)</span><br><span class="line">	loss = (z - x - v).square().<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure></p>
+<h4 id="推理">推理</h4>
+<p>会先取一个步骤数 <span class="math inline">\(T\)</span>（通常从 <span
+class="math inline">\(50\)</span> 开始），采样 <span
+class="math inline">\(x \sim p_{\text{noise}}\)</span>。 然后进入循环
+<span class="math inline">\(t \in \left\{ 1, 1 - \frac{1}{T}, 1 -
+\frac{2}{T}, \cdots, 0 \right\}\)</span>，在每次循环中，计算 <span
+class="math inline">\(v_{t} = f_{\theta}(x_{t}, t)\)</span>，并更新
+<span class="math inline">\(x = x - \frac{v_{t}}{T}\)</span>。
+最终得到的 <span class="math inline">\(x\)</span> 即为生成的样本。</p>
+<p>相较于
+GAN，尽管推理过程更复杂，其更具稳定性，且往往能生成更好的样本，且其能较好地拓展至大规模数据集和大型模型。</p>
+<p>且实现代码也很简单： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sample = torch.randn(x_shape)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> torch.linspace(<span class="number">1</span>, <span class="number">0</span>, num_steps):</span><br><span class="line">	v = model(sample, t)</span><br><span class="line">	sample = sample - v / num_steps</span><br></pre></td></tr></table></figure></p>
+<h3 id="条件整流流conditional-rectified-flow">条件整流流（Conditional
+Rectified Flow）</h3>
+<p>考虑数据集中有多种数据，即数据集中有不同的子部分，即数据为 <span
+class="math inline">\((x, y)\)</span>，其中 <span
+class="math inline">\(y\)</span> 为类别等。</p>
+<p>则对训练，有： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (x, y) <span class="keyword">in</span> dataset:</span><br><span class="line">	z = torch.randn_like(x)</span><br><span class="line">	t = random.uniform(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">	xt = (<span class="number">1</span> - t) * x + t * z</span><br><span class="line">	v = model(xt, y, t)</span><br><span class="line">	loss = (z - x - v).square().<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure></p>
+<p>对于采样，有： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = user_input()</span><br><span class="line">sample = torch.randn(x_shape)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> torch.linspace(<span class="number">1</span>, <span class="number">0</span>, num_steps):</span><br><span class="line">	v = model(sample, y, t)</span><br><span class="line">	sample = sample - v / num_steps</span><br></pre></td></tr></table></figure></p>
+<p>其中 <span class="math inline">\(y\)</span>
+形式多样，可为文本、图片，也可为用户希望推理的输入等，其使模型更具可控性和可用性。</p>
+<h3 id="cfgclassifier-free-guidance">CFG（Classifier-Free
+Guidance）</h3>
+<p>可考虑一个问题：是否可控制模型对该条件信号 <span
+class="math inline">\(y\)</span>
+的关注程度。例如当直接训练模型时，它们往往不会以我们希望的那样遵循条件信号。</p>
+<p>考虑进行修改训练阶段即可实现： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (x, y) <span class="keyword">in</span> dataset:</span><br><span class="line">	z = torch.randn_like(x)</span><br><span class="line">	t = random.uniform(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">	xt = (<span class="number">1</span> - t) * x + t * z</span><br><span class="line">	<span class="keyword">if</span> random.random() &lt; <span class="number">0.5</span>:</span><br><span class="line">		y = y_null</span><br><span class="line">	v = model(xt, y, t)</span><br><span class="line">	loss = (z - x - v).square().<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
+即在训练时，有一定概率删除条件信息（设为零值或空值等），该概率为超参数（通常设为
+<span class="math inline">\(50\%\)</span>）。</p>
+<p>此时，该模型则需学习两种速度向量，即对有部分噪声的 <span
+class="math inline">\(x_{t}\)</span>，有：</p>
+<ul>
+<li>若 <span class="math inline">\(y\)</span> 为空，则 <span
+class="math inline">\(v^{\varnothing} = f_{\theta}(x_{t},
+y_{\varnothing}, t)\)</span> 指向 <span
+class="math inline">\(p(x)\)</span>；</li>
+<li>若 <span class="math inline">\(y\)</span> 非空，则 <span
+class="math inline">\(v^{y} = f_{\theta}(x_{t}, y, t)\)</span> 指向
+<span class="math inline">\(p(x \mid y)\)</span>；</li>
+<li><strong>考虑进行线性组合</strong>，有 <span
+class="math inline">\(v^{\text{cfg}} = (1 + w)v^{y} -
+wv^{\varnothing}\)</span>，其让结果更加偏向 <span
+class="math inline">\(p(x \mid y)\)</span>，其中 <span
+class="math inline">\(w\)</span> 为超参数。 于是在采样时，使用 <span
+class="math inline">\(v^{\text{cfg}}\)</span> 进行迭代。</li>
+</ul>
+<p>于是采样时，有： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y = user_input()</span><br><span class="line">sample = torch.randn(x_shape)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> torch.linspace(<span class="number">1</span>, <span class="number">0</span>, num_steps):</span><br><span class="line">	vy = model(sample, y, t)</span><br><span class="line">	v0 = model(sample, y_null, t)</span><br><span class="line">	v = (<span class="number">1</span> + w) * vy - w * v0</span><br><span class="line">	sample = sample - v / num_steps</span><br></pre></td></tr></table></figure></p>
+<p>该方法在实际中十分常用，以获得高质量输出。</p>
+<h3 id="最优预测">最优预测</h3>
+<p>在原始的整流流中，显然当 <span class="math inline">\(t = 1\)</span>
+时，其全为噪声，最优的 <span class="math inline">\(v\)</span>
+指向数据分布的均值；且当 <span class="math inline">\(t = 0\)</span>
+时候，其无噪声，最优的 <span class="math inline">\(v\)</span>
+指向噪声分布的均值。故在这两个值时，问题已于解决。 而在两者之间时，<span
+class="math inline">\(x_{t}\)</span> 可由多种的 <span
+class="math inline">\((x, z)\)</span>
+生成，故需解决该期望问题，并确定最优预测方向，以整合所有可能经过 <span
+class="math inline">\(x_{t}\)</span> 的 <span class="math inline">\((x,
+z)\)</span>。显然该问题更难解决。</p>
+<p>而当 <span class="math inline">\(t\)</span> 在 <span
+class="math inline">\([0, 1]\)</span>
+均匀采样时，其对所有噪声程度赋予了同等重要性，这显然不合理，所以考虑
+<strong>采用不同的噪声调度</strong>。 其中较常见的有
+<strong>逻辑正态采样</strong>（logic-normal
+sampling，其形状与高斯分布类似）。有时也会采用不对称噪声调度，其偏向某一方向，在处理高分辨率数据时较为重要（更高分辨率的图的相邻像素之间可能有更强的关联性，故根据数据中相关性的强弱，可能需要不同的噪声水平来破坏信息）。</p>
+<p>这也引出了一个问题：扩散模型在高分辨率数据上工作较为困难。</p>
+<h3 id="latent-diffusion-modelsldms">Latent Diffusion
+Models（LDMs）</h3>
+<p>该种方法为当今扩散模型的最常见模式。</p>
+<p>考虑训练编码器 + 解码器以提取隐表示，其将图片 <span
+class="math inline">\(H \times W \times 3\)</span>
+输入编码器，映射至隐空间 <span class="math inline">\(\frac{H}{D} \times
+\frac{W}{D} \times C\)</span>，然后输入解码器，恢复图像 <span
+class="math inline">\(H \times W \times 3\)</span>。 其中常见设置为
+<span class="math inline">\(D = 8, \ C =
+16\)</span>。编码器和解码器常用带注意力的 CNN 实现，不过最近也有使用 ViT
+实现的。</p>
+<p>接着，考虑在隐空间上训练扩散模型，即采样一张图，输入编码器得到隐表示，然后对其加入噪声，并训练扩散模型去噪。其中编码器需要冻结。</p>
+<p>在完成训练后，随机在隐空间中采样，多次通过扩散模型去噪，得到干净样本，将其输入解码器，得到生成的图像。</p>
+<p>对于训练编码器 + 解码器，通常采用 VAE。但 VAE
+输出模糊，考虑改进，即在结尾添加 GAN。</p>
+<p>综上，对于目前的 SOTA，即现代 LDM 流程为 VAE + GAN + Diffusion。</p>
+<h3 id="diffusion-transformerdit">Diffusion Transformer（DiT）</h3>
+<p>使用常规的 Transformer Block 即可实现
+Diffusion。其问题主要为如何插入条件信息（<span
+class="math inline">\(y\)</span> 和 <span
+class="math inline">\(t\)</span>）。 一般来说，会对噪声图片分成 patches
+等，将 <span class="math inline">\(y\)</span> 和 <span
+class="math inline">\(t\)</span> 进行 embedding，并将这些输入多层
+DiT（即常规的 Transformer Block），然后通过 LayerNorm、Linear and
+Reshape，得到输出。</p>
+<p>其有多种实现方式：</p>
+<ul>
+<li>预测缩放和偏移，并对 DiT
+中的每一层之间都加入缩放与偏置以调整激活值，该种方法多为 <span
+class="math inline">\(t\)</span> 的注入方式；</li>
+<li>考虑到 Transformer 可处理序列，故考虑直接将 <span
+class="math inline">\(t\)</span> 和 <span
+class="math inline">\(y\)</span> 等塞入序列，然后让 Transformer
+统一建模该数据序列（可通过在 DiT 中间加入 LayerNorm + 多头交叉注意力 +
+残差连接实现，或者通过在 DiT 开头将 tokens
+和数据序列拼接实现（称为联合注意力（Joint Attention）））。
+在现代扩散模型中，对于 DiT，常常通过预测缩放与平移以注入 <span
+class="math inline">\(t\)</span>，并通过交叉注意力注入 <span
+class="math inline">\(y\)</span>
+和其他条件信息（有时也会用联合注意力）</li>
+</ul>
+<h3 id="text-to-image">Text-to-Image</h3>
+<p>其流程为将 text promt 输入预训练的文本编码器（多为
+T5、CLIP，且通常被冻结）得到文本嵌入（text
+embeddings），并将文本嵌入和噪声隐向量一并输入
+DiT（同时也会加入时间步长）迭代多次，得到干净的隐向量，最后将其输入 VAE
+解码器，得到最终图像输出。</p>
+<h3 id="text-to-video">Text-to-Video</h3>
+<p>其与 Text-to-Image 几乎一致，唯一区别为噪声隐向量多了一个时间维度（即
+<span class="math inline">\(t \times h \times w \times
+c\)</span>，通常为时空自编码器，即同时进行时间与空间下采样），得到干净的隐向量
+<span class="math inline">\(t \times h \times w \times
+c\)</span>，输入解码器得到输出 <span class="math inline">\(T \times H
+\times W \times 3\)</span>。</p>
+<p>该模型主要问题为由于序列长度过场，其训练成本极高。</p>
+<h3 id="蒸馏distillation">蒸馏（Distillation）</h3>
+<p>Diffusion 的一大问题为其采样速度很慢，且模型可能较为庞大。
+该问题可使用 <strong>蒸馏</strong>
+进行解决，其可以某种方式修改模型，在尽可能保持样本质量的情况下，以更少步数生成优质样本。</p>
+<h2 id="广义扩散模型generalized-diffusion">广义扩散模型（Generalized
+Diffusion）</h2>
+<p>进行抽象化至更广义的扩散模型：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">整流流（Rectified Flow）</th>
+<th style="text-align: left;">广义扩散模型（Generalized Diffusion）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">采样真实数据 <span class="math inline">\(x
+\sim p_{\text{data}}\)</span>，采样噪声 <span class="math inline">\(z
+\sim p_{\text{noise}}\)</span></td>
+<td style="text-align: left;">采样真实数据 <span class="math inline">\(x
+\sim p_{\text{data}}\)</span>，采样噪声 <span class="math inline">\(z
+\sim p_{\text{noise}}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">采样时间步 <span class="math inline">\(t
+\sim p_{t}\)</span></td>
+<td style="text-align: left;">采样时间步 <span
+class="math inline">\(\boldsymbol{t} \sim p_{t}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">构造含噪样本 <span
+class="math inline">\(x_t = (1-t)x + tz\)</span></td>
+<td style="text-align: left;">构造含噪样本 <span
+class="math inline">\(x_t = \boldsymbol{a(t)}x +
+\boldsymbol{b(t)}z\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">真实标签（速度场）<span
+class="math inline">\(v_{\text{gt}} = z - x\)</span></td>
+<td style="text-align: left;">真实标签 <span
+class="math inline">\(y_{\text{gt}} = \boldsymbol{c(t)}x +
+\boldsymbol{d(t)}z\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">模型预测速度场 <span
+class="math inline">\(v_{\text{pred}} = f_{\theta}(x_{t},
+t)\)</span></td>
+<td style="text-align: left;">模型预测 <span
+class="math inline">\(y_{\text{pred}} = f_{\theta}(x_{t},
+t)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">计算 loss <span
+class="math inline">\(\|v_{\text{gt}} -
+v_{\text{pred}}\|_{2}^{2}\)</span></td>
+<td style="text-align: left;">计算 loss <span
+class="math inline">\(\|y_{\text{gt}} -
+y_{\text{pred}}\|_{2}^{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="方差保持variance-preservingvp">方差保持（Variance
+Preserving，VP）</h3>
+<p>其取： <span class="math display">\[
+\begin{align*}
+a(t) &amp;= \sqrt{ \sigma(t) } \\
+b(t) &amp;= \sqrt{ 1 - \sigma(t) }
+\end{align*}
+\]</span></p>
+<p>其中，若 <span class="math inline">\(x\)</span> 与 <span
+class="math inline">\(z\)</span> 相互独立且方差均为 <span
+class="math inline">\(1\)</span>，则含噪样本 <span
+class="math inline">\(x_{t}\)</span> 的方差也恒为 <span
+class="math inline">\(1\)</span>。
+其将两个超参数合并为单一的噪声调度。</p>
+<h3 id="方差爆炸variance-explodingve">方差爆炸（Variance
+Exploding，VE）</h3>
+<p>其取： <span class="math display">\[
+\begin{align*}
+a(t) &amp;= 1 \\
+b(t) &amp;= \sigma(t)
+\end{align*}
+\]</span></p>
+<h3 id="目标函数">目标函数</h3>
+<p>其也有多种不同取法：</p>
+<ul>
+<li>x-prediction：<span class="math inline">\(y_{\text{gt}} =
+x\)</span>；</li>
+<li><span class="math inline">\(\varepsilon\)</span>-prediction：<span
+class="math inline">\(y_{\text{gt}} = z\)</span>；</li>
+<li>v-prediction：<span class="math inline">\(y_{\text{gt}} = b(t)z -
+a(t)x\)</span>。</li>
+</ul>
+<h3 id="数学形式化框架">数学形式化框架</h3>
+<p>通常，选取这些函数需要遵循数学原理，即通过特定的
+<strong>特定的数学形式化框架</strong> 确定：</p>
+<ul>
+<li>Diffusion 为 <strong>隐变量模型</strong>（Latent Variable
+Model），即对干净的 <span
+class="math inline">\(x_{0}\)</span>，其需推断与隐变量 <span
+class="math inline">\(x_{t}\)</span> 相关，故其与 VAE
+类似，考虑使用类似的数学技巧，即最大化变分下界；</li>
+<li>Diffusion 建模了得分函数，即给定分布 <span
+class="math inline">\(p(x)\)</span>，存在得分函数 <span
+class="math inline">\(s(x) = \frac{ \partial }{ \partial x } \log
+p(x)\)</span>，其为指向高概率密度区的向量场，而 Diffusion
+学习了一系列不同噪声程度的得分函数；</li>
+<li>Diffusion
+求解随机微分方程（SDE），即其为以下微分方程的数值求解器（其中数据为
+<span class="math inline">\(\boldsymbol{x}\)</span>，时间为 <span
+class="math inline">\(t\)</span>，噪声为 <span
+class="math inline">\(\boldsymbol{w}\)</span>，在该视角下，梯度下降等同于前向欧拉积分器，可考虑使用其他积分器求解）：
+<span class="math display">\[ \mathrm{d}\boldsymbol{x} =
+f(\boldsymbol{x}, t) \, \mathrm{d}t + g(t) \, \mathrm{d}\boldsymbol{w}.
+\]</span></li>
+</ul>
+<p>这些多视角可参考：<a
+target="_blank" rel="noopener" href="https://sander.ai/2023/07/20/perspectives.html">Perspectives on
+diffusion – Sander Dieleman</a></p>
+<h2 id="自回归模型-1">自回归模型</h2>
+<p>可以考虑对自回归模型做与 LDM 相同的事情，即使用编码器 -&gt;
+自回归模型 -&gt; 解码器结构。</p>
+<p>在现代生成模型中，除了 Diffusion，另一种核心方法为在离散 VAE
+计算得到的离散隐变量上训练自回归模型。</p>
+<hr />
+<h1 id="lecture-15-3d-vision">Lecture 15: 3D Vision</h1>
+<h2 id="d-表示方式">3D 表示方式</h2>
+<p>其有多种方式表示几何结构，分为显式表示和隐式表示：</p>
+<ul>
+<li>显式：
+<ul>
+<li>点云；</li>
+<li>多边形网格；</li>
+<li>细分曲面、NURBS；</li>
+<li>……</li>
+</ul></li>
+<li>隐式：
+<ul>
+<li>水平集；</li>
+<li>代数曲面；</li>
+<li>距离函数；</li>
+<li>……</li>
+</ul></li>
+</ul>
+<p>每种方法都有其独特的适配任务或几何类型等。</p>
+<p>对于表示方式，需要考虑：</p>
+<ul>
+<li>存储；</li>
+<li>创建新形状（例如通过语言或图像进行创建）；</li>
+<li>操作（编辑、简化、平滑、滤波、修复等）；</li>
+<li>渲染（即如何将三维物体渲染成二维图片）；</li>
+<li>动画等。</li>
+</ul>
+<h3 id="点云point-clouds">点云（Point Clouds）</h3>
+<p>其为最简单的表示方式：只存储点，不存储连接性。 直接使用 <span
+class="math inline">\(3 \times n\)</span> 存储，其中每个点为 <span
+class="math inline">\((x, y,
+z)\)</span>，可能附带表面法向量。这些带有方向信息的点称为
+<strong>面元</strong>（surfels）。</p>
+<p>在渲染时，光源需要与表面互动，此时法向量即可起作用。</p>
+<p>点云通常是三维传感器的原始数据格式。不过得到图像可能带有噪声，且对多张图像需要进行配准。</p>
+<p>显然，其相当灵活，可容易地表示任何图形，且对大型数据集有利，但其难以绘制欠采样区。
+且其难以进行简化或细分，难以实现平滑渲染，且没有拓扑信息。</p>
+<h3 id="多边形网格polygonal-meshes">多边形网格（Polygonal Meshes）</h3>
+<p>其仍以点的形式进行存储，但其也存储了点之间的连接方式，以得到表面等等。该方法为所有图形引擎表达三维对象的最常用做法。</p>
+<p>显然其更复杂，且每个面可能含有不同个数的点，即其含有可变的维度，故如何将其与神经网络结合是一个挑战。</p>
+<p>多边形网络可通过非常复杂的网格来捕捉所有细节，且其可自然地支持细分（通过增加网格）、简化（通过减少网格）、正则化（例如让所有的面转化成大小相同的小三角形，以得到更高质量，便于处理）。</p>
+<h3 id="参数化表示parametric-representation">参数化表示（Parametric
+Representation）</h3>
+<p>上述的点云和多边形网络均为非参数化表示。</p>
+<p>参数化表示即直接用解析几何中的参数方程进行表示，其可以相对低维的形式进行操作。
+例如使用贝塞尔曲线和贝塞尔曲面等，可在只使用少量点的情况下，构造灵活且平滑的曲面。</p>
+<p>参数化表示可较为简单地实现细分等操作。</p>
+<h3 id="显式表示">显式表示</h3>
+<p>上述三种表示均为显式表示，其显式地给出了所有的点，故对其进行采样十分容易。
+不过相应地，显式表示很难判断某点是否在该对象内部或外部。</p>
+<h3 id="隐式表示">隐式表示</h3>
+<p>考虑对点进行分类。即考虑位于物体表面上地点会满足某种特定关系，即
+<span class="math inline">\(f(x, y, z) =
+0\)</span>。进一步，即考虑在物体上的点满足的约束（从某种角度来说，即在解析几何中使用一个方程进行表示，不过该方程所对应的函数可能极其复杂，需要神经网络拟合）。
+该种表示方式则称为
+<strong>隐式表示</strong>，其不仅可表示几何结构，也可用来表示纹理、材质、外观等等。</p>
+<p>显然，隐式表示更难以进行采样，不过其可更容易地判断某点是否在物体内部或外部。
+且隐式表示易于进行组合，例如对于 <span class="math inline">\(A\)</span>
+和 <span class="math inline">\(B\)</span>，可进行逻辑计算 <span
+class="math inline">\(A \cup B\)</span>、<span class="math inline">\(A
+\cap B\)</span>、<span class="math inline">\(A \setminus B\)</span>
+等（直接进行数值计算即可），于是可进行组合以创建复杂形状（该方法在工业设计，例如
+CAD 中很常见）。</p>
+<h4 id="距离函数">距离函数</h4>
+<p>距离函数可给出空间中任意点到物体的最小距离（可以是带符号距离，且数值本身有意义）。</p>
+<p>隐式表示可以通过距离函数将两物体相加，甚至通过调整距离让两个物体平滑地逐渐融合在一起（通过插值实现）。</p>
+<p>距离函数可任意组合，并创建相当复杂的形态，并展现出相当的表达能力（尽管可能组合并不容易）。</p>
+<h3 id="水平集方法level-set-methods">水平集方法（Level Set
+Methods）</h3>
+<p>尽管隐式曲线有很多很好的性质，但其很难以解析形式表达复杂物体。
+于是考虑建立一个网格，然后再网格内预采样（计算函数值，或是否在物体内，或与物体表面的距离等）。于是可以非参数化的形式保留隐式表达。</p>
+<p>表面依然是容易找到的，只需寻找 <span
+class="math inline">\(f(\boldsymbol{x}) = 0\)</span>
+的点即可（即对网格内的点通过该函数进行预查询，以将参数化的隐式表达转为非参的）。
+其也能提供更直接的控制（例如控制纹理）。</p>
+<p>并对该网格，可进行可视化，其在 CT、MRI 等医疗数据中有广泛应用。</p>
+<h4 id="体素voxels">体素（Voxels）</h4>
+<p>考虑对预采样网格中的函数值分正负，然后分别对正数赋为 <span
+class="math inline">\(1\)</span>（在物体外部），对负数赋为 <span
+class="math inline">\(0\)</span>（在物体内部），于是得到二值化处理的结果，称为
+<strong>体素</strong>（其类似于三维矩阵，且值只有 <span
+class="math inline">\(0\)</span> 和 <span
+class="math inline">\(1\)</span> 表示是否在物体内）。</p>
+<p>从另一种角度来看，体素就相当于三维下的像素。且由于该种直观表现，体素是第一个直接应用于深度学习的三维表现形式（只需将
+CNN 拓展至三维即可）。</p>
+<h2 id="数据集">数据集</h2>
+<p>在深度学习之前，常用的数据集为：普林斯顿形状基准数据集（Princeton
+Shape Benchmark），其有 1814 个模型和 182
+个分类，显然其模型格式过少，故在机器学习种很少用。</p>
+<p>之后则出现了一些可用的数据集：</p>
+<ul>
+<li>ShapeNet：其为三维物体的大型数据集（类似于
+ImageNet，实际上每种类别的模型数量并不一致，最多的是椅子和车）；</li>
+<li>ModelNet：已被 ShapeNet 整合；</li>
+<li>ShapeNetCore：即 ShapeNet 的小型子类，只取了 55 种类别。</li>
+</ul>
+<p>在这之后，出现了更大的数据集：Objaverse 和 Objaverse-XL。</p>
+<p>不仅如此，还有一些真实数据集，部分通过 3D 扫描制成，例如 Redwood
+数据集。 近些年，也有更大型的真实数据集，例如 CO3D（其为物体的 <span
+class="math inline">\(360^{\circ}\)</span>
+视频的数据集，用于三维重建）。</p>
+<p>另外，也有基于部件的数据集，其尝试标注物体部件极其对应关系和层次结构，例如
+PartNet 标注了部件及其语义和运动信息。</p>
+<p>还有针对三维场景的数据集（比如房间结构），例如 ScanNet，以及更近的
+ARKitScenes、ScanNet++ 等。</p>
+<p>整体来说，3D 数据集的数据量（尤其是 3D
+场景）都明显比图像数据集更小。</p>
+<h2 id="任务">任务</h2>
+<p>对于 3D，我们常常关注以下任务：</p>
+<ul>
+<li>生成模型：学习（条件）形状先验，完成形状生成、补全及几何数据处理等；</li>
+<li>判别模型：学习形状描述子，完成形状分类、分割、视角估计等；</li>
+<li>3D 与 2D 数据的联合建模：考虑利用大规模 2D
+数据集与良好的预训练模型的先验知识；微分投影 / 反投影，可微分 /
+神经渲染实现三维与二维的连接等；</li>
+<li>视觉之外的多模态数据联合建模等（例如文本）。</li>
+</ul>
+<h2 id="multi-view-cnn">Multi-View CNN</h2>
+<p>对 3D 物体进行分类，不考虑对 3D
+进行建模，直接考虑在多个视角中对该物体拍照，则可将其转化为 2D
+问题，则只需对每个视角执行 CNN，然后通过池化融合结果即可。</p>
+<p>该方法在物体分类中效果显著，且可充分利用 2D
+图像模型的资料，可使用预训练的特征。
+不过该方法需要进行投影操作，并不适用于嘈杂或不完整的输入（如点云）。</p>
+<p>该方法为解决 3D 问题的最初方法，后来的方法则更多地深入3D 本身。
+但由于现在图像和视频模型都非常强大，该方法也趋于更加流行。</p>
+<h2 id="d-卷积深度信念网络3d-conv-deep-belief-networkscdbn">3D
+卷积深度信念网络（3D Conv Deep Belief Networks，CDBN）</h2>
+<p>将像素切换至体素是自然的。即只需考虑将 2D CNN 改为 3D CNN。</p>
+<p>其中，3D
+卷积深度信念网络即为一种该方法实现的生成模型，且其支持根据标签的条件生成。
+作为生成网络，其自然也支持分类。</p>
+<h2 id="d-gans">3D-GANs</h2>
+<p>同样地，进行拓展，也可用 GAN 通过生成体素来生成 3D 物体。</p>
+<p>进一步，在 3D-GANs 基础上，可拓展出
+<strong>视觉物体网络</strong>（Visual Object Networks）。 其使用 GAN
+生成三维形状后，将其投影至 2D，得到 3D
+物体的深度图，于是用循环网络将深度图转为彩色图像。此时分析 loss
+时，不仅可看 3D 物体，也可看 2D 图像，以此同时得到更加真实的 3D 物体和
+2D 图像生成。</p>
+<p>且对该方法，我们分别得到了形状、视角、纹理的隐向量，我们可分别控制这些向量，得到不同的形状、视角、纹理，以及做插值等，甚至可以将一辆车的纹理转移至另一辆车上。</p>
+<h2 id="八叉树octree">八叉树（Octree）</h2>
+<p>体素有显著缺点：运行速度慢（需要预先采样），且存在大量无效工作（不少采样点为空或在物体内，其并没有提供可用信息）。</p>
+<p>考虑改进，可用
+<strong>八叉树</strong>，其改进了体素存储，将体素分为不同尺寸（即将空间划为不同区域，且在接近表面时投入更多资源，以更精细的尺度进行表示；而在空区域或物体内部时，则可用巨大体素）。</p>
+<p>即考虑递归地分割空间，其中在不同空间中的体素可得到不同尺寸。这使其显著降低存储空间，进一步扩展规模。</p>
+<p>且八叉树同样可以与体素类似地生成物体，且由于更高效地空间表示，其生成物体分辨率可更高。</p>
+<h2 id="pointnet">PointNet</h2>
+<p>考虑对点云进行操作。其核心思想有：点具有
+<strong>置换不变性</strong>（Point Permutation
+Invariance），即点云是一系列无序的点的集合；且点具有
+<strong>采样不变性</strong>（Sampling
+Invariance），即模型输出应反映底层几何形状的特征，而非受采样方式影响的结果。</p>
+<p>对于置换不变性，即考虑使用对称函数（Symmetric Functions）： <span
+class="math display">\[ f(x_{1}, x_{2}, \cdots, x_{n}) \equiv
+f(x_{\pi_{1}}, x_{\pi_{2}}, \cdots, x_{\pi_{n}}), \quad x_{i} \in
+\mathbb{R}^{D}. \]</span> 例如取最大值或相加等进行融合。</p>
+<p>于是考虑对点计算嵌入，然后使用对称函数进行聚合，对聚合的结果再通过几层网络（例如
+MLP）进行处理，最后得到分类结果： <span class="math display">\[ f(x_{1},
+x_{2}, \cdots, x_{n}) = \gamma \circ g(h(x_{1}), h(x_{2}), \cdots,
+h(x_{n})). \]</span></p>
+<h2 id="graph-nns">Graph NNs</h2>
+<p>由于点可轻易地转化成图节点，邻里关系可转化成边，故可考虑使用
+<strong>图神经网络</strong>（Graph NNs）处理点云。</p>
+<h2 id="点云的距离度量">点云的距离度量</h2>
+<p>有两种方法度量点云间的距离：</p>
+<ul>
+<li><strong>Chamfer 距离</strong>：即对两个点云 <span
+class="math inline">\(S_{1}, S_{2} \subseteq
+\mathbb{R}^{3}\)</span>，定义距离： <span class="math display">\[
+d_{CD}(S_{1}, S_{2}) = \sum_{x \in S_{1}} \min_{y \in S_{2}} \|x -
+y\|_{2} + \sum_{y \in S_{2}} \min_{x \in S_{1}} \|x - y\|_{2}.
+\]</span></li>
+<li><strong>Earth Mover 距离</strong>：即对两个点云 <span
+class="math inline">\(S_{1}, S_{2} \subseteq \mathbb{R}^{3}\)</span>
+满足大小相同 <span class="math inline">\(s = |S_{1}| =
+|S_{2}|\)</span>，定义距离（其中 <span class="math inline">\(\phi \colon
+S_{1} \to S_{2}\)</span> 为双射）： <span class="math display">\[
+d_{EMD}(S_{1}, S_{2}) = \min_{\phi \colon S_{1} \to S_{2}} \sum_{x \in
+S_{1}} \|x - \phi(x)\|_{2}. \]</span> 且这两种距离均可微。</li>
+</ul>
+<h2 id="atlasnet">AtlasNet</h2>
+<p>考虑对于隐形状表示，考虑在二维平面上采样点，输入
+MLP，得到其在三维中对应的点。即神经网络学习参数化表示中的从二维转化至三维的函数。</p>
+<p>不过可能用单次变换表示整个物体较为困难，可考虑用多个小型神经网络，然后将输出的形状进行整合得到最终形状。</p>
+<p>该方法基于参数化表示的思想，故可得到相较于点云和体素更加光滑的输出。</p>
+<h2 id="深度隐式函数deep-implicit-functions">深度隐式函数（Deep Implicit
+Functions）</h2>
+<p>考虑不直接对 3D 物体进行建模，而是直接用一个神经网络隐式地表示一个 3D
+物体，即输入点的坐标，输出该点是否在物体内，甚至与表面的距离、该点的密度、颜色、辐射值等等。该种神经网络称为
+<strong>深度隐式函数</strong>。</p>
+<p>进一步，可考虑用小的神经网络表示物体的不同部分，然后组合起来表示一个完整的复杂形状。且通过深度隐式函数，我们可以得到更丰富的信息。</p>
+<h2 id="神经辐射场nerf">神经辐射场（NeRF）</h2>
+<p>即考虑建模深度隐式函数，然后有： <span class="math display">\[ (x, y,
+z, \theta, \phi) \stackrel{F_{\Theta}}\longmapsto (RGB,
+\sigma).\]</span> 即输入坐标和相机角度，输出颜色值和密度值。</p>
+<p>考虑直接在一系列 3D 物体上训练，由于有 ground truth（简称
+g.t.，即地面实况，为“绝对正确的参考值”），可由 3D 物体本身进行监督。
+但考虑在 2D 图像上进行训练（即为
+NeRF），则需与体渲染函数结合，且该体渲染函数需可微。</p>
+<p>有渲染模型，对于射线 <span class="math inline">\(\boldsymbol{r}(t) =
+\boldsymbol{o} + t\boldsymbol{d}\)</span>，有： <span
+class="math display">\[ \boldsymbol{c} \approx \sum_{i=1}^{n}
+T_{i}\alpha_{i}\boldsymbol{c}_{i}. \]</span> 其中 <span
+class="math inline">\(T_{i}\)</span> 为权重，<span
+class="math inline">\(\alpha_{i}\)</span>
+为密度（可视为点的不透明度），<span
+class="math inline">\(\boldsymbol{c}_{i}\)</span>
+为颜色，且可计算光线被阻挡的程度： <span class="math display">\[ T_{i} =
+\prod_{j=1}^{i-1} (1 - \alpha_{j}). \]</span> 显然该渲染模型对 <span
+class="math inline">\(\alpha\)</span> 和 <span
+class="math inline">\(\boldsymbol{c}\)</span>
+是可微的。该模型将几何、颜色与密度等转化成了辐射值和外观。</p>
+<p>于是其可在 2D 图像上进行训练，且同时关注几何形状和外观。</p>
+<h3 id="生成模型-1">生成模型</h3>
+<p>可考虑最终直接训练一个神经网络表示辐射场和密度以表示 3D
+物体，且同样可应用类似 GAN 渲染的框架，同时得到 3D 物体和 2D 图片。
+其同样支持可控性操作，如改变相机视角、物体身份等等。</p>
+<p>而由于通过
+NeRF，可直接通过图片学习，故其可学习的类别更加广泛（不需拘泥于有 3D
+模型的物体），且输出更加真实。例如 Pi-GAN。</p>
+<h3 id="高斯溅射gaussian-splatting">高斯溅射（Gaussian Splatting）</h3>
+<p>尽管如此，NeRF
+仍有缺点：其需在三维空间大量采样（类似于水平集需采样密集的点）以创建神经网络，故其速度很慢。
+可发现与体素类似，NeRF 采样密集的点，其中不少点是浪费的。</p>
+<p>考虑只采样有物体的位置，可使用 <strong>高斯溅射</strong>。
+其依然使用隐式函数，但点的表示方式已在三维高斯体中（类似于点云，不过每个“点”为团块，即空间中的某个区域）。
+故当发射射线时，由于知道团块的位置，无需持续采样，而只需观察团块的位置，并根据它们的半径，只采样有物体的区域，以此大幅度提升渲染效率。</p>
+<p>高斯溅射的渲染质量可与 NeRF 相当，但其渲染速度显著更快。</p>
+<h2 id="元素结构">元素结构</h2>
+<p>物体几何不仅包括元素几何，还包括元素结构（例如椅子不仅有多个木板组成，木板之间也存在结构关系（例如对称性、重复性等），这里前者为元素几何，后者为元素结构）。</p>
+<p>考虑将物体视为一系列简单几何体，有多种表示元素结构的方法：</p>
+<ul>
+<li>分段几何（Segmented Geometry）；</li>
+<li>部件集（Part Sets）；</li>
+<li>关系图（Relationship Graphs）；</li>
+<li>层级结构（Hierarchies）；</li>
+<li>层级图（Hierarchical Graphs）；</li>
+<li>程序式表示（Programs）。</li>
+</ul>
+<p>现在已有应用于其的深度学习方法，例如将物体呈现为不同部分，并用简单几何体或隐式函数等表示后进行组合；或者将
+3D 物体适配层级结构并生成等；或者近几年趋势的，例如使用 LLM
+输出程序式表示，然后用隐式函数等处理几何细节等。</p>
+<hr />
+<h1 id="lecture-16-vision-and-language">Lecture 16: Vision and
+Language</h1>
+<h2 id="基础模型foundation-models">基础模型（Foundation Models）</h2>
+<p>最近几年的趋势为
+<strong>基础模型</strong>，即预训练一个可涵盖多种任务的模型，然后再根据需求适配具体任务（例如
+GPT 即为基础模型）。
+基础模型一大优势为，其可通过少量数据（甚至可能无需训练数据）即可完成对具体需求的适配。</p>
+<p>基础模型有许多种类，例如有针对语言的、针对图像分类的、针对多模态的、将多个基础模型链起来等等的。</p>
+<p>对于基础模型，其通常具有对广泛任务的
+<strong>鲁棒性</strong>，可能有大量参数、大量训练数据、采用自监督学习等等。</p>
+<h2 id="clip">CLIP</h2>
+<p>考虑 SimCLR，其倾向于将相同类别的聚在一起，并远离不同类别。
+对于基础模型，我们则希望对于数据集中没见过的图，也能与所属类别聚在一起，甚至对于多模态，能将相关的文字描述与所属类别聚在一起（例如对于真实图像的猫狗分类，将简笔画的猫和对猫的文字描述与猫的图像聚在一起）。</p>
+<p>对于
+SimCLR，其利用对图像的分别两次变换，生成相同类别的两张图片。考虑转为
+<strong>CLIP</strong>，其考虑对图片变换生成一张新的图像，但同时用该图像生成一段文字描述，这样则将图片和文字聚在一块。</p>
+<p>其与 SimCLR 类似，故也有类似的互补对称 loss： <span
+class="math display">\[ \sum_{i=1}^{n} -\log\left( \frac{e^{\langle
+u_{i}, v_{i} \rangle}}{\sum_{j=1}^{n} e^{\langle u_{i}, v_{j} \rangle}}
+\right) + \sum_{i=1}^{n} -\log\left( \frac{e^{\langle u_{i}, v_{i}
+\rangle}}{\sum_{j=1}^{n} e^{\langle u_{j}, v_{i} \rangle}} \right).
+\]</span></p>
+<p>故 CLIP
+可只通过附有描述的图片进行训练，而这种数据大量存在于互联网中，故模型规模可相当大。</p>
+<p>完成训练后，取出编码器，在后面加入线性层或解码器等，即可完成图像分类、图像检测、语义分割等下游任务。
+实践表明，就算只加入一层线性分类器，其效果已十分显著。</p>
+<p>对于语言模型，其训练为自动补全任务。但其在预训练后，应用于下游任务时，均可视为自动补全任务，故无需再训练。
+但对于 CLIP，其没有自动补全过程，故无法预训练后直接使用。</p>
+<p>为解决该问题，考虑利用文本编码器，以引导模型泛化到任意下游分类任务。
+即考虑使用 CLIP
+计算出图像向量，然后用文本编码器计算出所有分类的文本向量，然后用 1-NN
+算法计算出距离图像向量最近的文本向量，即图片与该种分类有最高的相似度。</p>
+<p>显然单个单词可能得不到足够高质量的向量，考虑使用短语（例如
+<code>A photo of a plane</code>、<code>A photo of a [category]</code>
+等），究其原因为训练数据来源于网络，其通常不会出现单个单词。该种改动有显著效果（在
+ImageNet 上提高 1.3%）。 更进一步，可考虑采用多个短语（例如
+<code>A photo of a dog</code>、<code>A drawing of a dog</code>
+等等），然后对每个类别的所有文本向量取平均向量，然后在进行 1-NN
+算法。此可得在 ImageNet 上 5% 的改善。</p>
+<p>由于训练数据来源与互联网，其有海量类别，从而推断出更多结构化信息，增强了表示能力，且互联网本身就有远超任何数据集的数据量，故其能更好地适配有些许差异的新任务。
+故其展现了就算对于未经训练的数据，其也能有良好的适配性（例如就算不在
+ImageNet 上进行训练，CLIP 在 ImageNet 上也有相当的等同于 ResNet
+的准确率，且在另外没见过的数据集上仍能保持等同的高准确率）。</p>
+<p>将零样本（zero-shot）与线性探测（linear
+probe）进行对比，在有的数据集线性探测效果更好，有的数据集上反而零样本效果更好。这意味着训练出的图片编码器的强大的对下游任务的广泛适配性。</p>
+<p>究其原因，在于 CLIP 具有远超之前方法的参数量（且采用了
+ViT），使用了来自互联网的远超之前方法的训练数据量。</p>
+<h3 id="coca">CoCa</h3>
+<p>其为 CLIP 的变体，其考虑在 CLIP
+末尾增加一个解码器，输入从图像解码器得到的图像特征，然后输出该图像的描述，并用交叉熵损失计算描述的
+loss。
+相较于分类，描述所用信息更多，更能促使模型学习更多信息，从而习得更强的特征。</p>
+<p>实践表明，CoCa 相较于 CLIP，有更进一步显著的效果提升。
+甚至该种基础模型的效果能超过监督模型。</p>
+<h3 id="clip-的优势">CLIP 的优势</h3>
+<ul>
+<li>由于为简单的对比学习，其易于训练，且推理速度极快；</li>
+<li>可将整个数据集嵌入某种表示，然后只需对其进行检索即可分类，进一步，其可适用于搜索与检索等任务；</li>
+<li>开放词汇能力（Open-vocabulary），即输入任何文字描述均可检索正确图像，故可零样本泛化；</li>
+<li>其可与其他模型链式组合（CuPL）。</li>
+</ul>
+<h3 id="clip-的劣势">CLIP 的劣势</h3>
+<p>CLIP
+无法区分两张图片：一张是草地上有一个马克杯（<code>there is a mug in some grass</code>），另一张是一个马克杯里面种了草（<code>there is some grass in a mug</code>）。
+换句话来说，CLIP 缺乏组合性概念，且大量实验说明了 CLIP
+存在大量的局限性。</p>
+<p>究其原因，<strong>CLIP 的学习高度依赖 batch size</strong>，若 batch
+size 不足，其他批次元素则无法为模型提供有效监督。
+例如若批次过小，只有猫和卡车，那模型只会认识到这是猫，而批次足够大，包含多种动物时，其才能学习更好的特征。
+但无论如何增大批次，CLIP
+并不能保证能学到优质表达，其只能依赖于训练数据的随机性。</p>
+<p>而对 batch
+进行考虑，试图使用足够强的负样本，实则并不会学到语义相关的大量内容（原因目前不明），从而导致在不同数据集和环境中泛化能力显著变差。</p>
+<p>另一个缺点为，<strong>图像级别的描述文本并不能提供足够强的监督信号</strong>，例如图片中的位置信息，若文本未指出时，则会在
+CLIP 中缺失。</p>
+<p>还有缺点为，<strong>无论数据集多大，其仍无法涵盖所有我们关注的重要信息</strong>。故需考虑进行数据过滤，而对
+CLIP 在互联网中寻找最佳训练数据则为一个前沿课题。</p>
+<h2 id="llava">LLaVA</h2>
+<p>LLaVA 为最早的 <strong>多模态语言模型</strong>（multimodal language
+models）之一。</p>
+<p>考虑语言模型，其总是做下一个 token
+的预测，即自动补全。该种过程对适应新任务极其有用。
+于是考虑对于图像模型，是否同样地可输入图像，然后进行类似自回归地推理。即
+<strong>视觉语言模型</strong>（Vision-Language Models）或
+<strong>多模态模型</strong>（Multimodal Models）。</p>
+<p>文本模型为
+Transformer，则可考虑在输入文本之前加入额外上下文，将图片加入对话。故需要考虑对图像分成
+token，然后将 token
+输入语言模型，随后接着文本输入，以自动补全剩余文本。</p>
+<p>LLaVA 则考虑使用 CLIP 的编码器将图片转为 token。即考虑将图片分为
+patch，并额外加入 CLS，将这些输入 CLIP 的 ViT，则可得到一系列的 token
+和一个 CLS token。 对于分类问题，只需要 CLS
+token，其受监督，但这也意味着另外的 token 并未受到监督（且实验表明这些
+token 并没有什么用）。 于是考虑回退一层，则这一层得到的 token
+会用于生成最终的 CLS token，故这些 token
+是有用的。于是考虑将这些倒数第二层的 token 用于基于 Transformer
+的语言模型。</p>
+<p>于是可将图片输入预训练的 CLIP
+编码器，从中提取大量特征，并将这些特征输入线性层，其将 CLIP 的输出转化为
+LLM 能理解的输入，得到 LLM 的输入 token。于是将这些 token 输入
+LLM，于是可生成关于该图片的对话。</p>
+<h3 id="flamingo">Flamingo</h3>
+<p>其与 LLaVA 类似，但其改动为并不使用线性层，而是将编码器生成的特征输入
+LLM 中的每一层，然后文本输入时就只用一个 <code>&lt;image&gt;</code>
+进行指代。</p>
+<p>对于 LLM 的每一层，其具体的改动为在每一层之前加入
+<strong>门控交叉注意力</strong>（Gated
+Cross-Attention），且在图像编码器之后加入
+<strong>接收采样器</strong>（Perceiver
+Resampler），即对图像表示进行下采样，以得到更小的维度和固定数量的
+token。 其中，所有原先的 LLM
+和图像编码器均被冻结，只有接收采样器和门控交叉注意力会受训练。</p>
+<p>对于门控交叉注意力，其会查看图像特征，并判断哪些对 LLM
+有用，决定保留哪些图像特征。其结构如下：</p>
+<ol type="1">
+<li>交叉注意力：<span class="math inline">\(Q\)</span>
+为前一层输出，<span class="math inline">\(K\)</span> 和 <span
+class="math inline">\(V\)</span> 为图像的输入，以关注图像特征；</li>
+<li>tanh 门控（tanh gating）：决定哪些部分保留，哪些部分抛弃；</li>
+<li>从 1 开头进行残差连接；</li>
+<li>全连接层：对表示进行调整；</li>
+<li>tanh 门控：决定保留部分；</li>
+<li>从 4 开头进行残差连接。</li>
+</ol>
+<p>其给予每层能关注图像特定部分的能力，从而赋予了模型大量决定何时如何关注视觉特征的能力。</p>
+<p>而对于训练，其将大量不同图像进行拼接组合。在一段话中，会用
+<code>&lt;image&gt;</code> 标注新图片出现的位置，用
+<code>&lt;eos&gt;</code>
+标注文本结束的位置。故得到一个长序列，其为图文交替的数据。
+在描述单张图像时，显然我们不希望模型看到全部的上下文，而只关注当前的图像，故其会使用掩码。于是在生成对于图像描述时，只会看到对应和之前的图像。不过模型可看到所有已生成内容的上下文。</p>
+<p>通过该种架构即可实现多图像或多对话处理。 且其可进行
+<strong>上下文学习</strong>（in-context
+learning），这也体现了从语言模型带来的广泛的少样本学习甚至零样本学习的能力，且效果显著（甚至只要下游任务能转化成问答过程，其就有可能解决）。</p>
+<h2 id="segment-anything-modelsam">Segment Anything Model（SAM）</h2>
+<p>其尝试对分割任务建立基础模型。即允许在图像中指出感兴趣的对象与类别，希望能对其输出掩码。
+对其，有两点需要泛化，一为分割的类别多样，二为能精准输出用户关心的内容。</p>
+<p>考虑用户关心的内容，其仅简单地输入文本是不够的（比如会出现指代不清等问题）。
+故对于 SAM，其有图形编码器，以输入图片，和 prompt
+编码器，以编码文本、点或者边界框等。接着将两个编码器的输出一并输入一个轻量级的掩码解码器（其架构类似于图像分割的解码器），以得到掩码。</p>
+<p>不过对于输入，其仍有可能产生歧义（例如点的位置剪刀的一个柄，则可能分割的为剪刀的一个柄、剪刀的两个柄、剪刀整体等等），我们并不希望模型因歧义而收到惩罚。
+于是考虑输出多种不同粒度的掩码，并取与目标最相近的掩码进行比较并计算
+loss，此时其他掩码则不会受惩罚。于是最终，模型可生成各种类型的掩码，用户可选用其中最合适的。</p>
+<p>考虑训练数据，大多数针对分割的数据集都很小，于是需要扩展现有分割数据集的规模（对该模型，其对数据集做了大幅度扩展，且由于互联网中对其的数据质量不佳，需要主动收集数据）。
+为了扩大数据量，SAM
+采用了循环策略。即最初用标注过的数据进行训练，接着用训练过的模型标注更多数据，并对模型生成的分割结果进行人工修正，然后重复这一流程。</p>
+<h2 id="cuplcustomized-prompts-via-language-models">CuPL（CUstomized
+Prompts via Language models）</h2>
+<p>若需让 CLIP 对没见过的概念进行分类，可考虑使用
+<strong>链式操作</strong>（Chaining）。其即将两个模型链起来，以解决单个模型难以解决的问题：</p>
+<ol type="1">
+<li>使用 LLM（例如 GPT）对概念做解释；</li>
+<li>通过这些解释让 CLIP 进行分类。</li>
+</ol>
+<p>综上，链式操作的核心即为结合一个模型的优势，并于另一个模型的能力相结合，以获得全新能力。其赋予了
+CLIP 对全新的细化的数据集的强大能力。</p>
+<p>链式操作的方法在当今十分流行。可考虑将语言模型与其他海量的专用视觉模型的输出链起来，以得到新能力。</p>
+<h3 id="visprogvisual-programming">VisProg（visual programming）</h3>
+<p>对于输入的任何图像和任何问题，考虑生成一个程序以获得答案，且该程序可对其他模型进行调用。
+且由于 GPT
+具有上下文学习的能力，其甚至只需告诉它怎么用，即可扩展至其他原本没见过的模型。</p>
+<p>虽说其能激活海量好的能力，但其需要大量计算资源，其需调用 GPT 的
+API，且需将每个单独的模型加载至内存中，并依次运行。故现在有课题为，能否将这些能力浓缩至单个模型，或者如何有效衔接这些流程。</p>
+<p>且其依然可能出现幻觉问题，一种方案为收集与所需推理类型的相关数据，另一种更好的方法是采用针对于点的验证机制，以验证输出是否可信。该方向也为现在活跃的课题。</p>
+<hr />
+<h1 id="lecture-17-robot-learning">Lecture 17: Robot Learning</h1>
+<p>机器人学习与其他学习有一个显著的不同之处，其必须与现实世界进行物理交互。
+于是做出的动作会改变现实世界，且现实世界会给出新的观测或奖励反馈。</p>
+<p>于是学习的目标为通过环境反馈，生成一系列动作序列，以最大化奖励或最小化成本等。
+该领域，尤其在近几年，在学术界和工业界都十分火热。</p>
+<h2 id="问题建模">问题建模</h2>
+<p>其有智能体（Agent），其被给定任务 <span
+class="math inline">\(g\)</span>，可为人类的语言指令、衡量智能体执行任务效果的函数等。
+智能体将从物理世界获取状态信息或环境数据 <span
+class="math inline">\(s_{t}\)</span>，并决定采取的动作 <span
+class="math inline">\(a_{t}\)</span>。该动作将作用于物理世界，将得到反馈的状态
+<span class="math inline">\(s_{t + 1}\)</span> 和奖励反馈 <span
+class="math inline">\(r_{t}\)</span>（其评估任务表现）输入智能体，以决定下一个动作。
+于是问题关键为如何定义目标（Goal）<span
+class="math inline">\(g\)</span>、状态（State）<span
+class="math inline">\(s\)</span>、动作（Action）<span
+class="math inline">\(a\)</span>、奖励（Reward）<span
+class="math inline">\(r\)</span>，以及目标函数等等。</p>
+<p>相较于 CV
+多为通过输入的高维数据学习环境的表征，机器人的问题本质上多为解决有物理世界约束的优化问题。即针对问题构造目标函数，然后通过生成动作序列以解决该优化问题。
+其中，机器人问题是广义的，不仅可为物理上的机器人，也可为 AI
+玩游戏，甚至为对话模型（例如 ChatGPT
+在回答完成后会有“是否对对话满意”的选项框）等等。</p>
+<h2 id="机器人感知">机器人感知</h2>
+<p>状态 <span class="math inline">\(s\)</span> 为 agent
+从物理世界中感知的信息，我们需从这些高维数据中进行提炼或应用结构化知识，以让机器人进行下游决策。于是我们需要解决如何理解现实世界的问题。</p>
+<p>而现实世界的信息是非结构化且混乱的：机器人得到的数据可能是不完整的，例如被遮挡，甚至传感器的错误信息。不完美的动作可能导致任务失败，进一步导致了环境的意外的变化。环境本身也是可变的，且其并非全由刚性物体组成，而含有可变形的物体，且存在其他
+agent（如人类、宠物等）更进一步扰乱环境信息。</p>
+<p>于是为了解决这些问题，我们通常不会仅使用相机输入，而是使用尽可能多的传感器以采样多种有用信息，例如同时采样触觉信息、音频信息、深度信息等等。
+因此我们需要设计一个系统，以整合这些传感器，并让这些信息从不同角度进行互补并协同工作（例如音频告诉物理接触情况，触觉告诉是否抓稳，视觉告诉环境的宏观信息等等）。
+这些传感器的协同工作对于需要在物理世界中运行的机器人至关重要。</p>
+<p>且对于机器人视觉，其相较于
+CV，其需要理解动作的效果，和在环境中的可用性，如主动做出动作，以更好地感知并理解环境（例如拆开积木以感知这是多个物体而不是一个物体）。</p>
+<p>换句话来说，机器人视觉是
+<strong>具身的</strong>（embodied）、<strong>主动的</strong>（active）、<strong>环境情景化的</strong>（environmentally
+situated）：</p>
+<ul>
+<li>具身化：机器人拥有实体身体，能够直接感知世界。它们的行为是与世界互动动态过程的一部分，并且自身的感知会获得即时反馈；</li>
+<li>主动性：机器人是主动的感知者。它清楚自己为何要进行感知，会自主选择要感知的对象，并决定如何、何时、在何处完成感知行为；</li>
+<li>情境化：机器人处于真实世界的具体场景中。它们不依赖抽象的描述，而是直接根据世界的
+“此时此地” 信息来调整自身行为。</li>
+</ul>
+<p>机器人存在感知与动作循环（Perception-Action
+Loop）。其中部分感知需与任务和下游决策系统协同设计，以专注相关区域或任务，从而形成最紧密的感知与动作循环。</p>
+<h2 id="强化学习reinforcement-learning">强化学习（Reinforcement
+learning）</h2>
+<p>考虑让机器人尽可能广泛地与环境互动，以收集所有经验数据进行试错学习，从而让机器人理解哪些动作可获得更高或更低的奖励，并引导
+agent 向更高奖励动作进行调整。这即为 <strong>强化学习</strong>
+的思想。</p>
+<p>其于监督学习存在明显的区别：</p>
+<ul>
+<li>环境充满了不确定性和随机性，即对相同的动作可能会对环境产生不同的改变，从而导致奖励也是随机的，即相同的动作可能会导致不同的奖励；</li>
+<li>奖励可能延迟，即最终的奖励可能与开头的动作有重大关系，故需要考虑如何正确地分配贡献。其为十分棘手且重要地问题；</li>
+<li>由于涉及环境，该系统不可微，故得到梯度十分棘手（例如大量采样以进行梯度零阶估计等）；</li>
+<li>场景并非平稳，即环境会随着 agent
+的动作而改变，故之前的动作会影响之后的决策。这也增加了问题的复杂性。</li>
+</ul>
+<p>对于强化学习，其允许 agent
+进行广泛的世界探索与交互，使其有可能发现超越人类的策略。</p>
+<p>附带的，强化学习带来了 AlphaGo Zero 等成就，且由于 AlphaGo Zero 为
+AlphaGo 的简化版本，有一个感性的结论，称为 <strong>Rich Sutton
+提出的苦涩教训</strong>（a bitter lesson from the Rich Sutton）：
+最简单的方案往往能最好地适配规模化，从而充分利用规模效应，以发挥规模化带来的力量。
+且把方法做得更简单，由于能更好地适配用来做大规模扩展的基础设施，可能反而能带来更好的性能。</p>
+<p>对于 Model-Free RL，有以下缺点：</p>
+<ul>
+<li>其通过试错学习，且需要大量与现实世界的交互；</li>
+<li>存在安全顾虑；</li>
+<li>可解释性十分有限，故做错时难以纠正。</li>
+</ul>
+<p>相比于
+RL，人类对环境有非常直观的理解，能预判执行特定动作后的环境变化。这个预测能力赋予了人类能规划行为以达成目标的能力，且该种预测能力源自现实世界中的物理交互和日常经验。</p>
+<h2
+id="模型学习与基于模型的规划model-learning-model-based-planning">模型学习与基于模型的规划（Model
+learning &amp; model-based planning）</h2>
+<p>对于训练，需要有模拟工具，通常选用 Isaac Gym 或 Isaac
+Sim，其为一系列刚体的模拟，且机器人通常以接触类似于多边形的物体进行模拟。我们通常会对其完全地随机化（随机化摩擦系数、环境中的集合形状、物理参数等），于是可以假设真实世界即为该种随机化模拟分布中的一个点。以此可使机器人的策略更加鲁棒，且具有泛化性。
+实践表明该种假设是正确的，能使策略在真实世界中可靠且鲁棒。
+对于运动控制领域，模拟不必非常完美，只要能充分地随机化，就有很大可能在真实环境中鲁棒。而对于操作领域，模拟需要多高的精度，以及模拟和真实世界的差距有多大，目前仍为一个课题。</p>
+<p>人类不仅可试错学期，且在过程中构建了自己的内部模型。
+于是可考虑可否通过机器人与环境的交互中学习模型，然后利用该模型让机器人进行更好的物理交互。
+换句话来说，我们可否考虑学习并近似真实的物理世界，且如何让这个虚拟的物理世界知道机器人的动作，并决定在真实世界中所做的动作。</p>
+<p>若已经习得这个模型，给定状态 <span
+class="math inline">\(s_{t}\)</span> 和动作 <span
+class="math inline">\(t\)</span>，则可预测环境的下一状态 <span
+class="math inline">\(s_{t + 1}\)</span>，即计算 <span
+class="math inline">\(P(s_{t + 1} \mid s_{t}, a_{t})\)</span>。
+该种预测为一个前向模型，于是若给定当前状态和目标状态，考虑进行规划，可进行动作的初始操作，然后模型预测状态序列的演变，然后考虑模型结果与目标状态的距离，则可进行反向传播等对整个动作序列进行优化，以得到更接近目标的动作序列。</p>
+<p>不过模型可能不够准确，故我们通常只执行初始动作，然后从真实环境中获取新状态，并用梯度下降等方法重新优化动作序列。
+对于采样和梯度下降，可用 GPU
+并行处理，以得到相当高效的大规模采样和动作序列的优化。</p>
+<p>考虑如何正确且有效地表示状态 <span
+class="math inline">\(s_{t}\)</span>，且如何让模型在 <span
+class="math inline">\(s_{t}\)</span>
+上进行学习，目前已有许多研究和方法：</p>
+<ul>
+<li>像素动态：深度视觉前瞻（Deep Visual
+Foresight），仅用二维图像进行状态表示，并学习像素动态，即做动作后图片将如何改变；</li>
+<li>关键点动态：即使用关键点作为环境表示进行学习；</li>
+<li>粒子动态：对于更高自由度的物体，考虑用粒子集表示物体</li>
+</ul>
+<p>严格来说，这种直接学习模型，然后用模型进行规划的方法，并不能称为强化学习，不过该方法也可称为
+<strong>基于模型的强化学习</strong>（model-based reinforcement
+learning）或 <strong>基于模型的规划</strong>（model-based
+planning）等。</p>
+<h2 id="模仿学习imitation-learning">模仿学习（Imitation learning）</h2>
+<p>考虑用已有的环境演化数据进行监督学习，然后用习得的模型进行基于模型的规划。
+进一步考虑，能否对策略也通过监督学习进行训练，即为
+<strong>模仿学习</strong>。
+其考虑能否使用数据集来展示一项任务是如何完成的，并用该数据集进行策略（即
+agent 做的事）的训练。</p>
+<p>模仿学习为能获取在真实物理世界中执行任务的策略的最高效的方式。而为使策略更加有效且鲁棒，专家示范数据的迭代式采集是必要的，以处理意外情况。</p>
+<h3 id="行为克隆behavior-cloningbc">行为克隆（Behavior
+Cloning，BC）</h3>
+<p>即学习从观察 <span class="math inline">\(o\)</span> 映射至动作 <span
+class="math inline">\(a\)</span> 的映射 <span
+class="math inline">\(\pi_{\theta}(a_{t} \mid o_{t})\)</span>。
+其有一个关键问题为 <strong>级联误差</strong>（cascading
+error），即对于序列决策问题，误差会随着时间累积并被放大，即开头的微小偏差会在累计与放大中导致最后的结果与目标差距显著。</p>
+<h3 id="专家示范数据的迭代式采集">专家示范数据的迭代式采集</h3>
+<p>若想要模仿学习有效，通常遵循该流程：
+首先需要有专家收集的的示范数据，接着用该数据进行监督学习以训练策略，并在真实环境中测试策略，观察失败案例，然后收集额外数据或提供修正行为，使数据集不仅包含初始示范，还包含能将错误策略修回典型轨迹或仍能完成任务的轨迹的修正行为，最后进行相同步骤的迭代。</p>
+<h3 id="逆强化学习inverse-reinforcement-learningirl">逆强化学习（Inverse
+Reinforcement Learning，IRL）</h3>
+<p>对于模仿学习，任务常常没有明确的定义，其通常隐含在示范数据中。</p>
+<p>故考虑
+<strong>逆强化学习</strong>，即从示范中（即从环境和行为中）总结出奖励函数，并利用该奖励进行通常的强化学习。</p>
+<h3 id="隐式行为克隆implicit-behavior-cloningibc">隐式行为克隆（Implicit
+Behavior Cloning，IBC）</h3>
+<p>考虑借鉴能量模型的思想（其为一种生成模型），直接通过观察 <span
+class="math inline">\(o\)</span> 和动作 <span
+class="math inline">\(a\)</span> 的预测分数 <span
+class="math inline">\(\arg\max_{a \in \mathcal{A}} E_{\theta}(o,
+a)\)</span>，并用这种基于能量的模型进行推理，以得到预测动作 <span
+class="math inline">\(\hat{a}\)</span>。</p>
+<p>其可使机器人处理多模态的示范，或处理优化曲面并非足够平滑的场景。</p>
+<h3 id="扩散策略diffusion-policies">扩散策略（Diffusion Policies）</h3>
+<p>机器人学习领域近年来的一些重大成功都得益于该工作。 考虑利用 diffusion
+作为策略函数，以继承 diffusion 的优势和特性。
+该策略展现了非常多样化的功能，使模型能实现许多精细动作，如操作任务（例如简单地做饭）。</p>
+<h2 id="机器人基础模型robotic-foundation-models">机器人基础模型（Robotic
+foundation models）</h2>
+<p>该领域为目前机器人学习的热潮，且较为复杂。</p>
+<p>对于机器人基础模型，其不存在显式的状态或状态转移函数的表示，且其仍然是将状态
+<span class="math inline">\(s\)</span> 和目标 <span
+class="math inline">\(g\)</span> 映射到动作 <span
+class="math inline">\(a\)</span> 的策略。</p>
+<p>考虑一般的基础模型，其输出不一定总是最优，但其始终会生成合理的结果。
+扩展至机器人基础模型，其合成的动作不一定始终是最优的动作，但整体的轨迹始终是优雅（即动作应平滑连续而非摇晃）且合理（即机器人会遵循人给出的语言指令）的，以在真实世界中执行。</p>
+<p>其有多种名称，例如
+<strong>视觉语言动作模型</strong>（Vision-Language-Action
+Models，VLAs）、<strong>大型行为模型</strong>（Large behavior
+models，LBMs）等等，不过其均为同一概念：接收观察结果和语言指令等任务形式，并生成能能在多场景广泛使用的动作的策略。</p>
+<h3 id="pi-zero-by-physical-intelligence">Pi-Zero by Physical
+Intelligence</h3>
+<p>其为一种机器人基础模型。</p>
+<p>其拥有大量学术数据和自建数据组成的数据集，涵盖了不同机器人执行在真实世界中执行的实用任务。</p>
+<p>其利用数据集进行预训练，且这个预训练从一个已预训练的
+<strong>视觉语言模型</strong>（Vision-Language
+Model）开始（其可自然地迁移语义知识），然后通过
+<strong>协同微调</strong>（Co-finetuning），结合动作预测目标和视觉回答的适配目标，即可保留模型中的语义知识，与此同时也能预测机器人动作。</p>
+<p>然后进行 <strong>后训练</strong>（Post-training，其受 LLM
+的启发，即有基础模型，其可提供合理的基准性能，若想让其在特定任务中表现优秀，则需收集特定任务的数据，然后在该数据上进行微调，以满足特定任务的性能要求）。</p>
+<p>其有三个不同的类别评估整个系统：</p>
+<ul>
+<li>直接使用基础模型，其已足够应对某些简单的预训练见过的该分布内数据；</li>
+<li>若任务稍微复杂一点，可通过后训练，让基础模型进一步提升该分布内任务的表现；</li>
+<li>若为没见过的任务，则需要收集特定任务后进行后训练，以得到更好的效果。</li>
+</ul>
+<p>该模型从预训练的视觉语言模型开始，已有大量的语义知识被编码，故其天然具有一些泛化能力，且基础模型已经有相当可观的语义泛化能力。从而通过在机器人数据上进行微调，即可确保不仅在语义层面泛化，也可在动作层面泛化。</p>
+<h2 id="尚存挑战">尚存挑战</h2>
+<h3 id="机器人学习模型的评估">机器人学习模型的评估</h3>
+<p>其为目前公认的主要挑战之一。</p>
+<p>可在现实世界进行评估，但进行该种评估成本高昂，结果易受噪声干扰（微小的环境差异可能就会导致显著的结果差异）。
+且实际上，训练的 loss
+与真实世界中的成功率相关性很弱。这也是监督学习与序列决策问题的重要区别。序列决策问题中，loss
+只反映这一步的预测如何，而非反映该模型的性能如何，故其很多时候并不能反映策略在长周期任务中的表现。</p>
+<p>这些问题导致了很难制定，甚至难以近似地进行策略表现的衡量，且我们必须依赖真实环境的评估。</p>
+<p>另一种方法为在虚拟环境中进行评估。显然仿真与真实有差距（例如如何准确模拟刚体、可形变的物体、衣物等）。
+资产问题（即大规模泛化和生成资产（即环境与物体等））也为其主要问题。
+数字化真实世界、程序化生成逼真多样的物体等等也较为困难。
+同时，也需要考虑模拟与现实的相关性。</p>
+<p>所以说，机器人学习目前需要一个 ImageNet in Embodied AI
+作为基准以测量机器人的进步。</p>
+<h2 id="基础世界模型foundation-world-models">基础世界模型（Foundation
+World Models）</h2>
+<p>目前，人们正在大规模采集
+<strong>动作条件化</strong>（action-conditioned）
+的机器人交互数据，以训练基础策略。这些数据蕴含了大量动态知识，故可考虑在策略学习之外的领域利用它们。</p>
+<p>于是考虑利用这些收集的数据，来训练
+<strong>基础世界模型</strong>，并探讨其与基础策略如何协同作用。
+换句话来说，基础世界模型即为基于动作条件的未来预测。</p>
+<p>目前该方向已有些许探索，且有一些可能要考虑特性，例如是否需要
+3D、是否需要结构先验、学习与物理规律的比例、其与真实物理世界的关联等等。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+              <a href="/tags/CS231n/" rel="tag"># CS231n</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cs231n-2/" rel="prev" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">
+                  <i class="fa fa-angle-left"></i> 「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/cs231n-assignments/" rel="next" title="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">
+                  「CS231n：计算机视觉与深度学习」学习笔记（Assignments） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments disqusjs-container">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/styles/disqusjs.css" integrity="sha256-E4RzceSomICFY1PT/yDQrN8DsLSwdScDEiQAevHabp0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/disqusjs.es2015.umd.min.js","integrity":"sha256-gdbBT62HLzqWTnXQED3WQL/ItFCuWsA5gd6dM/wgdiE="}}</script>
+<script src="/js/third-party/comments/disqusjs.js" defer></script>
+
+</body>
+</html>

@@ -182,18 +182,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">121</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">136</span>
+        <span class="site-state-item-count">140</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -227,6 +227,456 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cf-1746d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cf-1746d/" class="post-title-link" itemprop="url">「Codeforces 1746D」Paths on the Tree - 贪心</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-23 22:13:01" itemprop="dateCreated datePublished" datetime="2022-10-23T22:13:01+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-24 09:08:24" itemprop="dateModified" datetime="2022-10-24T09:08:24+08:00">2022-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1746/D">Codeforces
+链接</a></p>
+<p>给定一个 <span class="math inline">\(n\)</span>
+个节点的树，其节点被标记为 <span class="math inline">\(1\)</span> 到
+<span class="math inline">\(n\)</span>，而且该树的根为 <span
+class="math inline">\(1\)</span>，另外也给定一个积分序列 <span
+class="math inline">\(s\)</span></p>
+<p>如果下列两个条件都满足，则我们称路径集合k可用：</p>
+<ul>
+<li><p>该集合内所有路径从 <span class="math inline">\(1\)</span>
+开始</p></li>
+<li><p><span class="math inline">\(c_i\)</span> 为覆盖节点 <span
+class="math inline">\(i\)</span>
+的路径数量，对于每对拥有同个父节点的节点 <span
+class="math inline">\((u,v)\)</span>，要求<span
+class="math inline">\(|c_u-c_v|\)</span> 小于等于1</p></li>
+</ul>
+<p>对于每个路径集合，其权值被定义为 <span
+class="math inline">\(\sum\limits_{i=1}^n{c_i s_i}\)</span></p>
+<p>显而易见，每组数据至少有一个可用的路径集合，找出所有可用路径集合中的最大权值</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/cf-1746d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/ybtoj723-tee/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ybtoj723-tee/" class="post-title-link" itemprop="url">「YbtOJ CSP-S 模拟赛」砍苹果树 - 树上差分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-23 21:59:49 / 修改时间：22:11:04" itemprop="dateCreated datePublished" datetime="2022-10-23T21:59:49+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a target="_blank" rel="noopener" href="http://noip.ybtoj.com.cn/contest/723/problem/1">YbtOJ
+链接（需付费）</a></p>
+<p>小 K 有一棵 <span class="math inline">\(n\)</span> 个点，<span
+class="math inline">\(n - 1\)</span> 条边的苹果树，将树上的边称为 A
+类边。</p>
+<p>小 K 还往这棵树上加上了 <span class="math inline">\(m\)</span>
+条边，称加上的边为 B 类边。</p>
+<p>作为小 K 的好朋友，你想要砍掉小 K
+的苹果树，但是你发现砍掉一条边不一定能使苹果树不连通，于是你需要求出：有多少选取
+<strong>恰好一条 A 类边和恰好一条 B 类边</strong>
+的方案，使得这两条边删去之后，原图不连通。</p>
+<p>两种方案不同当且仅当一条边在第一种方案中被删除了但在第二种方案中没有被删除。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/ybtoj723-tee/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/nc-40646a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nc-40646a/" class="post-title-link" itemprop="url">「牛客 CSP-S 模拟赛」躲避技能 - 树上差分 + 贪心 + 高精度</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-08 11:56:07" itemprop="dateCreated datePublished" datetime="2022-10-08T11:56:07+08:00">2022-10-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-23 22:02:23" itemprop="dateModified" datetime="2022-10-23T22:02:23+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a
+target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/40646/A">牛客链接（需付费）</a></p>
+<p>鸡尾酒是一个多操手，他可以同时操作 <span
+class="math inline">\(m\)</span> 个账号。今天，他使用这些账号一起打一个
+boss。这个 boss 战的地图共有 <span class="math inline">\(n\)</span>
+个关键点，其中有 <span class="math inline">\(n - 1\)</span>
+条边，每条边连接着两个不同的点，使得从任意点出发可以到达其他所有的点。鸡尾酒的
+<span class="math inline">\(m\)</span> 个账号分别编号 <span
+class="math inline">\(1\)</span> 至 <span
+class="math inline">\(m\)</span>，一开始，第 <span
+class="math inline">\(i\)</span> 个账号在点 <span
+class="math inline">\(s_i\)</span>。<strong>可能有两个账号在同一位置</strong>。</p>
+<p>现在，boss 放出了一个致命技能。boss 在地图上标出了 <span
+class="math inline">\(m\)</span>
+个关键点，想成功躲避这个技能，必须在每一个被标记的点上，都有一个账号站在上面。<strong>注意，可能会有点被多次标记，多次标记的点需要有多个账号站在上面</strong>。</p>
+<p>由于鸡尾酒无法分身，所以
+<strong>他必须先把一个账号移动到一个位置，才能动另一个账号，不能同时移动多个账号</strong>。假设鸡尾酒的任意账号通过第
+<span class="math inline">\(i\)</span> 条边的时间为 <span
+class="math inline">\(w_i\)</span>，请帮鸡尾酒求出他成功躲避技能所需要的最少时间。</p>
+<p>数据范围：<span class="math inline">\(1 \le n, m \le
+10^5\)</span>，<span class="math inline">\(1 \le w_i \le
+10^{100}\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/nc-40646a/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/nc-40645a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nc-40645a/" class="post-title-link" itemprop="url">「牛客 CSP-S 模拟赛」光 - 二分答案</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-08 11:36:20 / 修改时间：11:55:46" itemprop="dateCreated datePublished" datetime="2022-10-08T11:36:20+08:00">2022-10-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="题意描述">题意描述</h1>
+<p><a
+target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/40645/A">牛客链接（需付费）</a></p>
+<p>在一个 <span class="math inline">\(2 \times 2\)</span>
+的网格上有四盏灯，每个网格一盏。这四盏灯的位置分别是左上角，右上角，左下角，右下角。</p>
+<p>每盏灯有一个可供调节的耗电量，耗电量越高，则灯对周围提供的亮度越多。具体来说，若某一盏灯的耗电量为
+<span class="math inline">\(x\)</span>，那么它将会为自己的格子提供 <span
+class="math inline">\(x\)</span> 的亮度，为相邻的两个格子提供 <span
+class="math inline">\(\lfloor \frac{x}{2} \rfloor\)</span>
+的亮度，为对角的格子提供 <span class="math inline">\(\lfloor \frac{x}{4}
+\rfloor\)</span>。其中 <span class="math inline">\(\lfloor x
+\rfloor\)</span> 表示对 <span class="math inline">\(x\)</span>
+向下取整。</p>
+<p>某一个<strong>格子的亮度</strong>是四盏灯对它提供的亮度之和。例如左上角的灯耗电量为
+<span class="math inline">\(4\)</span>，右上角的灯耗电量为 <span
+class="math inline">\(7\)</span>，右下角的灯耗电量为 <span
+class="math inline">\(8\)</span>，左下角的灯耗电量为 <span
+class="math inline">\(0\)</span>，那么左上角这个格子的亮度就是 <span
+class="math inline">\(4 + \lfloor \frac{7}{2} \rfloor + \lfloor
+\frac{8}{4} \rfloor + 0 = 9\)</span></p>
+<p>现在我们对 <strong>四个格子的最低亮度</strong>
+提出了要求，我们想要让四个格子的亮度都达到标准。你可以将每一盏灯的耗电量调节为任何一个大于等于零的整数，为了省电，你希望四盏灯的耗电量之和尽可能的小，请问
+<strong>四盏灯的最小耗电量之和</strong> 是多小？</p>
+<p>数据范围：四个格子的最低亮度均为正整数且不超过 <span
+class="math inline">\(1500\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/nc-40645a/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -898,435 +1348,8 @@ class="math inline">\(m\)</span> 条赛道中最短赛道的长度尽可能大�
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noip2014-equation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/noip2014-equation/" class="post-title-link" itemprop="url">「NOIP2014」解方程 - 数论 + Hash</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-27 15:17:48" itemprop="dateCreated datePublished" datetime="2022-09-27T15:17:48+08:00">2022-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2312">洛谷链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://loj.ac/p/2503">LibreOJ 链接</a></p>
-<p>已知多项式方程：</p>
-<p><span
-class="math display">\[a_0+a_1x+a_2x^2+\cdots+a_nx^n=0\]</span></p>
-<p>求这个方程在 <span class="math inline">\([1,m]\)</span>
-内的整数解（<span class="math inline">\(n\)</span> 和 <span
-class="math inline">\(m\)</span> 均为正整数）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/noip2014-equation/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/noip2015-transport/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/noip2015-transport/" class="post-title-link" itemprop="url">「NOIP2015」运输计划 - 二分答案 + 最近公共祖先 + 树上差分</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-27 10:50:32" itemprop="dateCreated datePublished" datetime="2022-09-27T10:50:32+08:00">2022-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-14 16:11:08" itemprop="dateModified" datetime="2022-11-14T16:11:08+08:00">2022-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2680">洛谷链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://loj.ac/p/2425">LibreOJ 链接</a></p>
-<p>公元 <span class="math inline">\(2044\)</span>
-年，人类进入了宇宙纪元。</p>
-<p>L 国有 <span class="math inline">\(n\)</span> 个星球，还有 <span
-class="math inline">\(n - 1\)</span>
-条双向航道，每条航道建立在两个星球之间，这 <span class="math inline">\(n
-- 1\)</span> 条航道连通了 L 国的所有星球。</p>
-<p>小 P
-掌管一家物流公司，该公司有很多个运输计划，每个运输计划形如：有一艘物流飞船需要从
-<span class="math inline">\(u_i\)</span> 号星球沿最快的宇航路径飞行到
-<span class="math inline">\(v_i\)</span>
-号星球去。显然，飞船驶过一条航道是需要时间的，对于航道 <span
-class="math inline">\(j\)</span>，任意飞船驶过它所花费的时间为 <span
-class="math inline">\(t_j\)</span>，并且任意两艘飞船之间不会产生任何干扰。</p>
-<p>为了鼓励科技创新，L 国国王同意小 P 的物流公司参与 L
-国的航道建设，即允许小 P
-把某一条航道改造成虫洞，飞船驶过虫洞不消耗时间。</p>
-<p>在虫洞的建设完成前小 P 的物流公司就预接了 <span
-class="math inline">\(m\)</span> 个运输计划。在虫洞建设完成后，这 <span
-class="math inline">\(m\)</span>
-个运输计划会同时开始，所有飞船一起出发。当这 <span
-class="math inline">\(m\)</span> 个运输计划都完成时，小 P
-的物流公司的阶段性工作就完成了。</p>
-<p>如果小 P 可以自由选择将哪一条航道改造成虫洞，试求出小 P
-的物流公司完成阶段性工作所需要的最短时间是多少?</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/noip2015-transport/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/csp2022-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/csp2022-1/" class="post-title-link" itemprop="url">CSP-S 2022 第一轮 行记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-18 12:38:36" itemprop="dateCreated datePublished" datetime="2022-09-18T12:38:36+08:00">2022-09-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-26 09:26:10" itemprop="dateModified" datetime="2022-10-26T09:26:10+08:00">2022-10-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/%E8%A1%8C%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">行记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><del>又来记流水账了 QWQ</del></p>
-<h1 id="day-0">Day 0</h1>
-<p>由于成都疫情一直在家，复习了一下初赛，然后继续刷题。由于现在基本等于停课状态准备算比较充分。</p>
-<p>今年是线上考，事先试了一下设备。刷了一套初赛题之后就在洛谷上刷其它题去了（逃
-<del>还是复赛题有意思</del></p>
-<p>补了几集《四月是你的谎言》就睡觉了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/csp2022-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/jsoi2010-banquet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="XenonWZH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XenonWZH's Blog">
-      <meta itemprop="description" content="XenonWZH's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | XenonWZH's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/jsoi2010-banquet/" class="post-title-link" itemprop="url">「JSOI2010」满汉全席 - 2-SAT</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-09-18 11:38:14 / 修改时间：11:57:36" itemprop="dateCreated datePublished" datetime="2022-09-18T11:38:14+08:00">2022-09-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/OI/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="题意描述">题意描述</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4171">洛谷链接</a></p>
-<p>大会的规则如下：每位参赛的选手可以得到 <span
-class="math inline">\(n\)</span>
-种材料，选手可以自由选择用满式或是汉式料理将材料当成菜肴。</p>
-<p>大会的评审制度是：共有 <span class="math inline">\(m\)</span>
-位评审员分别把关。只要参赛者能在这两种材料的做法中，其中一个符合评审的喜好即可通过该评审的审查。</p>
-<p>但大会后来发现，在这样的制度下如果材料选择跟派出的评审员没有特别安排好的话，所有的参赛者最多只能通过部分评审员的审查而不是全部，所以可能会发生没有人通过考核的情形。</p>
-<p>所以大会希望有人能写一个程序来判断，所选出的 <span
-class="math inline">\(m\)</span>
-位评审，会不会发生没有人能通过考核的窘境，以便协会组织合适的评审团。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/jsoi2010-banquet/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

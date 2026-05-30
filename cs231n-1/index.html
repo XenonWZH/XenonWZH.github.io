@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 02 - Lec 04。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）">
+<meta property="og:url" content="https://xenonwzh.github.io/cs231n-1/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="本篇为《CS231n: Deep Learning for Computer Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 02 - Lec 04。 主要参考了 CS231n 官网 和 B 站课程视频，相关代码和作业实现可以参考 个人完成记录。  前置说明：基础知识可参考 《PyTorch深度学习实践》。本文默认读者已掌握该课程的基础常识，故">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-30T07:51:18.000Z">
+<meta property="article:modified_time" content="2026-05-30T09:35:36.306Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="CS231n">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/cs231n-1/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/cs231n-1/","path":"cs231n-1/","title":"「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04） | XenonWZH's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="XenonWZH's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-2-image-classification-with-linear-classifiers"><span class="nav-number">1.</span> <span class="nav-text">Lecture
+2: Image Classification with Linear Classifiers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#knn"><span class="nav-number">1.1.</span> <span class="nav-text">kNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.</span> <span class="nav-text">交叉验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-3-regularization-and-optimization"><span class="nav-number">2.</span> <span class="nav-text">Lecture 3:
+Regularization and Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8Dsgd"><span class="nav-number">2.2.1.</span> <span class="nav-text">随机梯度下降（SGD）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sgd-momentum"><span class="nav-number">2.2.2.</span> <span class="nav-text">SGD + Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rmsprop"><span class="nav-number">2.2.3.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adam"><span class="nav-number">2.2.4.</span> <span class="nav-text">Adam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adamw"><span class="nav-number">2.2.5.</span> <span class="nav-text">AdamW</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87learning-ratelr"><span class="nav-number">2.2.6.</span> <span class="nav-text">学习率（Learning Rate，LR）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%98%B6%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">二阶优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-4-neural-networks-and-backpropagation"><span class="nav-number">3.</span> <span class="nav-text">Lecture 4: Neural
+Networks and Backpropagation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">3.2.</span> <span class="nav-text">2 层神经网络</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">140</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener me" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/cs231n-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04） | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-05-30 15:51:18 / 修改时间：17:35:36" itemprop="dateCreated datePublished" datetime="2026-05-30T15:51:18+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本篇为《CS231n: Deep Learning for Computer
+Vision》课程的学习笔记，课程版本为 Spring 2025。该篇笔记涵盖了 Lec 02 -
+Lec 04。</p>
+<p>主要参考了 <a
+target="_blank" rel="noopener" href="https://cs231n.stanford.edu/2025/index.html">CS231n 官网</a> 和 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1b1agz5ERC/">B
+站课程视频</a>，相关代码和作业实现可以参考 <a
+target="_blank" rel="noopener" href="https://github.com/XenonWZH/learn-dl/tree/main/CS231n">个人完成记录</a>。</p>
+<blockquote>
+<p><strong>前置说明</strong>：基础知识可参考 <a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411d7Ys/">《PyTorch深度学习实践》</a>。本文默认读者已掌握该课程的基础常识，故不再进行赘述。</p>
+</blockquote>
+<p>这一系列笔记为个人随手记录，<del>且是直接从 Obsidian
+强行复制过来的，不保证排版和可读性（）</del>。</p>
+<span id="more"></span>
+<hr />
+<p>导航链接：</p>
+<ul>
+<li><strong><a href="/cs231n-1/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 02 - Lec 04）">Lec 02 - Lec 04：线性分类器进行图像分类，正则化与优化，神经网络与反向传播</a></strong></li>
+<li><a href="/cs231n-2/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">Lec 05 - Lec 11：基于 CNN 的图像分类，CNN 架构，循环神经网络，注意力机制与 Transformer，目标检测、图像分割与可视化，视频理解，大规模分布式训练</a></li>
+<li><a href="/cs231n-3/" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 12 - Lec 17）">Lec 12 - Lec 17：自监督学习，生成模型（一），生成模型（二），三维视觉，视觉与语言，机器人学习</a></li>
+<li><a href="/cs231n-assignments/" title="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">Assignments：作业合集</a></li>
+</ul>
+<hr />
+<h1 id="lecture-2-image-classification-with-linear-classifiers">Lecture
+2: Image Classification with Linear Classifiers</h1>
+<h2 id="knn">kNN</h2>
+<p>一种比较 trivial 的图像分类方法，通过定义图像之间的距离，并对于
+<code>test</code> 集中的每一张图像，找出 <code>train</code> 集中距离前
+<span class="math inline">\(k\)</span>
+小的图像，取其中出现次数最多的类别作为答案。
+比较显而易见的，该方法的泛化能力较差。</p>
+<p>常见的距离有下列两种：</p>
+<ul>
+<li>L1 距离： <span class="math display">\[ d_{1}(I_{1}, I_{2}) =
+\sum\limits_{p} \left| I^{p}_{1} - I^{p}_{2} \right|. \]</span></li>
+<li>L2 距离： <span class="math display">\[ d_{2}(I_{1}, I_{2}) = \sqrt{
+\sum_{p} \left( I^{p}_{1} - I^{p}_{2} \right)^{2} }. \]</span></li>
+</ul>
+<h2 id="交叉验证">交叉验证</h2>
+<p>一般来说，会把数据集分为训练集（<code>train</code>）、验证集（<code>validation</code>）和测试集（<code>test</code>），一般来说，使用训练集进行训练，验证集进行调参（调整超参数等），并在调参完成后，使用测试集进行效果测试。
+<strong>需要注意，不可用测试集进行调参，否则会影响模型的泛化能力，或也可认为结果在
+cheating。所以说，只可在最后使用测试集对模型进行评估，且只可使用一次。</strong></p>
+<p>在数据集较小时，为避免验证集无法反映全体数据，可采用交叉验证。即将训练集分段（<code>fold</code>），假设分为
+<span class="math inline">\(n\)</span> 段，然后让每个 <code>fold</code>
+分别当一次验证集，其余的 <code>fold</code> 合并起来当训练集，如此执行
+<span class="math inline">\(n\)</span> 次数，让验证集覆盖所有的
+<code>fold</code>，最后求 accuracy 的平均数即可。</p>
+<hr />
+<h1 id="lecture-3-regularization-and-optimization">Lecture 3:
+Regularization and Optimization</h1>
+<h2 id="正则化">正则化</h2>
+<p>对于损失函数 (loss
+function)，如果不同的模型可以得到相同的结果（例如以 <span
+class="math inline">\(f(x_{i}, W) = Wx_{i}\)</span> 为例, 在 <span
+class="math inline">\(L = 0\)</span> 时，<span
+class="math inline">\(W\)</span>
+可能不唯一），于是我们需要对其进行正则化 (regularization)
+取得相对来说更简单的 <span
+class="math inline">\(W\)</span>（一般来说，更简单的模型泛化能力更强）。</p>
+<p>于是我们可以在损失函数中添加惩罚项 <span
+class="math inline">\(R(W)\)</span> 来实现这一点，例如使用 L2
+范数控制权重： <span class="math display">\[ R(W) = \sum\limits_{k}
+\sum\limits_{l} W_{k, l}^{2} \]</span> 也可用 L1
+范数，具体用哪个看问题需求（一般来说，L2 范数更常用）： <span
+class="math display">\[ R(W) = \sum\limits_{k} \sum\limits_{l} |W_{k,
+l}| \]</span></p>
+<p>自此，我们可得到完整的损失函数： <span class="math display">\[ L =
+\underbrace{ \frac{1}{N} \sum\limits_{i} L_{i} }_{ \text{data loss} } +
+\underbrace{ \lambda R(W) }_{ \text{regularization loss} } \]</span>
+其中 <span class="math inline">\(\lambda\)</span>
+为超参数，需要通过验证集确定。</p>
+<h2 id="优化">优化</h2>
+<h3 id="随机梯度下降sgd">随机梯度下降（SGD）</h3>
+<p><span class="math display">\[ x_{t + 1} = x_{t} - \alpha \nabla
+f(x_{t}) \]</span></p>
+<p>一般会使用 minibatch，<strong>大小通常为 32 / 64 / 128</strong>。</p>
+<h3 id="sgd-momentum">SGD + Momentum</h3>
+<p><span class="math display">\[
+\begin{align*}
+v_{t + 1} &amp;= \rho v_{t} + \nabla f(x_{t}) \\
+x_{t + 1} &amp;= x_{t} - \alpha v_{t + 1}
+\end{align*}
+\]</span></p>
+<p>增加了速度一项，可避免陷入局部最小值（有惯性可以冲出来），其中摩擦系数（friction，<span
+class="math inline">\(\rho\)</span>）通常设为 <span
+class="math inline">\(0.9\)</span> 或 <span
+class="math inline">\(0.99\)</span>。</p>
+<p>SGD + Momentum 有不同的表达形式，例如： <span class="math display">\[
+\begin{align*}
+v_{t + 1} &amp;= \rho v_{t} - \alpha \nabla f(x_{t}) \\
+x_{t + 1} &amp;= x_{t} - v_{t + 1}
+\end{align*}
+\]</span> 这几种表达形式实际上是等价的。</p>
+<h3 id="rmsprop">RMSProp</h3>
+<p>为了加速梯度下降过程，并减小垂直于目标方向的剧烈梯度的副作用，可以考虑对学习率进行自适应地逐项缩放。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grad_squared = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	dx = compute_gradient(x)</span><br><span class="line">	grad_squared = decay_rate * grad_squared + (<span class="number">1</span> - decay_rate) * dx * dx</span><br><span class="line">	x -= learning_rate * dx / (np.sqrt(grad_squared) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+<p>由此，可使其在梯度“陡峭”更新减缓，在梯度“平缓”时更新加剧。</p>
+<h3 id="adam">Adam</h3>
+<p>实际上就是 Momentum 和 RMSProp 的结合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">first_moment = <span class="number">0</span></span><br><span class="line">second_moment = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	dx = compute_gradient(x)</span><br><span class="line">	first_moment = beta1 * first_moment + (<span class="number">1</span> - beta1) * dx  // Momentum</span><br><span class="line">	second_moment = beta2 * second_moment + (<span class="number">1</span> - beta2) * dx * dx  // RMSProp</span><br><span class="line">	x -= learning_rate * first_moment / (np.sqrt(second_moment) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+<p>不过实际上，由于一般来说 <code>beta2</code> 取值会接近 <span
+class="math inline">\(1\)</span>，第一次计算 <code>second_moment</code>
+时该值很可能会很小，从而导致第一步的步长极大。</p>
+<p>为解决该问题，可添加偏差项：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">first_moment = <span class="number">0</span></span><br><span class="line">second_moment = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, num_iterations):</span><br><span class="line">	dx = compute_gradient(x)</span><br><span class="line">	first_moment = beta1 * first_moment + (<span class="number">1</span> - beta1) * dx</span><br><span class="line">	second_moment = beta2 * second_moment + (<span class="number">1</span> - beta2) * dx * dx</span><br><span class="line">	first_unbias = first_moment / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">	second_unbias = second_moment / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line">	x -= learning_rate * first_unbias / (np.sqrt(second_unbias) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+<p>从经验来说，<strong>Adam 和 AdamW
+基本是最常用的优化器，且对于绝大部分模型，可从默认值
+<code>beta1 = 0.9, beta2 = 0.999, learning rate = 1e-3 or 5e-4</code>
+开始</strong>。</p>
+<h3 id="adamw">AdamW</h3>
+<p>和 Adam 的区别在于如何对待正则项（例如 L2），Adam
+会在计算梯度时就加入 L2 项；而 AdamW 计算梯度时只会算 data
+loss，然后在更新权重时加入 L2 项。</p>
+<p>AdamW
+实际上意图为让动量取决于损失函数，与正则项独立。在大多数情况下，AdamW
+表现更好。</p>
+<h3 id="学习率learning-ratelr">学习率（Learning Rate，LR）</h3>
+<p>理想的学习率能快速降低
+loss，但继续训练时仍能看到持续改进。较大的学习率可能在开始时 loss
+下降更快，但无法收敛（可能在局部最小值徘徊），也有可能让 loss
+变得非常大（可能在 loss landscape
+震荡了）；较小的学习率会使收敛速度变慢。</p>
+<p>实际上，在整个训练过程中，不一定始终使用同一个学习率，比如有以下例方法，根据实际情况选用即可：</p>
+<ul>
+<li>经过固定次数迭代后，LR 降为 <span
+class="math inline">\(\frac{1}{10}\)</span>（例如应用在 ResNet）；</li>
+<li>余弦学习率衰减：<span class="math inline">\(\alpha_{t} =
+\frac{1}{2}\alpha_{0}\left( 1 + \cos\left( \frac{t\pi}{T} \right)
+\right)\)</span>（<span class="math inline">\(\alpha_{0}\)</span>
+为初始学习率，<span class="math inline">\(\alpha_{t}\)</span> 为在 epoch
+<span class="math inline">\(t\)</span> 时的学习率，<span
+class="math inline">\(T\)</span> 为 epoch
+个数），学习率呈现半余弦曲线（类似于 <span class="math inline">\(y =
+\cos x + 1\)</span> 在 <span class="math inline">\(\left[ 0, \pi
+\right]\)</span> 的拉伸），可在训练中间阶段得到较好的效果；</li>
+<li>线性学习率衰减：<span class="math inline">\(\alpha_{t} =
+\alpha_{0}\left( 1 - \frac{t}{T} \right)\)</span>；倒数平方根方法：<span
+class="math inline">\(\frac{\alpha_{0}}{\sqrt{ t }}\)</span>；</li>
+</ul>
+<p>可以使用一种叫做 <strong>线性预热</strong>
+的策略：先用固定迭代次数预热，逐步线性提升到最大值，然后继续使用后续的调度器。</p>
+<p>一个经验性的结论（线性缩放定律）：若批量大小增大 <span
+class="math inline">\(n\)</span> 倍，学习率也应增大 <span
+class="math inline">\(n\)</span> 倍。</p>
+<h2 id="二阶优化方法">二阶优化方法</h2>
+<p>不仅可以利用梯度进行优化，也可以利用 Hessian
+矩阵（即二阶导数）进行优化，此时可以用二次多项式代替梯度所带来的线性函数，加速寻找最小值的过程。</p>
+<p>不过该方法并不常用，一方面该方法需要二阶可导，求解成本太高，且当参数较多时，Hessian
+矩阵会过大，存储需要 <span
+class="math inline">\(O(n^{2})\)</span>，求逆则需 <span
+class="math inline">\(O(n^{3})\)</span>。这也导致了该方法智能适用于小模型，且不太在意求解时间的时候。</p>
+<p>在较为大型的模型中，与其求解 Hessian 矩阵，不如在训练时增强数据。</p>
+<hr />
+<h1 id="lecture-4-neural-networks-and-backpropagation">Lecture 4: Neural
+Networks and Backpropagation</h1>
+<h2 id="激活函数">激活函数</h2>
+<p>以下是常见的激活函数（activation functions）：</p>
+<ul>
+<li>ReLU：<span class="math inline">\(\max(0, x)\)</span>；
+<ul>
+<li>基本可以说是最常用的激活函数，不过存在有时生成死神经元的问题；</li>
+</ul></li>
+<li>Leaky ReLU：<span class="math inline">\(\max(0.1x, x)\)</span>；
+<ul>
+<li>避免 ReLU 的死神经元问题；</li>
+</ul></li>
+<li>ELU：<span class="math inline">\(\begin{cases} x &amp; x \geq 0 \\
+\alpha(e^{x} - 1) &amp; x &lt; 0 \end{cases}\)</span>；
+<ul>
+<li>避免 ReLU
+的死神经元问题，且是更好的零中心化函数（在零点可导），所以比 Leaky ReLU
+更好；</li>
+</ul></li>
+<li>GELU：<span class="math inline">\(x \cdot \phi(x)\)</span>；
+<ul>
+<li>高斯误差线性单元，同样是 ReLU 的变种，常用于新架构（如
+Transformer）；</li>
+</ul></li>
+<li>SiLU：<span class="math inline">\(f(x) = x \cdot
+\sigma(x)\)</span>；
+<ul>
+<li>S 形加权线性单元，即 Sigmoid 型线性单元，常用于一些现代 CNN
+架构；</li>
+</ul></li>
+<li>Sigmoid：<span class="math inline">\(\sigma(x) = \frac{1}{1 +
+e^{-x}}\)</span>；</li>
+<li>Tanh：<span class="math inline">\(\tanh(x) = \frac{e^{x} -
+e^{-x}}{e^{x} + e^{-x}}\)</span>。</li>
+</ul>
+<p>对于 Sigmoid 和
+Tanh，存在将值压缩到狭窄范围的问题，有时会导致梯度消失，因此通常不在神经网络中间层适用该两种激活函数，而常用于后期层，例如需要二进制输出等场景。</p>
+<p>选择激活函数是经验性的。在通常情况下，可使用 ReLU
+作为默认选择（或采用特定架构常用的激活函数）。</p>
+<h2 id="层神经网络">2 层神经网络</h2>
+<p>通常情况下，更多的神经元意味着更强的学习复杂函数的能力，但过多的神经元（即赋予网络大量容量）会导致过拟合问题。</p>
+<p>有一个经验法则，不要将网络规模作为正则化手段，我们通常不将其作为超参数进行精细调整（过大地增加网络复杂度可能会导致问题）。
+通常会使用比实际稍大一点的网络（从小网络逐步增大，直到出现一定程度的过拟合），然后使用正则器，调整超参数
+<span class="math inline">\(\lambda\)</span>
+来减小过拟合。即通常调整的是正则化和正则化超参数，而不一定是网络本身的大小。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+              <a href="/tags/CS231n/" rel="tag"># CS231n</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ode-review/" rel="prev" title="「常微分方程」ODE 期末复习习题集">
+                  <i class="fa fa-angle-left"></i> 「常微分方程」ODE 期末复习习题集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/cs231n-2/" rel="next" title="「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11）">
+                  「CS231n：计算机视觉与深度学习」学习笔记（Lec 05 - Lec 11） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments disqusjs-container">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/styles/disqusjs.css" integrity="sha256-E4RzceSomICFY1PT/yDQrN8DsLSwdScDEiQAevHabp0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/disqusjs.es2015.umd.min.js","integrity":"sha256-gdbBT62HLzqWTnXQED3WQL/ItFCuWsA5gd6dM/wgdiE="}}</script>
+<script src="/js/third-party/comments/disqusjs.js" defer></script>
+
+</body>
+</html>
