@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="几乎处处不可懂在复习至多可数遍后依然几乎处处不可懂 QAQ 学不会实变函数, 只能抄教材和板书, 狂背划重点了 数学与背诵数学这一块.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「实变函数」实变期末复习习题集">
+<meta property="og:url" content="https://xenonwzh.github.io/real-analysis-review/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="几乎处处不可懂在复习至多可数遍后依然几乎处处不可懂 QAQ 学不会实变函数, 只能抄教材和板书, 狂背划重点了 数学与背诵数学这一块.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-19T10:09:25.000Z">
+<meta property="article:modified_time" content="2026-06-23T15:33:43.022Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="实变函数">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/real-analysis-review/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/real-analysis-review/","path":"real-analysis-review/","title":"「实变函数」实变期末复习习题集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>「实变函数」实变期末复习习题集 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="XenonWZH's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E5%87%BD%E6%95%B0%E7%9A%84%E6%80%A7%E8%B4%A8%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E6%9F%90%E4%BA%9B%E7%82%B9%E9%9B%86%E6%98%AF%E5%90%A6%E5%8F%AF%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">结合函数的性质判断函数某些点集是否可数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lindelof-%E5%AE%9A%E7%90%86%E5%8F%8A%E8%AF%81%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">Lindelof 定理及证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%B5%8B%E9%9B%86%E7%9A%84%E5%AE%9A%E4%B9%89-caratheodory-%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">可测集的定义 (Caratheodory
+条件)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%B5%8B%E9%9B%86%E7%9A%84%E6%80%A7%E8%B4%A8-%E5%8F%AF%E5%88%97%E5%8F%AF%E5%8A%A0%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">可测集的性质, 可列可加性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steinhaus-%E5%AE%9A%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8-%E7%BB%93%E5%90%88%E5%87%BD%E6%95%B0%E6%80%A7%E8%B4%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">Steinhaus 定理及应用:
+结合函数性质的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%94%B6%E6%95%9B%E5%AE%9A%E4%B9%89%E4%BA%92%E6%8E%A8%E8%AF%81%E6%98%8E%E5%8F%8D%E4%BE%8B"><span class="nav-number">6.</span> <span class="nav-text">三种收敛定义、互推证明、反例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lusin-%E5%AE%9A%E7%90%86%E5%8F%8A%E8%AF%81%E6%98%8E"><span class="nav-number">7.</span> <span class="nav-text">Lusin 定理及证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#levi-implies-fatou"><span class="nav-number">8.</span> <span class="nav-text">Levi \(\implies\) Fatou</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fatou-%E5%BC%95%E7%90%86%E4%B8%A5%E6%A0%BC%E4%B8%8D%E7%AD%89%E5%8F%B7%E6%88%90%E7%AB%8B%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">9.</span> <span class="nav-text">Fatou
+引理严格不等号成立的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lebesgue-%E6%8E%A7%E5%88%B6%E6%94%B6%E6%95%9B%E5%AE%9A%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-number">10.</span> <span class="nav-text">Lebesgue 控制收敛定理及应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tonelli-%E5%AE%9A%E7%90%86fubini-%E5%AE%9A%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-number">11.</span> <span class="nav-text">Tonelli 定理、Fubini
+定理及应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83-operatornamebva-b-text%E6%9D%A1%E4%BB%B6-iff-operatornameaca-b"><span class="nav-number">12.</span> <span class="nav-text">思考:
+\(\operatorname{BV}([a, b]) + \text{条件 (?)}
+\iff \operatorname{AC}([a, b])\)</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">141</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener me" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/real-analysis-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="「实变函数」实变期末复习习题集 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「实变函数」实变期末复习习题集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-19 18:09:25" itemprop="dateCreated datePublished" datetime="2026-06-19T18:09:25+08:00">2026-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-23 23:33:43" itemprop="dateModified" datetime="2026-06-23T23:33:43+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><del>几乎处处不可懂在复习至多可数遍后依然几乎处处不可懂 QAQ</del></p>
+<p>学不会实变函数, 只能抄教材和板书, 狂背划重点了
+<del>数学与背诵数学这一块</del>.</p>
+<span id="more"></span>
+<hr />
+<h2
+id="结合函数的性质判断函数某些点集是否可数">结合函数的性质判断函数某些点集是否可数</h2>
+<blockquote>
+<p><strong>例 1</strong></p>
+<p><span class="math inline">\(\mathbb{R}\)</span>
+上单调函数的不连续集为可数集.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>以单调上升函数为例: 若 <span class="math inline">\(x_{0}\)</span> 为
+<span class="math inline">\(f(x)\)</span> 的不连续点, 则有 <span
+class="math display">\[ f(x_{0} - 0) = \lim_{ x \to x_{0}^{-} } f(x)
+&lt; \lim_{ x \to x_{0}^{+} } f(x) = f(x_{0} + 0). \]</span> 因此, <span
+class="math inline">\(x_{0}\)</span> 就对应着一个开区间 <span
+class="math inline">\((f(x_{0} - 0), f(x_{0} + 0))\)</span>. 显然,
+对于两个不同的不连续点 <span class="math inline">\(x_{1}\)</span> 及
+<span class="math inline">\(x_{2}\)</span>, 区间 <span
+class="math inline">\((f(x_{1} - 0), f(x_{1} + 0))\)</span> 与 <span
+class="math inline">\((f(x_{2} - 0), f(x_{2} + 0))\)</span>
+是互不相交的, 故只需看实轴上互不相交的开集族, 后者为可数集.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 2</strong></p>
+<p>设 <span class="math inline">\(f(x)\)</span> 是定义在 <span
+class="math inline">\(\mathbb{R}\)</span> 上的实值函数, 则点集 <span
+class="math display">\[ E = \{ x \in \mathbb{R} : \lim_{ y \to x } f(y)
+= +\infty \} \]</span> 是可数集.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>令 <span class="math inline">\(g(x) = \arctan f(x) \ (x \in
+\mathbb{R})\)</span>, 且作点集 <span class="math display">\[ E = \left\{
+x \in \mathbb{R} : \lim_{ y \to x } g(y) = \frac{\pi}{2} \right\}.
+\]</span> 又有 <span class="math inline">\(g(x) &lt;
+\frac{\pi}{2}\)</span>, 故对 <span class="math inline">\(\forall x \in
+E\)</span>, 有 <span class="math inline">\(\lim_{ y \to x } g(y) =
+\frac{\pi}{2} \neq g(x)\)</span>, 即在 <span
+class="math inline">\(x\)</span> 不连续, 但存在右极限 <span
+class="math inline">\(g(x + 0)\)</span>, 故由下例知 <span
+class="math inline">\(E\)</span> 是可数集.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 3</strong></p>
+<p>设 <span class="math inline">\(f(x)\)</span> 是定义在 <span
+class="math inline">\(\mathbb{R}\)</span> 上的实值函数, 则点集 <span
+class="math display">\[ \{ x \in \mathbb{R} : f(x) \text{ 在点 } x
+\text{ 处不连续, 但右极限 } f(x + 0) \text{ 存在} \} \]</span>
+是可数集.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>令 <span class="math inline">\(S = \{ x \in \mathbb{R} : f(x + 0)
+\text{ 存在} \}\)</span>, 对每个自然数 <span
+class="math inline">\(n\)</span>, 作 <span class="math display">\[ E_{n}
+= \left\{ x \in \mathbb{R} : \text{存在 } \delta &gt; 0, \text{ 当 }
+x&#39;, x&#39;&#39; \in (x - \delta, x + \delta) \text{ 时, 有 }
+|f(x&#39;) - f(x&#39;&#39;)| &lt; \frac{1}{n} \right\}. \]</span> 显然,
+<span class="math inline">\(\bigcap_{n=1}^{\infty} E_{n}\)</span> 是
+<span class="math inline">\(f(x)\)</span> 的连续点集, 从而只需指出 <span
+class="math inline">\(S \setminus E_{n} \ (n = 1, 2, \cdots)\)</span>
+是可数集即可.</p>
+<p>取定任意一个 <span class="math inline">\(n\)</span>, 并设 <span
+class="math inline">\(x \in S \setminus E_{n}\)</span>, 则存在 <span
+class="math inline">\(\delta &gt; 0\)</span>, 使得 <span
+class="math display">\[ |f(x&#39;) - f(x + 0)| &lt; \frac{1}{2n}, \quad
+x&#39; \in (x, x + \delta), \]</span> 从而当 <span
+class="math inline">\(x&#39;, x&#39;&#39; \in (x, x + \delta)\)</span>
+时, 就有 <span class="math inline">\(|f(x&#39;) - f(x&#39;&#39;)| &lt;
+\frac{1}{n}\)</span>. 这说明 <span class="math inline">\((x, x + \delta)
+\subset E_{n}\)</span>. 也就是说, <span class="math inline">\(S
+\setminus E_{n}\)</span> 中每一个点 <span
+class="math inline">\(x\)</span> 是某个开区间 <span
+class="math inline">\(I_{x} = (x, x + \delta)\)</span> 的左端点, 且
+<span class="math inline">\(I_{x}\)</span> 与 <span
+class="math inline">\(S \setminus E_{n}\)</span> 不相交. 因此, 当 <span
+class="math inline">\(x_{1}, x_{2} \in S \setminus E_{n}\)</span> 且
+<span class="math inline">\(x_{1} \neq x_{2}\)</span> 时, 我们得到 <span
+class="math inline">\(I_{x_{1}} \cap I_{x_{2}} = \varnothing\)</span>.
+于是区间族 <span class="math inline">\(\{ I_{x} : x \in S \setminus
+E_{n} \}\)</span> 是可数的, 即 <span class="math inline">\(S \setminus
+E_{n}\)</span> 是可数集.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 4</strong></p>
+<p>定义在 <span class="math inline">\((a, b)\)</span> 上的 (下)
+凸函数在至多除一可列集外的点上都是可微的.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>所谓 <span class="math inline">\((a, b)\)</span> 上的 (下) 凸函数
+<span class="math inline">\(f(x)\)</span>, 是指对 <span
+class="math inline">\((a, b)\)</span> 中任意两点 <span
+class="math inline">\(x_{1}, x_{2}\)</span>, <span
+class="math inline">\(x_{1} &lt; x_{2}\)</span>, 均有 <span
+class="math display">\[ f(x) \leq \frac{(x_{2} - x)f(x_{1}) + (x -
+x_{1})f(x_{2})}{x_{2} - x_{1}}, \quad x_{1} &lt; x &lt; x_{2}, \]</span>
+将上式进行线性变换, 有 <span class="math display">\[ \frac{f(x) -
+f(x_{1})}{x - x_{1}} \leq \frac{f(x_{2}) - f(x)}{x_{2} - x}. \]</span>
+此外, 对 <span class="math inline">\(x &lt; x_{2}&#39; &lt;
+x_{2}\)</span>, 我们有 <span class="math display">\[ \frac{f(x_{2}&#39;)
+- f(x)}{x_{2}&#39; - x} \leq \frac{f(x_{2}) - f(x)}{x_{2} - x}.
+\]</span> 这说明存在右导数: <span class="math display">\[ \lim_{
+x_{2}&#39; \to x+ } \frac{f(x_{2}&#39;) - f(x)}{x_{2}&#39; - x} =
+f_{+}&#39;(x) &lt; +\infty. \]</span> 类似地可知左导数 <span
+class="math inline">\(f_{-}&#39;(x)\)</span> 存在, 且有 <span
+class="math display">\[ -\infty &lt; f_{-}&#39;(x) \leq f_{+}&#39;(x)
+&lt; +\infty. \]</span> 故可分配区间 <span class="math inline">\(I_{x} =
+(f_{-}&#39;(x), f_{+}&#39;(x))\)</span>. 由 (下) 凸函数导单调性知, 若
+<span class="math inline">\(x_{1} &lt; x_{2}\)</span>, 则 <span
+class="math inline">\(f_{+}&#39;(x_{1}) \leq f_{-}&#39;(x_{2})\)</span>,
+故 <span class="math inline">\(I_{x}\)</span> 两两不交. 从而可得结论:
+<span class="math inline">\((a, b)\)</span> 上的 (下)
+凸函数在至多除一可数点集外都是可微的.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<h2 id="lindelof-定理及证明">Lindelof 定理及证明</h2>
+<blockquote>
+<p><strong>定理</strong> (Lindelof 定理)</p>
+<p><span class="math inline">\(\mathbb{R}^{n}\)</span> 中点集 <span
+class="math inline">\(E\)</span> 的任一开覆盖 <span
+class="math inline">\(\Gamma\)</span> 都含有一个可数子覆盖.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>考虑开球族 <span class="math display">\[ \mathcal{B} = \{ B(q, r) : q
+\in \mathbb{Q}^{n}, \ r \in \mathbb{Q}, \ r &gt; 0 \}. \]</span> 因为
+<span class="math inline">\(\mathbb{Q}^{n}\)</span> 可数, <span
+class="math inline">\(\mathbb{Q}^{+}\)</span> 可数, 所以 <span
+class="math inline">\(\mathcal{B}\)</span> 可数.</p>
+<p>考虑证明对任意开集 <span class="math inline">\(G \subset
+\mathbb{R}^{n}\)</span>, 任意点 <span class="math inline">\(x \in
+G\)</span>, 都存在 <span class="math inline">\(B(q, r) \in
+\mathcal{B}\)</span>, 使得 <span class="math display">\[ x \in B(q, r)
+\subset G. \]</span> 由于 <span class="math inline">\(G\)</span> 开,
+故存在 <span class="math inline">\(\rho &gt; 0\)</span>, 使得 <span
+class="math inline">\(B(x, \rho) \subset G\)</span>. 取有理点 <span
+class="math inline">\(q \in \mathbb{Q}^{n}\)</span>, 使得 <span
+class="math inline">\(|q - x| &lt; \frac{\rho}{4}\)</span>, 再取有理数
+<span class="math inline">\(r &gt; 0\)</span>, 满足 <span
+class="math inline">\(|q - x| &lt; r &lt; \frac{\rho}{2}\)</span>. 于是
+<span class="math inline">\(x \in B(q, r)\)</span>. 并且若 <span
+class="math inline">\(y \in B(q, r)\)</span>, 则 <span
+class="math display">\[ |y - x| \leq |y - q| + |q - x| &lt; r +
+\frac{\rho}{4} &lt; \frac{3\rho}{4} &lt; \rho. \]</span> 所以 <span
+class="math inline">\(B(q, r) \subset B(x, \rho) \subset G\)</span>, 即
+<span class="math inline">\(\mathbb{R}^{n}\)</span> 有可数基.</p>
+<p>设 <span class="math inline">\(\Gamma = \{ G_{\alpha} : \alpha \in A
+\}\)</span> 是 <span class="math inline">\(E\)</span> 的开覆盖. 即对每个
+<span class="math inline">\(x \in E\)</span>, 存在某个 <span
+class="math inline">\(G_{\alpha} \in \Gamma\)</span>, 使得 <span
+class="math inline">\(x \in G_{\alpha}\)</span>. 由于 <span
+class="math inline">\(G_{\alpha}\)</span> 是开集, 由上述可数基性质,
+存在一个开球 <span class="math inline">\(B(q, r) \in
+\mathcal{B}\)</span>, 使得 <span class="math inline">\(x \in B(q, r)
+\subset G_{\alpha}\)</span>. 现在考虑所有满足下面条件的有理开球: <span
+class="math display">\[ \mathcal{B}_{0} = \{ B \in \mathcal{B} : \exists
+G_{\alpha} \subset \Gamma, \ B \subset G_{\alpha} \}. \]</span> 因为
+<span class="math inline">\(\mathcal{B}_{0} \subset
+\mathcal{B}\)</span>, 而 <span
+class="math inline">\(\mathcal{B}\)</span> 可数, 所以 <span
+class="math inline">\(\mathcal{B}_{0}\)</span> 也至多可数. 对每个 <span
+class="math inline">\(B \in \mathcal{B}_{0}\)</span>, 选取一个 <span
+class="math inline">\(G_{B} \in \Gamma\)</span>, 使得 <span
+class="math inline">\(B \subset G_{B}\)</span>.
+于是我们得到了一个至多可数集 <span class="math display">\[ \{ G_{B} : B
+\in \mathcal{B}_{0} \} \subset \Gamma. \]</span> 下面证明它覆盖 <span
+class="math inline">\(E\)</span>. 任取 <span class="math inline">\(x \in
+E\)</span>. 由前面的讨论, 存在 <span class="math inline">\(G_{\alpha}
+\in \Gamma\)</span> 和有理开球 <span class="math inline">\(B(q, r) \in
+\mathcal{B}\)</span>, 使得 <span class="math inline">\(x \in B(q, r)
+\subset G_{\alpha}\)</span>. 所以 <span class="math inline">\(B(q, r)
+\in \mathcal{B}_{0}\)</span>. 按照构造, 存在对应的 <span
+class="math inline">\(G_{B(q, r)} \in \Gamma\)</span>, 并且 <span
+class="math inline">\(B(q, r) \subset G_{B(q, r)}\)</span>. 因此 <span
+class="math inline">\(x \in G_{B(q, r)}\)</span>. 这说明 <span
+class="math display">\[ E \subset \bigcup_{B \in \mathcal{B}_{0}} G_{B}.
+\]</span> 由于 <span class="math inline">\(B_{0}\)</span> 至多可数, 所以
+<span class="math inline">\(\{ G_{B} : B \in \mathcal{B}_{0} \}\)</span>
+是 <span class="math inline">\(\Gamma\)</span> 的可数子覆盖.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<h2 id="可测集的定义-caratheodory-条件">可测集的定义 (Caratheodory
+条件)</h2>
+<blockquote>
+<p><strong>定义</strong> (可测集)</p>
+<p>设 <span class="math inline">\(E \subset \mathbb{R}^{n}\)</span>,
+若对任意的点集 <span class="math inline">\(T \subset
+\mathbb{R}^{n}\)</span>, 有 <span class="math display">\[ m^{*}(T) =
+m^{*}(T \cap E) + m^{*}(T \cap E^{c}), \]</span> 则称 <span
+class="math inline">\(E\)</span> 是 Lebesgue 可测集 (或 <span
+class="math inline">\(m^{*}\)</span>-可测集), 简称
+<strong>可测集</strong>, 其中 <span class="math inline">\(T\)</span>
+称为试验集 (这一定义可测集的等式也称为 Caratheodory 条件).
+可测集的全体称为 <strong>可测集类</strong>, 简记为 <span
+class="math inline">\(\mathscr{M}\)</span>.</p>
+</blockquote>
+<hr />
+<h2 id="可测集的性质-可列可加性">可测集的性质, 可列可加性</h2>
+<blockquote>
+<p><strong>定理</strong> (可测集的性质)</p>
+<ol type="1">
+<li><span class="math inline">\(\varnothing \in
+\mathscr{M}\)</span>.</li>
+<li>若 <span class="math inline">\(E \in \mathscr{M}\)</span>, 则 <span
+class="math inline">\(E^{c} \in \mathscr{M}\)</span>.</li>
+<li>若 <span class="math inline">\(E_{1} \in \mathscr{M}\)</span>, <span
+class="math inline">\(E_{2} \in \mathscr{M}\)</span>, 则 <span
+class="math inline">\(E_{1} \cup E_{2}\)</span>, <span
+class="math inline">\(E_{1} \cap E_{2}\)</span> 以及 <span
+class="math inline">\(E_{1} \setminus E_{2}\)</span> 皆属于 <span
+class="math inline">\(\mathscr{M}\)</span>. (由此知,
+可测集任何有限次取交、并运算后所得的集皆为可测集.)</li>
+<li>若 <span class="math inline">\(E_{i} \in \mathscr{M} \ (i = 1, 2,
+\cdots)\)</span>, 则其并集也属于 <span
+class="math inline">\(\mathscr{M}\)</span>. 若进一步有 <span
+class="math inline">\(E_{i} \cap E_{j} = \varnothing \ (i \neq
+j)\)</span>, 则 <span class="math display">\[ m^{*}\left(
+\bigcup_{i=1}^{\infty} E_{i} \right) = \sum_{i=1}^{\infty} m^{*}(E_{i}),
+\]</span> 即 <span class="math inline">\(m^{*}\)</span> 在 <span
+class="math inline">\(\mathscr{M}\)</span> 上满足可数可加性 (或称为
+<span class="math inline">\(\sigma\)</span>-可加性).</li>
+</ol>
+</blockquote>
+<p><strong>证明.</strong></p>
+<ol type="1">
+<li>显然成立</li>
+<li>注意到 <span class="math inline">\((E^{c})^{c} = E\)</span>,
+从定义可立即得出结论.</li>
+<li>对于任一集 <span class="math inline">\(T \subset
+\mathbb{R}^{n}\)</span>, 根据集合分解与外测度的次可加性, 我们有 <span
+class="math display">\[
+\begin{align*}
+m^{*}(T) &amp;\leq m^{*}(T \cap (E_{1} \cup E_{2})) + m^{*}(T \cap
+(E_{1} \cup E_{2})^{c}) \\
+&amp;= m^{*}(T \cap (E_{1} \cup E_{2})) + m^{*}((T \cap E_{1}^{c}) \cap
+E_{2}^{c}) \\
+&amp;\leq m^{*}((T \cap E_{1}) \cap E_{2}) + m^{*}((T \cap E_{1}) \cap
+E_{2}^{c}) + m^{*}((T \cap E_{1}^{c}) \cap E_{2}) + m^{*}((T \cap
+E_{1}^{c}) \cap E_{2}^{c}).
+\end{align*}
+\]</span> 又由 <span class="math inline">\(E_{1}, E_{2}\)</span>
+的可测性知, 上式右端就是 <span class="math display">\[ m^{*}(T \cap
+E_{1}) + m^{*}(T \cap E_{1}^{c}) = m^{*}(T). \]</span> 这说明 <span
+class="math display">\[ m^{*}(T) = m^{*}(T \cap (E_{1} \cup E_{2})) +
+m^{*}(T \cap (E_{1} \cup E_{2})^{c}). \]</span> 也就是说 <span
+class="math inline">\(E_{1} \cup E_{2}\)</span> 是可测集. 为证 <span
+class="math inline">\(E_{1} \cap E_{2}\)</span> 是可测集, 只需注意 <span
+class="math inline">\(E_{1} \cap E_{2} = (E_{1}^{c} \cup
+E_{2}^{c})^{c}\)</span> 即可. 又由 <span class="math inline">\(E_{1}
+\setminus E_{2} = E_{1} \cap E_{2}^{c}\)</span> 可知, <span
+class="math inline">\(E_{1} \setminus E_{2}\)</span> 是可测集.</li>
+<li>首先, 设 <span class="math inline">\(E_{1}, E_{2}, \cdots, E_{k},
+\cdots\)</span> 皆互不相交, 并令 <span class="math display">\[ S =
+\bigcup_{i=1}^{\infty} E_{i}, \quad S_{k} = \bigcup_{i=1}^{k} E_{i}, \ k
+=1, 2, \cdots. \]</span> 由性质 3 知每个 <span
+class="math inline">\(S_{k}\)</span> 都是可测集, 从而对任一集 <span
+class="math inline">\(T\)</span>, 我们有 <span class="math display">\[
+\begin{align*}
+m^{*}(T) &amp;= m^{*}(T \cap S_{k}) + m^{*}(T \cap S_{k}^{c}) \\
+&amp;= m^{*}\left( \bigcup_{i=1}^{k} (T \cap E_{i}) \right) + m^{*}(T
+\cap S_{k}^{c}) \\
+&amp;= \sum_{i=1}^{k} m^{*}(T \cap E_{i}) + m^{*}(T \cap S_{k}^{c}).
+\end{align*}
+\]</span> 由于 <span class="math inline">\(T \cap S_{k}^{c} \supset T
+\cap S^{c}\)</span>, 可知 <span class="math display">\[ m^{*}(T) \geq
+\sum_{i=1}^{k} m^{*}(T \cap E_{i}) + m^{*}(T \cap S^{c}). \]</span> 令
+<span class="math inline">\(k \to \infty\)</span>, 就有 <span
+class="math display">\[ m^{*}(T) \geq \sum_{i=1}^{\infty} m^{*}(T \cap
+E_{i}) + m^{*}(T \cap S^{c}). \]</span> 由此可得 <span
+class="math display">\[ m^{*}(T) \geq m^{*}(T \cap S) + m^{*}(T \cap
+S^{c}). \]</span> 这说明 <span class="math inline">\(S \in
+\mathscr{M}\)</span>. 此外, 在公式 <span class="math display">\[
+m^{*}(T) \geq \sum_{i=1}^{\infty} m^{*}(T \cap E_{i}) + m^{*}(T \cap
+S^{c}) \]</span> 中以 <span class="math inline">\(T \cap S\)</span> 替换
+<span class="math inline">\(T\)</span>, 则又可得 <span
+class="math display">\[ m^{*}(T \cap S) \geq \sum_{i=1}^{\infty} m^{*}(T
+\cap E_{i}). \]</span> 但反向不等式总是成立的, 因此实际上有 <span
+class="math display">\[ m^{*}(T \cap S) = \sum_{i=1}^{\infty} m^{*}(T
+\cap E_{i}). \]</span> 在这里再取 <span class="math inline">\(T\)</span>
+为全空间 <span class="math inline">\(\mathbb{R}^{n}\)</span>,
+就可证明可数可加性质: <span class="math display">\[ m^{*}(S) =
+m^{*}\left( \bigcup_{i=1}^{\infty} E_{i} \right) = \sum_{i=1}^{\infty}
+m^{*}(E_{i}). \]</span> 其次, 对于一般的可测函数集列 <span
+class="math inline">\(\{ E_{i} \}\)</span>, 我们令 <span
+class="math display">\[ S_{1} = E_{1}, \quad S_{k} = E_{k} \setminus
+\left( \bigcup_{i=1}^{k-1} E_{i} \right), \quad k \geq 2, \]</span> 则
+<span class="math inline">\(\{ S_{k} \}\)</span> 是互不相交的可测集列.
+而由 <span class="math inline">\(\bigcup_{i=1}^{\infty} E_{i} =
+\bigcup_{k=1}^{\infty} S_{k}\)</span> 可知, <span
+class="math inline">\(\bigcup_{i=1}^{\infty} E_{i}\)</span>
+是可测集.</li>
+</ol>
+<p><em>Q.E.D.</em></p>
+<hr />
+<h2 id="steinhaus-定理及应用-结合函数性质的应用">Steinhaus 定理及应用:
+结合函数性质的应用</h2>
+<blockquote>
+<p><strong>定理</strong> (Steinhaus 定理)</p>
+<p>设 <span class="math inline">\(E\)</span> 是 <span
+class="math inline">\(\mathbb{R}^{n}\)</span> 中的可测集, 且 <span
+class="math inline">\(m(E) &gt; 0\)</span>. 作 (向量差) 点集 <span
+class="math display">\[ E - E \xlongequal{\text{def}} \{ x - y : x, y
+\in E \}, \]</span> 则存在 <span
+class="math inline">\(\delta_{0}\)</span>, 使得 <span
+class="math inline">\(E - E \supset B(0, \delta_{0})\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例</strong></p>
+<p>设有定义在 <span class="math inline">\(\mathbb{R}\)</span> 上的函数
+<span class="math inline">\(f(x)\)</span>, 满足 <span
+class="math display">\[ f(x + y) = f(x) + f(y), \quad x, y \in
+\mathbb{R}, \]</span> 且在 <span class="math inline">\(E \subset
+\mathbb{R} \ (m(E) &gt; 0)\)</span> 上有界, 则 <span
+class="math inline">\(f(x) = xf(1) \ (x \in \mathbb{R})\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>首先, 由题设知, 对 <span class="math inline">\(r \in
+\mathbb{Q}\)</span>, 必有 <span class="math inline">\(f(r) =
+rf(1)\)</span>.</p>
+<p>其次, 由 <span class="math inline">\(m(E) &gt; 0\)</span> 可知,
+存在区间 <span class="math inline">\(I \colon I \subset E - E\)</span>.
+不妨设 <span class="math inline">\(|f(x)| \leq M \ (x \in E)\)</span>,
+又对任意的 <span class="math inline">\(x \in I\)</span>, 有 <span
+class="math inline">\(x&#39;, x&#39;&#39; \in E\)</span>, 使得 <span
+class="math inline">\(x = x&#39; - x&#39;&#39;\)</span>, 则 <span
+class="math display">\[ |f(x)| = |f(x&#39;) - f(x&#39;&#39;)| \leq
+|f(x&#39;)| + |f(x&#39;&#39;)| \leq 2M. \]</span></p>
+<p>记 <span class="math inline">\(I = [a, b]\)</span>, 并考查 <span
+class="math inline">\([0, b - a]\)</span>. 若 <span
+class="math inline">\(x \in [0, b - a]\)</span>, 则 <span
+class="math inline">\(x + a \in [a, b]\)</span>. 从而由 <span
+class="math inline">\(f(x) = f(x + a) - f(a)\)</span> 可知, <span
+class="math inline">\(|f(x)| \leq 4M\)</span>, <span
+class="math inline">\(x \in [0, b - a]\)</span>. 记 <span
+class="math inline">\(b - a = c\)</span>, 这说明 <span
+class="math display">\[ |f(x)| \leq 4M, \quad x \in [0, c]. \]</span>
+易知 <span class="math display">\[ |f(x)| \leq 4M, \quad x \in [-c, c].
+\]</span></p>
+<p>已知对任意的 <span class="math inline">\(x \in \mathbb{R}\)</span>
+以及自然数 <span class="math inline">\(n\)</span>, 均存在有理数 <span
+class="math inline">\(r\)</span>, 使得 <span class="math inline">\(|x -
+r| &lt; \frac{c}{n}\)</span>, 因此我们得到 <span class="math display">\[
+\begin{align*}
+|f(x) - xf(1)| &amp;= |f(x - r) + rf(1) - xf(1)| \\
+&amp;= |f(x - r) + (r - x)f(1)| \\
+&amp;= \left| \frac{1}{n}f(n(x - r)) + (r - x)f(1) \right| \\
+&amp;\leq \frac{|f(n(x - r))|}{n} + |(r - x)f(1)| \\
+&amp;\leq \frac{4M + c|f(1)|}{n}.
+\end{align*}
+\]</span> 根据 <span class="math inline">\(n\)</span> 的任意性 (<span
+class="math inline">\(r\)</span> 的任意性), 即得 <span
+class="math inline">\(f(x) = xf(1)\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<h2 id="三种收敛定义互推证明反例">三种收敛定义、互推证明、反例</h2>
+<blockquote>
+<p><strong>定义</strong> (几乎处处收敛)</p>
+<p>设 <span class="math inline">\(f(x), f_{1}(x), f_{2}(x), \cdots,
+f_{k}(x), \cdots\)</span> 是定义在点集 <span class="math inline">\(E
+\subset \mathbb{R}^{n}\)</span> 上的广义实值函数. 若存在 <span
+class="math inline">\(E\)</span> 中的点集 <span
+class="math inline">\(Z\)</span>, 有 <span class="math inline">\(m(Z) =
+0\)</span> 及 <span class="math display">\[ \lim_{ k \to \infty }
+f_{k}(x) = f(x), \quad x \in E \setminus Z, \]</span> 则称 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上 <strong>几乎处处收敛</strong> 于
+<span class="math inline">\(f(x)\)</span>, 并记为 <span
+class="math display">\[ f_{k}(x) \to f(x), \quad \text{a.e. } x \in E.
+\]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定义</strong> (近一致收敛)</p>
+<p>设 <span class="math inline">\(f(x), f_{1}(x), f_{2}(x), \cdots,
+f_{k}(x), \cdots\)</span> 是 <span class="math inline">\(E\)</span>
+上几乎处处有限的可测函数. 若对任给的 <span class="math inline">\(\delta
+&gt; 0\)</span>, 存在 <span class="math inline">\(E\)</span> 的可测子集
+<span class="math inline">\(E_{\delta} \colon m(E_{\delta}) \leq
+\delta\)</span>, 使得 <span class="math inline">\(\{ f_{k}(x)
+\}\)</span> 在 <span class="math inline">\(E \setminus
+E_{\delta}\)</span> 上一致收敛于 <span
+class="math inline">\(f(x)\)</span>, 则称 <span class="math inline">\(\{
+f_{k}(x) \}\)</span> 在 <span class="math inline">\(E\)</span> 上
+<strong>近一致收敛</strong> 于 <span
+class="math inline">\(f(x)\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定义</strong> (依测度收敛)</p>
+<p>设 <span class="math inline">\(f(x), f_{1}(x), f_{2}(x), \cdots,
+f_{k}(x), \cdots\)</span> 是 <span class="math inline">\(E\)</span>
+上几乎处处有限的可测函数. 若对任给的 <span
+class="math inline">\(\varepsilon &gt; 0\)</span>, 有 <span
+class="math display">\[ \lim_{ k \to \infty } m(\{ x \in E : |f_{k}(x) -
+f(x)| &gt; \varepsilon \}) = 0, \]</span> 则称 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上 <strong>依测度收敛</strong> 于 <span
+class="math inline">\(f(x)\)</span>, 并记为 <span
+class="math display">\[ f_{k}(x) \xrightarrow{m} f(x). \]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>引理</strong></p>
+<p>设 <span class="math inline">\(f(x), f_{1}(x), f_{2}(x), \cdots,
+f_{k}(x), \cdots\)</span> 是 <span class="math inline">\(E\)</span>
+上几乎处处有限的可测函数, 且 <span class="math inline">\(m(E) &lt;
++\infty\)</span>. 若 <span class="math inline">\(f_{k}(x) \to f(x), \
+\text{a.e. } x \in E\)</span>, 则对任给 <span
+class="math inline">\(\varepsilon &gt; 0\)</span>, 令 <span
+class="math display">\[ E_{k}(x) = \{ x \in E : |f_{k}(x) - f(x)| \geq
+\varepsilon \}, \]</span> 有 <span class="math display">\[ \lim_{ j \to
+\infty } m\left( \bigcup_{k=j}^{\infty} E_{k}(\varepsilon) \right) = 0.
+\]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p><span class="math inline">\(f_{k}(x), f(x)\)</span> 均为可测, 则
+<span class="math inline">\(\{ x \in E : |f_{k}(x) - f(x)| \geq
+\varepsilon \}\)</span> 可测. 又 <span class="math inline">\(m(E) &lt;
+\infty\)</span>, <span class="math inline">\(\bigcup_{k=j}^{\infty}
+E_{k}(\varepsilon)\)</span> 为递缩可测集列, 则 <span
+class="math display">\[ \lim_{ j \to \infty } m\left(
+\bigcup_{k=j}^{\infty} E_{k}(\varepsilon) \right) = m\left( \lim_{ j \to
+\infty } \bigcup_{k=j}^{\infty} E_{k}(\varepsilon) \right) = m\left(
+\bigcap_{j=1}^{\infty} \bigcup_{k=j}^{\infty} E_{k}(\varepsilon)
+\right). \]</span> <span class="math display">\[ \bigcap_{j=1}^{\infty}
+\bigcup_{k=j}^{\infty} E_{k}(\varepsilon) = \{ x \in E : \forall j \in
+\mathbb{N}, \ \exists k \geq j, \text{ s.t. } |f_{k}(x) - f(x)| \geq
+\varepsilon \} \subseteq \{ x : f_{k}(x) \not\to f(x) \}. \]</span> 因
+<span class="math inline">\(f_{k}(x) \to f(x), \ \text{a.e. } x \in
+E\)</span>, 则 <span class="math inline">\(m\left(
+\bigcap_{j=1}^{\infty} \bigcup_{k=j}^{\infty} E_{k}(\varepsilon) \right)
+= 0\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (Egrov 定理)</p>
+<p>若 <span class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上几乎处处收敛于 <span
+class="math inline">\(f(x)\)</span>, 且 <span class="math inline">\(m(E)
+&lt; +\infty\)</span>, 则 <span class="math inline">\(\{ f_{k}(x)
+\}\)</span> 在 <span class="math inline">\(E\)</span> 上近一致收敛于
+<span class="math inline">\(f(x)\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (Riesz 定理)</p>
+<p>若 <span class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上依测度收敛于 <span
+class="math inline">\(f(x)\)</span>, 则存在子列 <span
+class="math inline">\(\{ f_{k_{i}}(x) \}\)</span>, 使得 <span
+class="math display">\[ \lim_{ i \to \infty } f_{k_{i}}(x) = f(x), \quad
+\text{a.e. } x \in E. \]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (Egrov 逆定理)</p>
+<p>设 <span class="math inline">\(f(x), f_{1}(x), f_{2}(x), \cdots,
+f_{k}(x), \cdots\)</span> 是 <span class="math inline">\(E\)</span>
+上几乎处处有限的可测函数. 若 <span class="math inline">\(\{ f_{k}(x)
+\}\)</span> 在 <span class="math inline">\(E\)</span> 上近一致收敛于
+<span class="math inline">\(f(x)\)</span>, 则 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上 a.e. 收敛于 <span
+class="math inline">\(f(x)\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>对 <span class="math inline">\(\forall i \in \mathbb{N}\)</span>,
+存在 <span class="math inline">\(E_{i} \subseteq E\)</span>, s.t. <span
+class="math inline">\(m(E_{i}) &lt; \frac{1}{i}\)</span>. 则 <span
+class="math inline">\(f_{k}(x) \to f(x)\)</span> 一致收敛, <span
+class="math inline">\(\forall x \in E \setminus E_{i}\)</span>. 令 <span
+class="math inline">\(E&#39; = \bigcap_{i=1}^{\infty} E_{i}\)</span>, 则
+<span class="math inline">\(E&#39; \subseteq E_{i}, \ m(E&#39;) \leq
+m(E_{i}) &lt; \frac{1}{i} \implies m(E&#39;) = 0\)</span>. 而对 <span
+class="math inline">\(\forall x \in E \setminus E&#39; = E \setminus
+\left( \bigcap_{i=1}^{\infty} E_{i} \right) = \bigcup_{i=1}^{\infty} (E
+\setminus E_{i})\)</span>, 则 <span class="math inline">\(\exists i_{x}
+\in \mathbb{N}\)</span>, s.t. <span class="math inline">\(x \in E
+\setminus E_{i_{x}}\)</span>, 即 <span class="math inline">\(f_{k}(x)
+\to f(x)\)</span>. 即 <span class="math inline">\(f_{k}(x) \to f(x), \
+\forall x \in E \setminus E&#39;\)</span>. 又 <span
+class="math inline">\(m(E&#39;) = 0\)</span>, 则 <span
+class="math inline">\(f_{k}(x) \to f(x), \ \text{a.e. } x \in
+E\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (Lebesgue)</p>
+<p>设 <span class="math inline">\(\{ f_{k}(x) \}\)</span> 是 <span
+class="math inline">\(E\)</span> 上几乎处处有限的可测函数列, 且 <span
+class="math inline">\(m(E) &lt; +\infty\)</span>. 若 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span>
+几乎处处收敛于几乎处处有限的函数 <span
+class="math inline">\(f(x)\)</span>, 则 <span class="math inline">\(\{
+f_{k}(x) \}\)</span> 在 <span class="math inline">\(E\)</span>
+上依测度收敛于 <span class="math inline">\(f(x)\)</span> (反之不然).</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p><span class="math inline">\(f_{k}(x)\)</span> 满足引理条件, 从而对
+<span class="math inline">\(\forall \varepsilon &gt; 0\)</span>, 有
+<span class="math display">\[ \lim_{ j \to \infty } m\left(
+\bigcup_{k=j}^{\infty} \{ x \in E : |f_{k}(x) - f(x)| \geq \varepsilon
+\} \right) = 0. \]</span> 更有 <span class="math display">\[ \lim_{ j
+\to \infty } m(\{ x \in E : |f_{j}(x) - f(x)| \geq \varepsilon \}) = 0.
+\]</span> 即 <span class="math inline">\(f_{k}(x)\)</span> 在 <span
+class="math inline">\(E\)</span> 上依测度收敛.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (近一致收敛 <span
+class="math inline">\(\implies\)</span> 依测度收敛)</p>
+<p>设 <span class="math inline">\(f(x), f_{1}(x), f_{2}(x), \cdots,
+f_{k}(x), \cdots\)</span> 是 <span class="math inline">\(E\)</span>
+上几乎处处有限的可测函数. 若 <span class="math inline">\(\{ f_{k}(x)
+\}\)</span> 在 <span class="math inline">\(E\)</span> 上近一致收敛于
+<span class="math inline">\(f(x)\)</span>, 则 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上依测度收敛于 <span
+class="math inline">\(f(x)\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>对 <span class="math inline">\(\forall \varepsilon &gt; 0\)</span>,
+<span class="math inline">\(\forall \delta &gt; 0\)</span>, 存在 <span
+class="math inline">\(E_{\delta} \subset E\)</span>, <span
+class="math inline">\(m(E_{\delta}) &lt; \delta\)</span>, 存在自然数
+<span class="math inline">\(k_{0}\)</span> (<span
+class="math inline">\(k_{0}\)</span> 与 <span
+class="math inline">\(x\)</span> 无关), s.t. 当 <span
+class="math inline">\(k &gt; k_{0}\)</span> 时, <span
+class="math display">\[ |f_{k}(x) - f(x)| &lt; \varepsilon, \quad
+\forall x \in E \setminus E_{\delta}. \]</span> 从而 <span
+class="math display">\[ \{ x \in E : |f_{k}(x) - f(x)| \geq \varepsilon
+\} \subseteq E_{\delta}. \]</span> <span class="math display">\[ m(\{ x
+\in E : |f_{k}(x) - f(x)| \geq \varepsilon \}) &lt; \delta. \]</span> 则
+<span class="math display">\[ \lim_{ k \to \infty } m(\{ x \in E :
+|f_{k}(x) - f(x)| \geq \varepsilon \}) = 0. \]</span> 则 <span
+class="math display">\[ f_{k}(x) \xrightarrow{m} f(x). \]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (依测度收敛 <span
+class="math inline">\(\implies\)</span> 近一致收敛)</p>
+<p>若 <span class="math inline">\(\{ f_{k}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上依测度收敛于 <span
+class="math inline">\(f(x)\)</span>, 则存在子列 <span
+class="math inline">\(\{ f_{k_{i}}(x) \}\)</span> 在 <span
+class="math inline">\(E\)</span> 上近一致收敛于 <span
+class="math inline">\(f(x)\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>由 <span class="math inline">\(f_{k}(x) \xrightarrow{m}
+f(x)\)</span>, 即对 <span class="math inline">\(\forall i \in
+\mathbb{N}\)</span>, <span class="math inline">\(\exists k_{i} \in
+\mathbb{N}\)</span>, s.t. <span class="math display">\[ m\left( \left\{
+x \in E : |f_{k_{i}}(x) - f(x)| &gt; \frac{1}{2^{i}} \right\} \right)
+&lt; \frac{1}{2^{i}}. \]</span> 且 <span class="math inline">\(k_{1}
+&lt; k_{2} &lt; \cdots\)</span>.</p>
+<p>令 <span class="math display">\[ E_{i} = \left\{ x \in E :
+|f_{k_{i}}(x) - f(x)| &gt; \frac{1}{2^{i}} \right\}. \]</span> 令 <span
+class="math inline">\(\mathcal{E}_{j} = \bigcup_{i \geq j}
+E_{i}\)</span>, 则 <span class="math inline">\(m(\mathcal{E}_{j}) \leq
+\sum_{i=j}^{\infty} m(E_{i}) = \sum_{i=j}^{\infty} \frac{1}{2^{i}} =
+\frac{1}{2^{j - 1}}\)</span>. 从而对 <span class="math inline">\(\forall
+x \in E \setminus \mathcal{E}_{j} = \bigcap_{i \geq j} (E \setminus
+E_{i})\)</span>, <span class="math display">\[ E \setminus E_{i} =
+\left\{ x \in E : |f_{k_{i}}(x) - f(x)| \leq \frac{1}{2^{i}} \right\}.
+\]</span> 即对 <span class="math inline">\(\forall i \geq j\)</span> 有
+<span class="math inline">\(|f_{k_{i}}(x) - f(x)| \leq
+\frac{1}{2^{i}}\)</span>. 也即 <span
+class="math inline">\(f_{k_{i}}(x)\)</span> 在 <span
+class="math inline">\(E \setminus \mathcal{E}_{j}\)</span> 上一致收敛,
+且 <span class="math inline">\(m(\mathcal{E}_{j}) &lt; \frac{1}{2^{j -
+1}}\)</span> 可任意小. 知 <span class="math inline">\(f_{k_{i}}\)</span>
+在 <span class="math inline">\(E\)</span> 上近一致收敛于 <span
+class="math inline">\(f(x)\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 1</strong> (Egrov 定理的反例)</p>
+<p>Egrov 定理中条件 <span class="math inline">\(m(E) &lt;
++\infty\)</span> 不能去掉. 例如考虑可测函数列 <span
+class="math display">\[ f_{n}(x) = \chi_{(0, n)}(x), \quad n = 1, 2,
+\cdots, \quad x \in (0, +\infty). \]</span> 它在 <span
+class="math inline">\((0, +\infty)\)</span> 上处处收敛于 <span
+class="math inline">\(f(x) \equiv 1\)</span>, 但在 <span
+class="math inline">\((0, +\infty)\)</span>
+中的任一个有限测度外均不一致收敛于 <span class="math inline">\(f(x)
+\equiv 1\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 2</strong> (依测度收敛但不是几乎处处收敛)</p>
+<p>令 <span class="math inline">\(E = (0, 1]\)</span>, 将 <span
+class="math inline">\(E\)</span> 二等分, 定义 <span
+class="math display">\[
+\begin{align*}
+f_{1}^{(1)} &amp;= \begin{cases}
+1 &amp; x \in \left( 0, \frac{1}{2} \right] \\
+0 &amp; x \in \left( \frac{1}{2}, 1 \right]
+\end{cases} \\
+f_{2}^{(1)} &amp;= \begin{cases}
+0 &amp; x \in \left( 0, \frac{1}{2} \right] \\
+1 &amp; x \in \left( \frac{1}{2}, 1 \right]
+\end{cases}
+\end{align*}
+\]</span> 然后将 <span class="math inline">\(E\)</span> 四等分, 得 <span
+class="math inline">\(f_{1}^{(2)}, f_{2}^{(2)}, f_{3}^{(2)},
+f_{4}^{(2)}\)</span>. 以此类推, 最后将 <span class="math inline">\(\{
+f_{j}^{(k)} \}\)</span> 先按 <span class="math inline">\(k\)</span>,
+再按 <span class="math inline">\(j\)</span> 由小到大顺序排列 <span
+class="math display">\[ f_{1}^{(1)}, f_{2}^{(1)}, f_{1}^{(2)},
+f_{2}^{(2)}, f_{3}^{(2)}, f_{4}^{(2)}, \cdots. \]</span> <span
+class="math inline">\(f_{j}^{(k)}\)</span> 在这个列中第 <span
+class="math inline">\(N = 2^{k} - 2 + j\)</span> 个位置. 可证明 <span
+class="math inline">\(f_{j}^{(k)}\)</span> 依测度收敛于 <span
+class="math inline">\(0\)</span>, 但在 <span class="math inline">\((0,
+1]\)</span> 上任一点都不收敛.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 3</strong> (处处收敛 (a.e. 收敛) 但不依测度收敛)</p>
+<p>令 <span class="math inline">\(E = (0, +\infty)\)</span>, 作函数列
+<span class="math display">\[
+f_{k}(x) = \begin{cases}
+1 &amp; x \in (0, k] \\
+0 &amp; x \in (k, +\infty)
+\end{cases}, \quad k = 1, 2, \cdots.
+\]</span> 显然 <span class="math inline">\(f_{k}(x) \to f(x) \equiv 1, \
+\forall x \in (0, +\infty)\)</span>. 但对 <span
+class="math inline">\(\forall \varepsilon \in (0, 1)\)</span>, 有 <span
+class="math display">\[ \{ x : |f_{k}(x) - 1| &gt; \varepsilon \} = (k,
++\infty). \]</span> 则 <span class="math inline">\(m(\{ x : |f_{k}(x)| -
+1  &gt; \varepsilon\}) = \infty \not\to 0\)</span>, <span
+class="math inline">\(f_{k}(x)\)</span> 不依测度收敛于 <span
+class="math inline">\(f(x) \equiv 1\)</span>.</p>
+</blockquote>
+<hr />
+<h2 id="lusin-定理及证明">Lusin 定理及证明</h2>
+<blockquote>
+<p><strong>定理</strong> (Lusin 定理)</p>
+<p>若 <span class="math inline">\(f(x)\)</span> 是 <span
+class="math inline">\(E \subset \mathbb{R}^{n}\)</span>
+上的几乎处处有限的可测函数, 则对任给的 <span
+class="math inline">\(\delta &gt; 0\)</span>, 存在 <span
+class="math inline">\(E\)</span> 中的闭集 <span
+class="math inline">\(F\)</span>, <span class="math inline">\(m(E
+\setminus F) &lt; \delta\)</span>, 使得 <span
+class="math inline">\(f(x)\)</span> 是 <span
+class="math inline">\(F\)</span> 上的连续函数.</p>
+</blockquote>
+<hr />
+<h2 id="levi-implies-fatou">Levi <span
+class="math inline">\(\implies\)</span> Fatou</h2>
+<blockquote>
+<p><strong>定理</strong> (Beppo Levi 非负渐升列积分定理 / Levi (渐近)
+定理)</p>
+<p>设有定义在 <span class="math inline">\(E\)</span>
+上的非负可测函数渐升列: <span class="math display">\[ f_{1}(x) \leq
+f_{2}(x) \leq \cdots \leq f_{k}(x) \leq \cdots, \]</span> 且有 <span
+class="math inline">\(\lim_{ k \to \infty } f_{k}(x) = f(x), \ x \in
+E\)</span>, 则 <span class="math display">\[ \lim_{ k \to \infty }
+\int_{E} f_{k}(x) \, \mathrm{d}x = \int_{E} f(x) \, \mathrm{d}x.
+\]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (Fatou 引理)</p>
+<p>若 <span class="math inline">\(\{ f_{k}(x) \}\)</span> 是 <span
+class="math inline">\(E\)</span> 上的非负可测函数列, 则 <span
+class="math display">\[ \int_{E} \varliminf_{k \to \infty} f_{k}(x) \,
+\mathrm{d}x \leq \varliminf_{k \to \infty} \int_{E} f_{k}(x) \,
+\mathrm{d}x. \]</span></p>
+</blockquote>
+<hr />
+<h2 id="fatou-引理严格不等号成立的例子">Fatou
+引理严格不等号成立的例子</h2>
+<blockquote>
+<p><strong>例 1</strong> (集中爆破)</p>
+<p><span class="math inline">\(f_{n}(x)\)</span> 定义在 <span
+class="math inline">\([0, 1]\)</span> 上, <span class="math display">\[
+f_{n}(x) = \begin{cases}
+n &amp; x \in \left( 0, \frac{1}{n} \right) \\
+0 &amp; x \in [0, 1] \setminus \left( 0, \frac{1}{n} \right)
+\end{cases}
+\]</span> 则 <span class="math inline">\(\lim_{ n \to \infty } f_{n}(x)
+= f(x) \equiv 0\)</span>, <span class="math inline">\(\int_{[0, 1]}
+f_{n}(x) \, \mathrm{d}x = 1\)</span>, <span
+class="math inline">\(\int_{[0, 1]} f(x) \, \mathrm{d}x =
+0\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 2</strong> (消失)</p>
+<p><span class="math inline">\(f_{n}(x)\)</span> 定义在 <span
+class="math inline">\([0, +\infty)\)</span> 上, <span
+class="math display">\[
+f_{n}(x) = \begin{cases}
+\frac{1}{n} &amp; x \in (0, n) \\
+0 &amp; x \in [0, +\infty) \setminus (0, n)
+\end{cases}
+\]</span> 则 <span class="math inline">\(\lim_{ n \to \infty } f_{n}(x)
+= f(x) \equiv 0\)</span>, <span class="math inline">\(\int_{[0,
++\infty)} f_{n}(x) \, \mathrm{d}x = 1\)</span>, <span
+class="math inline">\(\int_{[0, +\infty)} f(x) \, \mathrm{d}x =
+0\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 3</strong> (二分)</p>
+<p><span class="math inline">\(f_{n}(x)\)</span> 定义在 <span
+class="math inline">\(\mathbb{R}\)</span> 上, <span
+class="math display">\[
+f_{n}(x) = \begin{cases}
+\frac{1}{2} &amp; x \in (n, n + 1) \cup (-(n + 1), -n) \\
+0 &amp; x \in \mathbb{R} \setminus ((n, n + 1) \cup (-(n + 1), -n))
+\end{cases}
+\]</span> 则 <span class="math inline">\(\lim_{ n \to \infty } f_{n}(x)
+= f(x) \equiv 0\)</span>, <span class="math inline">\(\int_{\mathbb{R}}
+f_{n}(x) \, \mathrm{d}x = 1\)</span>, <span
+class="math inline">\(\int_{\mathbb{R}} f(x) \, \mathrm{d}x =
+0\)</span>.</p>
+</blockquote>
+<hr />
+<h2 id="lebesgue-控制收敛定理及应用">Lebesgue 控制收敛定理及应用</h2>
+<blockquote>
+<p><strong>定理</strong> (Lebesgue 控制收敛定理 / LDCT)</p>
+<p>设 <span class="math inline">\(f_{k} \in L(E) \ (k = 1, 2,
+\cdots)\)</span>, 且有 <span class="math display">\[ \lim_{ k \to \infty
+} f_{k}(x) = f(x), \quad \text{a.e. } x \in E. \]</span> 若存在 <span
+class="math inline">\(E\)</span> 上的可积函数 <span
+class="math inline">\(F(x)\)</span>, 使得 <span class="math display">\[
+|f_{k}(x)| \leq F(x), \quad \text{a.e. } x \in E \ (k = 1, 2, \cdots),
+\]</span> 则 <span class="math display">\[ \lim_{ k \to \infty }
+\int_{E} f_{k}(x) \, \mathrm{d}x = \int_{E} f(x) \, \mathrm{d}x.
+\]</span> (通常称 <span class="math inline">\(F(x)\)</span> 为函数列
+<span class="math inline">\(\{ f_{k}(x) \}\)</span> 的
+<strong>控制函数</strong>.)</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>注</strong></p>
+<ol type="1">
+<li>实际上可证明更强的结论: <span class="math display">\[ \lim_{ k \to
+\infty } \int_{E} |f_{k}(x) - f(x)| \, \mathrm{d}x = 0. \]</span> 称其为
+<span class="math inline">\(f_{k}(x)\)</span> 在 <span
+class="math inline">\(E\)</span> 上依 <span
+class="math inline">\(L^{1}\)</span> 的意义收敛于 <span
+class="math inline">\(f(x)\)</span>.</li>
+<li>上述控制收敛定理的一个特例是有界收敛定理: 设 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span> 是 <span
+class="math inline">\(E\)</span> 上的可测函数列, <span
+class="math inline">\(m(E) &lt; +\infty\)</span>, 且对 <span
+class="math inline">\(x \in E\)</span> 有 <span class="math display">\[
+\lim_{ k \to \infty } f_{k}(x) = f(x), \quad |f_{k}(x)| \leq M \quad (k
+= 1, 2, \cdots), \]</span> 则 <span class="math inline">\(f \in
+L(E)\)</span>, 且 <span class="math display">\[ \lim_{ k \to \infty }
+\int_{E} f_{k}(x) \, \mathrm{d}x = \int_{E} f(x) \, \mathrm{d}x.
+\]</span></li>
+</ol>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (依测度收敛型控制收敛定理 / Lebesgue
+控制收敛定理 / LDCT)</p>
+<p>设 <span class="math inline">\(f_{k} \in L(\mathbb{R}^{n}) \ (k = 1,
+2, \cdots)\)</span>, 且 <span class="math inline">\(f_{k}(x)\)</span> 在
+<span class="math inline">\(\mathbb{R}^{n}\)</span> 上依测度收敛于 <span
+class="math inline">\(f(x)\)</span>. 若存在 <span
+class="math inline">\(F \in L(\mathbb{R}^{n})\)</span>, 使得 <span
+class="math display">\[ |f_{k}(x)| \leq F(x), \quad (k = 1, 2, \cdots; \
+\text{a.e. } x \in \mathbb{R}^{n}), \]</span> 则 <span
+class="math inline">\(f \in L(\mathbb{R}^{n})\)</span>, 且有 <span
+class="math display">\[ \lim_{ k \to \infty } \int_{\mathbb{R}^{n}}
+f_{k}(x) \, \mathrm{d}x = \int_{\mathbb{R}^{n}} f(x) \, \mathrm{d}x.
+\]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>注</strong></p>
+<p>对于 <span class="math inline">\(E\)</span> 上依测度收敛于 <span
+class="math inline">\(f \in L(E)\)</span> 的非负可积函数列 <span
+class="math inline">\(\{ f_{k}(x) \}\)</span>, 若有 <span
+class="math display">\[ \lim_{ k \to \infty } \int_{E} f_{k}(x) \,
+\mathrm{d}x = \int_{E} f(x) \, \mathrm{d}x, \]</span> 则 <span
+class="math display">\[ \lim_{ k \to \infty } \int_{E} |f_{k}(x) - f(x)|
+\, \mathrm{d}x = 0. \]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 1</strong></p>
+<p>设 <span class="math inline">\(f_{n} \in C^{(1)}((a, b)) \ (n = 1, 2,
+\cdots)\)</span>, 且有 <span class="math display">\[ \lim_{ n \to \infty
+} f_{n}(x) = f(x), \quad \lim_{ n \to \infty } f_{n}&#39;(x) = F(x),
+\quad x \in (a, b). \]</span> 若 <span class="math inline">\(f&#39;(x),
+F(x)\)</span> 在 <span class="math inline">\((a, b)\)</span> 上连续, 则
+<span class="math inline">\(f&#39;(x) = F(x), \ x \in (a,
+b)\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>只需指出在 <span class="math inline">\((a, b)\)</span>
+的一个稠密子集上有 <span class="math inline">\(f&#39;(x) = F(x)\)</span>
+即可. 为此, 任取 <span class="math inline">\((a, b)\)</span> 中的子区间
+<span class="math inline">\([c, d]\)</span>, 且记 <span
+class="math display">\[ E_{n} = \{ x \in [c, d] : |f_{k}&#39;(x) - F(x)|
+\leq 1, \ k \geq n \}, \]</span> 易知每个 <span
+class="math inline">\(E_{n}\)</span> 皆闭集, 且<span
+class="math inline">\([c, d] = \bigcup_{n=1}^{\infty} E_{n}\)</span>.
+从而根据 Baire 定理可知, 存在 <span class="math inline">\(n_{0}\)</span>
+以及区间 <span class="math inline">\([c&#39;, d&#39;]\)</span>, 使得
+<span class="math inline">\(E_{n_{0}} \supset [c&#39;, d&#39;]\)</span>.
+由于 <span class="math display">\[ |f_{k}&#39;(x) - F(x)| \leq 1 \quad
+(k \geq n_{0}), \ x \in [c&#39;, d&#39;], \]</span> 故知 <span
+class="math inline">\(k \geq n_{0}\)</span> 时, <span
+class="math inline">\({f_{k}&#39;(x)}\)</span> 在 <span
+class="math inline">\([c&#39;, d&#39;]\)</span> 上一致有界. 这样, 由等式
+<span class="math display">\[ \int_{[c&#39;, x]} f_{k}&#39;(t) \,
+\mathrm{d}t = f_{k}(x) - f_{k}(c&#39;), \quad c&#39; &lt; x &lt; d&#39;,
+\]</span> 可知 (有界收敛定理) <span class="math display">\[
+\int_{[c&#39;, x]} F(t) \, \mathrm{d}t = f(x) - f(c&#39;), \quad c&#39;
+&lt; x &lt; d&#39;. \]</span> 在等式两端对 <span
+class="math inline">\(x\)</span> 求导可得 <span class="math display">\[
+F(x) = f&#39;(x), \quad c&#39; &lt; x &lt; d&#39;, \]</span>
+即得所证.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 2</strong></p>
+<p><span class="math display">\[ \int_{[0, 1]} \frac{x\sin x}{1 +
+(nx)^{\alpha}} \, \mathrm{d}x = o\left( \frac{1}{n} \right) \quad (n \to
+\infty, \ \alpha &gt; 1). \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>往证 <span class="math inline">\(\int_{[0, 1]} \frac{nx\sin x}{1 +
+(nx)^{\alpha}} \, \mathrm{d}x \to 0 \ (n \to \infty)\)</span>. 令 <span
+class="math display">\[ g(x) = 1 + (nx)^{\alpha} - nx^{\frac{3}{2}}
+\quad (g(0) = 1, \ g(1) = 1 + n^{\alpha} - n), \]</span> 易知, 在 <span
+class="math inline">\(1 &lt; \alpha \leq \frac{3}{2}\)</span> 且 <span
+class="math inline">\(n\)</span> 无穷大时, <span
+class="math inline">\(g(x)\)</span> 在 <span class="math inline">\([0,
+1]\)</span> 中有极值点, 从而在 <span class="math inline">\(n\)</span>
+充分大时, 不难得出 <span class="math display">\[ 0 &lt; \frac{nx\sin
+x}{1 + (nx)^{\alpha}} \leq \frac{1}{\sqrt{ x }} \quad (x \in [0, 1]).
+\]</span> 根据控制收敛定理即得所证.</p>
+<p><em>Q.E.D.</em></p>
+<blockquote>
+<p>其实教材上的做法有些许繁琐, 直接换元取上界或许更加简便. 显然 <span
+class="math inline">\(\frac{nx\sin x}{1 + (nx)^{\alpha}}\)</span> 对
+<span class="math inline">\(x \in [0, 1]\)</span> 逐点收敛于 <span
+class="math inline">\(0\)</span>, 于是只需找到控制函数即可. 考虑换元
+<span class="math inline">\(t = nx\)</span>, 则有 <span
+class="math display">\[ \frac{nx\sin x}{1 + (nx)^{\alpha}} = \frac{t}{1
++ t^{\alpha}}\sin x. \]</span> 显然 <span
+class="math inline">\(\frac{t}{1 + t^{\alpha}}\)</span> 在 <span
+class="math inline">\([0, +\infty)\)</span> 有界. 设其上界为 <span
+class="math inline">\(C\)</span>, 则有 <span class="math display">\[
+\left| \frac{nx\sin x}{1 + (nx)^{\alpha}} \right| = \left| \frac{t}{1 +
+t^{\alpha}} \right| \cdot |\sin x| \leq C|\sin x|. \]</span>
+显然该控制函数在 <span class="math inline">\([0, 1]\)</span> 中可积.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 3</strong></p>
+<p><span class="math display">\[ \int_{[a, +\infty)}
+\frac{xe^{-n^{2}x^{2}}}{1 + x^{2}} \, \mathrm{d}x = o\left(
+\frac{1}{n^{2}} \right) \quad (n \to \infty, \ a &gt; 0). \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>只需指出 <span class="math inline">\(I = \lim_{ n \to \infty }
+\int_{[\alpha, +\infty)} \frac{n^{2}xe^{-n^{2}x^{2}}}{1 + x^{2}} \,
+\mathrm{d}x = 0\)</span> 即可. 令 <span class="math inline">\(u =
+nx\)</span>, 则 <span class="math display">\[ I = \int_{[na, +\infty)}
+\frac{ue^{-u^{2}}}{1 + \frac{u^{2}}{n^{2}}} \, \mathrm{d}u = \int_{[0,
++\infty)} \chi_{[na, +\infty)}(u) \frac{ue^{-u^{2}}}{1 +
+\frac{u^{2}}{n^{2}}} \, \mathrm{d}u. \]</span> 注意到 <span
+class="math display">\[ \lim_{ n \to \infty } \chi_{[na, +\infty)}(u)
+\frac{ue^{-u^{2}}}{1 + \frac{u^{2}}{n^{2}}} = 0, \]</span> <span
+class="math display">\[ 0 \leq \chi_{[na, +\infty)}(u)
+\frac{ue^{-u^{2}}}{1 + \frac{u^{2}}{n^{2}}} \leq ue^{-u^{2}} \quad (0
+\leq u &lt; +\infty), \]</span> 以及 <span
+class="math inline">\(ue^{-u^{2}}\)</span> 在 <span
+class="math inline">\([0, +\infty)\)</span> 上可积,
+故根据控制收敛定理即得所证.</p>
+<p><em>Q.E.D.</em></p>
+<blockquote>
+<p>可用与例 2 类似的简便方法解决. 显然 <span
+class="math inline">\(\frac{n^{2}xe^{-n^{2}x^{2}}}{1 + x^{2}}\)</span>
+对 <span class="math inline">\(x \in [a, +\infty)\)</span> 逐点收敛于
+<span class="math inline">\(0\)</span>, 于是只需找到控制函数即可.
+考虑换元 <span class="math inline">\(t = n^{2}x^{2}\)</span>, 则有 <span
+class="math display">\[ \frac{n^{2}xe^{-n^{2}x^{2}}}{1 + x^{2}} =
+\frac{te^{-t}}{x(1 + x^{2})}. \]</span> 显然 <span
+class="math inline">\(te^{-t}\)</span> 在 <span
+class="math inline">\([a^{2}, +\infty)\)</span> 有界. 设其上界为 <span
+class="math inline">\(C\)</span>, 则有 <span class="math display">\[
+\left| \frac{n^{2}xe^{-n^{2}x^{2}}}{1 + x^{2}} \right| =
+\frac{te^{-t}}{x(1 + x^{2})} \leq \frac{C}{x(1 + x^{2})}. \]</span>
+显然该控制函数在 <span class="math inline">\([a, +\infty)\)</span>
+中可积.</p>
+</blockquote>
+<hr />
+<h2 id="tonelli-定理fubini-定理及应用">Tonelli 定理、Fubini
+定理及应用</h2>
+<blockquote>
+<p><strong>定理</strong> (Tonelli 定理)</p>
+<p>设 <span class="math inline">\(f(x, y)\)</span> 是 <span
+class="math inline">\(\mathbb{R}^{n} = \mathbb{R}^{p} \times
+\mathbb{R}^{q}\)</span> 上的非负可测函数, 则有 1. 对于几乎处处的 <span
+class="math inline">\(x \in \mathbb{R}^{p}\)</span>, <span
+class="math inline">\(f(x, y)\)</span> 作为 <span
+class="math inline">\(y\)</span> 的函数是 <span
+class="math inline">\(\mathbb{R}^{q}\)</span> 上的非负可测函数; 2. 记
+<span class="math inline">\(F_{f}(x) = \int_{\mathbb{R}^{q}} f(x, y) \,
+\mathrm{d}y\)</span>, 则 <span class="math inline">\(F_{f}(x)\)</span>
+是 <span class="math inline">\(\mathbb{R}^{p}\)</span> 上的非负可测函数;
+3. <span class="math display">\[ \int_{\mathbb{R}^{p}} F_{f}(x) \,
+\mathrm{d}x = \int_{\mathbb{R}^{p}} \mathrm{d}x \, \int_{\mathbb{R}^{q}}
+f(x, y) \, \mathrm{d}y = \int_{\mathbb{R}^{n}} f(x, y) \, \mathrm{d}x \,
+\mathrm{d}y. \]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>注</strong></p>
+<ol type="1">
+<li>改变 <span class="math inline">\(x \in \mathbb{R}^{p}\)</span> 与
+<span class="math inline">\(y \in \mathbb{R}^{q}\)</span> 的次序,
+结论同样成立. 因此, 实际上我们可得 <span class="math display">\[
+\int_{\mathbb{R}^{n}} f(x, y) \, \mathrm{d}x \, \mathrm{d}y =
+\int_{\mathbb{R}^{p}} \mathrm{d}x \, \int_{\mathbb{R}^{q}} f(x, y) \,
+\mathrm{d}y = \int_{\mathbb{R}^{q}} \mathrm{d}y \, \int_{\mathbb{R}^{p}}
+f(x, y) \, \mathrm{d}x. \]</span></li>
+<li>若 <span class="math inline">\(f(x, y)\)</span> 是 <span
+class="math inline">\(E\)</span> 上的非负可测函数, 则可用 <span
+class="math inline">\(f(x, y)\chi_{E}(x, y)\)</span> 代替定理中的 <span
+class="math inline">\(f(x, y)\)</span>, 我们有 <span
+class="math display">\[ \int_{E} f(x, y) \, \mathrm{d}x \, \mathrm{d}y =
+\int_{\mathbb{R}^{p}} \mathrm{d}x \, \int_{\mathbb{R}^{q}} f(x,
+y)\chi_{E}(x, y) \, \mathrm{d}y. \]</span></li>
+</ol>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定理</strong> (Fubini 定理)</p>
+<p>若 <span class="math inline">\(f \in L(\mathbb{R}^{n})\)</span>,
+<span class="math inline">\((x, y) \in \mathbb{R}^{n} = \mathbb{R}^{p}
+\times \mathbb{R}^{q}\)</span>, 则 1. 对于几乎处处的 <span
+class="math inline">\(x \in \mathbb{R}^{p}\)</span>, <span
+class="math inline">\(f(x, y)\)</span> 是 <span
+class="math inline">\(\mathbb{R}^{q}\)</span> 上的可积函数; 2. 积分
+<span class="math display">\[ \int_{\mathbb{R}^{q}} f(x, y) \,
+\mathrm{d}y \]</span> 是 <span
+class="math inline">\(\mathbb{R}^{p}\)</span> 上的可积函数; 3. 我们有
+<span class="math display">\[ \int_{\mathbb{R}^{n}} f(x, y) \,
+\mathrm{d}x \, \mathrm{d}y = \int_{\mathbb{R}^{p}} \mathrm{d}x \,
+\int_{\mathbb{R}^{q}} f(x, y) \, \mathrm{d}y = \int_{\mathbb{R}^{q}}
+\mathrm{d}y \, \int_{\mathbb{R}^{p}} f(x, y) \, \mathrm{d}x.
+\]</span></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>注</strong></p>
+<p>设 <span class="math inline">\(f(x) = f(\xi_{1}, \xi_{2}, \cdots,
+\xi_{n})\)</span> 在开球 <span class="math inline">\(B(0, r) \subset
+\mathbb{R}^{n}\)</span> 上有表达式 <span class="math display">\[ f(x) =
+\mathop{\sum^{\infty} \cdots \sum^{\infty}}_{(k_{1}, \cdots, k_{n}) =
+(1, \cdots, 1)} a_{k_{1} \cdots k_{n}}x_{1}^{k_{1}}x_{2}^{k_{2}} \cdots
+x_{n}^{k_{n}}, \]</span> 则或有 <span class="math inline">\(f(x) = 0 \
+(x \in B(0, r))\)</span>, 或是 <span class="math inline">\(m(f^{-1}(0)
+\cap B(0, r)) = 0\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>例 1</strong></p>
+<p>设 <span class="math inline">\(f \in L([0, +\infty))\)</span>, <span
+class="math inline">\(a &gt; 0\)</span>, 则有等式 <span
+class="math display">\[ \int_{0}^{+\infty} \sin ax \, \mathrm{d}x \,
+\int_{0}^{+\infty} f(y)e^{-xy} \, \mathrm{d}y = a\int_{0}^{+\infty}
+\frac{f(y) \, \mathrm{d}y}{a^{2} + y^{2}}.  \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>因为 <span class="math display">\[ \int_{0}^{+\infty} \sin ax \,
+e^{-xy} \, \mathrm{d}x = \frac{a}{a^{2} + y^{2}} \quad (x &gt; 0),
+\]</span> 所以只需阐明原等式积分可交换次序即可.</p>
+<p>考察二元可测函数 <span class="math inline">\(\sin ax \,
+f(y)e^{-xy}\)</span>. 它不是非负的, 从而要研究它的可积性. 为此,
+取其绝对值并将 <span class="math inline">\(x\)</span> 的积分范围限于
+<span class="math inline">\([\delta, X] \colon 0 &lt; \delta &lt; X &lt;
++\infty\)</span>. 此时有 <span class="math display">\[ \int_{\delta}^{X}
+\int_{0}^{+\infty} |\sin ax \cdot f(y)e^{-xy}| \, \mathrm{d}x \,
+\mathrm{d}y \leq \int_{\delta}^{X} \int_{0}^{+\infty} |f(y)|e^{-xy} \,
+\mathrm{d}x \, \mathrm{d}y \leq (X - \delta)\int_{0}^{+\infty} |f(y)| \,
+\mathrm{d}y, \]</span> 这说明 <span class="math inline">\(\sin ax \,
+f(y)e^{-xy}\)</span> 在 <span class="math inline">\([\delta, X] \times
+[0, +\infty)\)</span> 上可积. 于是, 我们有 <span class="math display">\[
+\int_{\delta}^{X} \sin ax \, \mathrm{d}x \, \int_{0}^{+\infty}
+f(y)e^{-xy} \, \mathrm{d}y = \int_{0}^{+\infty} f(y) \, \mathrm{d}y
+\int_{\delta}^{X} \sin ax \, e^{-xy} \, \mathrm{d}x. \]</span></p>
+<p>注意到 (根据积分第二中值定理) <span class="math display">\[ \left|
+\int_{\delta}^{X} e^{-xy}\sin ax \, \mathrm{d}x \right| \leq
+\frac{2}{a}, \quad 0 &lt; \delta &lt; X &lt; +\infty, \]</span>
+由控制收敛定理即得 <span class="math display">\[
+\begin{align*}
+\int_{0}^{+\infty} \sin ax \, \mathrm{d}x \, \int_{0}^{+\infty}
+f(y)e^{-xy} \, \mathrm{d}y &amp;= \lim_{\substack{\delta \to 0 \\ X \to
++\infty}} \int_{\delta}^{X} \sin ax \, \mathrm{d}x \, \int_{0}^{+\infty}
+f(y)e^{-xy} \, \mathrm{d}y \\
+&amp;= \lim_{\substack{\delta \to 0 \\ X \to +\infty}}
+\int_{0}^{+\infty} f(y) \, \mathrm{d}y \int_{\delta}^{X} \sin ax \,
+e^{-xy} \, \mathrm{d}x \\
+&amp;= \int_{0}^{+\infty} f(y) \, \mathrm{d}y \int_{0}^{+\infty} \sin ax
+\, e^{-xy} \, \mathrm{d}x.
+\end{align*}
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 2</strong></p>
+<p><span class="math display">\[ \int_{0}^{+\infty} e^{-x^{2}} \,
+\mathrm{d}x = \frac{\sqrt{ \pi }}{2}. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong> 因为 <span class="math inline">\(f(x, y) =
+ye^{-(1 + x^{2})y^{2}}\)</span> 在 <span class="math inline">\([0,
++\infty) \times [0, +\infty)\)</span> 上非负可测, 所以根据 Tonelli
+定理可知 <span class="math display">\[ \int_{0}^{+\infty} \left(
+\int_{0}^{+\infty} ye^{-(1 + x^{2})y^{2}} \, \mathrm{d}y \right) \,
+\mathrm{d}x = \int_{0}^{+\infty} \left( \int_{0}^{+\infty} ye^{-(1 +
+x^{2})y^{2}} \, \mathrm{d}x \right) \, \mathrm{d}y. \]</span>
+易知上式左端为 <span class="math inline">\(\frac{\pi}{4}\)</span>,
+而右端为 <span class="math display">\[ \left( \int_{0}^{+\infty}
+e^{-x^{2}} \, \mathrm{d}x \right)\left( \int_{0}^{+\infty} e^{-y^{2}} \,
+\mathrm{d}y \right) = \left( \int_{0}^{+\infty} e^{-x^{2}} \,
+\mathrm{d}x \right)^{2}. \]</span> <em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 3</strong></p>
+<p>对 <span class="math inline">\(x \in \mathbb{R}^{n - 1} \ (n &gt;
+1)\)</span>, <span class="math inline">\(t \in \mathbb{R}\)</span>, 记
+<span class="math inline">\((x, t)\)</span> 为 <span
+class="math display">\[ (x, t) = (x_{1}, x_{2}, \cdots, x_{n - 1}, t)
+\in \mathbb{R}^{n}. \]</span> 设 <span class="math inline">\(E\)</span>
+是 <span class="math inline">\(\mathbb{R}^{n - 1}\)</span> 中的可测集,
+<span class="math inline">\(h &gt; 0\)</span>, 点集 <span
+class="math display">\[ A = \{ (az, ah) : z \in E, \ 0 \leq a \leq 1 \}
+\]</span> 是以 <span class="math inline">\(E\)</span> 为底、高为 <span
+class="math inline">\(h\)</span> 且顶点为 <span
+class="math inline">\(0\)</span> 的锥, 则 <span class="math display">\[
+m(A) = \frac{h}{n}m(E). \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>当 <span class="math inline">\((x, t) \in A\)</span> 时, <span
+class="math inline">\(x = az, \ t = ah\)</span>, 也就是 <span
+class="math inline">\(a = \frac{t}{h}, \ az = \frac{tz}{h}\)</span>.
+从而当 <span class="math inline">\(0 \leq t \leq h\)</span> 时, 有 <span
+class="math display">\[ A_{t} \xlongequal{\text{def}} \{ x \in
+\mathbb{R}^{n - 1} : (x, t) \in A \} = \left\{ \frac{t}{h}z : z \in E
+\right\}. \]</span> 易知 <span class="math inline">\(m(A_{t}) = \left(
+\frac{t}{h} \right)^{n - 1}m(E)\)</span>. 由此可得 <span
+class="math display">\[
+\begin{align*}
+m(A) &amp;= \int_{\mathbb{R}^{n}} \chi_{A}(u) \, \mathrm{d}u \\
+&amp;= \int_{\mathbb{R}} \mathrm{d}t \, \int_{\mathbb{R}^{n - 1}}
+\chi_{A}(x, t) \, \mathrm{d}x \\
+&amp;= \int_{\mathbb{R}} \mathrm{d}t \, \int_{A_{t}} 1 \, \mathrm{d}x \\
+&amp;= \int_{\mathbb{R}} m(A_{t}) \, \mathrm{d}t \\
+&amp;= \frac{m(E)}{h^{n - 1}} \int_{0}^{h} t^{n - 1} \, \mathrm{d}t \\
+&amp;= \frac{h}{n}m(E).
+\end{align*}
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 4</strong></p>
+<p>设 <span class="math inline">\(f(x) \in L((0, a))\)</span>, <span
+class="math inline">\(g(x) = \int_{x}^{a} \frac{f(t)}{t} \, \mathrm{d}t
+\ (a &gt; x &gt; 0)\)</span>, 试证明 <span class="math inline">\(g \in
+L((0, a))\)</span>, 且有 <span class="math display">\[ \int_{0}^{a} g(x)
+\, \mathrm{d}x = \int_{0}^{a} f(x) \, \mathrm{d}x. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p><span class="math display">\[
+\begin{align*}
+\int_{0}^{a} |g(x)| \, \mathrm{d}x &amp;= \int_{0}^{a} \left|
+\int_{x}^{a} t^{-1}f(t) \, \mathrm{d}t \right| \, \mathrm{d}x \\
+&amp;\leq \int_{0}^{a} \int_{x}^{a} \frac{|f(t)|}{t} \, \mathrm{d}t \,
+\mathrm{d}x \\
+&amp;\xlongequal{\text{Tonelli}} \int_{0}^{a} \frac{|f(t)|}{t} \,
+\int_{x}^{a} \chi_{(x, a)}(t) \, \mathrm{d}x \, \mathrm{d}t \\
+&amp;= \int_{0}^{a} \frac{|f(t)|}{t} \, \int_{x}^{a} 1 \, \mathrm{d}x \,
+\mathrm{d}t \\
+&amp;= \int_{0}^{a} |f(t)| \, \mathrm{d}t \\
+&amp;&lt; \infty.
+\end{align*}
+\]</span> 则 <span class="math inline">\(g \in L((0, a))\)</span>, 且
+<span class="math display">\[ \int_{0}^{a} g(x) \, \mathrm{d}x =
+\int_{0}^{a} \int_{x}^{a} f(t)t^{-1} \, \mathrm{d}t \, \mathrm{d}x
+\xlongequal{\text{Fubini}} \int_{0}^{a} f(t)t^{-1} \int_{0}^{t} 1 \,
+\mathrm{d}x = \int_{0}^{a} f(t) \, \mathrm{d}t. \]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<h2 id="思考-operatornamebva-b-text条件-iff-operatornameaca-b">思考:
+<span class="math inline">\(\operatorname{BV}([a, b]) + \text{条件 (?)}
+\iff \operatorname{AC}([a, b])\)</span></h2>
+<blockquote>
+<p><strong>定义</strong> (有界变差函数)</p>
+<p>设 <span class="math inline">\(f(x)\)</span> 是定义在 <span
+class="math inline">\([a, b]\)</span> 上的实值函数, 作分划 <span
+class="math inline">\(\Delta \colon a = x_{0} &lt; x_{1} &lt; \cdots
+&lt; x_{n} = b\)</span> 以及相应的和 <span class="math display">\[
+v_{\Delta} = \sum_{i=1}^{n} |f(x_{i}) - f(x_{i - 1})|, \]</span> 称之为
+<span class="math inline">\(f(x)\)</span> 在 <span
+class="math inline">\([a, b]\)</span> 上的 <strong>变差</strong>; 作
+<span class="math display">\[ \bigvee_{a}^{b} (f) = \sup\{ v_{\Delta} :
+\Delta \text{ 为 } [a, b] \text{ 的任一分划} \}, \]</span> 并称它为<span
+class="math inline">\(f(x)\)</span> 在 <span class="math inline">\([a,
+b]\)</span> 上的 <strong>全变差</strong>. 若 <span
+class="math display">\[ \bigvee_{a}^{b} (f) &lt; +\infty, \]</span> 则称
+<span class="math inline">\(f(x)\)</span> 是 <span
+class="math inline">\([a, b]\)</span> 上的 <strong>有界变差函数</strong>
+(即全体变差形成的有界数集), 其全体记为 <span
+class="math inline">\(\operatorname{BV}([a, b])\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定义</strong> (绝对连续函数)</p>
+<p>设 <span class="math inline">\(f(x)\)</span> 是 <span
+class="math inline">\([a, b]\)</span> 上的实值函数. 若对任给 <span
+class="math inline">\(\varepsilon &gt; 0\)</span>, 存在 <span
+class="math inline">\(\delta &gt; 0\)</span>, 使得当 <span
+class="math inline">\([a, b]\)</span> 中任意有限个互不相交的开区间 <span
+class="math inline">\((x_{i}, y_{i}) \ (i = 1, 2, \cdots, n)\)</span>
+满足 <span class="math inline">\(\sum_{i=1}^{n} (y_{i} - x_{i}) &lt;
+\delta\)</span> 时, 有 <span class="math display">\[ \sum_{k=1}^{n}
+|f(y_{i}) - f(x_{i})| &lt; \varepsilon, \]</span> 则称 <span
+class="math inline">\(f(x)\)</span> 是 <span class="math inline">\([a,
+b]\)</span> 上的 <strong>绝对连续函数</strong>, 其全体记为 <span
+class="math inline">\(\operatorname{AC}([a, b])\)</span>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>定理</strong></p>
+<p>若 <span class="math inline">\(f(x)\)</span> 是 <span
+class="math inline">\([a, b]\)</span> 上的绝对连续函数, 则 <span
+class="math inline">\(f(x)\)</span> 是 <span class="math inline">\([a,
+b]\)</span> 上的有界变差函数.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>在函数绝对连续的定义中, 取 <span class="math inline">\(\varepsilon
+&gt; 1\)</span>, 可知存在 <span class="math inline">\(\delta &gt;
+0\)</span>, 当 <span class="math inline">\([a, b]\)</span>
+中任意有限个互不相交的开区间 <span class="math inline">\((x_{i}, y_{i})
+\ (i = 1, 2, \cdots, n)\)</span> 满足 <span class="math display">\[
+\sum_{i=1}^{n} (y_{i} - x_{i}) &lt; \delta \]</span> 时, 必有 <span
+class="math display">\[ \sum_{i=1}^{n} |f(y_{i}) - f(x_{i})| &lt; 1.
+\]</span> 作分划 <span class="math inline">\(\Delta \colon a = c_{0}
+&lt; c_{1} &lt; \cdots &lt; c_{n} = b\)</span>, 使得 <span
+class="math display">\[ c_{k + 1} - c_{k} &lt; \delta, \quad k = 0, 1,
+\cdots, n - 1, \]</span> 从而有 <span class="math display">\[
+\bigvee_{c_{k}}^{c_{k + 1}} (f) \leq 1, \quad k = 0, 1, \cdots, n - 1,
+\]</span> 故得 <span class="math display">\[ \bigvee_{a}^{b} (f) \leq n.
+\]</span></p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 1</strong></p>
+<p>设 <span class="math inline">\(f \in C([a, b]) \cap
+\operatorname{BV}([a, b])\)</span>. 若对 <span class="math inline">\([a,
+b]\)</span> 中的任一零测集 <span class="math inline">\(Z\)</span>, 必有
+<span class="math inline">\(m(f(Z)) = 0\)</span>, 则 <span
+class="math inline">\(f \in \operatorname{AC}([a, b])\)</span>.</p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>用反证法. 假定 <span class="math inline">\(f \not\in
+\operatorname{AC}([a, b])\)</span>, 则存在 <span
+class="math inline">\(\varepsilon_{0} &gt; 0\)</span>, 使得对每个 <span
+class="math inline">\(n \in \mathbb{N}\)</span>, 都有 <span
+class="math inline">\([a, b]\)</span> 的子区间组 <span
+class="math display">\[ I_{n, k} = [a_{n, k}, b_{n, k}] \ (k = 1, 2,
+\cdots, j_{n}), \quad \sum_{k=1}^{j_{n}} (b_{n, k} - a_{n, k}) \leq
+\frac{1}{2^{n}}, \]</span> <span class="math display">\[
+\sum_{k=1}^{j_{n}} |f(b_{n, k} - f(a_{n, k}))| \geq \varepsilon_{0}.
+\]</span></p>
+<p>作点集 <span class="math inline">\(E =
+\bigcup_{n=i}^{\infty}\bigcup_{k=1}^{j_{n}} I_{n, k} \ (i \in
+\mathbb{N})\)</span>, 我们有 <span class="math display">\[ m(E_{i}) \leq
+\sum_{n=i}^{\infty} \sum_{k=1}^{j_{n}} (b_{n, k} - a_{n, k}) \leq
+\sum_{n=i}^{\infty} \frac{1}{2^{n}} = \frac{1}{2^{i - 1}}. \]</span>
+由此可知 <span class="math inline">\(m(E_{i}) \to 0 \ (i \to
+\infty)\)</span>. 因为 <span class="math inline">\(f \in C([a,
+b])\)</span>, 所以 <span class="math inline">\(f(E_{i})\)</span>
+是紧区间的并集. 又由 <span class="math inline">\([a, b] \supset E_{i}
+\supset E_{i + 1} \supset \cdots\)</span> 可得 <span
+class="math display">\[ m(E) = 0 \ \left( E = \bigcap_{i=1}^{\infty}
+E_{i} \right), \quad m(f(E)) = 0, \]</span> 从而依据 <span
+class="math inline">\(f([a, b]) \supset f(E_{i}) \supset f(E_{i + 1})
+\supset \cdots\)</span>, 又有 <span class="math display">\[ \lim_{ i \to
+\infty } m(f(E_{i})) = m(f(E)) = 0. \]</span></p>
+<p>另一方面, 若 <span class="math inline">\(f(x)\)</span> 在 <span
+class="math inline">\([a, b]\)</span> 上递增, 易知 <span
+class="math display">\[ f(I_{i, k}) = [f(a_{i, k}), f(b_{i, k})], \quad
+m(f(E_{i})) \geq \sum_{k=1}^{j_{i}} |f(b_{i, k}) - f(a_{i, k})| \geq
+\varepsilon_{0}. \]</span> 矛盾. 证毕.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 2</strong></p>
+<p>设 <span class="math display">\[ V(x) = \bigvee_{a}^{x} (f) \]</span>
+是 <span class="math inline">\(f\)</span> 在 <span
+class="math inline">\([a, x]\)</span> 上的全变差函数, 则有 <span
+class="math display">\[ f \in \operatorname{AC}([a, b]) \iff f \in
+\operatorname{BV}([a, b]) \text{ 且 } V(x) \in \operatorname{AC}([a,
+b]). \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>充分性: 任给 <span class="math inline">\(\varepsilon\)</span>, 则存在
+<span class="math inline">\(\delta\)</span>.
+取任意有限个互不相交的开区间 <span class="math inline">\((a_{i},
+b_{i})\)</span> 满足 <span class="math inline">\(\sum_{i=1}^{n} (b_{i} -
+a_{i}) &lt; \delta\)</span>, 则有 <span class="math display">\[
+\sum_{i=1}^{n} |V(b_{i}) - V(a_{i})| &lt; \varepsilon. \]</span> 又有
+<span class="math display">\[ |V(b_{i}) - V(a_{i})| =
+\bigvee_{a_{i}}^{b_{i}} (f) \geq |f(b_{i}) - f(a_{i})|. \]</span> 故
+<span class="math display">\[ \sum_{i=1}^{n} |f(b_{i}) - f(a_{i})| \leq
+\sum_{i=1}^{n} |V(b_{i}) - V(a_{i})| &lt; \varepsilon. \]</span> 即
+<span class="math inline">\(f \in \operatorname{AC}([a,
+b])\)</span>.</p>
+<p>必要性: 任给 <span class="math inline">\(\varepsilon &gt; 0\)</span>,
+则存在 <span class="math inline">\(\delta\)</span>.
+取任意有限个互不相交的开区间 <span class="math inline">\((a_{i},
+b_{i})\)</span> 满足 <span class="math inline">\(\sum_{i=1}^{n} (b_{i} -
+a_{i}) &lt; \delta\)</span>. 对每个 <span
+class="math inline">\(k\)</span>, 由全变差的定义, 对任意 <span
+class="math inline">\(\eta &gt; 0\)</span>, 存在划分 <span
+class="math inline">\(a_{i} = t_{i, 0} &lt; t_{i, 1} &lt; \cdots &lt;
+t_{i, m_{i}} = b_{i}\)</span> 使得 <span class="math display">\[
+\sum_{j=1}^{m_{i}} |f(t_{i, j}) - f(t_{i, j - 1})| \geq V(b_{i}) -
+V(a_{i}) - \frac{\eta}{2^{i}}. \]</span> 考虑所有小区间 <span
+class="math inline">\((t_{i, j - 1} t_{i, j})\)</span>. 它们互不相交,
+且总长度小于 <span class="math inline">\(\delta\)</span>. 由绝对连续性得
+<span class="math display">\[ \sum_{i=1}^{n} \sum_{j=1}^{m_{i}} |f(t_{i,
+j}) - f(t_{i, j - 1})| &lt; \varepsilon. \]</span> 于是 <span
+class="math display">\[ \sum_{i=1}^{n} (V(b_{i}) - V(a_{i})) &lt;
+\varepsilon + \eta. \]</span> 由 <span
+class="math inline">\(\eta\)</span> 任意性知 <span
+class="math inline">\(\sum_{i=1}^{n} (V(b_{i}) - V(a_{i})) \leq
+\varepsilon\)</span>. 故 <span class="math inline">\(V \in
+\operatorname{AC}([a, b])\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 3</strong></p>
+<p><span class="math display">\[ f \in \operatorname{AC}([a, b]) \iff f
+\in \operatorname{BV}([a, b]) \text{ 且 } f(x) = f(a) + \int_{a}^{x}
+f&#39;(t) \, \mathrm{d}t. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>必要性显然, 下证充分性. 由于 <span class="math inline">\(f \in
+\operatorname{BV}\)</span>, 有 <span class="math inline">\(f&#39; \in
+L([a, b])\)</span>. 令 <span class="math display">\[ g(x) = f(a) +
+\int_{a}^{x} f&#39;(t) \, \mathrm{d}t. \]</span> 因为 <span
+class="math inline">\(f&#39; \in L([a, b])\)</span>, 所以 <span
+class="math inline">\(g \in \operatorname{AC}([a, b])\)</span>.
+而题设给出 <span class="math inline">\(f(x) = g(x), \ x \in [a,
+b]\)</span>, 所以 <span class="math inline">\(f \in
+\operatorname{AC}([a, b])\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 4</strong></p>
+<p>若 <span class="math inline">\(f\)</span> 单调递增, 则 <span
+class="math inline">\(f \in \operatorname{BV}\)</span> 自然成立. 这时有
+<span class="math display">\[ f \in \operatorname{AC}([a, b]) \iff f(b)
+- f(a) = \int_{b}^{a} f&#39;(x) \, \mathrm{d}x. \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>必要性显然, 下证充分性. 定义 <span class="math display">\[ G(x) =
+f(x) - f(a) - \int_{x}^{a} f&#39;(t) \, \mathrm{d}t. \]</span>
+由于单调函数几乎处处可导, 且 <span class="math inline">\(f&#39;(t) \geq
+0, \ \text{a.e.}\)</span>, 故对任意 <span class="math inline">\(a \leq s
+&lt; t \leq b\)</span>, 单调函数满足 <span class="math display">\[ f(t)
+- f(s) \geq \int_{s}^{t} f&#39;(u) \, \mathrm{d}u. \]</span> 因此 <span
+class="math display">\[ G(t) - G(s) = f(t) - f(s) - \int_{s}^{t}
+f&#39;(u) \, \mathrm{d}u \geq 0. \]</span> 所以 <span
+class="math inline">\(G\)</span> 单调递增. 又 <span
+class="math inline">\(G(a) = 0\)</span>, 且由题设 <span
+class="math inline">\(G(b) = f(b) - f(a) - \int_{a}^{b} f&#39;(t) \,
+\mathrm{d}t = 0\)</span>, 因此 <span class="math inline">\(G(x) \equiv
+0\)</span>. 于是对任意 <span class="math inline">\(x \in [a,
+b]\)</span>, 有 <span class="math display">\[ f(x) = f(a) + f(a) +
+\int_{x}^{a} f&#39;(t) \, \mathrm{d}t. \]</span> 右边是绝对连续函数, 故
+<span class="math inline">\(f \in \operatorname{AC}([a,
+b])\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 5</strong></p>
+<p><span class="math display">\[ f \in \operatorname{AC}([a, b]) \iff f
+\in \operatorname{BV}([a, b]) \text{ 且 } \bigvee_{a}^{b} (f) =
+\int_{a}^{b} |f&#39;(x)| \, \mathrm{d}x . \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>必要性: 有 <span class="math inline">\(f \in \operatorname{AC}([a,
+b])\)</span>, 则 <span class="math inline">\(V(x) = \bigvee_{a}^{x} (f)
+\in \operatorname{AC}([a, b])\)</span>. 又必有 <span
+class="math inline">\(f \in \operatorname{BV}([a, b])\)</span>, 则有
+<span class="math inline">\(V&#39;(x) = |f&#39;(x)|, \ \text{a.e. } x
+\in [a, b]\)</span>. 故对绝对连续函数, 有微积分基本定理: <span
+class="math display">\[ \int_{a}^{b} |f&#39;(x)| \, \mathrm{d}x =
+\int_{a}^{b} V&#39;(x) \, \mathrm{d}x = V(b) - V(a) = \bigvee_{a}^{b}
+(f). \]</span></p>
+<p>充分性: 令 <span class="math inline">\(V(x) = \bigvee_{a}^{x}
+(f)\)</span>, 则 <span class="math inline">\(V(x)\)</span>
+是单调递增函数, 且 <span class="math inline">\(V(x) \in
+\operatorname{BV}([a, b])\)</span>. 由 BV 函数的性质, 对几乎处处的 <span
+class="math inline">\(x\)</span>, 有 <span
+class="math inline">\(V&#39;(x) = |f&#39;(x)|, \ \text{a.e. } x \in [a,
+b]\)</span>, 则有 <span class="math display">\[ \int_{a}^{b} V&#39;(x)
+\, \mathrm{d}x = \int_{a}^{b} |f&#39;(x)| \, \mathrm{d}x =
+\bigvee_{a}^{b} (f) = V(b) - V(a). \]</span> 又 <span
+class="math inline">\(V(x)\)</span> 单调递增, 故 <span
+class="math inline">\(V \in \operatorname{AC}[(a, b)]\)</span>.
+则对任意区间 <span class="math inline">\((x, y)\)</span>, 显然有 <span
+class="math display">\[ |f(y) - f(x)| \leq \bigvee_{x}^{y} (f) = V(y) -
+V(x) = |V(y) - V(x)|. \]</span> 又 <span
+class="math inline">\(V(x)\)</span> 绝对连续, 故对任意 <span
+class="math inline">\(\varepsilon &gt; 0\)</span>, 存在 <span
+class="math inline">\(\delta &gt; 0\)</span>, 使得对于互不相交的区间满足
+<span class="math inline">\(\sum_{i=1}^{n} (b_{i} - a_{i}) &lt;
+\delta\)</span> 时, 有 <span class="math inline">\(\sum_{i=1}^{n}
+|V(b_{i}) - V(a_{i})| &lt; \varepsilon\)</span>. 则对同一组区间, 自然有
+<span class="math display">\[ \sum_{i=1}^{n} |f(b_{i}) - f(a_{i})| \leq
+\sum_{i=1}^{n} |V(b_{i}) - V(a_{i})| &lt; \varepsilon \]</span> 故有
+<span class="math inline">\(f \in \operatorname{AC}([a,
+b])\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+<hr />
+<blockquote>
+<p><strong>例 6</strong></p>
+<p>若 <span class="math inline">\(f \in \operatorname{BV}([a,
+b])\)</span>, 则可作 Jordan 分解 <span class="math inline">\(f = g -
+h\)</span>, 其中 <span class="math inline">\(g, h\)</span> 单调递增.
+则有 <span class="math display">\[ f \in \operatorname{AC}([a, b]) \iff
+\text{某个 Jordan 分解 } f = g - h \text{ 中 } g, h \in
+\operatorname{AC}([a, b]). \]</span></p>
+</blockquote>
+<p><strong>证明.</strong></p>
+<p>充分性显然, 下证必要性. 取标准 Jordan 分解: <span
+class="math display">\[ V(x) = \bigvee_{a}^{x} (f), \quad g(x) =
+\frac{V(x) + f(x)}{2}, \quad h(x) = \frac{V(x) - f(x)}{2}. \]</span> 则
+<span class="math inline">\(f = g - h\)</span>. 又有 <span
+class="math inline">\(f \in \operatorname{AC}([a, b])\)</span>, 则有
+<span class="math inline">\(V(x) \in \operatorname{AC}([a, b])\)</span>,
+于是 <span class="math inline">\(g, h\)</span> 都是绝对连续函数. 又
+<span class="math inline">\(g, h\)</span> 是标准 Jordan
+分解中的单调递增函数, 所以该分解满足 <span class="math inline">\(g, h
+\in \operatorname{AC}([a, b])\)</span>.</p>
+<p><em>Q.E.D.</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%AE%9E%E5%8F%98%E5%87%BD%E6%95%B0/" rel="tag"># 实变函数</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cs231n-assignments/" rel="prev" title="「CS231n：计算机视觉与深度学习」学习笔记（Assignments）">
+                  <i class="fa fa-angle-left"></i> 「CS231n：计算机视觉与深度学习」学习笔记（Assignments）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments disqusjs-container">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/styles/disqusjs.css" integrity="sha256-E4RzceSomICFY1PT/yDQrN8DsLSwdScDEiQAevHabp0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/disqusjs.es2015.umd.min.js","integrity":"sha256-gdbBT62HLzqWTnXQED3WQL/ItFCuWsA5gd6dM/wgdiE="}}</script>
+<script src="/js/third-party/comments/disqusjs.js" defer></script>
+
+</body>
+</html>
