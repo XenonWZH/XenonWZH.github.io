@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xenonwzh.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一文概括 Splay 长文预警 平衡树 Splay 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。 二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是排序后的序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。 于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为排序后序列。 然而在特殊数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Splay 学习笔记">
+<meta property="og:url" content="https://xenonwzh.github.io/splay-notes/index.html">
+<meta property="og:site_name" content="XenonWZH&#39;s Blog">
+<meta property="og:description" content="一文概括 Splay 长文预警 平衡树 Splay 是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。 二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是排序后的序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。 于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为排序后序列。 然而在特殊数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xenonwzh.github.io/splay-notes/balanced_tree.png">
+<meta property="og:image" content="https://xenonwzh.github.io/splay-notes/rotate.png">
+<meta property="og:image" content="https://xenonwzh.github.io/splay-notes/zig-zag.png">
+<meta property="og:image" content="https://xenonwzh.github.io/splay-notes/zig-zig.png">
+<meta property="article:published_time" content="2022-11-08T08:15:33.000Z">
+<meta property="article:modified_time" content="2025-12-20T12:21:32.000Z">
+<meta property="article:author" content="XenonWZH">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="平衡树">
+<meta property="article:tag" content="Splay">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xenonwzh.github.io/splay-notes/balanced_tree.png">
+
+
+<link rel="canonical" href="https://xenonwzh.github.io/splay-notes/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xenonwzh.github.io/splay-notes/","path":"splay-notes/","title":"Splay 学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Splay 学习笔记 | XenonWZH's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="XenonWZH's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XenonWZH's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卷了个寂寞?</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">平衡树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">平衡操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC"><span class="nav-number">2.1.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#splay-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">Splay 操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">二叉搜索树操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%90%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">查询排名操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%AC%AC-k-%E5%A4%A7%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">查询第 \(k\)
+大操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%89%8D%E9%A9%B1-%E5%90%8E%E7%BB%A7"><span class="nav-number">3.4.</span> <span class="nav-text">查询前驱 &#x2F; 后继</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">3.5.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">二叉搜索树代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">节点操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splay-%E6%93%8D%E4%BD%9C-1"><span class="nav-number">4.1.2.</span> <span class="nav-text">Splay 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%8A%82%E7%82%B9%E7%9A%84%E5%89%8D%E9%A9%B1-%E5%90%8E%E7%BB%A7"><span class="nav-number">4.1.3.</span> <span class="nav-text">查询节点的前驱 &#x2F; 后继</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%93%8D%E4%BD%9C-1"><span class="nav-number">4.2.</span> <span class="nav-text">二叉搜索树操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E6%A0%91-%E5%88%A0%E6%A0%91"><span class="nav-number">4.2.1.</span> <span class="nav-text">建树 &#x2F; 删树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%8C%87%E5%AE%9A%E5%80%BC%E6%89%80%E5%9C%A8%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.2.</span> <span class="nav-text">查找指定值所在节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.3.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.4.</span> <span class="nav-text">删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%80%BC%E6%8E%92%E5%90%8D-%E6%9F%A5%E8%AF%A2%E7%AC%AC-k-%E5%A4%A7"><span class="nav-number">4.2.5.</span> <span class="nav-text">查询值排名 &#x2F; 查询第 \(k\) 大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%80%BC%E7%9A%84%E5%89%8D%E9%A9%B1-%E5%90%8E%E7%BB%A7"><span class="nav-number">4.2.6.</span> <span class="nav-text">查询值的前驱 &#x2F; 后继</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%BE%8B%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">二叉搜索树例题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">序列操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E6%8F%92%E5%85%A5"><span class="nav-number">6.1.</span> <span class="nav-text">序列插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%88%A0%E9%99%A4"><span class="nav-number">6.2.</span> <span class="nav-text">序列删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E7%BF%BB%E8%BD%AC"><span class="nav-number">6.3.</span> <span class="nav-text">区间翻转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E4%BE%8B%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">序列例题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XenonWZH"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">XenonWZH</p>
+  <div class="site-description" itemprop="description">XenonWZH's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">141</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XenonWZH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XenonWZH" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xenonwzh@qq.com" title="E-Mail → mailto:xenonwzh@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/xen0nwzh" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;xen0nwzh" rel="noopener me" target="_blank"><i class="fa-brands fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/322190458" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;322190458" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xenonwzh.github.io/splay-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="XenonWZH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XenonWZH's Blog">
+      <meta itemprop="description" content="XenonWZH's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Splay 学习笔记 | XenonWZH's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Splay 学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-08 16:15:33" itemprop="dateCreated datePublished" datetime="2022-11-08T16:15:33+08:00">2022-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-20 20:21:32" itemprop="dateModified" datetime="2025-12-20T20:21:32+08:00">2025-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OI/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>一文概括 Splay</p>
+<p><del>长文预警</del></p>
+<h1 id="平衡树">平衡树</h1>
+<p>Splay
+是一种平衡树，可以解决很多序列问题。而平衡树是一种二叉搜索树。</p>
+<p>二叉搜索树则是一种数据结构，对于每一个节点，权值满足左儿子小于根节点小于右儿子，且整棵树的中序遍历是排序后的序列。这样二叉搜索树就可以解决很多问题，其时间复杂度取决于树的深度。</p>
+<p>于是这里可以引出一种调试平衡树的常见方法：输出这棵树的中序遍历，看中序遍历是否为排序后序列。</p>
+<p>然而在特殊数据下，二叉搜索树很容易退化成一颗链，于是就有了一种优化版本：平衡树。平衡树可以让二叉搜索树随时变化，以求深度保持相对较小，即“平衡”。而
+Splay 就是一种平衡树。</p>
+<span id="more"></span>
+<p>如左图是一颗退化成链的二叉搜索树，右图为一颗平衡树。</p>
+<img src="/splay-notes/balanced_tree.png" class="">
+<h1 id="平衡操作">平衡操作</h1>
+<h2 id="旋转">旋转</h2>
+<p>Splay
+有很多操作，其中旋转操作最为基本的操作之一。旋转分为左旋和右旋。左旋是将一个节点和它的左儿子互换位置，右旋是将一个点和它右儿子互换位置；同时保持中序遍历不变且仍然是一颗排序二叉树。方式如下图（接下来的图片都是使用
+Windows 画图鼠绘，画的不好请见谅）：</p>
+<img src="/splay-notes/rotate.png" class="">
+<p>合理运用旋转可以让整棵树保持平衡。</p>
+<h2 id="splay-操作">Splay 操作</h2>
+<p>顾名思义，Splay 操作是 Splay
+最重要的操作之一，也是最具有特点的操作。</p>
+<p>Splay 操作为将一个点通过旋转移到指定的点的儿子。假设我们需要将 <span
+class="math inline">\(x\)</span> 旋转至 <span
+class="math inline">\(y\)</span> 的儿子（若不指定 <span
+class="math inline">\(y\)</span> 则为将 <span
+class="math inline">\(x\)</span> 旋转至根节点），同时 <span
+class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span> 之间间隔节点 <span
+class="math inline">\(A\)</span>（距离 <span
+class="math inline">\(x\)</span> 更近）、<span
+class="math inline">\(B\)</span>（距离 <span
+class="math inline">\(y\)</span> 更近），则有 <span
+class="math inline">\(4\)</span> 种情况：</p>
+<ol type="1">
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子；</li>
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子；</li>
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子；</li>
+<li><span class="math inline">\(A\)</span> 为 <span
+class="math inline">\(y\)</span> 的右儿子，<span
+class="math inline">\(x\)</span> 为 <span
+class="math inline">\(y\)</span> 的左儿子。</li>
+</ol>
+<p>由于 <span class="math inline">\(1\)</span> 与 <span
+class="math inline">\(2\)</span>、<span class="math inline">\(3\)</span>
+与 <span class="math inline">\(4\)</span>
+情况基本相同，操作对称。于是我们只需要将 Splay 分为操作 <span
+class="math inline">\(1\)</span>、<span class="math inline">\(3\)</span>
+两类。Splay 具体操作如下：</p>
+<ul>
+<li>第 <span class="math inline">\(1\)</span> 种情况：<span
+class="math inline">\(A\)</span> 向上旋转，<span
+class="math inline">\(x\)</span> 向上旋转。这种操作称作 zig-zag
+操作。</li>
+</ul>
+<img src="/splay-notes/zig-zag.png" class="">
+<ul>
+<li>第 <span class="math inline">\(3\)</span> 种情况：<span
+class="math inline">\(x\)</span> 向上旋转，<span
+class="math inline">\(x\)</span> 向上旋转。这种操作称作 zig-zig
+操作。</li>
+</ul>
+<img src="/splay-notes/zig-zig.png" class="">
+<p>若想将 <span class="math inline">\(x\)</span> 转至 <span
+class="math inline">\(y\)</span> 的儿子，只需要不停进行该操作即可。</p>
+<p>为了让整颗树尽量保持平衡，<strong>我们需要在每次点操作后都将其 Splay
+操作旋转至根节点</strong>。</p>
+<p>已经过证明：使用 Splay 操作旋转节点，可将该平衡树操作时间复杂度降至
+<span class="math inline">\(O(\log n)\)</span>，证明略。</p>
+<h1 id="二叉搜索树操作">二叉搜索树操作</h1>
+<p>接下来将介绍 Splay 在二叉搜索树种的应用。模板：<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3369">洛谷 P3369
+普通平衡树</a></p>
+<p>为了方便，我们可以先加入 <span
+class="math inline">\(+\infty\)</span>、<span
+class="math inline">\(-\infty\)</span> 两点。</p>
+<h2 id="插入操作">插入操作</h2>
+<p>由于是二叉搜索树，我们可从根节点开始遍历。每到一个点就看若小于这个节点，就进入左儿子；大于这个节点，就进入右儿子。直到找到的儿子为空，就将其插入至该节点。</p>
+<p>插入后为保持平衡，需要将插入的节点 Splay 操作至根节点。</p>
+<h2 id="查询排名操作">查询排名操作</h2>
+<p>查询排名使用 Splay 有一种很方便的方法。我们可以把要查询的节点 Splay
+至根，排名即为左子树大小。</p>
+<h2 id="查询第-k-大操作">查询第 <span class="math inline">\(k\)</span>
+大操作</h2>
+<p>根开始遍历。每到一个点就看这个点的左子树大小：如果大于 <span
+class="math inline">\(k\)</span>，就进入左子树；如果小于 <span
+class="math inline">\(k\)</span>，就先将 <span
+class="math inline">\(k\)</span> 减去左子树大小和根节点大小，若 <span
+class="math inline">\(k \le 0\)</span> 就返回该点，否则进入右子树查询第
+<span class="math inline">\(k\)</span> 大。</p>
+<p>查询完后，将查询到的点 Splay 到根。</p>
+<h2 id="查询前驱-后继">查询前驱 / 后继</h2>
+<p>查询前驱 / 后继当然有其他方法，但在 Splay 中有特殊的方法。</p>
+<p>我们可以把将要查询的点 Splay
+操作至根节点。查询前驱即查询左子树的最右端点，查询后继则是查询右子树的最左端点。</p>
+<p>查完前驱 / 后继后，将查询到的点 Splay 到根。</p>
+<h2 id="删除">删除</h2>
+<p>由于 Splay 的特性，我们可以利用特殊方法删除节点。</p>
+<p>我们可以先求出这个点的前驱和后继，然后将前驱 Splay
+操作至根节点，然后将后继 Splay
+操作至前驱的儿子。显然现在前驱的右儿子是后继，左子树只有要删除的一个点。于是接下来直接删除该点即可。</p>
+<h1 id="二叉搜索树代码实现">二叉搜索树代码实现</h1>
+<h2 id="节点操作">节点操作</h2>
+<p>对于每个节点，我们需要存储它的儿子、父亲、值、子树大小、值的出现次数以及根节点。</p>
+<p>首先我们可以写一些像是更新子树大小这类常用函数备用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    Node *ch[<span class="number">2</span>], *fa, **root;</span><br><span class="line">    T x;</span><br><span class="line">    <span class="type">int</span> size, count;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Node</span>(Node *fa, Node **root, T x) : <span class="built_in">fa</span>(fa), <span class="built_in">root</span>(root), <span class="built_in">x</span>(x), <span class="built_in">count</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        ch[<span class="number">0</span>] = ch[<span class="number">1</span>] = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">Node</span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch[<span class="number">0</span>]) <span class="keyword">delete</span> ch[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span> (ch[<span class="number">1</span>]) <span class="keyword">delete</span> ch[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">maintain</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        size = (ch[<span class="number">0</span>] ? ch[<span class="number">0</span>]-&gt;size : <span class="number">0</span>) + (ch[<span class="number">1</span>] ? ch[<span class="number">1</span>]-&gt;size : <span class="number">0</span>) + count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">relation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span> == fa-&gt;ch[<span class="number">0</span>] ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ch[<span class="number">0</span>] ? ch[<span class="number">0</span>]-&gt;size : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; *root;</span><br></pre></td></tr></table></figure>
+<h3 id="旋转-1">旋转</h3>
+<p>按照上述的旋转思路直接模拟即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">rotate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Node *o = fa;</span><br><span class="line">    <span class="type">int</span> r = <span class="built_in">relation</span>();</span><br><span class="line"></span><br><span class="line">    fa = o-&gt;fa;</span><br><span class="line">    <span class="keyword">if</span> (fa) fa-&gt;ch[o-&gt;<span class="built_in">relation</span>()] = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    o-&gt;ch[r] = ch[r ^ <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (ch[r ^ <span class="number">1</span>]) ch[r ^ <span class="number">1</span>]-&gt;fa = o;</span><br><span class="line"></span><br><span class="line">    ch[r ^ <span class="number">1</span>] = o;</span><br><span class="line">    o-&gt;fa = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!fa) *root = <span class="keyword">this</span>;</span><br><span class="line">    o-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">    <span class="built_in">maintain</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="splay-操作-1">Splay 操作</h3>
+<p>按上述方法直接模拟。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">splay</span><span class="params">(Node *targetFa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (fa != targetFa) &#123;</span><br><span class="line">        <span class="keyword">if</span> (fa-&gt;fa == targetFa) <span class="built_in">rotate</span>();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (fa-&gt;<span class="built_in">relation</span>() == <span class="built_in">relation</span>()) &#123;</span><br><span class="line">            fa-&gt;<span class="built_in">rotate</span>();</span><br><span class="line">            <span class="built_in">rotate</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">rotate</span>();</span><br><span class="line">            <span class="built_in">rotate</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查询节点的前驱-后继">查询节点的前驱 / 后继</h3>
+<p>直接将查询的点 Splay 至根即可。</p>
+<p>注意查询后将查询到的点 Splay 到根，否则可能会被卡常。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *<span class="title">pred</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">splay</span>();</span><br><span class="line">    Node *v = ch[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">while</span> (v-&gt;ch[<span class="number">1</span>]) v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">    v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node *<span class="title">succ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">splay</span>();</span><br><span class="line">    Node *v = ch[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (v-&gt;ch[<span class="number">0</span>]) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">    v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉搜索树操作-1">二叉搜索树操作</h2>
+<h3 id="建树-删树">建树 / 删树</h3>
+<p>建树时插入两 <span class="math inline">\(\infty\)</span> 点即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Splay</span>() : <span class="built_in">root</span>(<span class="literal">nullptr</span>) &#123;</span><br><span class="line">    <span class="built_in">insert</span>(INF);</span><br><span class="line">    <span class="built_in">insert</span>(-INF);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">~<span class="built_in">Splay</span>() &#123;</span><br><span class="line">    <span class="keyword">delete</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查找指定值所在节点">查找指定值所在节点</h3>
+<p>就像二叉搜索树这样搜索即可。从根节点开始遍历。每到一个点就看若小于这个节点，就进入左儿子；大于这个节点，就进入右儿子，直到找到该值即可。</p>
+<p>注意找到后将找到的点 Splay 至根。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *<span class="title">find</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">    Node *v = root;</span><br><span class="line">    <span class="keyword">while</span> (v &amp;&amp; x != v-&gt;x) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; v-&gt;x) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!v) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入节点">插入节点</h3>
+<p>查找节点，如果查找到节点，则出现次数 <span
+class="math inline">\(+1\)</span>，否则就用上述方法插入该节点。</p>
+<p>最后将插入的节点 Splay 至根。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node *<span class="title">insert</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">    Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="keyword">if</span> (v) &#123;</span><br><span class="line">        v-&gt;count++;</span><br><span class="line">        v-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node **target = &amp;root, *fa = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (*target) &#123;</span><br><span class="line">        fa = *target;</span><br><span class="line">        fa-&gt;size++;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; fa-&gt;x) target = &amp;fa-&gt;ch[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> target = &amp;fa-&gt;ch[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *target = <span class="keyword">new</span> <span class="built_in">Node</span>(fa, &amp;root, x);</span><br><span class="line">    (*target)-&gt;<span class="built_in">splay</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除节点">删除节点</h3>
+<p>若出现次数大于 <span class="math inline">\(1\)</span>，则出现次数
+<span
+class="math inline">\(-1\)</span>。否则指定节点就用上述方法删除即可。</p>
+<p>若指定值则可先查询后删除。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">erase</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">erase</span>(<span class="built_in">find</span>(x));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">erase</span><span class="params">(Node *v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (v-&gt;count != <span class="number">1</span>) &#123;</span><br><span class="line">        v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        v-&gt;count--;</span><br><span class="line">        v-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node *pred = v-&gt;<span class="built_in">pred</span>();</span><br><span class="line">    Node *succ = v-&gt;<span class="built_in">succ</span>();</span><br><span class="line"></span><br><span class="line">    pred-&gt;<span class="built_in">splay</span>();</span><br><span class="line">    succ-&gt;<span class="built_in">splay</span>(pred);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> succ-&gt;ch[<span class="number">0</span>];</span><br><span class="line">    succ-&gt;ch[<span class="number">0</span>] = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    succ-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">    pred-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查询值排名-查询第-k-大">查询值排名 / 查询第 <span
+class="math inline">\(k\)</span> 大</h3>
+<p>若有值，则查询值排名只需将该点 Splay
+到根，返回左子树大小。若无值，则可先插入该点，查询后删除。</p>
+<p>查询第 <span class="math inline">\(k\)</span>
+大则使用上述方法遍历即可。</p>
+<p>查完后将查询到的值 Splay 至根。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">rank</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">    Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="keyword">if</span> (v) &#123;</span><br><span class="line">        v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        <span class="keyword">return</span> v-&gt;<span class="built_in">lSize</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        v = <span class="built_in">insert</span>(x);</span><br><span class="line">        <span class="type">int</span> ans = v-&gt;<span class="built_in">lSize</span>();</span><br><span class="line">        <span class="built_in">erase</span>(v);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node *<span class="title">select</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    k++;</span><br><span class="line">    Node *v = root;</span><br><span class="line">    <span class="keyword">while</span> (!(v-&gt;<span class="built_in">lSize</span>() + <span class="number">1</span> &lt;= k &amp;&amp; v-&gt;<span class="built_in">lSize</span>() + v-&gt;count &gt;= k)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k &lt; v-&gt;<span class="built_in">lSize</span>() + <span class="number">1</span>) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            k -= v-&gt;<span class="built_in">lSize</span>() + v-&gt;count;</span><br><span class="line">            v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查询值的前驱-后继">查询值的前驱 / 后继</h3>
+<p>同查询排名，若有值则直接按上述方法模拟，若无值则插入，查询后删除即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> T &amp;<span class="title">pred</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">    Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="keyword">if</span> (v) <span class="keyword">return</span> v-&gt;<span class="built_in">pred</span>()-&gt;x;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        v = <span class="built_in">insert</span>(x);</span><br><span class="line">        <span class="type">const</span> T &amp;ans = v-&gt;<span class="built_in">pred</span>()-&gt;x;</span><br><span class="line">        <span class="built_in">erase</span>(v);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">const</span> T &amp;<span class="title">succ</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">    Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="keyword">if</span> (v) <span class="keyword">return</span> v-&gt;<span class="built_in">succ</span>()-&gt;x;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        v = <span class="built_in">insert</span>(x);</span><br><span class="line">        <span class="type">const</span> T &amp;ans = v-&gt;<span class="built_in">succ</span>()-&gt;x;</span><br><span class="line">        <span class="built_in">erase</span>(v);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉搜索树例题">二叉搜索树例题</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6136">洛谷 P6136
+普通平衡树（数据加强版）</a>（数据比 <a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3369">洛谷 P3369 普通平衡树</a>
+强不少）</p>
+<p>平衡树板子，直接敲上去就行了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;climits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T INF&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Splay</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        Node *ch[<span class="number">2</span>], *fa, **root;</span><br><span class="line">        T x;</span><br><span class="line">        <span class="type">int</span> size, count;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">Node</span>(Node *fa, Node **root, T x) : <span class="built_in">fa</span>(fa), <span class="built_in">root</span>(root), <span class="built_in">x</span>(x), <span class="built_in">count</span>(<span class="number">1</span>) &#123;</span><br><span class="line">            ch[<span class="number">0</span>] = ch[<span class="number">1</span>] = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ~<span class="built_in">Node</span>() &#123;</span><br><span class="line">            <span class="keyword">if</span> (ch[<span class="number">0</span>]) <span class="keyword">delete</span> ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span> (ch[<span class="number">1</span>]) <span class="keyword">delete</span> ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">maintain</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            size = (ch[<span class="number">0</span>] ? ch[<span class="number">0</span>]-&gt;size : <span class="number">0</span>) + (ch[<span class="number">1</span>] ? ch[<span class="number">1</span>]-&gt;size : <span class="number">0</span>) + count;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">relation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span> == fa-&gt;ch[<span class="number">0</span>] ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">rotate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Node *o = fa;</span><br><span class="line">            <span class="type">int</span> r = <span class="built_in">relation</span>();</span><br><span class="line"></span><br><span class="line">            fa = o-&gt;fa;</span><br><span class="line">            <span class="keyword">if</span> (fa) fa-&gt;ch[o-&gt;<span class="built_in">relation</span>()] = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">            o-&gt;ch[r] = ch[r ^ <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> (ch[r ^ <span class="number">1</span>]) ch[r ^ <span class="number">1</span>]-&gt;fa = o;</span><br><span class="line"></span><br><span class="line">            ch[r ^ <span class="number">1</span>] = o;</span><br><span class="line">            o-&gt;fa = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!fa) *root = <span class="keyword">this</span>;</span><br><span class="line">            o-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">            <span class="built_in">maintain</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">splay</span><span class="params">(Node *targetFa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (fa != targetFa) &#123;</span><br><span class="line">                <span class="keyword">if</span> (fa-&gt;fa == targetFa) <span class="built_in">rotate</span>();</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (fa-&gt;<span class="built_in">relation</span>() == <span class="built_in">relation</span>()) &#123;</span><br><span class="line">                    fa-&gt;<span class="built_in">rotate</span>();</span><br><span class="line">                    <span class="built_in">rotate</span>();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">rotate</span>();</span><br><span class="line">                    <span class="built_in">rotate</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function">Node *<span class="title">pred</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="built_in">splay</span>();</span><br><span class="line">            Node *v = ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">while</span> (v-&gt;ch[<span class="number">1</span>]) v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">            v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function">Node *<span class="title">succ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="built_in">splay</span>();</span><br><span class="line">            Node *v = ch[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">while</span> (v-&gt;ch[<span class="number">0</span>]) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">            v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">lSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> ch[<span class="number">0</span>] ? ch[<span class="number">0</span>]-&gt;size : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; *root;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Splay</span>() : <span class="built_in">root</span>(<span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="built_in">insert</span>(INF);</span><br><span class="line">        <span class="built_in">insert</span>(-INF);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">Splay</span>() &#123;</span><br><span class="line">        <span class="keyword">delete</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node *<span class="title">find</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        Node *v = root;</span><br><span class="line">        <span class="keyword">while</span> (v &amp;&amp; x != v-&gt;x) &#123;</span><br><span class="line">            <span class="keyword">if</span> (x &lt; v-&gt;x) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">else</span> v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!v) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node *<span class="title">insert</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">        <span class="keyword">if</span> (v) &#123;</span><br><span class="line">            v-&gt;count++;</span><br><span class="line">            v-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node **target = &amp;root, *fa = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (*target) &#123;</span><br><span class="line">            fa = *target;</span><br><span class="line">            fa-&gt;size++;</span><br><span class="line">            <span class="keyword">if</span> (x &lt; fa-&gt;x) target = &amp;fa-&gt;ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">else</span> target = &amp;fa-&gt;ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        *target = <span class="keyword">new</span> <span class="built_in">Node</span>(fa, &amp;root, x);</span><br><span class="line">        (*target)-&gt;<span class="built_in">splay</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">erase</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">erase</span>(<span class="built_in">find</span>(x));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">erase</span><span class="params">(Node *v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (v-&gt;count != <span class="number">1</span>) &#123;</span><br><span class="line">            v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">            v-&gt;count--;</span><br><span class="line">            v-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node *pred = v-&gt;<span class="built_in">pred</span>();</span><br><span class="line">        Node *succ = v-&gt;<span class="built_in">succ</span>();</span><br><span class="line"></span><br><span class="line">        pred-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        succ-&gt;<span class="built_in">splay</span>(pred);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">delete</span> succ-&gt;ch[<span class="number">0</span>];</span><br><span class="line">        succ-&gt;ch[<span class="number">0</span>] = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        succ-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">        pred-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rank</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">        <span class="keyword">if</span> (v) &#123;</span><br><span class="line">            v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">            <span class="keyword">return</span> v-&gt;<span class="built_in">lSize</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            v = <span class="built_in">insert</span>(x);</span><br><span class="line">            <span class="type">int</span> ans = v-&gt;<span class="built_in">lSize</span>();</span><br><span class="line">            <span class="built_in">erase</span>(v);</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node *<span class="title">select</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        k++;</span><br><span class="line">        Node *v = root;</span><br><span class="line">        <span class="keyword">while</span> (!(v-&gt;<span class="built_in">lSize</span>() + <span class="number">1</span> &lt;= k &amp;&amp; v-&gt;<span class="built_in">lSize</span>() + v-&gt;count &gt;= k)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k &lt; v-&gt;<span class="built_in">lSize</span>() + <span class="number">1</span>) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                k -= v-&gt;<span class="built_in">lSize</span>() + v-&gt;count;</span><br><span class="line">                v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">const</span> T &amp;<span class="title">pred</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">        <span class="keyword">if</span> (v) <span class="keyword">return</span> v-&gt;<span class="built_in">pred</span>()-&gt;x;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v = <span class="built_in">insert</span>(x);</span><br><span class="line">            <span class="type">const</span> T &amp;ans = v-&gt;<span class="built_in">pred</span>()-&gt;x;</span><br><span class="line">            <span class="built_in">erase</span>(v);</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">const</span> T &amp;<span class="title">succ</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        Node *v = <span class="built_in">find</span>(x);</span><br><span class="line">        <span class="keyword">if</span> (v) <span class="keyword">return</span> v-&gt;<span class="built_in">succ</span>()-&gt;x;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v = <span class="built_in">insert</span>(x);</span><br><span class="line">            <span class="type">const</span> T &amp;ans = v-&gt;<span class="built_in">succ</span>()-&gt;x;</span><br><span class="line">            <span class="built_in">erase</span>(v);</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    Splay&lt;<span class="type">int</span>, INT_MAX&gt; splay;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        splay.<span class="built_in">insert</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> last = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="type">int</span> op, x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;op, &amp;x);</span><br><span class="line">        x ^= last;</span><br><span class="line">        <span class="keyword">if</span> (op == <span class="number">1</span>) splay.<span class="built_in">insert</span>(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">2</span>) splay.<span class="built_in">erase</span>(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">3</span>) last = splay.<span class="built_in">rank</span>(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">4</span>) last = splay.<span class="built_in">select</span>(x)-&gt;x;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">5</span>) last = splay.<span class="built_in">pred</span>(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">6</span>) last = splay.<span class="built_in">succ</span>(x);</span><br><span class="line">        <span class="keyword">if</span> (op &gt;= <span class="number">3</span> &amp;&amp; op &lt;= <span class="number">6</span>) ans ^= last;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="序列操作">序列操作</h1>
+<p>由于 Splay 的形态特殊，我们可以用它来解决序列问题。这时 Splay
+的中序遍历即为序列的各元素顺序。所以说 <strong>Splay
+不一定是有序的，它的中序遍历是可自定义的，可根据情况调整用途</strong>。</p>
+<h2 id="序列插入">序列插入</h2>
+<p>假设我们需要将序列 <span class="math inline">\(a\)</span> 插入到
+<span class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span> 之间，只需要做下列 <span
+class="math inline">\(3\)</span> 步：</p>
+<ul>
+<li>将 <span class="math inline">\(x\)</span> Splay 操作至根；</li>
+<li>将 <span class="math inline">\(y\)</span> Splay 操作至 <span
+class="math inline">\(x\)</span> 的右儿子；</li>
+<li>由于 <span class="math inline">\(y\)</span> 为 <span
+class="math inline">\(x\)</span> 的后继，故 <span
+class="math inline">\(y\)</span> 的左子树必为空。此时只需将 <span
+class="math inline">\(a\)</span> 插入 <span
+class="math inline">\(y\)</span> 的左子树即可。</li>
+</ul>
+<h2 id="序列删除">序列删除</h2>
+<p>与序列插入相似，假设我们需要需将 <span
+class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span> 之间的序列 <span
+class="math inline">\(a\)</span> 删除，依然只需 <span
+class="math inline">\(3\)</span> 步：</p>
+<ul>
+<li>将 <span class="math inline">\(x\)</span> Splay 操作至根；</li>
+<li>将 <span class="math inline">\(y\)</span> Splay 操作至 <span
+class="math inline">\(x\)</span> 的右儿子；</li>
+<li><span class="math inline">\(y\)</span> 的左子树即为 <span
+class="math inline">\(x\)</span>、<span class="math inline">\(y\)</span>
+之间的序列，即序列 <span
+class="math inline">\(a\)</span>。于是我们只需删除 <span
+class="math inline">\(y\)</span> 的左子树即可。</li>
+</ul>
+<h2 id="区间翻转">区间翻转</h2>
+<p>这里可能区间翻转多次，所以可以像线段树一样作懒标记。然后将左右子树交换即可。最终传到叶子节点的时候由于每个都交换，即可达成翻转区间。</p>
+<p>遍历到区间的时候就把懒标记下传，然后交换左右子树即可。</p>
+<h1 id="序列例题">序列例题</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3391">洛谷 P3391
+文艺平衡树</a></p>
+<p>区间翻转板子，敲就完事了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1e5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Splay</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        Node *ch[<span class="number">2</span>], *fa, **root;</span><br><span class="line">        T x;</span><br><span class="line">        <span class="type">int</span> size;</span><br><span class="line">        <span class="type">bool</span> rev, bound;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">Node</span>(Node *fa, Node **root, T x, <span class="type">bool</span> bound = <span class="literal">false</span>) : <span class="built_in">fa</span>(fa), <span class="built_in">root</span>(root), <span class="built_in">x</span>(x), <span class="built_in">size</span>(<span class="number">1</span>), <span class="built_in">rev</span>(<span class="literal">false</span>), <span class="built_in">bound</span>(bound) &#123;</span><br><span class="line">            ch[<span class="number">0</span>] = ch[<span class="number">1</span>] = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">maintain</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            size = (ch[<span class="number">0</span>] ? ch[<span class="number">0</span>]-&gt;size : <span class="number">0</span>) + (ch[<span class="number">1</span>] ? ch[<span class="number">1</span>]-&gt;size : <span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">pushDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (rev) &#123;</span><br><span class="line">                std::<span class="built_in">swap</span>(ch[<span class="number">0</span>], ch[<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span> (ch[<span class="number">0</span>]) ch[<span class="number">0</span>]-&gt;rev ^= <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">if</span> (ch[<span class="number">1</span>]) ch[<span class="number">1</span>]-&gt;rev ^= <span class="literal">true</span>;</span><br><span class="line">                rev = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">relation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span> == fa-&gt;ch[<span class="number">0</span>] ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">rotate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            fa-&gt;<span class="built_in">pushDown</span>();</span><br><span class="line"></span><br><span class="line">            Node *o = fa;</span><br><span class="line">            <span class="type">int</span> r = <span class="built_in">relation</span>();</span><br><span class="line"></span><br><span class="line">            fa = o-&gt;fa;</span><br><span class="line">            <span class="keyword">if</span> (fa) fa-&gt;ch[o-&gt;<span class="built_in">relation</span>()] = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">            o-&gt;ch[r] = ch[r ^ <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> (ch[r ^ <span class="number">1</span>]) ch[r ^ <span class="number">1</span>]-&gt;fa = o;</span><br><span class="line"></span><br><span class="line">            ch[r ^ <span class="number">1</span>] = o;</span><br><span class="line">            o-&gt;fa = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!fa) *root = <span class="keyword">this</span>;</span><br><span class="line">            o-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">            <span class="built_in">maintain</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">splay</span><span class="params">(Node *targetFa = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (fa != targetFa) &#123;</span><br><span class="line">                <span class="keyword">if</span> (fa-&gt;fa) fa-&gt;fa-&gt;<span class="built_in">pushDown</span>();</span><br><span class="line">                fa-&gt;<span class="built_in">pushDown</span>();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (fa-&gt;fa == targetFa) <span class="built_in">rotate</span>();</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (fa-&gt;<span class="built_in">relation</span>() == <span class="built_in">relation</span>()) &#123;</span><br><span class="line">                    fa-&gt;<span class="built_in">rotate</span>();</span><br><span class="line">                    <span class="built_in">rotate</span>();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">rotate</span>();</span><br><span class="line">                    <span class="built_in">rotate</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">lSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="built_in">pushDown</span>();</span><br><span class="line">            <span class="keyword">return</span> ch[<span class="number">0</span>] ? ch[<span class="number">0</span>]-&gt;size : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; *root;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Splay</span>() : <span class="built_in">root</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node *<span class="title">build</span><span class="params">(<span class="type">int</span> *l, <span class="type">int</span> *r, Node *fa)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; r) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> *mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">        Node *v = <span class="keyword">new</span> <span class="built_in">Node</span>(fa, &amp;root, *mid);</span><br><span class="line">        v-&gt;ch[<span class="number">0</span>] = <span class="built_in">build</span>(l, mid - <span class="number">1</span>, v);</span><br><span class="line">        v-&gt;ch[<span class="number">1</span>] = <span class="built_in">build</span>(mid + <span class="number">1</span>, r, v);</span><br><span class="line"></span><br><span class="line">        v-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        root = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="literal">nullptr</span>, &amp;root, <span class="number">-1</span>, <span class="literal">true</span>);</span><br><span class="line">        root-&gt;ch[<span class="number">1</span>] = <span class="keyword">new</span> <span class="built_in">Node</span>(root, &amp;root, <span class="number">-1</span>, <span class="literal">true</span>);</span><br><span class="line">        root-&gt;<span class="built_in">maintain</span>();</span><br><span class="line"></span><br><span class="line">        root-&gt;ch[<span class="number">1</span>]-&gt;ch[<span class="number">0</span>] = <span class="built_in">build</span>(a + <span class="number">1</span>, a + n, root-&gt;ch[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">        root-&gt;ch[<span class="number">1</span>]-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">        root-&gt;<span class="built_in">maintain</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node *<span class="title">select</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        Node *v = root;</span><br><span class="line">        <span class="keyword">while</span> (k != v-&gt;<span class="built_in">lSize</span>()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k &lt; v-&gt;<span class="built_in">lSize</span>()) v = v-&gt;ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">else</span> k -= v-&gt;<span class="built_in">lSize</span>() + <span class="number">1</span>, v = v-&gt;ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        v-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node *<span class="title">select</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">        Node *pred = <span class="built_in">select</span>(l - <span class="number">1</span>), *succ = <span class="built_in">select</span>(r + <span class="number">1</span>);</span><br><span class="line">        pred-&gt;<span class="built_in">splay</span>();</span><br><span class="line">        succ-&gt;<span class="built_in">splay</span>(pred);</span><br><span class="line">        <span class="keyword">return</span> succ-&gt;ch[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">select</span>(l, r)-&gt;rev ^= <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">fetch</span><span class="params">(<span class="type">int</span> *a)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> *p = a + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root, p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(Node *v, <span class="type">int</span> *&amp;p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!v) <span class="keyword">return</span>;</span><br><span class="line">        v-&gt;<span class="built_in">pushDown</span>();</span><br><span class="line">        <span class="built_in">dfs</span>(v-&gt;ch[<span class="number">0</span>], p);</span><br><span class="line">        <span class="keyword">if</span> (!v-&gt;bound) *p++ = v-&gt;x;</span><br><span class="line">        <span class="built_in">dfs</span>(v-&gt;ch[<span class="number">1</span>], p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> a[MAXN + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) a[i] = i;</span><br><span class="line"></span><br><span class="line">    Splay&lt;<span class="type">int</span>&gt; splay;</span><br><span class="line">    splay.<span class="built_in">build</span>(a, n);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;m);</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        splay.<span class="built_in">reverse</span>(l, r);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    splay.<span class="built_in">fetch</span>(a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" rel="tag"># 平衡树</a>
+              <a href="/tags/Splay/" rel="tag"># Splay</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ahoi2009-similar/" rel="prev" title="「AHOI2009」同类分布 - 数位 DP">
+                  <i class="fa fa-angle-left"></i> 「AHOI2009」同类分布 - 数位 DP
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/cf-808g/" rel="next" title="「Codeforces 808G」Anthem of Berland - KMP + DP">
+                  「Codeforces 808G」Anthem of Berland - KMP + DP <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments disqusjs-container">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XenonWZH</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/styles/disqusjs.css" integrity="sha256-E4RzceSomICFY1PT/yDQrN8DsLSwdScDEiQAevHabp0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="disqusjs" type="application/json">{"enable":true,"api":"https://disqus.skk.moe/disqus/","apikey":"TrkAeDnFi3dfoGmqD4quJmpueDLovz4ODSbameSo5Q6FyMYP2ZXlBc0ssOle1I1z","shortname":"xenonwzhs-blog","js":{"url":"https://cdn.jsdelivr.net/npm/disqusjs@3.1.0/dist/browser/disqusjs.es2015.umd.min.js","integrity":"sha256-gdbBT62HLzqWTnXQED3WQL/ItFCuWsA5gd6dM/wgdiE="}}</script>
+<script src="/js/third-party/comments/disqusjs.js" defer></script>
+
+</body>
+</html>
